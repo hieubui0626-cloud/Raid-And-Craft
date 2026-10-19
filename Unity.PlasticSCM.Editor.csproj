@@ -595,8 +595,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\UI\AttributeColor.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Rendering\VisualLineTextSource.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Diff\Text\ContentControlOptionsContextMenu.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Editing\IReadOnlySectionProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Configuration\ChannelCertificateUiImpl.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Editing\IReadOnlySectionProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BrowseRepository\BrowseRepositoryViewItem.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\UI\Tree\TreeHeaderColumns.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Utils\RopeNode.cs" />
