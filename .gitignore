@@ -1,0 +1,18 @@
+# --- Unity ---
+Library/
+Temp/
+Logs/
+Obj/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# --- IDEs & OS ---
+.vs/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+.DS_Store
+Thumbs.db
