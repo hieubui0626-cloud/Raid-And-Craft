@@ -8,16 +8,16 @@ using UnityEngine;
 /// </summary>
 public class Player_Stat
 {
-    public Player_StatType Type { get; }
+    public Player_Stat_Type Type { get; }
 
     /// <summary>Bắn ra khi giá trị cuối (Value) thay đổi.</summary>
     public event Action<Player_Stat> OnValueChanged;
 
-    private readonly List<Player_StatModifier> modifiers = new List<Player_StatModifier>();
+    private readonly List<Player_Stat_Modifier> modifiers = new List<Player_Stat_Modifier>();
     private float baseValue;
     private float finalValue;
 
-    public Player_Stat(Player_StatType type, float baseValue)
+    public Player_Stat(Player_Stat_Type type, float baseValue)
     {
         Type = type;
         this.baseValue = baseValue;
@@ -42,15 +42,15 @@ public class Player_Stat
     /// <summary>Giá trị cuối làm tròn, tiện cho hiển thị hoặc công thức dùng số nguyên.</summary>
     public int IntValue => Mathf.RoundToInt(finalValue);
 
-    public IReadOnlyList<Player_StatModifier> Modifiers => modifiers;
+    public IReadOnlyList<Player_Stat_Modifier> Modifiers => modifiers;
 
-    public void AddModifier(Player_StatModifier modifier)
+    public void AddModifier(Player_Stat_Modifier modifier)
     {
         modifiers.Add(modifier);
         Recalculate();
     }
 
-    public bool RemoveModifier(Player_StatModifier modifier)
+    public bool RemoveModifier(Player_Stat_Modifier modifier)
     {
         bool removed = modifiers.Remove(modifier);
         if (removed) Recalculate();
@@ -65,6 +65,19 @@ public class Player_Stat
         int removedCount = modifiers.RemoveAll(m => Equals(m.Source, source));
         if (removedCount > 0) Recalculate();
         return removedCount;
+    }
+
+    /// <summary>
+    /// Thay toàn bộ modifier của một nguồn bằng đúng 1 modifier mới, chỉ tính lại MỘT lần
+    /// (không bắn event trung gian như gỡ rồi thêm). Dùng cho chỉ số derive từ chỉ số khác.
+    /// </summary>
+    public void ReplaceModifierFromSource(object source, float value, Player_Stat_Modifier_Type type = Player_Stat_Modifier_Type.Flat)
+    {
+        if (source == null) return;
+
+        modifiers.RemoveAll(m => Equals(m.Source, source));
+        modifiers.Add(new Player_Stat_Modifier(value, type, source));
+        Recalculate();
     }
 
     private void Recalculate()
@@ -86,16 +99,16 @@ public class Player_Stat
 
         for (int i = 0; i < modifiers.Count; i++)
         {
-            Player_StatModifier m = modifiers[i];
+            Player_Stat_Modifier m = modifiers[i];
             switch (m.Type)
             {
-                case Player_StatModifierType.Flat:
+                case Player_Stat_Modifier_Type.Flat:
                     flat += m.Value;
                     break;
-                case Player_StatModifierType.PercentAdd:
+                case Player_Stat_Modifier_Type.PercentAdd:
                     percentAdd += m.Value;
                     break;
-                case Player_StatModifierType.PercentMult:
+                case Player_Stat_Modifier_Type.PercentMult:
                     percentMult *= 1f + m.Value;
                     break;
             }
