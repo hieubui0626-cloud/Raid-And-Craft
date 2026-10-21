@@ -63,18 +63,20 @@
     <Analyzer Include="D:\software\Unity\RPG_Prototype\RPG_Prototype\Library\PackageCache\com.unity.dt.app-ui@3bbd9e4c5c92\Runtime\SourceGenerators\netstandard2.0\EnumToLowerCase.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Local_Save_Provider.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stat.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Input_Manager.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Character_Stats.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Manager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stat_Type.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stat_Layer_Map.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stats.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\ISave_Provider.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
@@ -96,16 +98,20 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Controller\Player_Controller.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat_System\IDamageable.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Player\Player_Stat_System\Player_Stat_Layer.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Player_Stats_UI.cs" />
   </ItemGroup>

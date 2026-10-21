@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Quản lý toàn bộ chỉ số của Player. Mỗi chỉ số là một Player_Stat (base + modifier).
+/// Quản lý toàn bộ chỉ số của MỘT nhân vật (Player hoặc Enemy). Mỗi chỉ số là một Player_Stat (base + modifier).
 /// - Layer của từng chỉ số lấy từ Player_Stat_Layer_Map nên các hàm chỉ cần truyền Player_Stat_Type.
 /// - Chỉ số phát sinh (derived) khai báo bằng derivedRules: Target = Source * Multiplier (cộng vào Target dạng Flat).
 ///   Ví dụ mặc định: MaxHealth += Strength * 10, MaxMana += Intelligence * 10.
 /// - Máu/Mana hiện tại (CurrentHealth/CurrentMana) nằm ở đây, luôn được giữ trong khoảng [0, Max].
+/// - Implement IDamageable: nhận sát thương, báo chết (OnDeath), hồi sinh (Revive).
+/// - Dùng chung cho Player và Enemy: mỗi prefab tự chỉnh defaultStats/derivedRules trong Inspector.
 /// </summary>
-public class Player_Stats : MonoBehaviour
+public class Character_Stats : MonoBehaviour, IDamageable
 {
     [Serializable]
     public struct Default_Stat
@@ -31,7 +33,6 @@ public class Player_Stats : MonoBehaviour
         public Player_Stat_Type source;
         public Player_Stat_Type target;
         public float multiplier;
-        
 
         public Derived_Rule(Player_Stat_Type source, Player_Stat_Type target, float multiplier)
         {
@@ -49,6 +50,12 @@ public class Player_Stats : MonoBehaviour
 
     /// <summary>Bắn khi máu hoặc mana hiện tại đổi (kể cả bị kẹp lại do Max giảm).</summary>
     public event Action OnVitalsChanged;
+
+    /// <summary>Bắn đúng một lần khi máu về 0 (xem IDamageable).</summary>
+    public event Action OnDeath;
+
+    /// <summary>Bắn khi được hồi sinh (Revive/RestoreFull lúc đang chết).</summary>
+    public event Action OnRevive;
 
     [Header("Chỉ số khởi tạo (chỉnh được trong Inspector)")]
     [SerializeField]
@@ -77,7 +84,6 @@ public class Player_Stats : MonoBehaviour
         new Default_Stat(Player_Stat_Type.CriticalChance, 5f),
         new Default_Stat(Player_Stat_Type.CriticalDamage, 50f),
 
-
         // Layer: Defence
         new Default_Stat(Player_Stat_Type.Armor, 5f),
         new Default_Stat(Player_Stat_Type.Evade, 2f),
@@ -87,10 +93,6 @@ public class Player_Stats : MonoBehaviour
         new Default_Stat(Player_Stat_Type.LightningResistance, 0f),
         new Default_Stat(Player_Stat_Type.ChaosResistance, 0f),
         new Default_Stat(Player_Stat_Type.BlockChance, 0f),
-        
-
-        // Layer: Vitals (giá trị gốc, chưa cộng phần phát sinh từ Strength/Intelligence)
-        
     };
 
     [Header("Chỉ số phát sinh: Target += Source * Multiplier")]
@@ -113,12 +115,15 @@ public class Player_Stats : MonoBehaviour
     public float MaxHealth => GetValue(Player_Stat_Type.MaxHealth);
     public float MaxMana => GetValue(Player_Stat_Type.MaxMana);
 
+    /// <summary>True khi máu đã về 0 và chưa được hồi sinh. Đang chết thì không nhận sát thương/hồi máu.</summary>
+    public bool IsDead { get; private set; }
+
     private void Awake()
     {
         EnsureInitialized();
     }
 
-    // Khởi tạo lười: script khác gọi sớm hơn Awake của Player_Stats vẫn an toàn.
+    // Khởi tạo lười: script khác gọi sớm hơn Awake của Character_Stats vẫn an toàn.
     private void EnsureInitialized()
     {
         if (initialized) return;
@@ -149,13 +154,13 @@ public class Player_Stats : MonoBehaviour
         {
             if (!stats.ContainsKey(rule.source) || !stats.ContainsKey(rule.target))
             {
-                Debug.LogError($"[{nameof(Player_Stats)}] Derived rule {rule.source} -> {rule.target} tham chiếu chỉ số chưa khai báo trong Layer_Map.", this);
+                Debug.LogError($"[{nameof(Character_Stats)}] Derived rule {rule.source} -> {rule.target} tham chiếu chỉ số chưa khai báo trong Layer_Map.", this);
                 continue;
             }
 
             if (rule.source == rule.target)
             {
-                Debug.LogError($"[{nameof(Player_Stats)}] Derived rule không được trỏ vào chính nó ({rule.source}).", this);
+                Debug.LogError($"[{nameof(Character_Stats)}] Derived rule không được trỏ vào chính nó ({rule.source}).", this);
                 continue;
             }
 
@@ -291,10 +296,43 @@ public class Player_Stats : MonoBehaviour
     // MÁU / MANA hiện tại
     // ------------------------------------------------------------------
 
-    /// <summary>Cộng/trừ máu (delta âm = nhận sát thương). Trả về lượng thay đổi thực tế sau khi kẹp.</summary>
+    /// <summary>
+    /// IDamageable: nhận sát thương (amount dương). Trả về lượng máu thực sự bị trừ.
+    /// Giai đoạn 2 sẽ có overload nhận Damage_Info; hàm này là điểm cuối cùng trừ máu.
+    /// </summary>
+    public float TakeDamage(float amount)
+    {
+        EnsureInitialized();
+        if (IsDead || amount <= 0f) return 0f;
+
+        return -ModifyHealth(-amount);
+    }
+
+    /// <summary>Hồi máu (amount dương). Trả về lượng máu thực sự hồi. Đang chết thì không hồi được, hãy dùng Revive.</summary>
+    public float Heal(float amount)
+    {
+        EnsureInitialized();
+        if (IsDead || amount <= 0f) return 0f;
+
+        return ModifyHealth(amount);
+    }
+
+    public void SetVitals(float health, float mana)
+    {
+        EnsureInitialized();
+        SetVital(health, MaxHealth, true);
+        SetVital(mana, MaxMana, false);
+    }
+
+    /// <summary>
+    /// Cộng/trừ máu (delta âm = nhận sát thương). Trả về lượng thay đổi thực tế sau khi kẹp.
+    /// Đang chết thì bỏ qua (trả về 0).
+    /// </summary>
     public float ModifyHealth(float delta)
     {
         EnsureInitialized();
+        if (IsDead) return 0f;
+
         return SetVital(CurrentHealth + delta, MaxHealth, true);
     }
 
@@ -309,15 +347,29 @@ public class Player_Stats : MonoBehaviour
     public bool TrySpendMana(float cost)
     {
         EnsureInitialized();
-        if (cost < 0f || CurrentMana < cost) return false;
+        if (IsDead || cost < 0f || CurrentMana < cost) return false;
 
         ModifyMana(-cost);
         return true;
     }
 
+    /// <summary>Hồi sinh với một tỉ lệ máu (0..1, tối thiểu 1% để không chết ngay). Không làm gì nếu chưa chết.</summary>
+    public void Revive(float healthPercent = 1f)
+    {
+        EnsureInitialized();
+        if (!IsDead) return;
+
+        IsDead = false;
+        float percent = Mathf.Clamp(healthPercent, 0.01f, 1f);
+        SetVital(MaxHealth * percent, MaxHealth, true);
+        OnRevive?.Invoke();
+    }
+
+    /// <summary>Hồi đầy máu/mana. Nếu đang chết thì hồi sinh luôn.</summary>
     public void RestoreFull()
     {
         EnsureInitialized();
+        Revive(1f);
         ModifyHealth(MaxHealth);
         ModifyMana(MaxMana);
     }
@@ -333,6 +385,14 @@ public class Player_Stats : MonoBehaviour
         else CurrentMana = clamped;
 
         OnVitalsChanged?.Invoke();
+
+        // Báo chết SAU khi UI đã nhận OnVitalsChanged (thanh máu về 0 trước rồi mới xử lý chết).
+        if (isHealth && clamped <= 0f && !IsDead)
+        {
+            IsDead = true;
+            OnDeath?.Invoke();
+        }
+
         return clamped - old;
     }
 

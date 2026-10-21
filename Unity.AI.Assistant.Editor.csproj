@@ -131,8 +131,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\MCP\Transport\Models\McpTool.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\CodeAnalyze\CSharpFixProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\MCP\Transport\Models\McpToolCallRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\FunctionCalling\Permissions\ToolPermissionRules.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\Checkpoint\Git\GitInstanceResolver.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\FunctionCalling\Permissions\ToolPermissionRules.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\RunCommand\MacroEvaluatorParcelUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\Context\ContextBuilder.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\Assistant\Serialization\BuiltinOverrides\GraphicsSettingsOverrides.cs" />

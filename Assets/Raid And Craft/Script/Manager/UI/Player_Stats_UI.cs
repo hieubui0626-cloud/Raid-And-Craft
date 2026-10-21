@@ -3,43 +3,35 @@ using System.Text;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Stats_UI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Player_Stats player_Stats;
+    [SerializeField] private Character_Stats player_Stats;
     [SerializeField] private TextMeshProUGUI stats_Text;
+
+    [Header("Combat UI References")]
     [SerializeField] private TextMeshProUGUI Combat_UI_Text_Health;
+    [SerializeField] private GameObject Combat_UI_Health_Bar;
     [SerializeField] private TextMeshProUGUI Combat_UI_Text_Mana;
+    [SerializeField] private GameObject Combat_UI_Mana_Bar;
 
     // Tách "PhysicAttack" thành "Physic Attack" (không chèn khoảng trắng ở đầu chuỗi).
     private static readonly Regex CamelCaseSplitter = new Regex("(?<!^)([A-Z])", RegexOptions.Compiled);
 
     private readonly StringBuilder sb = new StringBuilder();
 
-    private void LateUpdate()
-    {
-        Update_Combat_UI();
-    }
-
-    void Update_Combat_UI()
-    {    
-        if (Combat_UI_Text_Health != null || Combat_UI_Text_Mana != null)
-        {
-            Combat_UI_Text_Health.text = $"{FormatValue(player_Stats.CurrentHealth)}";
-            Combat_UI_Text_Mana.text = $"{FormatValue(player_Stats.CurrentMana)}";
-        }
-
-        
-    }
-
     private void OnEnable()
     {
         if (player_Stats == null) return;
 
         player_Stats.OnStatsChanged += Update_Overview_UI;
-        player_Stats.OnVitalsChanged += Update_Overview_UI;
+        player_Stats.OnStatsChanged += Update_Combat_UI;   // Max đổi
+        player_Stats.OnVitalsChanged += Update_Combat_UI;
+
         Update_Overview_UI(); // Vẽ lại ngay: chỉ số có thể đã đổi lúc UI đang tắt.
+        Update_Combat_UI();
     }
 
     private void OnDisable()
@@ -47,9 +39,32 @@ public class Player_Stats_UI : MonoBehaviour
         if (player_Stats == null) return;
 
         player_Stats.OnStatsChanged -= Update_Overview_UI;
-        player_Stats.OnVitalsChanged -= Update_Overview_UI;
+        player_Stats.OnStatsChanged -= Update_Combat_UI;
+        player_Stats.OnVitalsChanged -= Update_Combat_UI;
     }
+    void Update_Combat_UI()
+    {
+        if (Combat_UI_Text_Health != null)
+        {
+            Combat_UI_Text_Health.text = $"{FormatValue(player_Stats.CurrentHealth)}";
+            Slider HPslider = Combat_UI_Health_Bar.GetComponent<Slider>();
+            if (HPslider != null)
+            {
+                HPslider.value = player_Stats.CurrentHealth / player_Stats.MaxHealth;
+            }
+        }
+        if (Combat_UI_Text_Mana != null)
+        {
+            Combat_UI_Text_Mana.text = $"{FormatValue(player_Stats.CurrentMana)}";
+            Slider Manaslider = Combat_UI_Mana_Bar.GetComponent<Slider>();
+            if (Manaslider != null)
+            {
+                Manaslider.value = player_Stats.CurrentMana / player_Stats.MaxMana;
+            }
+        }
 
+
+    }
     private void Update_Overview_UI()
     {
         if (stats_Text == null || player_Stats  == null) return;
