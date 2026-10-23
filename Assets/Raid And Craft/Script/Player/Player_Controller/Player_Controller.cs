@@ -21,6 +21,14 @@ public class Player_Controller : MonoBehaviour
     [Tooltip("Độ mượt khi Camera đuổi theo Player (càng nhỏ càng mượt, càng lớn càng nhanh)")]
     [SerializeField] private float cameraSmoothSpeed = 5f;
 
+    [Header("Chỉ số (tuỳ chọn)")]
+    [Tooltip("Bỏ trống thì tự lấy Character_Stats trên Player. Có thì tốc độ di chuyển lấy từ chỉ số MovementSpeed và Player đứng yên khi chết.")]
+    [SerializeField] private Character_Stats stats;
+
+    [Header("Chiến đấu (tuỳ chọn)")]
+    [Tooltip("Bỏ trống thì tự lấy Player_Combat trên Player. Có thì click vào Enemy sẽ đuổi + đánh thay vì đi tới.")]
+    [SerializeField] private Player_Combat combat;
+
     private NavMeshAgent agent;
     private Camera mainCamera;
 
@@ -51,15 +59,63 @@ public class Player_Controller : MonoBehaviour
 
         // Đặt camera vào đúng vị trí ngay từ đầu để không bị trượt từ xa vào.
         mainCamera.transform.position = player.transform.position + cameraOffset;
+
+        if (combat == null) combat = player.GetComponent<Player_Combat>();
+
+        if (stats == null) stats = player.GetComponent<Character_Stats>();
+        if (stats != null)
+        {
+            ApplyMovementSpeed();
+            stats.OnStatChanged += HandleStatChanged;
+            stats.OnDeath += HandleDeath;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (stats == null) return;
+
+        stats.OnStatChanged -= HandleStatChanged;
+        stats.OnDeath -= HandleDeath;
+    }
+
+    private void HandleStatChanged(Player_Stat stat)
+    {
+        if (stat.Type == Player_Stat_Type.MovementSpeed) ApplyMovementSpeed();
+    }
+
+    private void ApplyMovementSpeed()
+    {
+        agent.speed = stats.GetValue(Player_Stat_Type.MovementSpeed);
+    }
+
+    // Chết thì dừng ngay, không đi tiếp tới điểm đã click.
+    private void HandleDeath()
+    {
+        if (agent != null && agent.isOnNavMesh) agent.ResetPath();
     }
 
     private void Update()
     {
+        if (stats != null && stats.IsDead) return;
+
         Input_Manager input = Input_Manager.Instance;
         if (input == null) return;
 
         if (input.LeftClickPressed || input.LeftClickHeld)
         {
+            // Đang trỏ vào UI thì không coi là click vào thế giới (cả đánh lẫn di chuyển).
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+            if (combat != null)
+            {
+                // Click trúng Enemy: Player_Combat tự đuổi + đánh, không đi tới điểm click.
+                if (combat.TryTargetEnemyAt(input.MousePosition)) return;
+
+                // Click ra mặt đất: bỏ mục tiêu cũ rồi đi tới đó.
+                combat.ClearTarget();
+            }
+
             HandleMovementClick(input.MousePosition);
         }
     }
