@@ -513,8 +513,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\ConeSpanner\LowestVertexEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\ObstaclePortEntrance.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutEditing\NodeRestoreData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\Node.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\MultiEdgeRouter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\Node.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\Diagonal.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\VisibilityGraph.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutHelpers.cs" />

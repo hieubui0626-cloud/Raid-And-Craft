@@ -44,26 +44,21 @@ public class Player_Stats_UI : MonoBehaviour
     }
     void Update_Combat_UI()
     {
-        if (Combat_UI_Text_Health != null)
-        {
-            Combat_UI_Text_Health.text = $"{FormatValue(player_Stats.CurrentHealth)}";
-            Slider HPslider = Combat_UI_Health_Bar.GetComponent<Slider>();
-            if (HPslider != null)
-            {
-                HPslider.value = player_Stats.CurrentHealth / player_Stats.MaxHealth;
-            }
-        }
-        if (Combat_UI_Text_Mana != null)
-        {
-            Combat_UI_Text_Mana.text = $"{FormatValue(player_Stats.CurrentMana)}";
-            Slider Manaslider = Combat_UI_Mana_Bar.GetComponent<Slider>();
-            if (Manaslider != null)
-            {
-                Manaslider.value = player_Stats.CurrentMana / player_Stats.MaxMana;
-            }
-        }
+        if (player_Stats == null) return;
 
+        UpdateVital(Combat_UI_Text_Health, Combat_UI_Health_Bar, player_Stats.CurrentHealth, player_Stats.MaxHealth);
+        UpdateVital(Combat_UI_Text_Mana, Combat_UI_Mana_Bar, player_Stats.CurrentMana, player_Stats.MaxMana);
+    }
 
+    // Thiếu text hoặc thanh nào thì bỏ qua phần đó, không lỗi; Max = 0 thì thanh về 0 thay vì chia cho 0.
+    private static void UpdateVital(TextMeshProUGUI text, GameObject bar, float current, float max)
+    {
+        if (text != null) text.text = FormatValue((int)current);
+
+        if (bar != null && bar.TryGetComponent(out Slider slider))
+        {
+            slider.value = max > 0f ? current / max : 0f;
+        }
     }
     private void Update_Overview_UI()
     {
@@ -112,6 +107,9 @@ public class Player_Stats_UI : MonoBehaviour
             case Player_Stat_Type.CriticalDamage:
                 return $"  Critical Damage: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
             
+            case Player_Stat_Type.MagicResistance:
+                return $"  Magic Resistance: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
+
             case Player_Stat_Type.FireResistance:
                 return $"  Fire Resistance: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
 

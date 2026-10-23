@@ -57,9 +57,11 @@ public class Character_Stats : MonoBehaviour, IDamageable
     /// <summary>Bắn khi được hồi sinh (Revive/RestoreFull lúc đang chết).</summary>
     public event Action OnRevive;
 
-    [Header("Chỉ số khởi tạo (chỉnh được trong Inspector)")]
-    [SerializeField]
-    private List<Default_Stat> defaultStats = new List<Default_Stat>
+    /// <summary>
+    /// Chỉ số nền mặc định. Chỉ số nào KHÔNG có trong danh sách Inspector (ví dụ prefab cũ tạo trước khi thêm MovementSpeed)
+    /// sẽ lấy giá trị ở đây thay vì 0. Muốn một chỉ số bằng 0 thật: thêm dòng của nó vào danh sách Inspector với giá trị 0.
+    /// </summary>
+    public static readonly Default_Stat[] BuiltInDefaultStats =
     {
         // Layer: Complex
         new Default_Stat(Player_Stat_Type.Strength, 10f),
@@ -95,13 +97,64 @@ public class Character_Stats : MonoBehaviour, IDamageable
         new Default_Stat(Player_Stat_Type.BlockChance, 0f),
     };
 
+    [Header("Chỉ số khởi tạo (chỉnh được trong Inspector)")]
+    [Tooltip("Chỉ số không có trong danh sách này sẽ dùng giá trị mặc định có sẵn trong code (BuiltInDefaultStats).")]
+    [SerializeField]
+    private List<Default_Stat> defaultStats = new List<Default_Stat>(BuiltInDefaultStats);
+
+    /// <summary>
+    /// Bộ quy tắc phát sinh mặc định (mỗi 1 điểm thuộc tính cho bao nhiêu chỉ số phụ). Đây là nơi chỉnh cân bằng thuộc tính.
+    /// - Strength: máu, sát thương vật lý, giáp.
+    /// - Agility: độ chính xác, né, tốc độ hành động, tỉ lệ chí mạng (%).
+    /// - Intelligence: mana, sát thương phép, hồi mana, kháng phép (%).
+    /// Chỉ số nguyên tố (Fire/Cold/Lightning/Chaos), Block và kháng nguyên tố KHÔNG phát sinh: chúng đến từ trang bị/gem/passive.
+    /// Chỉ số khởi tạo (defaultStats) là phần "nền", phần phát sinh cộng thêm lên trên.
+    /// </summary>
+    public static readonly Derived_Rule[] DefaultDerivedRules =
+    {
+        // Strength
+        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.MaxHealth, 10f),
+        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.PhysicDamage, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.Armor, 0.5f),
+
+        // Agility
+        new Derived_Rule(Player_Stat_Type.Agility, Player_Stat_Type.Accuracy, 1f),
+        new Derived_Rule(Player_Stat_Type.Agility, Player_Stat_Type.Evade, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Agility, Player_Stat_Type.ActionSpeed, 0.01f),
+        new Derived_Rule(Player_Stat_Type.Agility, Player_Stat_Type.CriticalChance, 0.1f),
+
+        // Intelligence
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MaxMana, 10f),
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicDamage, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.ManaRegen, 0.05f),
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicResistance, 0.2f),
+    };
+
     [Header("Chỉ số phát sinh: Target += Source * Multiplier")]
     [SerializeField]
-    private List<Derived_Rule> derivedRules = new List<Derived_Rule>
+    private List<Derived_Rule> derivedRules = new List<Derived_Rule>(DefaultDerivedRules);
+
+    // Component đã có sẵn trên prefab/scene giữ danh sách cũ trong Inspector (đổi code mặc định không tự cập nhật).
+    // Menu này chỉ THÊM các quy tắc (source -> target) còn thiếu, không đụng tới quy tắc/giá trị bạn đã chỉnh.
+    [ContextMenu("Thêm quy tắc phát sinh mặc định còn thiếu")]
+    private void AddMissingDefaultDerivedRules()
     {
-        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.MaxHealth, 10f),
-        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MaxMana, 10f),
-    };
+        int added = 0;
+        foreach (Derived_Rule def in DefaultDerivedRules)
+        {
+            bool exists = false;
+            foreach (Derived_Rule rule in derivedRules)
+            {
+                if (rule.source == def.source && rule.target == def.target) { exists = true; break; }
+            }
+
+            if (exists) continue;
+            derivedRules.Add(def);
+            added++;
+        }
+
+        Debug.Log($"[{nameof(Character_Stats)}] Đã thêm {added} quy tắc phát sinh mặc định còn thiếu.", this);
+    }
 
     private readonly Dictionary<Player_Stat_Type, Player_Stat> stats = new Dictionary<Player_Stat_Type, Player_Stat>();
     private readonly Dictionary<Player_Stat_Layer, List<Player_Stat>> statsByLayer = new Dictionary<Player_Stat_Layer, List<Player_Stat>>();
@@ -118,9 +171,39 @@ public class Character_Stats : MonoBehaviour, IDamageable
     /// <summary>True khi máu đã về 0 và chưa được hồi sinh. Đang chết thì không nhận sát thương/hồi máu.</summary>
     public bool IsDead { get; private set; }
 
+    [Header("Hồi phục")]
+    [Tooltip("Tự hồi máu/mana mỗi giây theo LifeRegen/ManaRegen. Tắt cho vật thể không hồi (rương, bẫy...).")]
+    [SerializeField] private bool enableRegen = true;
+
+    /// <summary>
+    /// Bắn khi BẤT KỲ Character_Stats nào vừa xuất hiện (Awake xong). UI thanh máu nghe cái này để biết Enemy mới sinh ra.
+    /// Nhân vật đã có sẵn trước khi người nghe đăng ký thì người nghe tự quét Scene một lần.
+    /// </summary>
+    public static event Action<Character_Stats> OnAnySpawned;
+
     private void Awake()
     {
         EnsureInitialized();
+        OnAnySpawned?.Invoke(this);
+    }
+
+    // Hồi máu/mana theo thời gian. Dừng khi chết, khi tạm dừng game (timeScale = 0) hoặc khi đã đầy.
+    // Lưu ý: khi đang hồi, OnVitalsChanged bắn mỗi frame; UI chỉ nên vẽ lại phần thanh máu/mana, không vẽ lại cả bảng chỉ số.
+    private void Update()
+    {
+        if (!enableRegen || !initialized || IsDead) return;
+
+        float deltaTime = Time.deltaTime;
+
+        if (CurrentHealth < MaxHealth)
+        {
+            ModifyHealth(GetValue(Player_Stat_Type.LifeRegen) * deltaTime);
+        }
+
+        if (CurrentMana < MaxMana)
+        {
+            ModifyMana(GetValue(Player_Stat_Type.ManaRegen) * deltaTime);
+        }
     }
 
     // Khởi tạo lười: script khác gọi sớm hơn Awake của Character_Stats vẫn an toàn.
@@ -129,7 +212,9 @@ public class Character_Stats : MonoBehaviour, IDamageable
         if (initialized) return;
         initialized = true;
 
+        // Nền là giá trị mặc định trong code, danh sách Inspector ghi đè lên (chỉ số thiếu trong Inspector không bị về 0).
         var baseValues = new Dictionary<Player_Stat_Type, float>();
+        foreach (Default_Stat d in BuiltInDefaultStats) baseValues[d.type] = d.baseValue;
         foreach (Default_Stat d in defaultStats) baseValues[d.type] = d.baseValue;
 
         // Mọi Stat_Type đã khai báo trong Layer_Map đều có chỉ số (mặc định 0 nếu không có trong defaultStats).
@@ -164,6 +249,12 @@ public class Character_Stats : MonoBehaviour, IDamageable
                 continue;
             }
 
+            if (CreatesCycle(rule))
+            {
+                Debug.LogError($"[{nameof(Character_Stats)}] Derived rule {rule.source} -> {rule.target} tạo vòng phát sinh (đi ngược về {rule.source}), đã bỏ qua.", this);
+                continue;
+            }
+
             if (!rulesBySource.TryGetValue(rule.source, out List<Derived_Rule> rules))
             {
                 rules = new List<Derived_Rule>();
@@ -179,6 +270,28 @@ public class Character_Stats : MonoBehaviour, IDamageable
         // Bắt đầu với đầy máu/mana.
         CurrentHealth = MaxHealth;
         CurrentMana = MaxMana;
+    }
+
+    // Thêm rule này có làm xuất hiện vòng không? Có nếu từ Target đi theo các rule đã nhận vẫn tới được Source.
+    private bool CreatesCycle(Derived_Rule rule)
+    {
+        var visited = new HashSet<Player_Stat_Type>();
+        var pending = new Stack<Player_Stat_Type>();
+        pending.Push(rule.target);
+
+        while (pending.Count > 0)
+        {
+            Player_Stat_Type current = pending.Pop();
+            if (current == rule.source) return true;
+            if (!visited.Add(current)) continue;
+
+            if (rulesBySource.TryGetValue(current, out List<Derived_Rule> next))
+            {
+                foreach (Derived_Rule r in next) pending.Push(r.target);
+            }
+        }
+
+        return false;
     }
 
     private void HandleStatValueChanged(Player_Stat stat)
@@ -297,8 +410,9 @@ public class Character_Stats : MonoBehaviour, IDamageable
     // ------------------------------------------------------------------
 
     /// <summary>
-    /// IDamageable: nhận sát thương (amount dương). Trả về lượng máu thực sự bị trừ.
-    /// Giai đoạn 2 sẽ có overload nhận Damage_Info; hàm này là điểm cuối cùng trừ máu.
+    /// IDamageable: trừ máu thẳng (amount dương), KHÔNG qua né/đỡ/Armor/kháng. Trả về lượng máu thực sự bị trừ.
+    /// Dùng cho sát thương cố định (DoT, môi trường). Đòn đánh bình thường hãy dùng TakeDamage(Damage_Info).
+    /// Đây là điểm cuối cùng trừ máu: mọi đường sát thương đều đi qua đây.
     /// </summary>
     public float TakeDamage(float amount)
     {
@@ -306,6 +420,25 @@ public class Character_Stats : MonoBehaviour, IDamageable
         if (IsDead || amount <= 0f) return 0f;
 
         return -ModifyHealth(-amount);
+    }
+
+    /// <summary>
+    /// IDamageable: nhận một đòn đầy đủ. Né -> đỡ -> giảm theo Armor/kháng của CHÍNH nhân vật này -> trừ máu.
+    /// Kết quả cho biết trúng/né/đỡ, có chí mạng không, máu bị trừ bao nhiêu và có bị hạ gục không.
+    /// </summary>
+    public Damage_Result TakeDamage(Damage_Info info)
+    {
+        EnsureInitialized();
+        if (IsDead) return Damage_Result.Ignored;
+
+        Damage_Outcome outcome = Combat_Formulas.Resolve(info, this, out float finalDamage);
+        if (outcome != Damage_Outcome.Hit)
+        {
+            return new Damage_Result(outcome, false, 0f, false);
+        }
+
+        float dealt = TakeDamage(finalDamage);
+        return new Damage_Result(Damage_Outcome.Hit, info.isCritical, dealt, IsDead);
     }
 
     /// <summary>Hồi máu (amount dương). Trả về lượng máu thực sự hồi. Đang chết thì không hồi được, hãy dùng Revive.</summary>
