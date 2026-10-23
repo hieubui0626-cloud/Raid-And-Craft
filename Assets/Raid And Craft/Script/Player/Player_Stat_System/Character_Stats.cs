@@ -175,9 +175,16 @@ public class Character_Stats : MonoBehaviour, IDamageable
     [Tooltip("Tự hồi máu/mana mỗi giây theo LifeRegen/ManaRegen. Tắt cho vật thể không hồi (rương, bẫy...).")]
     [SerializeField] private bool enableRegen = true;
 
+    /// <summary>
+    /// Bắn khi BẤT KỲ Character_Stats nào vừa xuất hiện (Awake xong). UI thanh máu nghe cái này để biết Enemy mới sinh ra.
+    /// Nhân vật đã có sẵn trước khi người nghe đăng ký thì người nghe tự quét Scene một lần.
+    /// </summary>
+    public static event Action<Character_Stats> OnAnySpawned;
+
     private void Awake()
     {
         EnsureInitialized();
+        OnAnySpawned?.Invoke(this);
     }
 
     // Hồi máu/mana theo thời gian. Dừng khi chết, khi tạm dừng game (timeScale = 0) hoặc khi đã đầy.
