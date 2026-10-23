@@ -1,99 +1,96 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 /// <summary>
-/// Chiến đấu của Player theo kiểu ARPG: click vào Enemy -> tự đuổi theo -> vào tầm thì dừng và đánh liên tục
-/// cho tới khi mục tiêu chết hoặc bạn click ra mặt đất để đi chỗ khác.
-/// Gắn lên PlayerPrefab (cùng object với Character_Stats, Combat_Attacker, NavMeshAgent).
-/// Player_Controller là nơi nhận click và gọi TryTargetEnemyAt / ClearTarget; script này lo phần đuổi + đánh.
+/// Chiến đấu của Player kiểu ARPG không cần chọn mục tiêu:
+/// - GIỮ chuột phải = dùng đòn đánh mặc định (một Skill_Data có useWeaponDelivery) về phía con trỏ chuột, lặp theo ActionSpeed.
+///   Cách đòn hoạt động (quạt cận chiến / bắn đạn) do vũ khí đang cầm quyết định (Character_Equipment).
+/// - Chuột trái vẫn là di chuyển (Player_Controller); khi đang giữ chuột phải thì Player đứng yên để đánh.
+/// - CastAtMouse(skill) dùng cho các skill khác sau này (slot 1-5, Q-T): chỉ cần gọi với skill tương ứng.
+/// Gắn lên PlayerPrefab cùng Character_Stats, Skill_Caster, NavMeshAgent.
 /// </summary>
 [DisallowMultipleComponent]
-[RequireComponent(typeof(Combat_Attacker))]
+[RequireComponent(typeof(Skill_Caster))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class Player_Combat : MonoBehaviour
 {
-    [Header("Chọn mục tiêu")]
-    [Tooltip("Layer của Enemy. BẮT BUỘC chọn đúng (ví dụ tạo Layer 'Enemy'), nếu để Nothing sẽ không click trúng được ai.")]
-    [SerializeField] private LayerMask enemyMask;
+    [Header("Đòn đánh mặc định")]
+    [Tooltip("Skill dùng khi giữ chuột phải. Tạo asset Skill_Data, bật 'Use Weapon Delivery'.")]
+    [SerializeField] private Skill_Data defaultAttack;
+
     [SerializeField] private float maxRayDistance = 200f;
 
-    [Header("Đuổi theo")]
-    [Tooltip("Cứ mỗi khoảng này (giây) mới tính lại đường tới mục tiêu, tránh tính đường mỗi frame.")]
-    [SerializeField] private float repathInterval = 0.2f;
-
-    private Combat_Attacker attacker;
+    private Skill_Caster caster;
     private Character_Stats stats;
     private NavMeshAgent agent;
     private Camera mainCamera;
-    private float nextRepathTime;
-
-    /// <summary>Mục tiêu đang đuổi/đánh (null = không có).</summary>
-    public Character_Stats Target { get; private set; }
 
     private void Awake()
     {
-        attacker = GetComponent<Combat_Attacker>();
+        caster = GetComponent<Skill_Caster>();
         stats = GetComponent<Character_Stats>();
         agent = GetComponent<NavMeshAgent>();
     }
 
-    /// <summary>
-    /// Kiểm tra dưới con trỏ có Enemy còn sống không. Có thì đặt làm mục tiêu và trả về true
-    /// (Player_Controller sẽ không xử lý click di chuyển nữa).
-    /// </summary>
-    public bool TryTargetEnemyAt(Vector2 screenPosition)
+    private void Update()
     {
-        if (stats.IsDead) return false;
+        if (stats.IsDead || defaultAttack == null) return;
+
+        Input_Manager input = Input_Manager.Instance;
+        if (input == null || !input.RightClickHeld) return;
+
+        // Đang trỏ vào UI thì không đánh.
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+        CastAtMouse(defaultAttack);
+    }
+
+    /// <summary>
+    /// Thi triển skill về phía con trỏ chuột: dừng di chuyển, quay mặt về con trỏ, rồi ra đòn khi đã hết hồi chiêu.
+    /// Trả về true nếu đòn đã được tung ra.
+    /// </summary>
+    public bool CastAtMouse(Skill_Data skill)
+    {
+        Input_Manager input = Input_Manager.Instance;
+        if (input == null || skill == null) return false;
+
+        if (!TryGetAimPoint(input.MousePosition, out Vector3 aimPoint)) return false;
+
+        // Đứng yên để đánh (đang chạy mà giữ chuột phải thì dừng lại).
+        if (agent.isOnNavMesh && agent.hasPath) agent.ResetPath();
+
+        FaceTowards(aimPoint);
+        return caster.TryCast(skill, aimPoint);
+    }
+
+    /// <summary>
+    /// Điểm trong thế giới dưới con trỏ, đo trên mặt phẳng ngang ngang tầm chân Player
+    /// (không cần Layer mặt đất, đạn bay ngang nên đúng với camera nhìn từ trên xuống).
+    /// </summary>
+    public bool TryGetAimPoint(Vector2 screenPosition, out Vector3 aimPoint)
+    {
+        aimPoint = default;
 
         if (mainCamera == null) mainCamera = Camera.main;
         if (mainCamera == null) return false;
 
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        if (!Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, enemyMask, QueryTriggerInteraction.Ignore))
-        {
-            return false;
-        }
+        var plane = new Plane(Vector3.up, transform.position);
 
-        // Collider có thể nằm trên object con của Enemy nên tìm ngược lên cha.
-        Character_Stats found = hit.collider.GetComponentInParent<Character_Stats>();
-        if (found == null || found == stats || found.IsDead) return false;
+        if (!plane.Raycast(ray, out float distance) || distance > maxRayDistance) return false;
 
-        Target = found;
+        aimPoint = ray.GetPoint(distance);
         return true;
     }
 
-    public void ClearTarget()
+    // Quay mặt ngay cả khi đang chờ hồi chiêu, để Player luôn nhìn theo con trỏ lúc giữ chuột phải.
+    private void FaceTowards(Vector3 aimPoint)
     {
-        Target = null;
-    }
+        Vector3 direction = aimPoint - transform.position;
+        direction.y = 0f;
+        if (direction.sqrMagnitude < 0.0001f) return;
 
-    private void Update()
-    {
-        if (stats.IsDead)
-        {
-            Target = null;
-            return;
-        }
-
-        if (Target == null) return;
-
-        // Mục tiêu chết (hoặc bị huỷ) thì thôi, Player đứng yên chờ lệnh mới.
-        if (Target.IsDead)
-        {
-            Target = null;
-            return;
-        }
-
-        if (attacker.IsInRange(Target))
-        {
-            // Vào tầm: dừng lại rồi đánh. TryAttack tự lo hồi chiêu nên gọi mỗi frame được.
-            if (agent.isOnNavMesh && agent.hasPath) agent.ResetPath();
-            attacker.TryAttack(Target);
-        }
-        else if (Time.time >= nextRepathTime && agent.isOnNavMesh)
-        {
-            agent.SetDestination(Target.transform.position);
-            nextRepathTime = Time.time + repathInterval;
-        }
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 }

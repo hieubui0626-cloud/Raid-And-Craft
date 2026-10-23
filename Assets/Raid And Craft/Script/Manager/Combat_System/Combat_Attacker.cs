@@ -7,15 +7,13 @@ using UnityEngine;
 /// Combat_Formulas.BuildAttack -> đưa cho mục tiêu qua TakeDamage(Damage_Info).
 /// KHÔNG tự chọn mục tiêu, KHÔNG tự di chuyển: việc đó do Player_Combat / Enemy_AI quyết định.
 /// - Hồi chiêu giữa hai đòn = 1 / ActionSpeed (Combat_Formulas.ActionInterval), đổi ActionSpeed là đổi tốc độ đánh.
-/// - Muốn hiện hiệu ứng/animation/số sát thương: nghe OnAttackPerformed (từng đối tượng) hoặc OnAnyAttackResolved (toàn game).
+/// - Muốn hiện hiệu ứng/animation/số sát thương: nghe OnAttackPerformed (từng đối tượng) hoặc Combat_Events.OnAnyAttackResolved (toàn game).
+/// - Đây là kiểu đánh CÓ mục tiêu (Enemy_AI dùng). Player dùng Skill_Caster (đánh không cần mục tiêu, theo hướng con trỏ).
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Character_Stats))]
 public class Combat_Attacker : MonoBehaviour
 {
-    /// <summary>Bắn khi BẤT KỲ ai ra đòn (attacker, target, kết quả). UI số sát thương nổi chỉ cần nghe một chỗ này.</summary>
-    public static event Action<Character_Stats, Character_Stats, Damage_Result> OnAnyAttackResolved;
-
     /// <summary>Bắn khi đối tượng NÀY ra đòn (target, kết quả). Dùng để chạy animation/âm thanh của riêng nó.</summary>
     public event Action<Character_Stats, Damage_Result> OnAttackPerformed;
 
@@ -99,7 +97,7 @@ public class Combat_Attacker : MonoBehaviour
         }
 
         OnAttackPerformed?.Invoke(target, result);
-        OnAnyAttackResolved?.Invoke(stats, target, result);
+        Combat_Events.Report(stats, target, result);
         return true;
     }
 

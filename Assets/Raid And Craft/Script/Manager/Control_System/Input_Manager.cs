@@ -10,6 +10,7 @@ public class Input_Manager : MonoBehaviour
     public bool LeftClickPressed { get; private set; }
     public bool LeftClickHeld { get; private set; }
     public bool RightClickPressed { get; private set; }
+    public bool RightClickHeld { get; private set; }
     public Vector2 MousePosition { get; private set; }
 
     // --- Keyboard ---
@@ -46,6 +47,7 @@ public class Input_Manager : MonoBehaviour
             LeftClickPressed = false;
             LeftClickHeld = false;
             RightClickPressed = false;
+            RightClickHeld = false;
             MousePosition = Vector2.zero;
             return;
         }
@@ -53,6 +55,7 @@ public class Input_Manager : MonoBehaviour
         LeftClickPressed = mouse.leftButton.wasPressedThisFrame;
         LeftClickHeld = mouse.leftButton.isPressed;
         RightClickPressed = mouse.rightButton.wasPressedThisFrame;
+        RightClickHeld = mouse.rightButton.isPressed;
         MousePosition = mouse.position.ReadValue();
     }
 

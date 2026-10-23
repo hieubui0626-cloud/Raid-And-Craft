@@ -25,10 +25,6 @@ public class Player_Controller : MonoBehaviour
     [Tooltip("Bỏ trống thì tự lấy Character_Stats trên Player. Có thì tốc độ di chuyển lấy từ chỉ số MovementSpeed và Player đứng yên khi chết.")]
     [SerializeField] private Character_Stats stats;
 
-    [Header("Chiến đấu (tuỳ chọn)")]
-    [Tooltip("Bỏ trống thì tự lấy Player_Combat trên Player. Có thì click vào Enemy sẽ đuổi + đánh thay vì đi tới.")]
-    [SerializeField] private Player_Combat combat;
-
     private NavMeshAgent agent;
     private Camera mainCamera;
 
@@ -59,8 +55,6 @@ public class Player_Controller : MonoBehaviour
 
         // Đặt camera vào đúng vị trí ngay từ đầu để không bị trượt từ xa vào.
         mainCamera.transform.position = player.transform.position + cameraOffset;
-
-        if (combat == null) combat = player.GetComponent<Player_Combat>();
 
         if (stats == null) stats = player.GetComponent<Character_Stats>();
         if (stats != null)
@@ -102,20 +96,11 @@ public class Player_Controller : MonoBehaviour
         Input_Manager input = Input_Manager.Instance;
         if (input == null) return;
 
+        // Đang giữ chuột phải (đánh) thì không di chuyển, tránh hai lệnh giành nhau.
+        if (input.RightClickHeld) return;
+
         if (input.LeftClickPressed || input.LeftClickHeld)
         {
-            // Đang trỏ vào UI thì không coi là click vào thế giới (cả đánh lẫn di chuyển).
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
-
-            if (combat != null)
-            {
-                // Click trúng Enemy: Player_Combat tự đuổi + đánh, không đi tới điểm click.
-                if (combat.TryTargetEnemyAt(input.MousePosition)) return;
-
-                // Click ra mặt đất: bỏ mục tiêu cũ rồi đi tới đó.
-                combat.ClearTarget();
-            }
-
             HandleMovementClick(input.MousePosition);
         }
     }
