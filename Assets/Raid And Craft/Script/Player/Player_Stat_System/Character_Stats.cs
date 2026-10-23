@@ -57,9 +57,11 @@ public class Character_Stats : MonoBehaviour, IDamageable
     /// <summary>Bắn khi được hồi sinh (Revive/RestoreFull lúc đang chết).</summary>
     public event Action OnRevive;
 
-    [Header("Chỉ số khởi tạo (chỉnh được trong Inspector)")]
-    [SerializeField]
-    private List<Default_Stat> defaultStats = new List<Default_Stat>
+    /// <summary>
+    /// Chỉ số nền mặc định. Chỉ số nào KHÔNG có trong danh sách Inspector (ví dụ prefab cũ tạo trước khi thêm MovementSpeed)
+    /// sẽ lấy giá trị ở đây thay vì 0. Muốn một chỉ số bằng 0 thật: thêm dòng của nó vào danh sách Inspector với giá trị 0.
+    /// </summary>
+    public static readonly Default_Stat[] BuiltInDefaultStats =
     {
         // Layer: Complex
         new Default_Stat(Player_Stat_Type.Strength, 10f),
@@ -94,6 +96,11 @@ public class Character_Stats : MonoBehaviour, IDamageable
         new Default_Stat(Player_Stat_Type.ChaosResistance, 0f),
         new Default_Stat(Player_Stat_Type.BlockChance, 0f),
     };
+
+    [Header("Chỉ số khởi tạo (chỉnh được trong Inspector)")]
+    [Tooltip("Chỉ số không có trong danh sách này sẽ dùng giá trị mặc định có sẵn trong code (BuiltInDefaultStats).")]
+    [SerializeField]
+    private List<Default_Stat> defaultStats = new List<Default_Stat>(BuiltInDefaultStats);
 
     /// <summary>
     /// Bộ quy tắc phát sinh mặc định (mỗi 1 điểm thuộc tính cho bao nhiêu chỉ số phụ). Đây là nơi chỉnh cân bằng thuộc tính.
@@ -198,7 +205,9 @@ public class Character_Stats : MonoBehaviour, IDamageable
         if (initialized) return;
         initialized = true;
 
+        // Nền là giá trị mặc định trong code, danh sách Inspector ghi đè lên (chỉ số thiếu trong Inspector không bị về 0).
         var baseValues = new Dictionary<Player_Stat_Type, float>();
+        foreach (Default_Stat d in BuiltInDefaultStats) baseValues[d.type] = d.baseValue;
         foreach (Default_Stat d in defaultStats) baseValues[d.type] = d.baseValue;
 
         // Mọi Stat_Type đã khai báo trong Layer_Map đều có chỉ số (mặc định 0 nếu không có trong defaultStats).
