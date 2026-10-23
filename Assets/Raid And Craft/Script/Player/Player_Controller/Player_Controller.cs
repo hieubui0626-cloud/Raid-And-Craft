@@ -21,6 +21,10 @@ public class Player_Controller : MonoBehaviour
     [Tooltip("Độ mượt khi Camera đuổi theo Player (càng nhỏ càng mượt, càng lớn càng nhanh)")]
     [SerializeField] private float cameraSmoothSpeed = 5f;
 
+    [Header("Chỉ số (tuỳ chọn)")]
+    [Tooltip("Bỏ trống thì tự lấy Character_Stats trên Player. Có thì tốc độ di chuyển lấy từ chỉ số MovementSpeed và Player đứng yên khi chết.")]
+    [SerializeField] private Character_Stats stats;
+
     private NavMeshAgent agent;
     private Camera mainCamera;
 
@@ -51,12 +55,49 @@ public class Player_Controller : MonoBehaviour
 
         // Đặt camera vào đúng vị trí ngay từ đầu để không bị trượt từ xa vào.
         mainCamera.transform.position = player.transform.position + cameraOffset;
+
+        if (stats == null) stats = player.GetComponent<Character_Stats>();
+        if (stats != null)
+        {
+            ApplyMovementSpeed();
+            stats.OnStatChanged += HandleStatChanged;
+            stats.OnDeath += HandleDeath;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (stats == null) return;
+
+        stats.OnStatChanged -= HandleStatChanged;
+        stats.OnDeath -= HandleDeath;
+    }
+
+    private void HandleStatChanged(Player_Stat stat)
+    {
+        if (stat.Type == Player_Stat_Type.MovementSpeed) ApplyMovementSpeed();
+    }
+
+    private void ApplyMovementSpeed()
+    {
+        agent.speed = stats.GetValue(Player_Stat_Type.MovementSpeed);
+    }
+
+    // Chết thì dừng ngay, không đi tiếp tới điểm đã click.
+    private void HandleDeath()
+    {
+        if (agent != null && agent.isOnNavMesh) agent.ResetPath();
     }
 
     private void Update()
     {
+        if (stats != null && stats.IsDead) return;
+
         Input_Manager input = Input_Manager.Instance;
         if (input == null) return;
+
+        // Đang giữ chuột phải (đánh) thì không di chuyển, tránh hai lệnh giành nhau.
+        if (input.RightClickHeld) return;
 
         if (input.LeftClickPressed || input.LeftClickHeld)
         {
