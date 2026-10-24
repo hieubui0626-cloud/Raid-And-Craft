@@ -72,6 +72,28 @@ public class Skill_Caster : MonoBehaviour
         return !nextReadyTime.TryGetValue(skill, out float readyAt) || Time.time >= readyAt;
     }
 
+    /// <summary>Có thể thi triển ngay bây giờ không: còn sống, hết hồi chiêu và đủ mana. (AI dùng để chọn skill.)</summary>
+    public bool CanCast(Skill_Data skill)
+    {
+        if (skill == null || stats == null || stats.IsDead || !IsReady(skill)) return false;
+        return skill.manaCost <= 0f || stats.CurrentMana >= skill.manaCost;
+    }
+
+    /// <summary>
+    /// Tầm hiệu dụng của skill (mét): cận chiến = Range của quạt; đạn = 90% quãng bay (tốc độ x thời gian sống).
+    /// Với đòn đánh mặc định thì lấy theo vũ khí đang cầm. AI dùng để biết cần tới gần mục tiêu bao nhiêu thì ra đòn.
+    /// </summary>
+    public float GetReach(Skill_Data skill)
+    {
+        if (skill == null) return 0f;
+
+        ResolveDelivery(skill, out Skill_Delivery delivery, out _, out _);
+
+        return delivery.type == Skill_Delivery_Type.Melee_Arc
+            ? delivery.range
+            : delivery.projectileSpeed * delivery.projectileLifetime * 0.9f;
+    }
+
     /// <summary>
     /// Thi triển skill về phía aimPoint (điểm nhắm trong thế giới, thường là điểm dưới con trỏ chuột).
     /// Trả về false (không tốn mana, không tốn hồi chiêu) nếu: đã chết, chưa hết hồi chiêu, hoặc không đủ mana.
