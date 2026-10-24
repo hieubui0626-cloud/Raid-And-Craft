@@ -72,6 +72,20 @@ public class Skill_Caster : MonoBehaviour
         return !nextReadyTime.TryGetValue(skill, out float readyAt) || Time.time >= readyAt;
     }
 
+    /// <summary>Số giây còn lại của hồi chiêu (0 = đã sẵn sàng). UI dùng để vẽ vòng hồi chiêu.</summary>
+    public float GetCooldownRemaining(Skill_Data skill)
+    {
+        if (skill == null || !nextReadyTime.TryGetValue(skill, out float readyAt)) return 0f;
+        return Mathf.Max(0f, readyAt - Time.time);
+    }
+
+    /// <summary>Tổng thời gian hồi chiêu của skill: 1 / ActionSpeed nếu skill dùng ActionSpeed, ngược lại là 'cooldown' của skill.</summary>
+    public float GetCooldownDuration(Skill_Data skill)
+    {
+        if (skill == null || stats == null) return 0f;
+        return skill.usesActionSpeed ? Combat_Formulas.ActionInterval(stats) : skill.cooldown;
+    }
+
     /// <summary>Có thể thi triển ngay bây giờ không: còn sống, hết hồi chiêu và đủ mana. (AI dùng để chọn skill.)</summary>
     public bool CanCast(Skill_Data skill)
     {
