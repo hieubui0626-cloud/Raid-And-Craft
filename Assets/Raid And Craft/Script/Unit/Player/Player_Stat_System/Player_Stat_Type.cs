@@ -13,6 +13,7 @@ public enum Player_Stat_Type
     ManaRegen = 15,
     MovementSpeed = 25,
     CharacterLevel = 26,
+    MaxCharacterLevel = 27,
 
     // Layer: Offence
     PhysicDamage = 5,

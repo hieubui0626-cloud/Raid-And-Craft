@@ -12,6 +12,9 @@ public class Skill_Data : ScriptableObject
     public string displayName = "New Skill";
     public Sprite icon;
 
+    [Tooltip("Mô tả ngắn hiện trong tooltip khi rê chuột vào skill (tuỳ chọn).")]
+    [TextArea(1, 4)] public string description;
+
     [Header("Chi phí và hồi chiêu")]
     [Min(0f)] public float manaCost;
 

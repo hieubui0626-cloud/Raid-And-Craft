@@ -19,7 +19,8 @@ public static class Player_Stat_Layer_Map
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.LifeRegen,     Player_Stat_Layer.Complex),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.ManaRegen,     Player_Stat_Layer.Complex),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MovementSpeed,     Player_Stat_Layer.Complex),
-        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.CharacterLevel,     Player_Stat_Layer.Complex),  
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.CharacterLevel,     Player_Stat_Layer.Complex),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MaxCharacterLevel,  Player_Stat_Layer.Complex),
 
         // Layer: Offence
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.PhysicDamage, Player_Stat_Layer.Offence),
