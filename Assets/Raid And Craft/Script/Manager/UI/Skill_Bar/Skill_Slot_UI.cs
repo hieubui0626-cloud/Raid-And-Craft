@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -9,10 +10,14 @@ using UnityEngine.UI;
 /// nên chỉ cần có sẵn Button + hình nền của ô. Muốn tuỳ biến kiểu dáng: tự tạo các object đó rồi kéo vào ô tương ứng.
 /// </summary>
 [RequireComponent(typeof(Button))]
-public class Skill_Slot_UI : MonoBehaviour
+public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     /// <summary>Bắn khi người chơi bấm chuột vào ô này.</summary>
     public event Action<Skill_Slot_UI> OnClicked;
+
+    /// <summary>Bắn khi con trỏ đi vào/rời ô (dùng cho tooltip). Chỉ cần quan tâm khi ô đang có skill.</summary>
+    public event Action<Skill_Slot_UI> OnHoverEnter;
+    public event Action<Skill_Slot_UI> OnHoverExit;
 
     [Header("Tuỳ chọn (bỏ trống thì tự tạo)")]
     [SerializeField] private Image iconImage;
@@ -31,6 +36,9 @@ public class Skill_Slot_UI : MonoBehaviour
     private bool built;
 
     public int Index { get; private set; }
+
+    /// <summary>Skill đang gán trong ô (null = trống).</summary>
+    public Skill_Data Skill => skill;
     public RectTransform Rect => (RectTransform)transform;
 
     private void Awake()
@@ -48,6 +56,16 @@ public class Skill_Slot_UI : MonoBehaviour
         button.onClick.AddListener(() => OnClicked?.Invoke(this));
 
         EnsureParts();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        OnHoverEnter?.Invoke(this);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        OnHoverExit?.Invoke(this);
     }
 
     /// <summary>Skill_Bar_UI gọi một lần: chỉ số ô (0..9) và nhãn phím.</summary>

@@ -6,23 +6,37 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
-/// Popup danh sách skill để chọn gán vào một ô. Skill_Bar_UI tạo và gọi Open/Close; tự dựng toàn bộ giao diện bằng code
-/// (không cần prefab): một lớp nền bấm ra ngoài để đóng, bảng danh sách cuộn được, mỗi dòng gồm icon + tên + mana.
-/// Dòng đầu luôn là "Empty" để xoá skill khỏi ô. Bấm Esc cũng đóng.
+/// Popup chọn skill để gán vào một ô, dạng LƯỚI ô vuông (mặc định 3 cột). Skill_Bar_UI tạo và gọi Open/Close;
+/// tự dựng toàn bộ giao diện bằng code (không cần prefab): lớp nền bấm ra ngoài để đóng, bảng lưới cuộn được.
+/// - Mỗi ô là một skill (icon, hoặc tên nếu chưa có icon). Ô đầu tiên luôn là "Empty" để bỏ trống ô skill.
+/// - Số cột, số hàng hiển thị và cỡ ô chỉnh bằng Configure (Skill_Bar_UI có các ô nhập trong Inspector).
+///   Skill nhiều hơn số hàng hiển thị thì cuộn bằng con lăn chuột hoặc kéo.
+/// - Rê chuột vào ô: bắn OnHoverBegin/OnHoverEnd để hiện tooltip. Bấm Esc cũng đóng.
 /// </summary>
 public class Skill_Picker_UI : MonoBehaviour
 {
-    private const float PanelWidth = 280f;
-    private const float RowHeight = 44f;
-    private const float RowSpacing = 4f;
     private const float TitleHeight = 36f;
-    private const float Padding = 6f;
-    private const float MaxListHeight = 320f;
+    private const float HintHeight = 30f;
+    private const float Padding = 8f;
+    private const float Spacing = 6f;
+
+    /// <summary>Rê chuột vào ô skill (skill khác null).</summary>
+    public event Action<Skill_Data> OnHoverBegin;
+
+    /// <summary>Con trỏ rời ô skill hoặc popup đóng.</summary>
+    public event Action OnHoverEnd;
+
+    private int columns = 3;
+    private int visibleRows = 3;
+    private float cellSize = 72f;
 
     private Canvas canvas;
     private RectTransform panel;
+    private RectTransform scrollArea;
     private RectTransform content;
+    private GridLayoutGroup grid;
     private TextMeshProUGUI titleText;
+    private TextMeshProUGUI hintText;
     private ScrollRect scrollRect;
     private Action<Skill_Data> onPicked;
 
@@ -42,9 +56,17 @@ public class Skill_Picker_UI : MonoBehaviour
         if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) Close();
     }
 
+    /// <summary>Số cột (>= 1), số hàng hiển thị trước khi phải cuộn (>= 1) và cạnh ô vuông (pixel, theo độ phân giải 1080p).</summary>
+    public void Configure(int columns, int visibleRows, float cellSize)
+    {
+        this.columns = Mathf.Max(1, columns);
+        this.visibleRows = Mathf.Max(1, visibleRows);
+        this.cellSize = Mathf.Max(24f, cellSize);
+    }
+
     /// <summary>
     /// Mở popup cạnh một ô.
-    /// anchor: RectTransform của ô; anchorCanvas: Canvas chứa ô (để quy đổi vị trí);
+    /// anchor: RectTransform của ô trên thanh kỹ năng; anchorCanvas: Canvas chứa ô (để quy đổi vị trí);
     /// onPicked: gọi khi chọn (null = bỏ trống).
     /// </summary>
     public void Open(string slotLabel, RectTransform anchor, Canvas anchorCanvas, IReadOnlyList<Skill_Data> skills,
@@ -53,10 +75,25 @@ public class Skill_Picker_UI : MonoBehaviour
         this.onPicked = onPicked;
         titleText.text = $"Assign skill to slot {slotLabel}";
 
-        RebuildRows(skills, current);
+        int skillCount = RebuildCells(skills, current);
+        bool noSkills = skillCount == 0;
 
-        float listHeight = Mathf.Min(MaxListHeight, content.sizeDelta.y);
-        panel.sizeDelta = new Vector2(PanelWidth, TitleHeight + listHeight + Padding * 2f);
+        hintText.gameObject.SetActive(noSkills);
+        hintText.text = "No skills yet. Add skills to 'Available Skills' on Player_Skill_Slots.";
+        float hintHeight = noSkills ? HintHeight : 0f;
+
+        int cellCount = skillCount + 1; // + ô Empty
+        int rowsNeeded = Mathf.CeilToInt(cellCount / (float)columns);
+
+        float contentHeight = RowsHeight(rowsNeeded);
+        float listHeight = Mathf.Min(contentHeight, RowsHeight(visibleRows));
+        float width = columns * cellSize + (columns - 1) * Spacing + Padding * 2f;
+
+        panel.sizeDelta = new Vector2(width, TitleHeight + hintHeight + listHeight + Padding * 2f);
+
+        scrollArea.offsetMin = new Vector2(Padding, Padding);
+        scrollArea.offsetMax = new Vector2(-Padding, -(TitleHeight + hintHeight));
+        content.sizeDelta = new Vector2(0f, contentHeight);
 
         canvas.gameObject.SetActive(true);
         Canvas.ForceUpdateCanvases();
@@ -67,8 +104,17 @@ public class Skill_Picker_UI : MonoBehaviour
 
     public void Close()
     {
+        bool wasOpen = IsOpen;
+
         if (canvas != null) canvas.gameObject.SetActive(false);
         onPicked = null;
+
+        if (wasOpen) OnHoverEnd?.Invoke();
+    }
+
+    private float RowsHeight(int rows)
+    {
+        return rows * cellSize + Mathf.Max(0, rows - 1) * Spacing;
     }
 
     // ------------------------------------------------------------------
@@ -140,17 +186,24 @@ public class Skill_Picker_UI : MonoBehaviour
         titleText.rectTransform.sizeDelta = new Vector2(0f, TitleHeight);
         titleText.rectTransform.anchoredPosition = Vector2.zero;
 
-        // Vùng cuộn.
-        var scrollObject = new GameObject("List", typeof(RectTransform), typeof(Image), typeof(RectMask2D), typeof(ScrollRect));
+        // Dòng gợi ý (chỉ hiện khi chưa có skill nào), nằm ngay dưới tiêu đề.
+        hintText = CreateText(panel, "Hint", 13f, TextAlignmentOptions.Center);
+        hintText.color = new Color(0.8f, 0.8f, 0.8f);
+        hintText.rectTransform.anchorMin = new Vector2(0f, 1f);
+        hintText.rectTransform.anchorMax = new Vector2(1f, 1f);
+        hintText.rectTransform.pivot = new Vector2(0.5f, 1f);
+        hintText.rectTransform.sizeDelta = new Vector2(-Padding * 2f, HintHeight);
+        hintText.rectTransform.anchoredPosition = new Vector2(0f, -TitleHeight);
+
+        // Vùng cuộn chứa lưới.
+        var scrollObject = new GameObject("Grid_Scroll", typeof(RectTransform), typeof(Image), typeof(RectMask2D), typeof(ScrollRect));
         scrollObject.transform.SetParent(panel, false);
-        var scrollRectTransform = (RectTransform)scrollObject.transform;
-        scrollRectTransform.anchorMin = Vector2.zero;
-        scrollRectTransform.anchorMax = Vector2.one;
-        scrollRectTransform.offsetMin = new Vector2(Padding, Padding);
-        scrollRectTransform.offsetMax = new Vector2(-Padding, -TitleHeight);
+        scrollArea = (RectTransform)scrollObject.transform;
+        scrollArea.anchorMin = Vector2.zero;
+        scrollArea.anchorMax = Vector2.one;
         scrollObject.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.15f);
 
-        var contentObject = new GameObject("Content", typeof(RectTransform), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
+        var contentObject = new GameObject("Content", typeof(RectTransform), typeof(GridLayoutGroup));
         contentObject.transform.SetParent(scrollObject.transform, false);
         content = (RectTransform)contentObject.transform;
         content.anchorMin = new Vector2(0f, 1f);
@@ -158,111 +211,94 @@ public class Skill_Picker_UI : MonoBehaviour
         content.pivot = new Vector2(0.5f, 1f);
         content.anchoredPosition = Vector2.zero;
 
-        var layout = contentObject.GetComponent<VerticalLayoutGroup>();
-        layout.spacing = RowSpacing;
-        layout.childControlWidth = true;
-        layout.childControlHeight = true;
-        layout.childForceExpandWidth = true;
-        layout.childForceExpandHeight = false;
-
-        contentObject.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+        grid = contentObject.GetComponent<GridLayoutGroup>();
+        grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        grid.startAxis = GridLayoutGroup.Axis.Horizontal;
+        grid.childAlignment = TextAnchor.UpperLeft;
+        grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        grid.spacing = new Vector2(Spacing, Spacing);
 
         scrollRect = scrollObject.GetComponent<ScrollRect>();
         scrollRect.content = content;
-        scrollRect.viewport = scrollRectTransform;
+        scrollRect.viewport = scrollArea;
         scrollRect.horizontal = false;
         scrollRect.vertical = true;
         scrollRect.movementType = ScrollRect.MovementType.Clamped;
         scrollRect.scrollSensitivity = 30f;
     }
 
-    private void RebuildRows(IReadOnlyList<Skill_Data> skills, Skill_Data current)
+    // Dựng lại các ô; trả về số skill (không tính ô Empty).
+    private int RebuildCells(IReadOnlyList<Skill_Data> skills, Skill_Data current)
     {
+        // Cấu hình lưới theo giá trị hiện tại (Configure có thể được gọi sau khi Build).
+        grid.constraintCount = columns;
+        grid.cellSize = new Vector2(cellSize, cellSize);
+
         for (int i = content.childCount - 1; i >= 0; i--) Destroy(content.GetChild(i).gameObject);
 
         // Destroy trễ tới cuối frame nên tách khỏi cây ngay để bố cục tính đúng.
         content.DetachChildren();
 
-        AddRow(null, "- Empty -", null, current == null);
+        AddCell(null, current == null);
 
-        if (skills == null || skills.Count == 0)
-        {
-            AddMessageRow("No skills yet. Add skills to 'Available Skills' on Player_Skill_Slots.");
-        }
-        else
+        int count = 0;
+        if (skills != null)
         {
             foreach (Skill_Data skill in skills)
             {
                 if (skill == null) continue;
 
-                string label = skill.manaCost > 0f ? $"{skill.displayName}   ({skill.manaCost:0.#} mana)" : skill.displayName;
-                AddRow(skill, label, skill.icon, skill == current);
+                AddCell(skill, skill == current);
+                count++;
             }
         }
 
-        // Tính chiều cao nội dung ngay (ContentSizeFitter chỉ tính ở cuối frame).
-        float height = 0f;
-        for (int i = 0; i < content.childCount; i++)
-        {
-            height += content.GetChild(i).GetComponent<LayoutElement>().preferredHeight;
-            if (i > 0) height += RowSpacing;
-        }
-        content.sizeDelta = new Vector2(0f, height);
+        return count;
     }
 
-    private void AddRow(Skill_Data skill, string label, Sprite icon, bool isCurrent)
+    private void AddCell(Skill_Data skill, bool isCurrent)
     {
-        var rowObject = new GameObject("Row", typeof(RectTransform), typeof(Image), typeof(Button), typeof(LayoutElement));
-        rowObject.transform.SetParent(content, false);
-        rowObject.GetComponent<LayoutElement>().preferredHeight = RowHeight;
+        var cellObject = new GameObject(skill != null ? skill.displayName : "Empty", typeof(RectTransform), typeof(Image), typeof(Button), typeof(Skill_Hover_Target));
+        cellObject.transform.SetParent(content, false);
 
-        var background = rowObject.GetComponent<Image>();
+        var background = cellObject.GetComponent<Image>();
         background.color = isCurrent ? new Color(0.25f, 0.4f, 0.6f, 1f) : new Color(0.17f, 0.18f, 0.23f, 1f);
 
-        var button = rowObject.GetComponent<Button>();
+        var button = cellObject.GetComponent<Button>();
         button.targetGraphic = background;
         button.onClick.AddListener(() => Pick(skill));
 
-        float textLeft = Padding;
-
-        if (icon != null)
+        if (skill != null)
         {
-            var iconObject = new GameObject("Icon", typeof(RectTransform), typeof(Image));
-            iconObject.transform.SetParent(rowObject.transform, false);
-
-            var iconRect = (RectTransform)iconObject.transform;
-            iconRect.anchorMin = new Vector2(0f, 0.5f);
-            iconRect.anchorMax = new Vector2(0f, 0.5f);
-            iconRect.pivot = new Vector2(0f, 0.5f);
-            iconRect.sizeDelta = new Vector2(RowHeight - 8f, RowHeight - 8f);
-            iconRect.anchoredPosition = new Vector2(Padding, 0f);
-
-            var iconImage = iconObject.GetComponent<Image>();
-            iconImage.sprite = icon;
-            iconImage.preserveAspect = true;
-            iconImage.raycastTarget = false;
-
-            textLeft = Padding * 2f + RowHeight - 8f;
+            var hover = cellObject.GetComponent<Skill_Hover_Target>();
+            hover.OnEnter = () => OnHoverBegin?.Invoke(skill);
+            hover.OnExit = () => OnHoverEnd?.Invoke();
         }
 
-        TextMeshProUGUI text = CreateText((RectTransform)rowObject.transform, "Label", 18f, TextAlignmentOptions.MidlineLeft);
-        text.text = label;
-        text.rectTransform.anchorMin = Vector2.zero;
-        text.rectTransform.anchorMax = Vector2.one;
-        text.rectTransform.offsetMin = new Vector2(textLeft, 0f);
-        text.rectTransform.offsetMax = new Vector2(-Padding, 0f);
-    }
+        bool showIcon = skill != null && skill.icon != null;
 
-    private void AddMessageRow(string message)
-    {
-        var rowObject = new GameObject("Message", typeof(RectTransform), typeof(LayoutElement));
-        rowObject.transform.SetParent(content, false);
-        rowObject.GetComponent<LayoutElement>().preferredHeight = RowHeight * 2f;
+        if (showIcon)
+        {
+            var iconObject = new GameObject("Icon", typeof(RectTransform), typeof(Image));
+            iconObject.transform.SetParent(cellObject.transform, false);
+            Stretch((RectTransform)iconObject.transform, 6f);
 
-        TextMeshProUGUI text = CreateText((RectTransform)rowObject.transform, "Text", 14f, TextAlignmentOptions.Center);
-        text.text = message;
-        Stretch(text.rectTransform, Padding);
-        text.color = new Color(0.8f, 0.8f, 0.8f);
+            var iconImage = iconObject.GetComponent<Image>();
+            iconImage.sprite = skill.icon;
+            iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+        }
+        else
+        {
+            // Chưa có icon (hoặc ô Empty): hiện chữ co giãn vừa ô.
+            TextMeshProUGUI label = CreateText((RectTransform)cellObject.transform, "Label", 16f, TextAlignmentOptions.Center);
+            label.text = skill != null ? skill.displayName : "Empty";
+            label.enableAutoSizing = true;
+            label.fontSizeMin = 9f;
+            label.fontSizeMax = 18f;
+            if (skill == null) label.color = new Color(0.7f, 0.7f, 0.7f);
+            Stretch(label.rectTransform, 4f);
+        }
     }
 
     private void Pick(Skill_Data skill)

@@ -72,6 +72,25 @@ public class Skill_Caster : MonoBehaviour
         return !nextReadyTime.TryGetValue(skill, out float readyAt) || Time.time >= readyAt;
     }
 
+    /// <summary>
+    /// Tính nhanh sát thương của skill theo chỉ số HIỆN TẠI của nhân vật (đã gồm vũ khí đang cầm) để hiện trong tooltip.
+    /// Là sát thương mỗi mục tiêu, mỗi đòn, TRƯỚC khi trừ né/đỡ/giáp/kháng của kẻ địch. Không roll ngẫu nhiên, không tốn gì.
+    /// </summary>
+    public bool TryGetPreview(Skill_Data skill, out Skill_Preview preview)
+    {
+        preview = default;
+        if (skill == null || stats == null) return false;
+
+        ResolveDelivery(skill, out Skill_Delivery delivery, out Damage_Type[] types, out float multiplier);
+
+        // critRoll = 1 nên không bao giờ chí mạng: đây là đòn thường; đòn chí mạng suy ra bằng hệ số nhân.
+        Damage_Info hit = Combat_Formulas.BuildAttack(stats, 1f, multiplier, types);
+        float critMultiplier = Combat_Formulas.CritMultiplier(stats.GetValue(Player_Stat_Type.CriticalDamage));
+
+        preview = new Skill_Preview(delivery, hit, hit.Scaled(critMultiplier), GetCooldownDuration(skill));
+        return true;
+    }
+
     /// <summary>Số giây còn lại của hồi chiêu (0 = đã sẵn sàng). UI dùng để vẽ vòng hồi chiêu.</summary>
     public float GetCooldownRemaining(Skill_Data skill)
     {
@@ -277,4 +296,34 @@ public class Skill_Caster : MonoBehaviour
             previous = point;
         }
     }
+}
+
+/// <summary>Kết quả tính nhanh của Skill_Caster.TryGetPreview, dùng cho tooltip.</summary>
+public readonly struct Skill_Preview
+{
+    /// <summary>Cách ra đòn thực tế (đã xét vũ khí).</summary>
+    public readonly Skill_Delivery delivery;
+
+    /// <summary>Sát thương một đòn thường theo từng loại (chưa trừ phòng thủ của kẻ địch).</summary>
+    public readonly Damage_Info hit;
+
+    /// <summary>Sát thương một đòn chí mạng theo từng loại.</summary>
+    public readonly Damage_Info critHit;
+
+    /// <summary>Giây giữa hai lần dùng (hồi chiêu).</summary>
+    public readonly float cooldown;
+
+    public Skill_Preview(Skill_Delivery delivery, Damage_Info hit, Damage_Info critHit, float cooldown)
+    {
+        this.delivery = delivery;
+        this.hit = hit;
+        this.critHit = critHit;
+        this.cooldown = cooldown;
+    }
+
+    public float HitDamage => hit.TotalRaw;
+    public float CritDamage => critHit.TotalRaw;
+
+    /// <summary>Sát thương mỗi giây trên MỘT mục tiêu nếu dùng liên tục (không tính chí mạng); 0 nếu không xác định.</summary>
+    public float Dps => cooldown > 0f && !float.IsInfinity(cooldown) ? HitDamage / cooldown : 0f;
 }
