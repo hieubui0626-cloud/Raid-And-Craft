@@ -73,6 +73,7 @@ public class Character_Stats : MonoBehaviour, IDamageable
         new Default_Stat(Player_Stat_Type.ManaRegen, 1f),
         new Default_Stat(Player_Stat_Type.MovementSpeed, 5f),
         new Default_Stat(Player_Stat_Type.CharacterLevel, 1f),
+        new Default_Stat(Player_Stat_Type.MaxCharacterLevel, 100f),
 
         // Layer: Offence
         new Default_Stat(Player_Stat_Type.PhysicDamage, 10f),
