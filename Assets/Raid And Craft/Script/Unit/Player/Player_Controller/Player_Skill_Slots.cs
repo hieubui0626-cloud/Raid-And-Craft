@@ -129,6 +129,26 @@ public class Player_Skill_Slots : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Gỡ skill khỏi kho (Magic Circuit gọi khi gỡ Spell Stone). Skill đang nằm ở ô nào thì ô đó bị bỏ trống.
+    /// Trả về true nếu skill có trong kho và đã gỡ.
+    /// </summary>
+    public bool Forget(Skill_Data skill)
+    {
+        if (skill == null || !availableSkills.Remove(skill)) return false;
+
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (slots[i] != skill) continue;
+
+            slots[i] = null;
+            OnSlotChanged?.Invoke(i, null);
+        }
+
+        OnAvailableSkillsChanged?.Invoke();
+        return true;
+    }
+
     private static bool IsValidSlot(int index)
     {
         return index >= 0 && index < SlotCount;
