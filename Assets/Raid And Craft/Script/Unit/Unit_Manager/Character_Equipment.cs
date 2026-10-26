@@ -4,14 +4,14 @@ using UnityEngine;
 /// <summary>
 /// Trang bị đang mang của MỘT nhân vật (hiện chỉ có vũ khí). Gắn cùng object với Character_Stats.
 /// - Khi đổi vũ khí: gỡ chỉ số của vũ khí cũ, cộng chỉ số của vũ khí mới (modifier có Source = vũ khí nên gỡ sạch được).
-/// - Skill_Caster đọc Weapon ở đây để biết đòn đánh mặc định hoạt động thế nào.
+/// - Implement ISkill_Weapon_Source: Damage_Effect (bật Use Weapon Attack) lấy cách đánh/loại sát thương/hệ số từ vũ khí qua đây.
 /// - Muốn đổi vũ khí khi đang chơi (nhặt đồ, đổi đồ từ Inventory): gọi Equip(). Đổi ô Weapon trong Inspector lúc đang Play
 ///   KHÔNG tự cập nhật chỉ số, hãy dùng Equip().
 /// - Chưa được lưu trong Save_Data (làm cùng Inventory sau).
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Character_Stats))]
-public class Character_Equipment : MonoBehaviour
+public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 {
     /// <summary>Bắn khi đổi vũ khí (tham số là vũ khí mới, null = tháo vũ khí).</summary>
     public event Action<Weapon_Data> OnWeaponChanged;
@@ -22,6 +22,19 @@ public class Character_Equipment : MonoBehaviour
     [SerializeField] private Weapon_Data weapon;
 
     public Weapon_Data Weapon => weapon;
+
+    /// <summary>Cho Damage_Effect (Use Weapon Attack). Tay không = false, effect dùng delivery của chính nó.</summary>
+    public bool TryGetWeaponAttack(out Skill_Weapon_Attack attack)
+    {
+        if (weapon == null)
+        {
+            attack = default;
+            return false;
+        }
+
+        attack = new Skill_Weapon_Attack(weapon.attackDelivery, weapon.damageTypes, weapon.damageMultiplier);
+        return true;
+    }
 
     private void Awake()
     {

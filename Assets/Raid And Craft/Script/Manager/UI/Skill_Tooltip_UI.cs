@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
-/// Tooltip skill: tên, mô tả, mana, hồi chiêu, sát thương (thường/chí mạng/DPS) tính theo chỉ số hiện tại, cách ra đòn.
+/// Tooltip skill: tên, loại, mô tả, mana, hồi chiêu, rồi các dòng do từng Skill_Effect tự mô tả (Skill_Preview.Lines).
 /// Skill_Bar_UI tạo và gọi Show/Hide; tooltip tự dựng giao diện bằng code, đi theo con trỏ chuột và luôn nằm trong màn hình.
 /// Không nhận chuột (không chặn click).
 /// </summary>
@@ -38,7 +38,7 @@ public class Skill_Tooltip_UI : MonoBehaviour
         if (canvas != null) canvas.gameObject.SetActive(false);
     }
 
-    /// <summary>Hiện tooltip của skill. hasPreview = false (không tính được sát thương) thì bỏ phần sát thương.</summary>
+    /// <summary>Hiện tooltip của skill. hasPreview = false (hoặc preview null) thì chỉ hiện phần thông tin cơ bản.</summary>
     public void Show(Skill_Data skill, bool hasPreview, Skill_Preview preview, Character_Stats owner)
     {
         if (skill == null) return;
@@ -61,6 +61,7 @@ public class Skill_Tooltip_UI : MonoBehaviour
         sb.Clear();
 
         sb.Append("<size=130%><b>").Append(skill.displayName).Append("</b></size>\n");
+        sb.Append("<color=#8FA8C8>").Append(skill.category).Append("</color>\n");
 
         if (!string.IsNullOrWhiteSpace(skill.description))
         {
@@ -74,72 +75,40 @@ public class Skill_Tooltip_UI : MonoBehaviour
               .Append(skill.manaCost.ToString("0.#")).Append("</color>\n");
         }
 
-        if (!hasPreview) return sb.ToString().TrimEnd();
+        if (!hasPreview || preview == null) return sb.ToString().TrimEnd();
 
         AppendCooldown(preview);
-        AppendDamage(preview);
-        AppendDelivery(preview.delivery);
 
-        sb.Append("<size=80%><color=#8A8A8A>Per target, before enemy defence.</color></size>");
-        return sb.ToString();
+        // Các dòng do từng Skill_Effect tự thêm (Damage, Critical, DPS, Heal, làm chậm...).
+        bool hasDamage = false;
+        foreach (Skill_Preview_Line line in preview.Lines)
+        {
+            sb.Append(line.Label).Append(": <color=").Append(LineColor(line.Label)).Append('>')
+              .Append(line.Value).Append("</color>\n");
+
+            if (line.Label == "Damage") hasDamage = true;
+        }
+
+        if (hasDamage) sb.Append("<size=80%><color=#8A8A8A>Per target, before enemy defence.</color></size>");
+        return sb.ToString().TrimEnd();
     }
 
     private void AppendCooldown(Skill_Preview preview)
     {
-        if (preview.cooldown <= 0f || float.IsInfinity(preview.cooldown)) return;
+        if (preview.Cooldown <= 0f || float.IsInfinity(preview.Cooldown)) return;
 
-        sb.Append("Cooldown: <color=#FFFFFF>").Append(preview.cooldown.ToString("0.##")).Append("s</color>\n");
+        sb.Append("Cooldown: <color=#FFFFFF>").Append(preview.Cooldown.ToString("0.##")).Append("s</color>\n");
     }
 
-    private void AppendDamage(Skill_Preview preview)
+    // Màu theo nhãn; effect mới có nhãn lạ thì dùng màu trắng, không cần sửa file này.
+    private static string LineColor(string label)
     {
-        float hit = preview.HitDamage;
-
-        if (hit <= 0f)
+        switch (label)
         {
-            sb.Append("Damage: <color=#FF6B6B>0</color> (damage stat is 0)\n");
-            return;
-        }
-
-        sb.Append("Damage: <color=#FFD27F>").Append(hit.ToString("0.#")).Append("</color>");
-
-        // Chi tiết từng loại sát thương.
-        sb.Append(" (");
-        bool first = true;
-        foreach (Damage_Type type in Damage_Info.AllTypes)
-        {
-            float amount = preview.hit.Get(type);
-            if (amount <= 0f) continue;
-
-            if (!first) sb.Append(" + ");
-            sb.Append(amount.ToString("0.#")).Append(' ').Append(type);
-            first = false;
-        }
-        sb.Append(")\n");
-
-        sb.Append("Critical: <color=#FFB347>").Append(preview.CritDamage.ToString("0.#")).Append("</color>\n");
-
-        if (preview.Dps > 0f)
-        {
-            sb.Append("DPS: <color=#FFFFFF>").Append(preview.Dps.ToString("0.#")).Append("</color>\n");
-        }
-    }
-
-    private void AppendDelivery(Skill_Delivery delivery)
-    {
-        if (delivery.type == Skill_Delivery_Type.Melee_Arc)
-        {
-            sb.Append("Melee arc: ").Append(delivery.range.ToString("0.#")).Append(" m, ")
-              .Append(delivery.arcAngle.ToString("0")).Append("°, up to ")
-              .Append(delivery.maxTargets).Append(delivery.maxTargets == 1 ? " target\n" : " targets\n");
-        }
-        else
-        {
-            sb.Append("Projectile: speed ").Append(delivery.projectileSpeed.ToString("0.#"))
-              .Append(", range ").Append((delivery.projectileSpeed * delivery.projectileLifetime).ToString("0.#")).Append(" m");
-
-            if (delivery.pierce > 0) sb.Append(", pierces ").Append(delivery.pierce);
-            sb.Append('\n');
+            case "Damage": return "#FFD27F";
+            case "Critical": return "#FFB347";
+            case "Heal": return "#7FE08A";
+            default: return "#FFFFFF";
         }
     }
 

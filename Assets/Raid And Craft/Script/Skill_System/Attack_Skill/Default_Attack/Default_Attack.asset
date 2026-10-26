@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a46cc6d3bb3134480efd543ca1a4a0, type: 3}
+  m_Name: Default_Attack
+  m_EditorClassIdentifier: 
+  skillId: Default_Attack
+  displayName: Default Attack
+  icon: {fileID: 0}
+  description: Normal Attack by your weapind
+  category: 0
+  manaCost: 5
+  usesActionSpeed: 1
+  cooldown: 1
+  faceAimDirection: 1
+  effects:
+  - {fileID: 11400000, guid: 02382a01514c4594c969aca2cc720f4e, type: 2}

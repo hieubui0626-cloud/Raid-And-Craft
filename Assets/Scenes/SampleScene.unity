@@ -7477,10 +7477,12 @@ GameObject:
   - component: {fileID: 1311958129}
   - component: {fileID: 1311958130}
   - component: {fileID: 1311958132}
-  - component: {fileID: 1311958128}
+  - component: {fileID: 1311958135}
   - component: {fileID: 1311958127}
   - component: {fileID: 1311958133}
   - component: {fileID: 1311958134}
+  - component: {fileID: 1311958137}
+  - component: {fileID: 1311958136}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -7615,37 +7617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
---- !u!114 &1311958128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311958120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef008790f45e28c4483f4d9be67dcb79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 1311958132}
-  equipment: {fileID: 1311958129}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
-  unarmedDelivery:
-    type: 0
-    range: 1.5
-    arcAngle: 90
-    maxTargets: 1
-    projectilePrefab: {fileID: 0}
-    projectileSpeed: 15
-    projectileLifetime: 1.5
-    pierce: 0
-  muzzleOffset: {x: 0, y: 1, z: 0.6}
-  logResults: 0
 --- !u!114 &1311958129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7659,7 +7630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
-  weapon: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
+  weapon: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
 --- !u!114 &1311958130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7693,7 +7664,7 @@ MonoBehaviour:
   maxRayDistance: 200
   cameraOffset: {x: 0, y: 15, z: -10}
   cameraSmoothSpeed: 5
-  stats: {fileID: 0}
+  stats: {fileID: 1311958132}
 --- !u!114 &1311958132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7813,7 +7784,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8372e2af8a14e404c97f9abfc90e16ff, type: 2}
   - {fileID: 11400000, guid: 59aa62a8ce7ea514fa7b926ece7fa9c1, type: 2}
   initialSlots:
-  - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 8372e2af8a14e404c97f9abfc90e16ff, type: 2}
   - {fileID: 11400000, guid: 59aa62a8ce7ea514fa7b926ece7fa9c1, type: 2}
   - {fileID: 0}
@@ -7837,6 +7808,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
   config: {fileID: 11400000, guid: 44eecf8af0696a746b440659a5ad7910, type: 2}
+--- !u!114 &1311958135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311958120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da69f405390fe334d9ab4650393e1d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1311958132}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  muzzleOffset: {x: 0, y: 0.5, z: 0.6}
+  logCasts: 0
+--- !u!114 &1311958136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311958120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: face91876d4a2ac41b775c0c9ed60ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layout: {fileID: 11400000, guid: f55500a62a334104bb2c51f67851d209, type: 2}
+  inventory: {fileID: 0}
+  removalCostItem: {fileID: 0}
+  removalCostCount: 0
+--- !u!114 &1311958137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311958120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194f3a0c0a503da4c814530b22c8f972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1324842714
 GameObject:
   m_ObjectHideFlags: 0
@@ -10155,7 +10175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1752080270}
-  weapon: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
+  weapon: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
 --- !u!114 &1752080270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10267,28 +10287,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1752080267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef008790f45e28c4483f4d9be67dcb79, type: 3}
+  m_Script: {fileID: 11500000, guid: da69f405390fe334d9ab4650393e1d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1752080270}
-  equipment: {fileID: 1752080269}
   targetMask:
     serializedVersion: 2
     m_Bits: 256
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  unarmedDelivery:
-    type: 0
-    range: 1.5
-    arcAngle: 90
-    maxTargets: 1
-    projectilePrefab: {fileID: 0}
-    projectileSpeed: 15
-    projectileLifetime: 1.5
-    pierce: 0
-  muzzleOffset: {x: 0, y: 1, z: 0.6}
-  logResults: 1
+  muzzleOffset: {x: 0, y: 0.5, z: 0.6}
+  logCasts: 0
 --- !u!114 &1752080272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10305,9 +10315,9 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
   pickMode: 1
-  minTimeBetweenCasts: 1
-  aggroRange: 8
-  loseRange: 14
+  minTimeBetweenCasts: 0.5
+  aggroRange: 24
+  loseRange: 36
   repathInterval: 0.2
   restoreOnReturn: 1
   destroyDelay: 3
@@ -11107,9 +11117,9 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
   pickMode: 1
-  minTimeBetweenCasts: 1
-  aggroRange: 8
-  loseRange: 14
+  minTimeBetweenCasts: 0.5
+  aggroRange: 24
+  loseRange: 36
   repathInterval: 0.2
   restoreOnReturn: 1
   destroyDelay: 3
@@ -11220,28 +11230,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984829253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef008790f45e28c4483f4d9be67dcb79, type: 3}
+  m_Script: {fileID: 11500000, guid: da69f405390fe334d9ab4650393e1d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1984829264}
-  equipment: {fileID: 1984829263}
   targetMask:
     serializedVersion: 2
     m_Bits: 256
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  unarmedDelivery:
-    type: 0
-    range: 1.5
-    arcAngle: 90
-    maxTargets: 1
-    projectilePrefab: {fileID: 0}
-    projectileSpeed: 15
-    projectileLifetime: 1.5
-    pierce: 0
-  muzzleOffset: {x: 0, y: 1, z: 0.6}
-  logResults: 1
+  muzzleOffset: {x: 0, y: 0.5, z: 0.6}
+  logCasts: 0
 --- !u!114 &1984829263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11255,7 +11255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1984829264}
-  weapon: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
+  weapon: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
 --- !u!114 &1984829264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12265,7 +12265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 2101767428}
-  weapon: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
+  weapon: {fileID: 11400000, guid: e10e3a75578a15b4791ff58217f833ee, type: 2}
 --- !u!114 &2101767428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12377,28 +12377,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101767425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef008790f45e28c4483f4d9be67dcb79, type: 3}
+  m_Script: {fileID: 11500000, guid: da69f405390fe334d9ab4650393e1d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 2101767428}
-  equipment: {fileID: 2101767427}
   targetMask:
     serializedVersion: 2
     m_Bits: 256
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  unarmedDelivery:
-    type: 0
-    range: 1.5
-    arcAngle: 90
-    maxTargets: 1
-    projectilePrefab: {fileID: 0}
-    projectileSpeed: 15
-    projectileLifetime: 1.5
-    pierce: 0
   muzzleOffset: {x: 0, y: 1, z: 0.6}
-  logResults: 1
+  logCasts: 0
 --- !u!114 &2101767430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12415,9 +12405,9 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
   pickMode: 1
-  minTimeBetweenCasts: 1
-  aggroRange: 8
-  loseRange: 14
+  minTimeBetweenCasts: 0.5
+  aggroRange: 24
+  loseRange: 36
   repathInterval: 0.2
   restoreOnReturn: 1
   destroyDelay: 3
