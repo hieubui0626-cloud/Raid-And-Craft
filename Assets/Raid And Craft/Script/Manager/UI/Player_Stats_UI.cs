@@ -78,6 +78,8 @@ public class Player_Stats_UI : MonoBehaviour
             foreach (Player_Stat stat in statsInLayer)
             {
                 sb.AppendLine(BuildLine(stat));
+                string line = BuildLine(stat);
+                if (line != null) sb.AppendLine(line);
             }
 
             sb.AppendLine(); // Dòng trống giữa các Layer
@@ -91,7 +93,14 @@ public class Player_Stats_UI : MonoBehaviour
     {
         switch (stat.Type)
         {
-            
+            case Player_Stat_Type.PhysicDamageMin:
+                return DamageRangeLine("Physic Damage", stat.Value, player_Stats.GetValue(Player_Stat_Type.PhysicDamageMax));
+            case Player_Stat_Type.MagicDamageMin:
+                return DamageRangeLine("Magic Damage", stat.Value, player_Stats.GetValue(Player_Stat_Type.MagicDamageMax));
+            case Player_Stat_Type.PhysicDamageMax:
+            case Player_Stat_Type.MagicDamageMax:
+                return null; // đã hiện chung dòng Min
+
             case Player_Stat_Type.LifeRegen:
                 return $"  Life Regen: <color=#FFFFFF>{FormatValue(stat.Value)}</color> per second";
 
@@ -137,5 +146,9 @@ public class Player_Stats_UI : MonoBehaviour
     private static string FormatValue(float value)
     {
         return value.ToString("0.##");
+    }
+    private static string DamageRangeLine(string label, float a, float b)
+    {
+        return $"  {label}: <color=#FFFFFF>{FormatValue(Mathf.Min(a, b))} - {FormatValue(Mathf.Max(a, b))}</color>";
     }
 }

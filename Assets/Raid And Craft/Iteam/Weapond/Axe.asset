@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97dc401df84ed1f4da2124b4f990e159, type: 3}
-  m_Name: Staff
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  displayName: Staff
+  displayName: Axe
   icon: {fileID: 0}
   damageTypes: 00000000
-  damageMultiplier: 2
+  damageMultiplier: 1
   attackDelivery:
-    type: 1
-    range: 3
+    type: 0
+    range: 2
     arcAngle: 90
     maxTargets: 3
     projectilePrefab: {fileID: 0}
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
+  attackAnimation: 1
   statModifiers: []

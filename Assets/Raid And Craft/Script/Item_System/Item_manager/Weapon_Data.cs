@@ -34,6 +34,10 @@ public class Weapon_Data : ScriptableObject
 
     public Skill_Delivery attackDelivery = new Skill_Delivery();
 
+    [Tooltip("Loại animation của đòn đánh mặc định khi cầm vũ khí này (kiếm = Attack_Slash, trượng = Cast_Staff). " +
+             "Chỉ có tác dụng khi skill bật 'Use Weapon Animation'. None = dùng loại ghi trong skill.")]
+    public Skill_Animation_Type attackAnimation = Skill_Animation_Type.None;
+
     [Header("Chỉ số cộng cho người cầm")]
     public List<Weapon_Stat_Modifier> statModifiers = new List<Weapon_Stat_Modifier>();
 }

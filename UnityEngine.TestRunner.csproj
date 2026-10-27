@@ -72,8 +72,8 @@
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\NUnitExtensions\Commands\IgnoreTestCommand.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\TestRunner\Callbacks\PlayerQuitHandler.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\TestRunner\Callbacks\TestResultRenderer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\NUnitExtensions\Filters\CategoryFilterExtended.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\NUnitExtensions\Filters\CategoryFilterExtended.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\UnityTestProtocol\TestFinishMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\TestRunner\Callbacks\RemoteTestResultSender.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework@78fc86e3183e\UnityEngine.TestRunner\NUnitExtensions\Runner\PlaymodeWorkItemFactory.cs" />

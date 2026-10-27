@@ -56,30 +56,29 @@ public class Damage_Effect : Skill_Effect
 
         Resolve(caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier);
 
-        float total = 0f;
+        float totalMin = 0f, totalMax = 0f;
         var parts = new List<string>();
         if (types != null)
         {
             foreach (Damage_Type type in types)
             {
-                float value = GetDamageStat(stats, type) * multiplier;
-                total += value;
-                parts.Add($"{value:0.##} {type}");
+                Combat_Formulas.GetDamageRange(stats, type, out float lo, out float hi);
+                lo *= multiplier; hi *= multiplier;
+                totalMin += lo; totalMax += hi;
+                parts.Add(Mathf.Approximately(lo, hi) ? $"{lo:0.##} {type}" : $"{lo:0.##}-{hi:0.##} {type}");
             }
         }
 
-        if (total <= 0f)
-        {
-            preview.Add("Damage", "0 (damage stat is 0)");
-            return;
-        }
+        if (totalMax <= 0f) { preview.Add("Damage", "0 (damage stat is 0)"); return; }
 
-        preview.Add("Damage", parts.Count > 1 ? $"{total:0.##} ({string.Join(" + ", parts)})" : $"{total:0.##}");
+        string range = Mathf.Approximately(totalMin, totalMax) ? $"{totalMax:0.##}" : $"{totalMin:0.##}-{totalMax:0.##}";
+        preview.Add("Damage", parts.Count > 1 ? $"{range} ({string.Join(" + ", parts)})" : range);
 
-        float critMultiplier = 1f + stats.GetValue(Player_Stat_Type.CriticalDamage) / 100f;
-        preview.Add("Critical", $"{total * critMultiplier:0.##}");
+        float crit = 1f + stats.GetValue(Player_Stat_Type.CriticalDamage) / 100f;
+        preview.Add("Critical", $"{totalMin * crit:0.##}-{totalMax * crit:0.##}");
 
-        if (preview.Cooldown > 0f) preview.Add("DPS", $"{total / preview.Cooldown:0.##}");
+        float average = (totalMin + totalMax) * 0.5f;
+        if (preview.Cooldown > 0f) preview.Add("DPS", $"{average / preview.Cooldown:0.##}");
 
         preview.Add("Delivery", d.type == Skill_Delivery_Type.Melee_Arc
             ? $"Melee {d.range:0.#}m / {d.arcAngle:0}°"

@@ -76,8 +76,10 @@ public class Character_Stats : MonoBehaviour, IDamageable
         new Default_Stat(Player_Stat_Type.MaxCharacterLevel, 100f),
 
         // Layer: Offence
-        new Default_Stat(Player_Stat_Type.PhysicDamage, 10f),
-        new Default_Stat(Player_Stat_Type.MagicDamage, 10f),
+        new Default_Stat(Player_Stat_Type.PhysicDamageMin, 8f),
+        new Default_Stat(Player_Stat_Type.PhysicDamageMax, 12f),
+        new Default_Stat(Player_Stat_Type.MagicDamageMin, 8f),
+        new Default_Stat(Player_Stat_Type.MagicDamageMax, 12f),
         new Default_Stat(Player_Stat_Type.FireDamage, 0f),
         new Default_Stat(Player_Stat_Type.ColdDamage, 0f),
         new Default_Stat(Player_Stat_Type.LightningDamage, 0f),
@@ -115,7 +117,8 @@ public class Character_Stats : MonoBehaviour, IDamageable
     {
         // Strength
         new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.MaxHealth, 10f),
-        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.PhysicDamage, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.PhysicDamageMin, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.PhysicDamageMax, 0.5f),
         new Derived_Rule(Player_Stat_Type.Strength, Player_Stat_Type.Armor, 0.5f),
 
         // Agility
@@ -126,7 +129,8 @@ public class Character_Stats : MonoBehaviour, IDamageable
 
         // Intelligence
         new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MaxMana, 10f),
-        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicDamage, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicDamageMin, 0.5f),
+        new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicDamageMax, 0.5f),
         new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.ManaRegen, 0.05f),
         new Derived_Rule(Player_Stat_Type.Intelligence, Player_Stat_Type.MagicResistance, 0.2f),
     };

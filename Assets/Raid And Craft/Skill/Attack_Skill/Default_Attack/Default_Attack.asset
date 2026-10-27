@@ -21,5 +21,18 @@ MonoBehaviour:
   usesActionSpeed: 1
   cooldown: 1
   faceAimDirection: 1
+  timing:
+    windupTime: 0
+    fireOnAnimationEvent: 0
+    recoveryTime: 0
+    scaleWithActionSpeed: 1
+    windupLock: 7
+    channelLock: 7
+    recoveryLock: 5
+    interruptible: 1
+  animationConfig:
+    animationType: 0
+    useWeaponAnimation: 1
+    scaleSpeedWithActionSpeed: 1
   effects:
   - {fileID: 11400000, guid: 02382a01514c4594c969aca2cc720f4e, type: 2}

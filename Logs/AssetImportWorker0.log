@@ -2,7 +2,7 @@ Using pre-set license
 Built from '6000.1/staging' branch; Version is '6000.1.17f1 (c0b9d3899998) revision 12630483'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'en' Physical Memory: 16140 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
-Date: 2026-10-26T13:18:52Z
+Date: 2026-10-27T15:31:25Z
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\6000.1.17f1\Editor\Unity.exe
@@ -16,7 +16,7 @@ D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-64647
+50390
 -job-worker-count
 7
 -background-job-worker-count
@@ -62,12 +62,12 @@ D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [4836]  Target information:
+Player connection [10312]  Target information:
 
-Player connection [4836]  * "[IP] 192.168.1.6 [Port] 0 [Flags] 2 [Guid] 1229428130 [EditorId] 1229428130 [Version] 1048832 [Id] WindowsEditor(7,Kizzul) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [10312]  * "[IP] 192.168.1.6 [Port] 0 [Flags] 2 [Guid] 1665997548 [EditorId] 1665997548 [Version] 1048832 [Id] WindowsEditor(7,Kizzul) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [4836] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [4836] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [10312] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [10312] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -79,8 +79,8 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 4.85 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.84 ms.
+Refreshing native plugins compatible for Editor in 5.28 ms, found 5 plugins.
+Preloading 1 native plugins for Editor in 0.85 ms.
 Initialize engine version: 6000.1.17f1 (c0b9d3899998)
 [Subsystems] Discovering subsystems at path D:/Unity/6000.1.17f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype/Assets
@@ -96,50 +96,50 @@ Initialize mono
 Mono path[0] = 'D:/Unity/6000.1.17f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/6000.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Unity/6000.1.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56644
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56108
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.001642 seconds.
-- Loaded All Assemblies, in  0.388 seconds
+Registered in 0.001502 seconds.
+- Loaded All Assemblies, in  0.362 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 263 ms
+Android Extension - Scanning For ADB Devices 199 ms
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.623 seconds
-Domain Reload Profiling: 1012ms
-	BeginReloadAssembly (142ms)
+- Finished resetting the current domain, in  0.550 seconds
+Domain Reload Profiling: 912ms
+	BeginReloadAssembly (124ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (40ms)
+	RebuildCommonClasses (29ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (42ms)
-	LoadAllAssembliesAndSetupDomain (153ms)
-		LoadAssemblies (143ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (159ms)
+		LoadAssemblies (124ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (149ms)
-			TypeCache.Refresh (148ms)
-				TypeCache.ScanAssembly (135ms)
+		AnalyzeDomain (155ms)
+			TypeCache.Refresh (153ms)
+				TypeCache.ScanAssembly (141ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (624ms)
+	FinalizeReload (551ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (577ms)
+		SetupLoadedEditorAssemblies (502ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (363ms)
+			InitializePlatformSupportModulesInManaged (294ms)
 			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (53ms)
-			ProcessInitializeOnLoadAttributes (106ms)
-			ProcessInitializeOnLoadMethodAttributes (51ms)
+			BeforeProcessingInitializeOnLoad (49ms)
+			ProcessInitializeOnLoadAttributes (107ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -150,8 +150,8 @@ Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.183 seconds
-Refreshing native plugins compatible for Editor in 2.28 ms, found 5 plugins.
+- Loaded All Assemblies, in  1.035 seconds
+Refreshing native plugins compatible for Editor in 1.72 ms, found 5 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -170,825 +170,96 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
 (Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
 
-Refreshing native plugins compatible for Editor in 3.11 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 2.12 ms, found 5 plugins.
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.781 seconds
-Domain Reload Profiling: 2962ms
-	BeginReloadAssembly (181ms)
+- Finished resetting the current domain, in  1.534 seconds
+Domain Reload Profiling: 2569ms
+	BeginReloadAssembly (179ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (7ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (37ms)
+		CreateAndSetChildDomain (25ms)
+	RebuildCommonClasses (32ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (70ms)
-	LoadAllAssembliesAndSetupDomain (883ms)
-		LoadAssemblies (511ms)
+	initialDomainReloadingComplete (69ms)
+	LoadAllAssembliesAndSetupDomain (744ms)
+		LoadAssemblies (443ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (484ms)
-			TypeCache.Refresh (394ms)
-				TypeCache.ScanAssembly (366ms)
-			BuildScriptInfoCaches (72ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1781ms)
+		AnalyzeDomain (408ms)
+			TypeCache.Refresh (332ms)
+				TypeCache.ScanAssembly (312ms)
+			BuildScriptInfoCaches (62ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (1535ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1585ms)
+		SetupLoadedEditorAssemblies (1363ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (12ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (145ms)
-			ProcessInitializeOnLoadAttributes (1131ms)
-			ProcessInitializeOnLoadMethodAttributes (291ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (134ms)
+			ProcessInitializeOnLoadAttributes (967ms)
+			ProcessInitializeOnLoadMethodAttributes (245ms)
 			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
-Refreshing native plugins compatible for Editor in 2.33 ms, found 5 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Refreshing native plugins compatible for Editor in 2.54 ms, found 5 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10210 unused Assets / (20.5 MB). Loaded Objects now: 10937.
-Memory consumption went from 185.8 MB to 165.3 MB.
-Total: 27.166300 ms (FindLiveObjects: 1.124800 ms CreateObjectMapping: 2.009900 ms MarkObjects: 16.848800 ms  DeleteObjects: 7.181600 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 3291.670035 seconds.
-  path: Assets/Raid And Craft/Script/Item/Circuit_Item_Data.cs
-  artifactKey: Guid(51aba01d734e12e4ba9674dfa95376e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item/Circuit_Item_Data.cs using Guid(51aba01d734e12e4ba9674dfa95376e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8310f3b3062c01f2b7332afdff7cc867') in 0.0073916 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Raid And Craft/Script/Item/Item_Database.cs
-  artifactKey: Guid(ca20bd44d2aff3c438e947ed6ad8951f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item/Item_Database.cs using Guid(ca20bd44d2aff3c438e947ed6ad8951f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd15ebf0e63e5d73ade2353b7a916b8d9') in 0.0005816 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Raid And Craft/Script/Item
-  artifactKey: Guid(6e51c04e981f3e64798b9134cdce7498) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item using Guid(6e51c04e981f3e64798b9134cdce7498) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1da4e7c8517ae55ae3361e1e05274590') in 0.0004585 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.073694 seconds.
-  path: Assets/Raid And Craft/Script/Item/Item_Database.asset
-  artifactKey: Guid(7caae1fec58c5264fb24d027cae8c00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item/Item_Database.asset using Guid(7caae1fec58c5264fb24d027cae8c00c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '97585d8ee7341ca3a38ad130a2c59dcc') in 0.0190563 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 14.563783 seconds.
-  path: Assets/Raid And Craft/Script/Item/Item_manager
-  artifactKey: Guid(0d9f5d6db5c388d4ca9449c4ef0fac45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item/Item_manager using Guid(0d9f5d6db5c388d4ca9449c4ef0fac45) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ae76a7eadb2aae9a1bc5bb61cad4f05e') in 0.0004671 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.751095 seconds.
-  path: Assets/Raid And Craft/Script/Item/Weapon_Data.cs
-  artifactKey: Guid(97dc401df84ed1f4da2124b4f990e159) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item/Weapon_Data.cs using Guid(97dc401df84ed1f4da2124b4f990e159) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a6458e3b639f32e34c8bafcbcde702fc') in 0.0004866 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 5.77 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.12 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10186 unused Assets / (20.2 MB). Loaded Objects now: 10940.
+Unloading 10229 unused Assets / (20.2 MB). Loaded Objects now: 10956.
 Memory consumption went from 185.6 MB to 165.5 MB.
-Total: 27.502800 ms (FindLiveObjects: 2.041500 ms CreateObjectMapping: 1.436500 ms MarkObjects: 16.310900 ms  DeleteObjects: 7.711700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.121 seconds
-Refreshing native plugins compatible for Editor in 2.89 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.418 seconds
-Domain Reload Profiling: 2545ms
-	BeginReloadAssembly (281ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (95ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (55ms)
-	LoadAllAssembliesAndSetupDomain (748ms)
-		LoadAssemblies (542ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (325ms)
-			TypeCache.Refresh (22ms)
-				TypeCache.ScanAssembly (2ms)
-			BuildScriptInfoCaches (284ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (1419ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1251ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (160ms)
-			ProcessInitializeOnLoadAttributes (761ms)
-			ProcessInitializeOnLoadMethodAttributes (311ms)
-			AfterProcessingInitializeOnLoad (1ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (12ms)
-Refreshing native plugins compatible for Editor in 2.28 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10206 unused Assets / (20.8 MB). Loaded Objects now: 10957.
-Memory consumption went from 196.4 MB to 175.6 MB.
-Total: 23.852800 ms (FindLiveObjects: 1.065500 ms CreateObjectMapping: 0.903600 ms MarkObjects: 13.663500 ms  DeleteObjects: 8.219100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 2.49 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10186 unused Assets / (19.8 MB). Loaded Objects now: 10957.
-Memory consumption went from 199.4 MB to 179.6 MB.
-Total: 30.987200 ms (FindLiveObjects: 1.231200 ms CreateObjectMapping: 1.045000 ms MarkObjects: 16.801900 ms  DeleteObjects: 11.906900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 34.183163 seconds.
-  path: Assets/Raid And Craft/Script/Item_System
-  artifactKey: Guid(6e51c04e981f3e64798b9134cdce7498) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System using Guid(6e51c04e981f3e64798b9134cdce7498) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '75dd65e30fb3806ae8e1f704208601b9') in 0.0021921 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.154 seconds
-Refreshing native plugins compatible for Editor in 4.66 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.371 seconds
-Domain Reload Profiling: 3534ms
-	BeginReloadAssembly (286ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (99ms)
-	RebuildCommonClasses (36ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (53ms)
-	LoadAllAssembliesAndSetupDomain (772ms)
-		LoadAssemblies (528ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (359ms)
-			TypeCache.Refresh (20ms)
-				TypeCache.ScanAssembly (1ms)
-			BuildScriptInfoCaches (321ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (2372ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (2136ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (19ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (300ms)
-			ProcessInitializeOnLoadAttributes (1244ms)
-			ProcessInitializeOnLoadMethodAttributes (562ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (21ms)
-Refreshing native plugins compatible for Editor in 4.44 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10206 unused Assets / (18.9 MB). Loaded Objects now: 10961.
-Memory consumption went from 195.3 MB to 176.4 MB.
-Total: 35.344200 ms (FindLiveObjects: 1.833100 ms CreateObjectMapping: 1.546200 ms MarkObjects: 22.406400 ms  DeleteObjects: 9.555000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 52.857811 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Skill_Manager
-  artifactKey: Guid(f56f193d92ad5ad4f87163b3ed52aca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Skill_Manager using Guid(f56f193d92ad5ad4f87163b3ed52aca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ff51ef790cc6c88cf111fea98561b57c') in 0.0018836 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+Total: 20.584000 ms (FindLiveObjects: 1.829200 ms CreateObjectMapping: 0.749900 ms MarkObjects: 13.371900 ms  DeleteObjects: 4.631500 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.302535 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Data.cs
-  artifactKey: Guid(bfde245a5da52a640b53befd7494e20f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Data.cs using Guid(bfde245a5da52a640b53befd7494e20f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cc8e8e934077dff116c73abaf0bb6311') in 0.0007934 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.375682 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Delivery.cs
-  artifactKey: Guid(b5830c20f02831b4182febcbf508677d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Delivery.cs using Guid(b5830c20f02831b4182febcbf508677d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '24153eeca4aef0c329afa9510ad7b7ad') in 0.0005228 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.476884 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Hover_Target.cs
-  artifactKey: Guid(f07f286b937f3024986e66085ea59f35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Hover_Target.cs using Guid(f07f286b937f3024986e66085ea59f35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9afe1f2c91f0f2282d6c4d7bf13d8522') in 0.0005265 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.367313 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Projectile.cs
-  artifactKey: Guid(42746e7441deb44428e7b0457c5f03db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Skill_Manager/Skill_Projectile.cs using Guid(42746e7441deb44428e7b0457c5f03db) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '657c32cc5cf2ba0cf19fd0a80720691b') in 0.000645 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 7.17 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10194 unused Assets / (18.9 MB). Loaded Objects now: 10969.
-Memory consumption went from 195.4 MB to 176.5 MB.
-Total: 43.261700 ms (FindLiveObjects: 3.263900 ms CreateObjectMapping: 2.955500 ms MarkObjects: 26.679800 ms  DeleteObjects: 10.360000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 81.171257 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Unit_Action/Skill_Caster.cs
-  artifactKey: Guid(ef008790f45e28c4483f4d9be67dcb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Unit_Action/Skill_Caster.cs using Guid(ef008790f45e28c4483f4d9be67dcb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '06fcb5977f5b3f3e9c24e7300c22a5e2') in 0.0006912 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.157 seconds
-Refreshing native plugins compatible for Editor in 2.37 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.493 seconds
-Domain Reload Profiling: 2655ms
-	BeginReloadAssembly (271ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (94ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (57ms)
-	LoadAllAssembliesAndSetupDomain (792ms)
-		LoadAssemblies (552ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (349ms)
-			TypeCache.Refresh (21ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (308ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1493ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1337ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (14ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (160ms)
-			ProcessInitializeOnLoadAttributes (793ms)
-			ProcessInitializeOnLoadMethodAttributes (361ms)
-			AfterProcessingInitializeOnLoad (1ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (14ms)
-Refreshing native plugins compatible for Editor in 2.44 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10206 unused Assets / (19.5 MB). Loaded Objects now: 10965.
-Memory consumption went from 195.4 MB to 175.9 MB.
-Total: 26.772600 ms (FindLiveObjects: 1.174300 ms CreateObjectMapping: 1.074000 ms MarkObjects: 16.188700 ms  DeleteObjects: 8.332400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 2.16 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10186 unused Assets / (20.0 MB). Loaded Objects now: 10965.
-Memory consumption went from 198.3 MB to 178.3 MB.
-Total: 28.568500 ms (FindLiveObjects: 1.167000 ms CreateObjectMapping: 0.952600 ms MarkObjects: 16.226000 ms  DeleteObjects: 10.220600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.067 seconds
-Refreshing native plugins compatible for Editor in 2.16 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.428 seconds
-Domain Reload Profiling: 2501ms
-	BeginReloadAssembly (267ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (90ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (53ms)
-	LoadAllAssembliesAndSetupDomain (703ms)
-		LoadAssemblies (511ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (306ms)
-			TypeCache.Refresh (20ms)
-				TypeCache.ScanAssembly (2ms)
-			BuildScriptInfoCaches (269ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (1429ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1274ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (157ms)
-			ProcessInitializeOnLoadAttributes (769ms)
-			ProcessInitializeOnLoadMethodAttributes (327ms)
-			AfterProcessingInitializeOnLoad (1ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (13ms)
-Refreshing native plugins compatible for Editor in 1.95 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10206 unused Assets / (19.5 MB). Loaded Objects now: 10969.
-Memory consumption went from 201.2 MB to 181.7 MB.
-Total: 23.724500 ms (FindLiveObjects: 0.943300 ms CreateObjectMapping: 0.788900 ms MarkObjects: 15.599800 ms  DeleteObjects: 6.390800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 7.89 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10193 unused Assets / (18.7 MB). Loaded Objects now: 10976.
-Memory consumption went from 204.2 MB to 185.5 MB.
-Total: 36.943500 ms (FindLiveObjects: 2.418300 ms CreateObjectMapping: 2.062400 ms MarkObjects: 23.054400 ms  DeleteObjects: 9.405900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 4.79 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10194 unused Assets / (18.4 MB). Loaded Objects now: 10977.
-Memory consumption went from 207.1 MB to 188.7 MB.
-Total: 38.800400 ms (FindLiveObjects: 2.748400 ms CreateObjectMapping: 3.784600 ms MarkObjects: 22.446200 ms  DeleteObjects: 9.818600 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 212.561784 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Core/Skill_Delivery.cs
-  artifactKey: Guid(265554d8e1e714c4c9e20dc141eccba2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Core/Skill_Delivery.cs using Guid(265554d8e1e714c4c9e20dc141eccba2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd42868ba14cbaed9a12b642787078bcb') in 0.0023056 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 3.23 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10193 unused Assets / (20.0 MB). Loaded Objects now: 10976.
-Memory consumption went from 195.5 MB to 175.6 MB.
-Total: 27.215500 ms (FindLiveObjects: 1.463100 ms CreateObjectMapping: 1.178100 ms MarkObjects: 15.473000 ms  DeleteObjects: 9.099500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 7.03 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10194 unused Assets / (20.4 MB). Loaded Objects now: 10977.
-Memory consumption went from 198.4 MB to 178.1 MB.
-Total: 40.138300 ms (FindLiveObjects: 2.462500 ms CreateObjectMapping: 1.516000 ms MarkObjects: 23.919200 ms  DeleteObjects: 12.237400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 5.91 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.18 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10196 unused Assets / (19.4 MB). Loaded Objects now: 10979.
-Memory consumption went from 201.3 MB to 181.9 MB.
-Total: 46.165300 ms (FindLiveObjects: 3.819200 ms CreateObjectMapping: 2.810900 ms MarkObjects: 27.128100 ms  DeleteObjects: 12.404500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 4.78 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10195 unused Assets / (18.7 MB). Loaded Objects now: 10978.
-Memory consumption went from 204.2 MB to 185.6 MB.
-Total: 37.412300 ms (FindLiveObjects: 2.367500 ms CreateObjectMapping: 3.662700 ms MarkObjects: 21.607400 ms  DeleteObjects: 9.772400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 2.29 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10196 unused Assets / (19.9 MB). Loaded Objects now: 10979.
-Memory consumption went from 207.1 MB to 187.2 MB.
-Total: 33.201300 ms (FindLiveObjects: 1.339200 ms CreateObjectMapping: 1.109200 ms MarkObjects: 17.458100 ms  DeleteObjects: 13.292900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 6.97 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10193 unused Assets / (18.4 MB). Loaded Objects now: 10976.
-Memory consumption went from 210.0 MB to 191.6 MB.
-Total: 45.278900 ms (FindLiveObjects: 2.501900 ms CreateObjectMapping: 1.943200 ms MarkObjects: 30.115800 ms  DeleteObjects: 10.715500 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 6.50 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10194 unused Assets / (17.0 MB). Loaded Objects now: 10977.
-Memory consumption went from 213.0 MB to 195.9 MB.
-Total: 48.361600 ms (FindLiveObjects: 2.614600 ms CreateObjectMapping: 1.891700 ms MarkObjects: 28.505900 ms  DeleteObjects: 15.347100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 395.744486 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Effects
-  artifactKey: Guid(ad604e8f1b406e34996ba115e70ee072) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Effects using Guid(ad604e8f1b406e34996ba115e70ee072) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7223bb049425639d60ea3572532d158e') in 0.0010023 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 5.39 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10195 unused Assets / (16.3 MB). Loaded Objects now: 10978.
-Memory consumption went from 195.6 MB to 179.3 MB.
-Total: 41.440900 ms (FindLiveObjects: 1.757900 ms CreateObjectMapping: 1.424600 ms MarkObjects: 28.915000 ms  DeleteObjects: 9.341800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 159.450721 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Core/Skill_Preview.cs
-  artifactKey: Guid(c0b525561b0605f44b6f11bb9039e8d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Core/Skill_Preview.cs using Guid(c0b525561b0605f44b6f11bb9039e8d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5e8ca4a0ec6f8f34151de3d25e811ad7') in 0.0005398 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 89.376369 seconds.
-  path: Assets/Raid And Craft/Script/Manager/UI/Skill_Tooltip_UI.cs
-  artifactKey: Guid(9877558e82db5894ebcf45d15cabaff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Manager/UI/Skill_Tooltip_UI.cs using Guid(9877558e82db5894ebcf45d15cabaff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '077826ebc33c34517ab2ebb27bc617c4') in 0.0008932 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 133.293843 seconds.
-  path: Assets/Raid And Craft/Script/Manager/UI/Skill_Slot_UI.cs
-  artifactKey: Guid(337e4125e368f3749a4203521eb250ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Manager/UI/Skill_Slot_UI.cs using Guid(337e4125e368f3749a4203521eb250ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a58183982faec8c489c46b323d317522') in 0.0009701 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.245919 seconds.
-  path: Assets/Raid And Craft/Script/Manager/UI/Skill_Picker_UI.cs
-  artifactKey: Guid(4cea6a88776f8d4418206f5cb209b293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Manager/UI/Skill_Picker_UI.cs using Guid(4cea6a88776f8d4418206f5cb209b293) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '487576a00d2a885ab092502d31d19435') in 0.0006724 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 2.57 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10196 unused Assets / (20.4 MB). Loaded Objects now: 10979.
-Memory consumption went from 195.6 MB to 175.2 MB.
-Total: 30.415100 ms (FindLiveObjects: 1.808800 ms CreateObjectMapping: 1.349800 ms MarkObjects: 19.492400 ms  DeleteObjects: 7.762300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 226.426042 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Core/Skill_Hover_Target.cs
-  artifactKey: Guid(46be6cdbdad2b684c8a28947cd4e932c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Core/Skill_Hover_Target.cs using Guid(46be6cdbdad2b684c8a28947cd4e932c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6286a1536dac062f6ae43d37f8d59786') in 0.0015348 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.544 seconds
-Refreshing native plugins compatible for Editor in 2.43 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.875 seconds
-Domain Reload Profiling: 3428ms
-	BeginReloadAssembly (468ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (16ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (197ms)
-	RebuildCommonClasses (42ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (61ms)
-	LoadAllAssembliesAndSetupDomain (970ms)
-		LoadAssemblies (745ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (366ms)
-			TypeCache.Refresh (31ms)
-				TypeCache.ScanAssembly (2ms)
-			BuildScriptInfoCaches (315ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1875ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1671ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (13ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (173ms)
-			ProcessInitializeOnLoadAttributes (1034ms)
-			ProcessInitializeOnLoadMethodAttributes (442ms)
-			AfterProcessingInitializeOnLoad (1ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (17ms)
-Refreshing native plugins compatible for Editor in 4.03 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (20.5 MB). Loaded Objects now: 10983.
-Memory consumption went from 195.6 MB to 175.1 MB.
-Total: 32.407800 ms (FindLiveObjects: 1.881300 ms CreateObjectMapping: 1.454000 ms MarkObjects: 17.804900 ms  DeleteObjects: 11.265000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 46.572593 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Core/Skill_Hover_Target.cs
-  artifactKey: Guid(46be6cdbdad2b684c8a28947cd4e932c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Core/Skill_Hover_Target.cs using Guid(46be6cdbdad2b684c8a28947cd4e932c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e9e4f6f6655bf039cae1190a762f42ad') in 0.0026937 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.934144 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System
-  artifactKey: Guid(b3d37bda550f95b4aa9b89b729c40d1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System using Guid(b3d37bda550f95b4aa9b89b729c40d1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fd3b48be5341d91a585e1a7da384fd9d') in 0.0006617 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 29.683248 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Default_Attack.asset
-  artifactKey: Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Default_Attack.asset using Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4da0feb325e3b7da546581f81f936fb8') in 0.0119838 seconds
+  Time since last request: 97644.886311 seconds.
+  path: Assets/Raid And Craft/Script/Item_System/Weapond/Staff.asset
+  artifactKey: Guid(56eedc17943ee744c864c29887ee5079) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Script/Item_System/Weapond/Staff.asset using Guid(56eedc17943ee744c864c29887ee5079) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b8da41b134899cfb745fc3124618a42b') in 0.0175533 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 44.625669 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack
-  artifactKey: Guid(f72d28dd5c6afc84d90dc52cf6e1d687) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack using Guid(f72d28dd5c6afc84d90dc52cf6e1d687) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '33d97e02a286ba64e751cb6f7f8d1581') in 0.0004773 seconds
+  Time since last request: 11.047017 seconds.
+  path: Assets/Raid And Craft/Iteam
+  artifactKey: Guid(aafd3656691b3b6419d55f710cf08837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Iteam using Guid(aafd3656691b3b6419d55f710cf08837) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd866e96a5b33547e43d491e3ec6e7ab') in 0.0003819 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.160646 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill
-  artifactKey: Guid(f72d28dd5c6afc84d90dc52cf6e1d687) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill using Guid(f72d28dd5c6afc84d90dc52cf6e1d687) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c6201bffeac7f7e2ca8ee4997095c1d0') in 0.0005517 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.152637 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Status
-  artifactKey: Guid(5ade8891098f2474aa2c987aef6ccb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Status using Guid(5ade8891098f2474aa2c987aef6ccb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '982f5832bf5e85b89c59dd5dd34dd73c') in 0.0006842 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.065756 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack.asset
+  Time since last request: 45.494304 seconds.
+  path: Assets/Raid And Craft/Skill/Attack_Skill/Default_Attack/Default_Attack.asset
   artifactKey: Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack.asset using Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cf848712f931495281554edd746a9047') in 0.001288 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.452585 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack
-  artifactKey: Guid(5993bb699e71f854cb1287793ec3453a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack using Guid(5993bb699e71f854cb1287793ec3453a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '349e91bc9bef5b1c670baf748d4aac2e') in 0.0006149 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 25.941973 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack_Effect_Damage.asset
-  artifactKey: Guid(02382a01514c4594c969aca2cc720f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack_Effect_Damage.asset using Guid(02382a01514c4594c969aca2cc720f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '88a5aaf42be56d9bd22216af10057e70') in 0.0015445 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.958612 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack.asset
-  artifactKey: Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack.asset using Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd7102c243fddbfb907c1e2323892b131') in 0.0016385 seconds
+Start importing Assets/Raid And Craft/Skill/Attack_Skill/Default_Attack/Default_Attack.asset using Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5d7b33c4afbb432acce43a0f66bcda1a') in 0.0023256 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 13.790793 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack_Effect_Damage.asset
-  artifactKey: Guid(02382a01514c4594c969aca2cc720f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack_Effect_Damage.asset using Guid(02382a01514c4594c969aca2cc720f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bc8c030feb0b95cbbb0075a0c74e5e3b') in 0.001465 seconds
+  Time since last request: 7.675587 seconds.
+  path: Assets/Raid And Craft/Iteam/Weapond/Axe.asset
+  artifactKey: Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Iteam/Weapond/Axe.asset using Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '36299eff11a420da35cad33ce1916b29') in 0.0011973 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 15.939546 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Weapond
-  artifactKey: Guid(aa5ea4284ab508546a9b5640d4fd603b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Weapond using Guid(aa5ea4284ab508546a9b5640d4fd603b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cbde1d520a8ff882b285af63b17d6fa0') in 0.000981 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 34.379737 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Core
-  artifactKey: Guid(a9f26ccc4d6176642a0608745911f4fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Core using Guid(a9f26ccc4d6176642a0608745911f4fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '38ee4029993551e02ef79252f92b30fe') in 0.0006217 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 11.768967 seconds.
+  path: Assets/Raid And Craft/Player/Level_Config.asset
+  artifactKey: Guid(44eecf8af0696a746b440659a5ad7910) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Player/Level_Config.asset using Guid(44eecf8af0696a746b440659a5ad7910) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '754d6bfa683563e4e77074a194aa8944') in 0.0016483 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.056 seconds
-Refreshing native plugins compatible for Editor in 2.09 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
+- Loaded All Assemblies, in  0.967 seconds
+Refreshing native plugins compatible for Editor in 2.03 ms, found 5 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -1008,618 +279,44 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 (Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
 
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.530 seconds
-Domain Reload Profiling: 2594ms
-	BeginReloadAssembly (261ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (89ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (54ms)
-	LoadAllAssembliesAndSetupDomain (707ms)
-		LoadAssemblies (508ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (304ms)
-			TypeCache.Refresh (14ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (273ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (1531ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1346ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (153ms)
-			ProcessInitializeOnLoadAttributes (798ms)
-			ProcessInitializeOnLoadMethodAttributes (377ms)
-			AfterProcessingInitializeOnLoad (1ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (24ms)
-Refreshing native plugins compatible for Editor in 3.05 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (19.7 MB). Loaded Objects now: 10987.
-Memory consumption went from 195.7 MB to 175.9 MB.
-Total: 31.074200 ms (FindLiveObjects: 1.586600 ms CreateObjectMapping: 1.562600 ms MarkObjects: 17.037700 ms  DeleteObjects: 10.877000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.027 seconds
-Refreshing native plugins compatible for Editor in 2.31 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.538 seconds
-Domain Reload Profiling: 2575ms
-	BeginReloadAssembly (278ms)
+- Finished resetting the current domain, in  1.437 seconds
+Domain Reload Profiling: 2409ms
+	BeginReloadAssembly (254ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (100ms)
-	RebuildCommonClasses (30ms)
+		CreateAndSetChildDomain (86ms)
+	RebuildCommonClasses (28ms)
 	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (49ms)
-	LoadAllAssembliesAndSetupDomain (670ms)
-		LoadAssemblies (482ms)
+	initialDomainReloadingComplete (47ms)
+	LoadAllAssembliesAndSetupDomain (632ms)
+		LoadAssemblies (439ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (296ms)
+		AnalyzeDomain (297ms)
 			TypeCache.Refresh (13ms)
 				TypeCache.ScanAssembly (0ms)
 			BuildScriptInfoCaches (266ms)
 			ResolveRequiredComponents (11ms)
-	FinalizeReload (1538ms)
+	FinalizeReload (1438ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1354ms)
+		SetupLoadedEditorAssemblies (1278ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (153ms)
-			ProcessInitializeOnLoadAttributes (802ms)
-			ProcessInitializeOnLoadMethodAttributes (378ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (23ms)
-Refreshing native plugins compatible for Editor in 2.83 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (20.0 MB). Loaded Objects now: 10991.
-Memory consumption went from 198.6 MB to 178.6 MB.
-Total: 32.856400 ms (FindLiveObjects: 1.228900 ms CreateObjectMapping: 2.405500 ms MarkObjects: 18.251500 ms  DeleteObjects: 10.968100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 432.899139 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Effect_Damage.asset
-  artifactKey: Guid(7393662287c8f6840b1d6b4d929a896d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Effect_Damage.asset using Guid(7393662287c8f6840b1d6b4d929a896d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '005dbb8251a3672f52e3b63ab375771f') in 0.0216457 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 24.150084 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack.asset
-  artifactKey: Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Default_Attack/Default_Attack.asset using Guid(92abea42867038b4e8aa712c7fb3e800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ea2f1ead1b8b50b30d16113e64c403c9') in 0.0021346 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.067 seconds
-Refreshing native plugins compatible for Editor in 2.92 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.779 seconds
-Domain Reload Profiling: 2854ms
-	BeginReloadAssembly (278ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (97ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (52ms)
-	LoadAllAssembliesAndSetupDomain (703ms)
-		LoadAssemblies (505ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (309ms)
-			TypeCache.Refresh (13ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (277ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1779ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1615ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (188ms)
-			ProcessInitializeOnLoadAttributes (954ms)
-			ProcessInitializeOnLoadMethodAttributes (452ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-Refreshing native plugins compatible for Editor in 3.43 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (20.8 MB). Loaded Objects now: 10995.
-Memory consumption went from 195.8 MB to 174.9 MB.
-Total: 32.601800 ms (FindLiveObjects: 1.657600 ms CreateObjectMapping: 1.380800 ms MarkObjects: 17.204400 ms  DeleteObjects: 12.356700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 134.084626 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Weapond/Weapon_New.asset
-  artifactKey: Guid(e10e3a75578a15b4791ff58217f833ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Weapond/Weapon_New.asset using Guid(e10e3a75578a15b4791ff58217f833ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e4c97fbc3a0ab4ce3be43d8f04acfd9f') in 0.0176968 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 34.095620 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Weapond/Bow.asset
-  artifactKey: Guid(e10e3a75578a15b4791ff58217f833ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Weapond/Bow.asset using Guid(e10e3a75578a15b4791ff58217f833ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '10b5330b544245f1a17520eb1299b87e') in 0.0017257 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.301272 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Weapond/Axe.asset
-  artifactKey: Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Weapond/Axe.asset using Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd74b9f16772e2852279bf277610e9ef4') in 0.0012276 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 75.432388 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Weapond/Axe.asset
-  artifactKey: Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Weapond/Axe.asset using Guid(dfa23279937c02043aab08a6009d5546) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '49080e2fd4dba327073ad3bf00ce16fe') in 0.0014147 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.032 seconds
-Refreshing native plugins compatible for Editor in 2.09 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.508 seconds
-Domain Reload Profiling: 2546ms
-	BeginReloadAssembly (265ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (89ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (681ms)
-		LoadAssemblies (478ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (313ms)
-			TypeCache.Refresh (11ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (284ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1508ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1343ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (14ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (151ms)
-			ProcessInitializeOnLoadAttributes (788ms)
-			ProcessInitializeOnLoadMethodAttributes (382ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-Refreshing native plugins compatible for Editor in 3.22 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (19.8 MB). Loaded Objects now: 10999.
-Memory consumption went from 195.8 MB to 176.0 MB.
-Total: 32.059600 ms (FindLiveObjects: 1.534600 ms CreateObjectMapping: 1.454400 ms MarkObjects: 18.950000 ms  DeleteObjects: 10.119100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.107 seconds
-Refreshing native plugins compatible for Editor in 2.36 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.522 seconds
-Domain Reload Profiling: 2635ms
-	BeginReloadAssembly (287ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (8ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (106ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (61ms)
-	LoadAllAssembliesAndSetupDomain (717ms)
-		LoadAssemblies (510ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (320ms)
-			TypeCache.Refresh (20ms)
-				TypeCache.ScanAssembly (1ms)
-			BuildScriptInfoCaches (281ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (1522ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1350ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (164ms)
-			ProcessInitializeOnLoadAttributes (792ms)
-			ProcessInitializeOnLoadMethodAttributes (375ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (152ms)
+			ProcessInitializeOnLoadAttributes (762ms)
+			ProcessInitializeOnLoadMethodAttributes (346ms)
 			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (17ms)
-Refreshing native plugins compatible for Editor in 2.36 ms, found 5 plugins.
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 2.99 ms, found 5 plugins.
 Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (21.4 MB). Loaded Objects now: 11003.
-Memory consumption went from 198.7 MB to 177.2 MB.
-Total: 26.792200 ms (FindLiveObjects: 2.288700 ms CreateObjectMapping: 1.379200 ms MarkObjects: 13.962100 ms  DeleteObjects: 9.160300 ms)
+Unloading 10225 unused Assets / (20.0 MB). Loaded Objects now: 10976.
+Memory consumption went from 193.1 MB to 173.2 MB.
+Total: 26.916000 ms (FindLiveObjects: 1.251100 ms CreateObjectMapping: 1.240900 ms MarkObjects: 16.783000 ms  DeleteObjects: 7.639200 ms)
 
 Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 405.944048 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit
-  artifactKey: Guid(3c88350a9fe571445ae8f7e47fc68000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit using Guid(3c88350a9fe571445ae8f7e47fc68000) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90f5122f6c7e0be3a571f4b030dee914') in 0.0021682 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.913880 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.asset
-  artifactKey: Guid(f55500a62a334104bb2c51f67851d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.asset using Guid(f55500a62a334104bb2c51f67851d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '115d4b781d51eaecf537061bc33236ad') in 0.0128542 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.041 seconds
-Refreshing native plugins compatible for Editor in 2.23 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.657 seconds
-Domain Reload Profiling: 2705ms
-	BeginReloadAssembly (274ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (92ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (12ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (682ms)
-		LoadAssemblies (494ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (306ms)
-			TypeCache.Refresh (13ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (277ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1657ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1491ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (12ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (159ms)
-			ProcessInitializeOnLoadAttributes (899ms)
-			ProcessInitializeOnLoadMethodAttributes (413ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (21ms)
-Refreshing native plugins compatible for Editor in 3.23 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (19.6 MB). Loaded Objects now: 11007.
-Memory consumption went from 195.9 MB to 176.3 MB.
-Total: 31.192400 ms (FindLiveObjects: 1.612400 ms CreateObjectMapping: 1.233100 ms MarkObjects: 17.946100 ms  DeleteObjects: 10.399400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.057 seconds
-Refreshing native plugins compatible for Editor in 2.13 ms, found 5 plugins.
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Assertion failed on expression: 'pred(*previous, *i)'
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.679 seconds
-Domain Reload Profiling: 2744ms
-	BeginReloadAssembly (281ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (100ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (54ms)
-	LoadAllAssembliesAndSetupDomain (684ms)
-		LoadAssemblies (486ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (310ms)
-			TypeCache.Refresh (14ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (277ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (1680ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1513ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (11ms)
-			SetLoadedEditorAssemblies (7ms)
-			BeforeProcessingInitializeOnLoad (163ms)
-			ProcessInitializeOnLoadAttributes (903ms)
-			ProcessInitializeOnLoadMethodAttributes (427ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-Refreshing native plugins compatible for Editor in 3.02 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10216 unused Assets / (19.9 MB). Loaded Objects now: 11011.
-Memory consumption went from 198.8 MB to 178.9 MB.
-Total: 28.777000 ms (FindLiveObjects: 1.293600 ms CreateObjectMapping: 1.360700 ms MarkObjects: 17.836500 ms  DeleteObjects: 8.284200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 341.185000 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Controller/Player_Skill_Slots.cs
-  artifactKey: Guid(c2264f9cb0f51bf409bc130c4572a6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Controller/Player_Skill_Slots.cs using Guid(c2264f9cb0f51bf409bc130c4572a6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a2cec76c0094787747c585fd0b63e54a') in 0.0020298 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.079111 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.asset
-  artifactKey: Guid(f55500a62a334104bb2c51f67851d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.asset using Guid(f55500a62a334104bb2c51f67851d209) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd7a9423bec1240259c0c75f88fc3e33') in 0.0145101 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.080492 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.cs
-  artifactKey: Guid(e140a7edca2185a40a5ab48ec27ceb46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit_Layout.cs using Guid(e140a7edca2185a40a5ab48ec27ceb46) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '46d647ff45f080a4e002c3bd9f0c6d8e') in 0.0009836 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.721127 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit.cs
-  artifactKey: Guid(face91876d4a2ac41b775c0c9ed60ea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Magic_Circuit/Magic_Circuit.cs using Guid(face91876d4a2ac41b775c0c9ed60ea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9ef94b76d032ccc1d5384494a35ce98f') in 0.0005838 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 66.870550 seconds.
-  path: Assets/Raid And Craft/Script/Unit/Player/Player_Stat_System/Player_Circuit_Points.cs
-  artifactKey: Guid(194f3a0c0a503da4c814530b22c8f972) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Unit/Player/Player_Stat_System/Player_Circuit_Points.cs using Guid(194f3a0c0a503da4c814530b22c8f972) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bb65e32ba9f511d0be51f697807d2a83') in 0.0006468 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 200.485762 seconds.
-  path: Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Effect_Stat_Modifier.asset
-  artifactKey: Guid(0834daba76cc59a42ba8ec425827f066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Skill_System/Attack_Skill/Effect_Stat_Modifier.asset using Guid(0834daba76cc59a42ba8ec425827f066) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '04a8316655436de10957f7c7011f0e34') in 0.0019132 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-

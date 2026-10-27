@@ -29,6 +29,13 @@ public class Skill_Data : ScriptableObject
     [Tooltip("Bật: nhân vật quay về phía điểm nhắm trước khi chạy hiệu ứng. Tắt cho skill tự buff.")]
     public bool faceAimDirection = true;
 
+    [Tooltip("Gồng (cast time), hậu cast, kéo dài (channeling) và những gì bị khoá ở từng giai đoạn. Mặc định = tức thời.")]
+    public Skill_Timing timing = new Skill_Timing();
+
+    [Header("Animation (tuỳ chọn)")]
+    [Tooltip("Cấu hình gửi cho Skill_Animation_Driver. Không có Driver hoặc loại = None thì skill không có animation.")]
+    public Skill_Animation_Config animationConfig = new Skill_Animation_Config();
+
     [Header("Hiệu ứng (chạy lần lượt từ trên xuống)")]
     public Skill_Effect[] effects;
 

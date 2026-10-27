@@ -16,8 +16,10 @@ public enum Player_Stat_Type
     MaxCharacterLevel = 27,
 
     // Layer: Offence
-    PhysicDamage = 5,
-    MagicDamage = 6,
+    PhysicDamageMin = 5,
+    PhysicDamageMax = 28,
+    MagicDamageMin = 6,
+    MagicDamageMax = 29,
     FireDamage = 21,
     ColdDamage = 22,
     LightningDamage = 23,

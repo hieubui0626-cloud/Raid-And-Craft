@@ -32,7 +32,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             return false;
         }
 
-        attack = new Skill_Weapon_Attack(weapon.attackDelivery, weapon.damageTypes, weapon.damageMultiplier);
+        attack = new Skill_Weapon_Attack(weapon.attackDelivery, weapon.damageTypes, weapon.damageMultiplier, weapon.attackAnimation);
         return true;
     }
 

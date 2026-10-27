@@ -23,8 +23,10 @@ public static class Player_Stat_Layer_Map
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MaxCharacterLevel,  Player_Stat_Layer.Complex),
 
         // Layer: Offence
-        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.PhysicDamage, Player_Stat_Layer.Offence),
-        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MagicDamage,  Player_Stat_Layer.Offence),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.PhysicDamageMin, Player_Stat_Layer.Offence),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.PhysicDamageMax, Player_Stat_Layer.Offence),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MagicDamageMin,  Player_Stat_Layer.Offence),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.MagicDamageMax,  Player_Stat_Layer.Offence),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.FireDamage,  Player_Stat_Layer.Offence),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.ColdDamage,  Player_Stat_Layer.Offence),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.LightningDamage,  Player_Stat_Layer.Offence),

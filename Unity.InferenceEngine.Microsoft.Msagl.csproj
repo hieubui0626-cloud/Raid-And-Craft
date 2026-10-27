@@ -513,8 +513,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\ConeSpanner\LowestVertexEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\ObstaclePortEntrance.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutEditing\NodeRestoreData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\MultiEdgeRouter.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\Node.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\MultiEdgeRouter.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\Diagonal.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\VisibilityGraph.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutHelpers.cs" />
@@ -1632,13 +1632,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
+      <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{A18FBD0B-E23B-B387-FF54-E2FF313B7614}</Project>

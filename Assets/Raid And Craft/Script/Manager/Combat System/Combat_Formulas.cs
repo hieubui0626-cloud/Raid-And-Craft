@@ -83,17 +83,42 @@ public static class Combat_Formulas
     }
 
     /// <summary>Chỉ số tấn công tương ứng với một loại sát thương.</summary>
-    public static Player_Stat_Type GetOffenceStat(Damage_Type type)
+    public static Player_Stat_Type GetOffenceStat(Damage_Type type) // giá trị MIN
     {
         switch (type)
         {
-            case Damage_Type.Physic: return Player_Stat_Type.PhysicDamage;
-            case Damage_Type.Magic: return Player_Stat_Type.MagicDamage;
+            case Damage_Type.Physic: return Player_Stat_Type.PhysicDamageMin;
+            case Damage_Type.Magic: return Player_Stat_Type.MagicDamageMin;
             case Damage_Type.Fire: return Player_Stat_Type.FireDamage;
             case Damage_Type.Cold: return Player_Stat_Type.ColdDamage;
             case Damage_Type.Lightning: return Player_Stat_Type.LightningDamage;
             default: return Player_Stat_Type.ChaosDamage;
         }
+    }
+
+    public static Player_Stat_Type GetOffenceMaxStat(Damage_Type type)
+    {
+        switch (type)
+        {
+            case Damage_Type.Physic: return Player_Stat_Type.PhysicDamageMax;
+            case Damage_Type.Magic: return Player_Stat_Type.MagicDamageMax;
+            default: return GetOffenceStat(type); // loại khác chưa có khoảng: min = max
+        }
+    }
+
+    /// <summary>Khoảng sát thương của một loại. Nếu modifier làm Max thấp hơn Min thì tự hoán đổi.</summary>
+    public static void GetDamageRange(Character_Stats stats, Damage_Type type, out float min, out float max)
+    {
+        float a = stats.GetValue(GetOffenceStat(type));
+        float b = stats.GetValue(GetOffenceMaxStat(type));
+        min = Mathf.Min(a, b);
+        max = Mathf.Max(a, b);
+    }
+
+    public static float RollDamage(Character_Stats stats, Damage_Type type)
+    {
+        GetDamageRange(stats, type, out float min, out float max);
+        return Random.Range(min, max);
     }
 
     /// <summary>Chỉ số kháng tương ứng (Physic dùng Armor nên không có kháng, trả về false).</summary>
@@ -142,7 +167,7 @@ public static class Combat_Formulas
         Damage_Type[] carried = (types == null || types.Length == 0) ? Damage_Info.AllTypes : types;
         foreach (Damage_Type type in carried)
         {
-            info.Set(type, attacker.GetValue(GetOffenceStat(type)) * multiplier);
+            info.Set(type, RollDamage(attacker, type) * multiplier);
         }
 
         info.accuracy = attacker.GetValue(Player_Stat_Type.Accuracy);
