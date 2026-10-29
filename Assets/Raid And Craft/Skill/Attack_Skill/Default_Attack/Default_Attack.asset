@@ -15,7 +15,7 @@ MonoBehaviour:
   skillId: Default_Attack
   displayName: Default Attack
   icon: {fileID: 0}
-  description: Normal Attack by your weapind
+  description: Normal Attack by your weapond
   category: 0
   manaCost: 5
   usesActionSpeed: 1
@@ -31,7 +31,7 @@ MonoBehaviour:
     recoveryLock: 5
     interruptible: 1
   animationConfig:
-    animationType: 0
+    animationType: 1
     useWeaponAnimation: 1
     scaleSpeedWithActionSpeed: 1
   effects:

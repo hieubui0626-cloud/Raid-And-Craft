@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Influ_Stat_New
+  m_EditorClassIdentifier: Assembly-CSharp::Stat_Influ_Data
+  influId: Inc_Phy_Damage
+  displayName: Pheonix Force
+  description: Gain increate min physical and max physical damage by 10-15%
+  minRoll: 10
+  maxRoll: 15
+  statModifiers:
+  - stat: 5
+    modifierType: 2
+    value: 0.1
+  - stat: 28
+    modifierType: 2
+    value: 0.15

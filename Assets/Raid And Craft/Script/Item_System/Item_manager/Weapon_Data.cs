@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>Một dòng cộng chỉ số của vũ khí (ví dụ +8 PhysicDamage, hoặc +20% ActionSpeed).</summary>
+/// <summary>Một dòng cộng chỉ số của trang bị/rune (ví dụ +8 PhysicDamage, hoặc +20% ActionSpeed).</summary>
 [Serializable]
 public struct Weapon_Stat_Modifier
 {
@@ -15,16 +14,16 @@ public struct Weapon_Stat_Modifier
 }
 
 /// <summary>
-/// Dữ liệu một loại vũ khí (tạo asset: chuột phải Project -> Create -> Raid And Craft -> Weapon Data).
+/// Dữ liệu một loại vũ khí (tạo asset: chuột phải Project -> Create -> Raid And Craft -> Items -> Weapon).
+/// Là một vật phẩm trang bị (Equippable_Item_Data): nằm được trong Inventory, mặc vào ô Equip Slot (mặc định MainHand).
+/// Tên, icon, Stat Modifiers, ô trang bị, Grid Size, Max Stack... nằm ở lớp cha (cùng tên field nên asset cũ không mất dữ liệu).
 /// Vũ khí quyết định ĐÒN ĐÁNH MẶC ĐỊNH hoạt động thế nào (cận chiến quạt hay bắn đạn) và cộng chỉ số cho người cầm.
 /// Sát thương KHÔNG nằm trong vũ khí mà đến từ chỉ số nhân vật (vũ khí cộng PhysicDamage/MagicDamage... qua statModifiers).
+/// Đòn đánh chỉ lấy từ vũ khí ở ô MainHand.
 /// </summary>
-[CreateAssetMenu(menuName = "Raid And Craft/Weapon Data", fileName = "Weapon_New")]
-public class Weapon_Data : ScriptableObject
+[CreateAssetMenu(menuName = "Raid And Craft/Items/Weapon", fileName = "Weapon_New")]
+public class Weapon_Data : Equippable_Item_Data
 {
-    public string displayName = "New Weapon";
-    public Sprite icon;
-
     [Header("Đòn đánh mặc định khi cầm vũ khí này")]
     [Tooltip("Các loại sát thương đòn mang theo. Kiếm = Physic, trượng = Magic.")]
     public Damage_Type[] damageTypes = { Damage_Type.Physic };
@@ -37,7 +36,4 @@ public class Weapon_Data : ScriptableObject
     [Tooltip("Loại animation của đòn đánh mặc định khi cầm vũ khí này (kiếm = Attack_Slash, trượng = Cast_Staff). " +
              "Chỉ có tác dụng khi skill bật 'Use Weapon Animation'. None = dùng loại ghi trong skill.")]
     public Skill_Animation_Type attackAnimation = Skill_Animation_Type.None;
-
-    [Header("Chỉ số cộng cho người cầm")]
-    public List<Weapon_Stat_Modifier> statModifiers = new List<Weapon_Stat_Modifier>();
 }

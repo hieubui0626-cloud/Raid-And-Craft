@@ -5,6 +5,8 @@
 /// </summary>
 public abstract class Circuit_Item_Data : Item_Data
 {
+    public override Item_Usage SupportedUsage => Item_Usage.MagicCircuit;
+
     /// <summary>
     /// Áp dụng tác động khi lắp vào ô.
     /// source: khoá riêng của ô này, dùng làm Source cho modifier để gỡ sạch được.

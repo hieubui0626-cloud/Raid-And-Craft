@@ -10,20 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97dc401df84ed1f4da2124b4f990e159, type: 3}
-  m_Name: Axe
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  displayName: Axe
-  icon: {fileID: 0}
+  itemId: Sword
+  displayName: Sword
+  description: Basic Sword
+  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  stackType: 1
+  maxStack: 1
+  gridSize: {x: 2, y: 3}
+  canRotate: 0
+  blockedUsage: 6
+  equipSlot: 1
+  statModifiers:
+  - stat: 5
+    modifierType: 0
+    value: 5
+  - stat: 28
+    modifierType: 0
+    value: 7
   damageTypes: 00000000
   damageMultiplier: 1
   attackDelivery:
     type: 0
-    range: 2
+    range: 2.2
     arcAngle: 90
-    maxTargets: 3
+    maxTargets: 5
     projectilePrefab: {fileID: 0}
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
   attackAnimation: 1
-  statModifiers: []

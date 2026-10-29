@@ -193,7 +193,7 @@ public class Magic_Circuit : MonoBehaviour
 
     public bool CanSocket(string nodeId, int socketIndex, Item_Data item)
     {
-        if (!(item is Circuit_Item_Data)) return false;
+        if (item == null || !(item is Circuit_Item_Data) || !item.CanBeUsedFor(Item_Usage.MagicCircuit)) return false;
         if (!sockets.TryGetValue(nodeId ?? string.Empty, out Item_Data[] arr)) return false;
         if (socketIndex < 0 || socketIndex >= arr.Length || arr[socketIndex] != null) return false;
         return inventory.Has(item);
