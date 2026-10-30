@@ -124,6 +124,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Panel_Hotkey_Toggle.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Magic_Circuit\Magic_Circuit_Layout.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Combat.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\ISkill_Weapon_Source.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Panel_Hotkey.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Blade_Storm_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Grid.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />

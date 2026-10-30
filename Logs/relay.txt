@@ -2758,3 +2758,21 @@
 [2026-10-29T13:45:32.440Z] [INFO] log Shutdown request received from client editor-15788-vw0djj
 [2026-10-29T13:45:32.441Z] [INFO] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
 [2026-10-29T13:45:32.442Z] [INFO] log Shutdown: Initiating graceful shutdown: Shutdown requested by client
+[2026-10-30T05:41:23.843Z] [INFO] relay.startup port=9001 mcpClientPort=9002 editorPid=8676
+[2026-10-30T05:41:23.844Z] [INFO] log === RELAY SERVER STARTED === (unity-ai-relay v1.0.12-build.99)
+[2026-10-30T05:41:23.855Z] [INFO] log TLS trust: NODE_USE_SYSTEM_CA=on systemCAs=77 bundledCAs=145
+[2026-10-30T05:41:23.855Z] [INFO] log Starting relay server...
+[2026-10-30T05:41:23.856Z] [INFO] log Command line arguments: ["bun","B:/~BUN/root/relay_win.exe","--relay","--port","9001","--mcp-client-port","9002","--editor-pid","8676","--shutdown-delay","180","--log-dir","D:\\Hieu\\software\\Unity\\RPG_Prototype\\RPG_Prototype\\Logs"]
+[2026-10-30T05:41:23.856Z] [INFO] log Parsed config: {"port":9001,"mcpClientPort":9002,"editorPid":"8676","shutdownDelaySeconds":180}
+[2026-10-30T05:41:23.857Z] [INFO] log Initializing relay components...
+[2026-10-30T05:41:23.857Z] [INFO] log Creating RelayEditor...
+[2026-10-30T05:41:23.861Z] [INFO] log WebSocket server started
+[2026-10-30T05:41:23.862Z] [INFO] log Relay server initialization completed
+[2026-10-30T05:41:23.863Z] [INFO] log MCP Client initialized at port: 9002
+[2026-10-30T05:41:23.872Z] [WARN] log [shell-env] Shell environment did not contain a PATH variable
+[2026-10-30T05:41:23.896Z] [INFO] log Unity MCP Relay server started | Port: 9002 | Endpoints: /mcp/start-server, /mcp/stop-server, /mcp/server-status, /mcp/call-tool
+[2026-10-30T05:41:24.365Z] [INFO] log Unity client connected with ID: editor-8676-v1rp0o (relay 1.0.12-build.99)
+[2026-10-30T05:41:24.366Z] [INFO] connection.established clientId=editor-8676-v1rp0o port=9001
+[2026-10-30T05:43:20.254Z] [INFO] log Shutdown request received from client editor-8676-v1rp0o
+[2026-10-30T05:43:20.255Z] [INFO] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
+[2026-10-30T05:43:20.256Z] [INFO] log Shutdown: Initiating graceful shutdown: Shutdown requested by client

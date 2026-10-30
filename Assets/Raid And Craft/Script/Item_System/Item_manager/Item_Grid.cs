@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Một vật phẩm (hoặc một chồng vật phẩm) đang nằm trong lưới. Chỉ để đọc, dữ liệu thật nằm trong Item_Grid.
+/// Một vật phẩm (hoặc một chồng vật phẩm) đang nằm trong lưới, hoặc đang được cầm trên con trỏ.
+/// Chỉ để đọc, dữ liệu thật nằm trong Item_Grid.
 /// Toạ độ: gốc (0,0) là ô TRÊN-TRÁI, x tăng sang phải, y tăng xuống dưới (khớp cách UI xếp ô).
-/// Origin là ô trên-trái của vùng vật phẩm chiếm; Size đã tính xoay.
+/// Origin là ô trên-trái của vùng vật phẩm chiếm (vô nghĩa khi đang cầm trên con trỏ).
 /// </summary>
 public readonly struct Grid_Placement
 {
@@ -15,21 +16,19 @@ public readonly struct Grid_Placement
 
     public readonly int Count;
     public readonly Vector2Int Origin;
-    public readonly bool Rotated;
 
-    public Grid_Placement(Item_Data item, Item_Instance instance, int count, Vector2Int origin, bool rotated)
+    public Grid_Placement(Item_Data item, Item_Instance instance, int count, Vector2Int origin)
     {
         Item = item;
         Instance = instance;
         Count = count;
         Origin = origin;
-        Rotated = rotated;
     }
 
     public bool IsEmpty => Item == null || Count <= 0;
 
-    /// <summary>Số ô rộng x cao đang chiếm (đã tính xoay).</summary>
-    public Vector2Int Size => Item == null ? Vector2Int.zero : Item.GetGridSize(Rotated);
+    /// <summary>Số ô rộng x cao đang chiếm.</summary>
+    public Vector2Int Size => Item == null ? Vector2Int.zero : Item.GridSize;
 
     public bool Contains(Vector2Int cell)
     {
@@ -40,7 +39,7 @@ public readonly struct Grid_Placement
 }
 
 /// <summary>
-/// Lưới vật phẩm kiểu PoE: mỗi vật phẩm chiếm GridSize ô (rộng x cao), có thể xoay 90 độ nếu CanRotate.
+/// Lưới vật phẩm kiểu PoE: mỗi vật phẩm chiếm GridSize ô (rộng x cao), không xoay.
 /// Vật phẩm Stackable xếp chồng tới MaxStack trong MỘT chỗ (một chỗ chiếm đúng GridSize ô, không tính theo số lượng).
 /// Đây là lớp thuần (không phải MonoBehaviour) nên Inventory, Stash... đều dùng lại được; Grid_Item_Container bọc nó.
 /// Chỉ lo luật đặt/gỡ/di chuyển; không có sự kiện (container bắn sự kiện khi gọi hàm thành công).
@@ -53,7 +52,6 @@ public class Item_Grid
         public Item_Instance instance; // chỉ có với trang bị (count luôn 1)
         public int count;
         public Vector2Int origin;
-        public bool rotated;
     }
 
     private readonly List<Entry> entries = new List<Entry>();
@@ -79,7 +77,7 @@ public class Item_Grid
         if (index < 0 || index >= entries.Count) return default;
 
         Entry e = entries[index];
-        return new Grid_Placement(e.item, e.instance, e.count, e.origin, e.rotated);
+        return new Grid_Placement(e.item, e.instance, e.count, e.origin);
     }
 
     public bool InBounds(Vector2Int cell)
@@ -127,20 +125,27 @@ public class Item_Grid
         return IndexOfInstance(instance) >= 0;
     }
 
-    /// <summary>Đặt vật phẩm với góc trên-trái tại origin có vừa (trong lưới, không đè vật khác) không.</summary>
-    public bool CanFit(Item_Data item, Vector2Int origin, bool rotated)
-    {
-        return CanFit(item, origin, rotated, -1);
-    }
-
-    // ignoreIndex: coi chỗ này như trống (dùng khi di chuyển chính vật phẩm đó).
-    private bool CanFit(Item_Data item, Vector2Int origin, bool rotated, int ignoreIndex)
+    /// <summary>Vùng vật phẩm chiếm khi đặt góc trên-trái tại origin có nằm trọn trong lưới không (không xét vật khác).</summary>
+    public bool FitsInBounds(Item_Data item, Vector2Int origin)
     {
         if (item == null) return false;
 
-        Vector2Int size = item.GetGridSize(rotated);
-        if (origin.x < 0 || origin.y < 0 || origin.x + size.x > width || origin.y + size.y > height) return false;
+        Vector2Int size = item.GridSize;
+        return origin.x >= 0 && origin.y >= 0 && origin.x + size.x <= width && origin.y + size.y <= height;
+    }
 
+    /// <summary>Đặt vật phẩm với góc trên-trái tại origin có vừa (trong lưới, không đè vật khác) không.</summary>
+    public bool CanFit(Item_Data item, Vector2Int origin)
+    {
+        return CanFit(item, origin, -1);
+    }
+
+    // ignoreIndex: coi chỗ này như trống (dùng khi di chuyển chính vật phẩm đó).
+    private bool CanFit(Item_Data item, Vector2Int origin, int ignoreIndex)
+    {
+        if (!FitsInBounds(item, origin)) return false;
+
+        Vector2Int size = item.GridSize;
         for (int dy = 0; dy < size.y; dy++)
         {
             for (int dx = 0; dx < size.x; dx++)
@@ -152,30 +157,20 @@ public class Item_Grid
         return true;
     }
 
-    /// <summary>
-    /// Tìm chỗ trống đầu tiên (duyệt từ trên xuống, trái sang phải; thử không xoay trước rồi mới xoay).
-    /// </summary>
-    public bool TryFindSpace(Item_Data item, out Vector2Int origin, out bool rotated)
+    /// <summary>Tìm chỗ trống đầu tiên (duyệt từ trên xuống, trái sang phải).</summary>
+    public bool TryFindSpace(Item_Data item, out Vector2Int origin)
     {
         origin = default;
-        rotated = false;
         if (item == null) return false;
 
-        bool canRotate = item.CanRotate;
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
                 var o = new Vector2Int(x, y);
-                if (CanFit(item, o, false, -1))
+                if (CanFit(item, o, -1))
                 {
                     origin = o;
-                    return true;
-                }
-                if (canRotate && CanFit(item, o, true, -1))
-                {
-                    origin = o;
-                    rotated = true;
                     return true;
                 }
             }
@@ -221,10 +216,10 @@ public class Item_Grid
 
         while (amount > 0)
         {
-            if (!TryFindSpace(item, out Vector2Int origin, out bool rotated)) break;
+            if (!TryFindSpace(item, out Vector2Int origin)) break;
 
             int put = Mathf.Min(max, amount);
-            AddEntry(item, null, put, origin, rotated);
+            AddEntry(item, null, put, origin);
             amount -= put;
         }
 
@@ -235,16 +230,16 @@ public class Item_Grid
     public bool AddInstance(Item_Instance instance)
     {
         if (instance == null || HasInstance(instance)) return false;
-        if (!TryFindSpace(instance.Base, out Vector2Int origin, out bool rotated)) return false;
+        if (!TryFindSpace(instance.Base, out Vector2Int origin)) return false;
 
-        AddEntry(instance.Base, instance, 1, origin, rotated);
+        AddEntry(instance.Base, instance, 1, origin);
         return true;
     }
 
     public bool CanAddInstance(Item_Instance instance)
     {
         if (instance == null || HasInstance(instance)) return false;
-        return TryFindSpace(instance.Base, out _, out _);
+        return TryFindSpace(instance.Base, out _);
     }
 
     public bool CanAdd(Item_Data item, int count = 1)
@@ -328,83 +323,66 @@ public class Item_Grid
         Entry old = entries[IndexOfInstance(take)];
 
         TryRemoveInstance(take);
-        if (TryPlaceInstanceAt(give, old.origin, old.rotated)) return true;
+        if (TryPlaceInstanceAt(give, old.origin)) return true;
 
         return AddInstance(give);
     }
 
     // ------------------------------------------------------------------
-    // ĐẶT / DI CHUYỂN THEO VỊ TRÍ (cho UI kéo thả)
+    // ĐẶT / DI CHUYỂN / THẢ THEO VỊ TRÍ (cho UI kéo thả)
     // ------------------------------------------------------------------
 
     /// <summary>
     /// Đặt một chồng count vật phẩm đúng vị trí (không gộp). False nếu không vừa hoặc count vượt MaxStack.
     /// Loại trang bị (UsesInstance): chỉ count = 1, tự tạo instance mặc định; muốn giữ món cũ dùng TryPlaceInstanceAt/TryPlace.
     /// </summary>
-    public bool TryPlaceAt(Item_Data item, int count, Vector2Int origin, bool rotated)
+    public bool TryPlaceAt(Item_Data item, int count, Vector2Int origin)
     {
         if (item == null || count <= 0 || count > item.MaxStack) return false;
-        if (item.UsesInstance) return count == 1 && TryPlaceInstanceAt(Item_Instance.Create(item), origin, rotated);
+        if (item.UsesInstance) return count == 1 && TryPlaceInstanceAt(Item_Instance.Create(item), origin);
 
-        rotated = rotated && item.CanRotate;
-        if (!CanFit(item, origin, rotated, -1)) return false;
+        if (!CanFit(item, origin, -1)) return false;
 
-        AddEntry(item, null, count, origin, rotated);
+        AddEntry(item, null, count, origin);
         return true;
     }
 
     /// <summary>Đặt đúng món (instance) vào vị trí. False nếu không vừa hoặc món đã có trong lưới.</summary>
-    public bool TryPlaceInstanceAt(Item_Instance instance, Vector2Int origin, bool rotated)
+    public bool TryPlaceInstanceAt(Item_Instance instance, Vector2Int origin)
     {
         if (instance == null || HasInstance(instance)) return false;
+        if (!CanFit(instance.Base, origin, -1)) return false;
 
-        rotated = rotated && instance.Base.CanRotate;
-        if (!CanFit(instance.Base, origin, rotated, -1)) return false;
-
-        AddEntry(instance.Base, instance, 1, origin, rotated);
+        AddEntry(instance.Base, instance, 1, origin);
         return true;
     }
 
-    /// <summary>Đặt lại một chồng đã nhấc lên (Grid_Placement từ TryRemoveAt), giữ nguyên instance nếu là trang bị.</summary>
-    public bool TryPlace(Grid_Placement placement, Vector2Int origin, bool rotated)
+    /// <summary>Đặt lại một chồng/món (Grid_Placement) vào vị trí trống, giữ nguyên instance nếu là trang bị.</summary>
+    public bool TryPlace(Grid_Placement placement, Vector2Int origin)
     {
         if (placement.IsEmpty) return false;
 
         return placement.Instance != null
-            ? TryPlaceInstanceAt(placement.Instance, origin, rotated)
-            : TryPlaceAt(placement.Item, placement.Count, origin, rotated);
+            ? TryPlaceInstanceAt(placement.Instance, origin)
+            : TryPlaceAt(placement.Item, placement.Count, origin);
     }
 
-    /// <summary>Dời chồng đang chiếm ô fromCell tới góc trên-trái toOrigin (có thể xoay). Chỉ dời vào chỗ trống.</summary>
-    public bool TryMove(Vector2Int fromCell, Vector2Int toOrigin, bool rotated)
+    /// <summary>Dời chồng đang chiếm ô fromCell tới góc trên-trái toOrigin. Chỉ dời vào chỗ trống (kể cả chỗ chính nó đang chiếm).</summary>
+    public bool TryMove(Vector2Int fromCell, Vector2Int toOrigin)
     {
         int index = IndexAt(fromCell);
         if (index < 0) return false;
 
         Entry e = entries[index];
-        rotated = rotated && e.item.CanRotate;
-        if (!CanFit(e.item, toOrigin, rotated, index)) return false;
+        if (!CanFit(e.item, toOrigin, index)) return false;
 
         e.origin = toOrigin;
-        e.rotated = rotated;
         entries[index] = e;
         RebuildCells();
         return true;
     }
 
-    /// <summary>Xoay chồng đang chiếm ô cell 90 độ, giữ nguyên góc trên-trái. False nếu không xoay được hoặc vướng.</summary>
-    public bool TryRotate(Vector2Int cell)
-    {
-        int index = IndexAt(cell);
-        if (index < 0) return false;
-
-        Entry e = entries[index];
-        if (!e.item.CanRotate) return false;
-
-        return TryMove(cell, e.origin, !e.rotated);
-    }
-
-    /// <summary>Gỡ nguyên chồng đang chiếm ô cell (nhấc lên). Trả về chồng đó.</summary>
+    /// <summary>Gỡ nguyên chồng đang chiếm ô cell (nhấc lên con trỏ). Trả về chồng đó.</summary>
     public bool TryRemoveAt(Vector2Int cell, out Grid_Placement removed)
     {
         int index = IndexAt(cell);
@@ -413,6 +391,74 @@ public class Item_Grid
 
         entries.RemoveAt(index);
         RebuildCells();
+        return true;
+    }
+
+    /// <summary>
+    /// THẢ một chồng/món đang cầm (held) xuống lưới, góc trên-trái tại origin. Luật:
+    ///   - Vùng thả trống: đặt vào.
+    ///   - Vùng thả chạm đúng MỘT chồng cùng loại xếp chồng được và còn chỗ: gộp tới Max Stack,
+    ///     phần dư vẫn còn trên con trỏ (leftover).
+    ///   - Vùng thả chạm đúng MỘT chồng khác (hoặc chồng cùng loại đã đầy): đổi chỗ, chồng bị đè được nhấc lên con trỏ (leftover).
+    ///   - Chạm từ hai chồng trở lên, hoặc vùng thả vượt ngoài lưới: không làm gì (false), leftover = held.
+    /// Trả về true nếu lưới có thay đổi. leftover.IsEmpty = con trỏ trống sau khi thả.
+    /// </summary>
+    public bool TryDrop(Grid_Placement held, Vector2Int origin, out Grid_Placement leftover)
+    {
+        leftover = held;
+        if (held.IsEmpty || !FitsInBounds(held.Item, origin)) return false;
+
+        // Tìm các chồng bị vùng thả chạm tới.
+        Vector2Int size = held.Item.GridSize;
+        int overlap = -1;
+        for (int dy = 0; dy < size.y; dy++)
+        {
+            for (int dx = 0; dx < size.x; dx++)
+            {
+                int occupant = cells[(origin.y + dy) * width + origin.x + dx];
+                if (occupant == -1) continue;
+                if (overlap == -1) overlap = occupant;
+                else if (overlap != occupant) return false;
+            }
+        }
+
+        // Vùng trống: đặt vào.
+        if (overlap == -1)
+        {
+            if (!TryPlace(held, origin)) return false;
+
+            leftover = default;
+            return true;
+        }
+
+        Entry target = entries[overlap];
+
+        // Gộp chồng cùng loại.
+        if (held.Instance == null && target.instance == null && target.item == held.Item
+            && held.Item.CanStack && target.count < held.Item.MaxStack)
+        {
+            int moved = Mathf.Min(held.Item.MaxStack - target.count, held.Count);
+            target.count += moved;
+            entries[overlap] = target;
+
+            int rest = held.Count - moved;
+            leftover = rest > 0 ? new Grid_Placement(held.Item, null, rest, default) : default;
+            return true;
+        }
+
+        // Đổi chỗ: nhấc chồng bị đè lên, đặt món đang cầm vào. Vùng thả chỉ chạm đúng chồng này nên chắc chắn vừa.
+        Grid_Placement picked = GetPlacement(overlap);
+        entries.RemoveAt(overlap);
+        RebuildCells();
+
+        if (!TryPlace(held, origin))
+        {
+            entries.Insert(overlap, target);
+            RebuildCells();
+            return false;
+        }
+
+        leftover = picked;
         return true;
     }
 
@@ -431,7 +477,7 @@ public class Item_Grid
 
         foreach (Entry e in entries)
         {
-            Vector2Int size = e.item.GetGridSize(e.rotated);
+            Vector2Int size = e.item.GridSize;
             if (e.origin.x + size.x > newWidth || e.origin.y + size.y > newHeight) return false;
         }
 
@@ -470,16 +516,16 @@ public class Item_Grid
         return -1;
     }
 
-    private void AddEntry(Item_Data item, Item_Instance instance, int count, Vector2Int origin, bool rotated)
+    private void AddEntry(Item_Data item, Item_Instance instance, int count, Vector2Int origin)
     {
-        entries.Add(new Entry { item = item, instance = instance, count = count, origin = origin, rotated = rotated });
+        entries.Add(new Entry { item = item, instance = instance, count = count, origin = origin });
         Paint(entries.Count - 1);
     }
 
     private void Paint(int index)
     {
         Entry e = entries[index];
-        Vector2Int size = e.item.GetGridSize(e.rotated);
+        Vector2Int size = e.item.GridSize;
 
         for (int dy = 0; dy < size.y; dy++)
         {

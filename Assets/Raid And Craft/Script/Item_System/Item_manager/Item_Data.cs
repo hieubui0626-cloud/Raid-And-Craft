@@ -23,7 +23,7 @@ public enum Item_Stack_Type
 /// Thêm loại mới: kế thừa lớp này (hoặc Circuit_Item_Data / Equippable_Item_Data) và đặt menuName = "Raid And Craft/Items/&lt;Tên&gt;".
 ///
 /// Phân loại xếp chồng: Stack Type = Stackable (tới Max Stack) hoặc NonStackable (luôn 1 vật phẩm mỗi chỗ).
-/// Inventory dạng lưới (grid): Grid Size là số ô rộng x cao vật phẩm chiếm (mặc định 1x1), Can Rotate cho phép xoay 90 độ.
+/// Inventory dạng lưới (grid): Grid Size là số ô rộng x cao vật phẩm chiếm (mặc định 1x1). Vật phẩm không xoay.
 /// Trang bị: IsEquippable / EquipSlot (chỉ Equippable_Item_Data mới có ô trang bị).
 /// </summary>
 public abstract class Item_Data : ScriptableObject
@@ -47,9 +47,6 @@ public abstract class Item_Data : ScriptableObject
     [Header("Lưới Inventory (grid)")]
     [Tooltip("Số ô vật phẩm chiếm trong Inventory dạng lưới: X = rộng, Y = cao. 1x1 = một ô.")]
     [SerializeField] private Vector2Int gridSize = Vector2Int.one;
-
-    [Tooltip("Cho phép xoay vật phẩm 90 độ khi đặt vào lưới (đổi chỗ rộng và cao). Vô nghĩa với vật 1x1 hoặc vuông.")]
-    [SerializeField] private bool canRotate = true;
 
     [Header("Công dụng")]
     [Tooltip("CHẶN bớt công dụng của vật phẩm này (ví dụ chặn MagicCircuit cho một Rune nhiệm vụ). " +
@@ -94,16 +91,6 @@ public abstract class Item_Data : ScriptableObject
 
     /// <summary>Số ô lưới chiếm (rộng x cao).</summary>
     public int GridCellCount => GridWidth * GridHeight;
-
-    /// <summary>Có xoay được không (chỉ có ý nghĩa khi rộng khác cao).</summary>
-    public bool CanRotate => canRotate && GridWidth != GridHeight;
-
-    /// <summary>Kích thước chiếm trong lưới khi xoay hoặc không xoay.</summary>
-    public Vector2Int GetGridSize(bool rotated)
-    {
-        Vector2Int size = GridSize;
-        return rotated && CanRotate ? new Vector2Int(size.y, size.x) : size;
-    }
 
     // ------------------------------------------------------------------
     // CÔNG DỤNG (tính năng nào được phép nhận vật phẩm này)

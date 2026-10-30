@@ -142,6 +142,58 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     }
 
     // ------------------------------------------------------------------
+    // KÉO THẢ TỪ/ĐẾN CON TRỎ (UI): món đang cầm đã rời khỏi kho
+    // ------------------------------------------------------------------
+
+    /// <summary>
+    /// Tháo món ở ô thả vào đúng ô lưới của kho (góc trên-trái tại origin). False nếu ô trang bị trống, không có kho,
+    /// hoặc vùng đó không trống/không nằm trọn trong lưới (không đổi gì). Đổi chỗ với món khác thì dùng TryTakeEquipped rồi Inventory.TryDrop.
+    /// </summary>
+    public bool TryUnequipTo(Equipment_Slot slot, Vector2Int origin)
+    {
+        EnsureInitialized();
+        if (inventory == null || !equipped.TryGetValue(slot, out Item_Instance item)) return false;
+        if (!inventory.CanFit(item.Base, origin)) return false;
+
+        SetSlot(slot, null);
+        if (inventory.TryPlace(new Grid_Placement(item.Base, item, 1, origin), origin)) return true;
+
+        SetSlot(slot, item); // không xảy ra vì đã kiểm CanFit; giữ nguyên trạng thái nếu có lỗi bất ngờ
+        return false;
+    }
+
+    /// <summary>
+    /// Nhấc món ở ô lên con trỏ (UI kéo từ ô trang bị): tháo khỏi người, KHÔNG trả về kho. False nếu ô trống.
+    /// Thả xuống lưới bằng Inventory.TryDrop(new Grid_Placement(taken.Base, taken, 1, default), origin, out ...).
+    /// </summary>
+    public bool TryTakeEquipped(Equipment_Slot slot, out Item_Instance taken)
+    {
+        EnsureInitialized();
+        if (!equipped.TryGetValue(slot, out taken)) return false;
+
+        SetSlot(slot, null);
+        return true;
+    }
+
+    /// <summary>
+    /// Thả món đang cầm trên con trỏ (đã rời khỏi kho) lên ô trang bị targetSlot. Món phải mặc được và thuộc đúng ô đó.
+    /// Món cũ ở ô (nếu có) được trả về qua previous để con trỏ cầm tiếp (null = con trỏ trống).
+    /// False (không đổi gì, previous = held) nếu sai ô, không mặc được, hoặc món đó vẫn còn trong kho.
+    /// </summary>
+    public bool TryEquipHeld(Equipment_Slot targetSlot, Item_Instance held, out Item_Instance previous)
+    {
+        previous = held;
+        EnsureInitialized();
+        if (!CanEquip(held) || held.Base.EquipSlot != targetSlot) return false;
+        if (inventory != null && inventory.HasInstance(held)) return false;
+
+        equipped.TryGetValue(targetSlot, out Item_Instance oldItem);
+        SetSlot(targetSlot, held);
+        previous = oldItem;
+        return true;
+    }
+
+    // ------------------------------------------------------------------
     // MẶC / THÁO THẲNG, KHÔNG QUA KHO (Enemy, thử nghiệm, load save)
     // ------------------------------------------------------------------
 

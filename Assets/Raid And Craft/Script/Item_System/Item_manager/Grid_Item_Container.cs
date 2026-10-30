@@ -86,10 +86,10 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
     }
 
     /// <summary>Đặt vật phẩm với góc trên-trái tại origin có vừa không (UI dùng để tô xanh/đỏ khi kéo).</summary>
-    public bool CanFit(Item_Data item, Vector2Int origin, bool rotated)
+    public bool CanFit(Item_Data item, Vector2Int origin)
     {
         EnsureInitialized();
-        return grid.CanFit(item, origin, rotated);
+        return grid.CanFit(item, origin);
     }
 
     // ------------------------------------------------------------------
@@ -189,46 +189,51 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
     // ------------------------------------------------------------------
 
     /// <summary>Đặt một chồng vật phẩm đúng vị trí (ví dụ thả từ con trỏ xuống lưới).</summary>
-    public bool TryPlaceAt(Item_Data item, int count, Vector2Int origin, bool rotated)
+    public bool TryPlaceAt(Item_Data item, int count, Vector2Int origin)
     {
         EnsureInitialized();
-        if (!grid.TryPlaceAt(item, count, origin, rotated)) return false;
+        if (!grid.TryPlaceAt(item, count, origin)) return false;
 
         NotifyChanged();
         return true;
     }
 
     /// <summary>Đặt lại một chồng đã nhấc lên (Grid_Placement từ TryRemoveAt), giữ nguyên món trang bị. UI dùng để thả item đang cầm.</summary>
-    public bool TryPlace(Grid_Placement placement, Vector2Int origin, bool rotated)
+    public bool TryPlace(Grid_Placement placement, Vector2Int origin)
     {
         EnsureInitialized();
-        if (!grid.TryPlace(placement, origin, rotated)) return false;
+        if (!grid.TryPlace(placement, origin)) return false;
 
         NotifyChanged();
         return true;
     }
 
-    /// <summary>Dời chồng đang chiếm ô fromCell tới góc trên-trái toOrigin (có thể xoay). Chỉ dời vào chỗ trống.</summary>
-    public bool TryMove(Vector2Int fromCell, Vector2Int toOrigin, bool rotated)
+    /// <summary>Dời chồng đang chiếm ô fromCell tới góc trên-trái toOrigin. Chỉ dời vào chỗ trống.</summary>
+    public bool TryMove(Vector2Int fromCell, Vector2Int toOrigin)
     {
         EnsureInitialized();
-        if (!grid.TryMove(fromCell, toOrigin, rotated)) return false;
+        if (!grid.TryMove(fromCell, toOrigin)) return false;
 
         NotifyChanged();
         return true;
     }
 
-    /// <summary>Xoay chồng đang chiếm ô cell 90 độ tại chỗ.</summary>
-    public bool TryRotate(Vector2Int cell)
+    /// <summary>
+    /// THẢ một chồng/món đang cầm trên con trỏ (held, lấy từ TryRemoveAt hoặc từ ô trang bị) xuống lưới, góc trên-trái tại origin.
+    /// Vùng thả trống: đặt vào. Chạm đúng một chồng cùng loại còn chỗ: gộp tới Max Stack, phần dư ở lại con trỏ.
+    /// Chạm đúng một chồng khác: đổi chỗ, chồng bị đè lên con trỏ. Chạm từ hai chồng trở lên hoặc vượt ngoài lưới: không làm gì (false).
+    /// leftover = thứ còn trên con trỏ sau khi thả (IsEmpty = con trỏ trống).
+    /// </summary>
+    public bool TryDrop(Grid_Placement held, Vector2Int origin, out Grid_Placement leftover)
     {
         EnsureInitialized();
-        if (!grid.TryRotate(cell)) return false;
+        if (!grid.TryDrop(held, origin, out leftover)) return false;
 
         NotifyChanged();
         return true;
     }
 
-    /// <summary>Nhấc nguyên chồng đang chiếm ô cell ra khỏi kho (UI phải đặt nó đi đâu đó, kẻo mất).</summary>
+    /// <summary>Nhấc nguyên chồng đang chiếm ô cell ra khỏi kho lên con trỏ. Thả bằng TryDrop (UI không cho tương tác khác khi đang cầm, kẻo mất).</summary>
     public bool TryRemoveAt(Vector2Int cell, out Grid_Placement removed)
     {
         EnsureInitialized();

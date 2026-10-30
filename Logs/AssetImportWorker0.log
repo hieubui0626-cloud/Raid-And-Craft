@@ -2,7 +2,7 @@ Using pre-set license
 Built from '6000.1/staging' branch; Version is '6000.1.17f1 (c0b9d3899998) revision 12630483'; Using compiler version '194234433'; Build Type 'Release'
 OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'en' Physical Memory: 16140 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
-Date: 2026-10-29T13:10:16Z
+Date: 2026-10-30T05:42:39Z
 
 COMMAND LINE ARGUMENTS:
 D:\Unity\6000.1.17f1\Editor\Unity.exe
@@ -16,7 +16,7 @@ D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50413
+53281
 -job-worker-count
 7
 -background-job-worker-count
@@ -62,12 +62,12 @@ D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [5524]  Target information:
+Player connection [22444]  Target information:
 
-Player connection [5524]  * "[IP] 192.168.1.7 [Port] 0 [Flags] 2 [Guid] 1633801480 [EditorId] 1633801480 [Version] 1048832 [Id] WindowsEditor(7,Kizzul) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [22444]  * "[IP] 192.168.1.8 [Port] 0 [Flags] 2 [Guid] 2299324030 [EditorId] 2299324030 [Version] 1048832 [Id] WindowsEditor(7,Kizzul) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [5524] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [5524] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [22444] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [22444] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -79,8 +79,8 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 26.27 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.99 ms.
+Refreshing native plugins compatible for Editor in 5.32 ms, found 5 plugins.
+Preloading 1 native plugins for Editor in 0.73 ms.
 Initialize engine version: 6000.1.17f1 (c0b9d3899998)
 [Subsystems] Discovering subsystems at path D:/Unity/6000.1.17f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path D:/Hieu/software/Unity/RPG_Prototype/RPG_Prototype/Assets
@@ -96,50 +96,50 @@ Initialize mono
 Mono path[0] = 'D:/Unity/6000.1.17f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/6000.1.17f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Unity/6000.1.17f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56772
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56192
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: D:/Unity/6000.1.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.005341 seconds.
-- Loaded All Assemblies, in  0.442 seconds
+Registered in 0.001445 seconds.
+- Loaded All Assemblies, in  0.365 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 217 ms
+Android Extension - Scanning For ADB Devices 214 ms
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.559 seconds
-Domain Reload Profiling: 1001ms
-	BeginReloadAssembly (202ms)
+- Finished resetting the current domain, in  0.545 seconds
+Domain Reload Profiling: 909ms
+	BeginReloadAssembly (137ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (43ms)
-	LoadAllAssembliesAndSetupDomain (155ms)
-		LoadAssemblies (204ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (39ms)
+	LoadAllAssembliesAndSetupDomain (146ms)
+		LoadAssemblies (137ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (150ms)
-			TypeCache.Refresh (149ms)
-				TypeCache.ScanAssembly (139ms)
+		AnalyzeDomain (142ms)
+			TypeCache.Refresh (141ms)
+				TypeCache.ScanAssembly (129ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (559ms)
+	FinalizeReload (545ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (514ms)
+		SetupLoadedEditorAssemblies (509ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (310ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (49ms)
-			ProcessInitializeOnLoadAttributes (106ms)
-			ProcessInitializeOnLoadMethodAttributes (46ms)
+			InitializePlatformSupportModulesInManaged (304ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (50ms)
+			ProcessInitializeOnLoadAttributes (105ms)
+			ProcessInitializeOnLoadMethodAttributes (47ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -150,8 +150,8 @@ Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.228 seconds
-Refreshing native plugins compatible for Editor in 2.15 ms, found 5 plugins.
+- Loaded All Assemblies, in  1.044 seconds
+Refreshing native plugins compatible for Editor in 2.36 ms, found 5 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -170,345 +170,70 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
 (Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
 
-Refreshing native plugins compatible for Editor in 2.04 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 2.36 ms, found 5 plugins.
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.733 seconds
-Domain Reload Profiling: 2959ms
-	BeginReloadAssembly (165ms)
+- Finished resetting the current domain, in  1.652 seconds
+Domain Reload Profiling: 2694ms
+	BeginReloadAssembly (170ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (59ms)
-	LoadAllAssembliesAndSetupDomain (961ms)
-		LoadAssemblies (656ms)
+		CreateAndSetChildDomain (25ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (64ms)
+	LoadAllAssembliesAndSetupDomain (765ms)
+		LoadAssemblies (458ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (412ms)
-			TypeCache.Refresh (329ms)
-				TypeCache.ScanAssembly (307ms)
+		AnalyzeDomain (415ms)
+			TypeCache.Refresh (332ms)
+				TypeCache.ScanAssembly (310ms)
 			BuildScriptInfoCaches (68ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1733ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (1652ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1502ms)
+		SetupLoadedEditorAssemblies (1469ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (11ms)
 			SetLoadedEditorAssemblies (4ms)
 			BeforeProcessingInitializeOnLoad (134ms)
-			ProcessInitializeOnLoadAttributes (1092ms)
-			ProcessInitializeOnLoadMethodAttributes (260ms)
+			ProcessInitializeOnLoadAttributes (1060ms)
+			ProcessInitializeOnLoadMethodAttributes (258ms)
 			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 2.62 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Refreshing native plugins compatible for Editor in 2.28 ms, found 5 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10237 unused Assets / (20.4 MB). Loaded Objects now: 10964.
-Memory consumption went from 183.9 MB to 163.6 MB.
-Total: 21.410800 ms (FindLiveObjects: 0.925500 ms CreateObjectMapping: 0.778000 ms MarkObjects: 13.748500 ms  DeleteObjects: 5.957600 ms)
+Unloading 10239 unused Assets / (20.1 MB). Loaded Objects now: 10966.
+Memory consumption went from 184.0 MB to 163.9 MB.
+Total: 20.016900 ms (FindLiveObjects: 1.475300 ms CreateObjectMapping: 0.727700 ms MarkObjects: 13.302800 ms  DeleteObjects: 4.510000 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 261978.274280 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Item_manager/Consumable_Item_Data.cs
-  artifactKey: Guid(95869b5bf3ee1fd46b5b2ec29b045b9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Item_manager/Consumable_Item_Data.cs using Guid(95869b5bf3ee1fd46b5b2ec29b045b9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2987ad69b9de1267174dc39b304364cd') in 0.0085082 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.039 seconds
-Refreshing native plugins compatible for Editor in 4.34 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.444 seconds
-Domain Reload Profiling: 3489ms
-	BeginReloadAssembly (263ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (96ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (682ms)
-		LoadAssemblies (483ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (302ms)
-			TypeCache.Refresh (11ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (272ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (2444ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (2198ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (19ms)
-			SetLoadedEditorAssemblies (9ms)
-			BeforeProcessingInitializeOnLoad (283ms)
-			ProcessInitializeOnLoadAttributes (1302ms)
-			ProcessInitializeOnLoadMethodAttributes (582ms)
-			AfterProcessingInitializeOnLoad (3ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (27ms)
-Refreshing native plugins compatible for Editor in 4.28 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.13 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10233 unused Assets / (15.9 MB). Loaded Objects now: 10983.
-Memory consumption went from 193.6 MB to 177.7 MB.
-Total: 27.921500 ms (FindLiveObjects: 1.439000 ms CreateObjectMapping: 0.903900 ms MarkObjects: 19.754800 ms  DeleteObjects: 5.822100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 331.244654 seconds.
-  path: Assets/Raid And Craft/Item
-  artifactKey: Guid(aafd3656691b3b6419d55f710cf08837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item using Guid(aafd3656691b3b6419d55f710cf08837) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9c33e35b41bbd38127f4a59a79373442') in 0.0022765 seconds
+  Time since last request: 321521.303968 seconds.
+  path: Assets/Raid And Craft/Player
+  artifactKey: Guid(27d134b4490b5374baf08a644cdbacd0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Player using Guid(27d134b4490b5374baf08a644cdbacd0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5d554d6cb76c33d1250e77f30634796b') in 0.0065952 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
-  Time since last request: 18.946181 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle
-  artifactKey: Guid(1044786f53a2d2e4f933bbcb5fd4b0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle using Guid(1044786f53a2d2e4f933bbcb5fd4b0f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bfcd410f91aeb15d09da2828043c51ce') in 0.0005215 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.470525 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset
-  artifactKey: Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset using Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1460a6b5593b0fe48c6cc73c6bba00ef') in 0.002673 seconds
+  Time since last request: 2.395666 seconds.
+  path: Assets/Raid And Craft/Player/Magic_Circuit_Layout.asset
+  artifactKey: Guid(ebb19dc97f9a5d64bbb96c51509bb263) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Player/Magic_Circuit_Layout.asset using Guid(ebb19dc97f9a5d64bbb96c51509bb263) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c10cff36c9150eb77d46112981567c48') in 0.0150609 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 120.833037 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset
-  artifactKey: Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset using Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f90282c18049a47e71258cb87b080df1') in 0.0010625 seconds
+  Time since last request: 29.511595 seconds.
+  path: Assets/Raid And Craft/Player/Magic_Circuit_Layout.asset
+  artifactKey: Guid(ebb19dc97f9a5d64bbb96c51509bb263) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Raid And Craft/Player/Magic_Circuit_Layout.asset using Guid(ebb19dc97f9a5d64bbb96c51509bb263) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '61556cde20f3b9d1328f83233a7c4854') in 0.0017955 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.240846 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Inc_phy_dam_01.asset
-  artifactKey: Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Inc_phy_dam_01.asset using Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bd53769bfc7a09813a7dea79e16a52aa') in 0.0009962 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 21.412143 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New 1.asset
-  artifactKey: Guid(1e2ae58d90aa0084ea03d9e143ce919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New 1.asset using Guid(1e2ae58d90aa0084ea03d9e143ce919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1808555527ebd96815d769e167f16b4f') in 0.0008884 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.152399 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Inc_PhyDamage.asset
-  artifactKey: Guid(1e2ae58d90aa0084ea03d9e143ce919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Inc_PhyDamage.asset using Guid(1e2ae58d90aa0084ea03d9e143ce919c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'efa8f05e2b1f9b89af6e539bfa2fc7ae') in 0.0009571 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 129.527877 seconds.
-  path: Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset
-  artifactKey: Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Item/Item_influ_modifle/Influ_Stat_New.asset using Guid(fa6eb6cb1b931bf489e42f12ec5cf30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '86f6ef8250ac203bbbfa31726933fd1b') in 0.0010626 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 407.355087 seconds.
-  path: Assets/Raid And Craft/Script/Item_System/Item_manager/Circuit_Item_Data.cs
-  artifactKey: Guid(51aba01d734e12e4ba9674dfa95376e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Item_System/Item_manager/Circuit_Item_Data.cs using Guid(51aba01d734e12e4ba9674dfa95376e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e56159e79465cd76e832b579787532d3') in 0.0007459 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 9.72 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.11 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10213 unused Assets / (15.0 MB). Loaded Objects now: 10984.
-Memory consumption went from 193.6 MB to 178.6 MB.
-Total: 46.723700 ms (FindLiveObjects: 2.052800 ms CreateObjectMapping: 2.197500 ms MarkObjects: 34.538000 ms  DeleteObjects: 7.933300 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.588 seconds
-Refreshing native plugins compatible for Editor in 4.04 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.399 seconds
-Domain Reload Profiling: 3994ms
-	BeginReloadAssembly (390ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (110ms)
-	RebuildCommonClasses (49ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (76ms)
-	LoadAllAssembliesAndSetupDomain (1061ms)
-		LoadAssemblies (781ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (467ms)
-			TypeCache.Refresh (21ms)
-				TypeCache.ScanAssembly (3ms)
-			BuildScriptInfoCaches (422ms)
-			ResolveRequiredComponents (15ms)
-	FinalizeReload (2400ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (2173ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (17ms)
-			SetLoadedEditorAssemblies (10ms)
-			BeforeProcessingInitializeOnLoad (284ms)
-			ProcessInitializeOnLoadAttributes (1262ms)
-			ProcessInitializeOnLoadMethodAttributes (598ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (20ms)
-Refreshing native plugins compatible for Editor in 5.71 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10233 unused Assets / (17.4 MB). Loaded Objects now: 10988.
-Memory consumption went from 196.4 MB to 179.0 MB.
-Total: 33.540800 ms (FindLiveObjects: 1.586200 ms CreateObjectMapping: 0.988000 ms MarkObjects: 23.212000 ms  DeleteObjects: 7.752700 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.975 seconds
-Refreshing native plugins compatible for Editor in 2.09 ms, found 5 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-[AssistantPerf] Could not open D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl: Sharing violation on path D:\Hieu\software\Unity\RPG_Prototype\RPG_Prototype\Logs\assistant-perf.jsonl
-UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-Unity.AI.Assistant.Utils.Perf.AssistantPerfRecorder:Open () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs:60)
-Unity.AI.Assistant.Utils.Perf.AssistantPerf:Initialize () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerf.cs:131)
-Unity.AI.Assistant.Editor.Diagnostics.AssistantPerfMenu:.cctor () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Editor/Assistant/Diagnostics/AssistantPerfMenu.cs:15)
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-(Filename: ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Runtime/Utils/Perf/AssistantPerfRecorder.cs Line: 60)
-
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.427 seconds
-Domain Reload Profiling: 2407ms
-	BeginReloadAssembly (244ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (80ms)
-	RebuildCommonClasses (29ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (48ms)
-	LoadAllAssembliesAndSetupDomain (642ms)
-		LoadAssemblies (443ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (303ms)
-			TypeCache.Refresh (12ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (273ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1427ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1283ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (10ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (150ms)
-			ProcessInitializeOnLoadAttributes (754ms)
-			ProcessInitializeOnLoadMethodAttributes (361ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (13ms)
-Refreshing native plugins compatible for Editor in 1.84 ms, found 5 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 55 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 10233 unused Assets / (19.6 MB). Loaded Objects now: 10992.
-Memory consumption went from 199.3 MB to 179.7 MB.
-Total: 25.531700 ms (FindLiveObjects: 1.598100 ms CreateObjectMapping: 0.840600 ms MarkObjects: 15.114300 ms  DeleteObjects: 7.976900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 256.928371 seconds.
-  path: Assets/Raid And Craft/Script/Manager/Control_System/Input_Manager.cs
-  artifactKey: Guid(49d4c64e22b66df40a819c92236b85ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Raid And Craft/Script/Manager/Control_System/Input_Manager.cs using Guid(49d4c64e22b66df40a819c92236b85ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dba357f238c8c8f77bd95c55a80aa05e') in 0.0017399 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 

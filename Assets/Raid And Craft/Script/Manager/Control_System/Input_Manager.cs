@@ -26,6 +26,18 @@ public class Input_Manager : MonoBehaviour
         Key.Q, Key.W, Key.E, Key.R, Key.T,
     };
 
+    /// <summary>Phím mở/đóng panel, theo thứ tự enum Panel_Hotkey: C, V, B, N, M.</summary>
+    public static readonly Key[] PanelHotkeyKeys = { Key.C, Key.V, Key.B, Key.N, Key.M };
+
+    private readonly bool[] panelHotkeyPressed = new bool[PanelHotkeyKeys.Length];
+
+    /// <summary>Phím mở/đóng panel này vừa được nhấn trong frame này.</summary>
+    public bool IsPanelHotkeyPressed(Panel_Hotkey hotkey)
+    {
+        int index = (int)hotkey;
+        return index >= 0 && index < panelHotkeyPressed.Length && panelHotkeyPressed[index];
+    }
+
     private readonly bool[] skillSlotPressed = new bool[SkillSlotCount];
     private readonly bool[] skillSlotHeld = new bool[SkillSlotCount];
 
@@ -88,6 +100,7 @@ public class Input_Manager : MonoBehaviour
                 skillSlotPressed[i] = false;
                 skillSlotHeld[i] = false;
             }
+            for (int i = 0; i < panelHotkeyPressed.Length; i++) panelHotkeyPressed[i] = false;
             return;
         }
 
@@ -98,6 +111,11 @@ public class Input_Manager : MonoBehaviour
             var key = keyboard[SkillSlotKeys[i]];
             skillSlotPressed[i] = key.wasPressedThisFrame;
             skillSlotHeld[i] = key.isPressed;
+        }
+
+        for (int i = 0; i < panelHotkeyPressed.Length; i++)
+        {
+            panelHotkeyPressed[i] = keyboard[PanelHotkeyKeys[i]].wasPressedThisFrame;
         }
     }
 }
