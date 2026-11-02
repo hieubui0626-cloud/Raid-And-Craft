@@ -326,13 +326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 160, y: -175}
-  m_SizeDelta: {x: 125, y: 125}
-=======
   m_AnchoredPosition: {x: 240, y: -140}
   m_SizeDelta: {x: 115.2, y: 115.2}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85385643
 MonoBehaviour:
@@ -1875,11 +1870,7 @@ GameObject:
   - component: {fileID: 277119592}
   - component: {fileID: 277119595}
   m_Layer: 5
-<<<<<<< HEAD
-  m_Name: Player_Overview_Equip_Offhand_Weapond
-=======
   m_Name: Player_Overview_Equip_Offhand
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1901,13 +1892,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 215, y: 100}
-  m_SizeDelta: {x: 125, y: 250}
-=======
   m_AnchoredPosition: {x: 240, y: 66.87492}
   m_SizeDelta: {x: 115.2, y: 230.4}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &277119592
 MonoBehaviour:
@@ -2613,7 +2599,7 @@ LookAtConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
   m_RotationAtRest: {x: 0, y: 0, z: 0}
@@ -4629,13 +4615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: -160, y: -175}
-  m_SizeDelta: {x: 125, y: 125}
-=======
   m_AnchoredPosition: {x: -240, y: -140}
   m_SizeDelta: {x: 115.2, y: 115.2}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &646942292
 MonoBehaviour:
@@ -4737,7 +4718,7 @@ GameObject:
   - component: {fileID: 693478695}
   - component: {fileID: 693478698}
   m_Layer: 5
-  m_Name: Player_Overview_Equip_Amulet
+  m_Name: Player_Overview_Equip_Ring_Amulet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4759,11 +4740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 112, y: 100}
-=======
   m_AnchoredPosition: {x: 136.25, y: 43.125}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693478695
@@ -4852,8 +4829,6 @@ MonoBehaviour:
   iconInset: 4
   fitColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.3}
   hoverColor: {r: 1, g: 1, b: 1, a: 0.15}
-<<<<<<< HEAD
-=======
 --- !u!1 &715366039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,7 +4895,6 @@ MonoBehaviour:
   showLabel: 1
   labelHeight: 2.4
   labelSize: 5
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &727487768
 GameObject:
   m_ObjectHideFlags: 0
@@ -5443,13 +5417,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 112, y: -70}
-  m_SizeDelta: {x: 65, y: 60}
-=======
   m_AnchoredPosition: {x: 135.5, y: -100}
   m_SizeDelta: {x: 60, y: 60}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902108079
 MonoBehaviour:
@@ -5714,13 +5683,7 @@ RectTransform:
   - {fileID: 693478694}
   - {fileID: 902108078}
   - {fileID: 1027974451}
-<<<<<<< HEAD
-  - {fileID: 411745704}
-  - {fileID: 88369626}
-  m_Father: {fileID: 1595814652}
-=======
   m_Father: {fileID: 2080322463}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6145,11 +6108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: -112, y: -70}
-=======
   m_AnchoredPosition: {x: -135, y: -100}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027974452
@@ -7881,25 +7840,17 @@ GameObject:
   - component: {fileID: 1311958121}
   - component: {fileID: 1311958131}
   - component: {fileID: 1311958129}
+  - component: {fileID: 1311958130}
   - component: {fileID: 1311958132}
-<<<<<<< HEAD
-  - component: {fileID: 1311958138}
-  - component: {fileID: 1311958136}
-=======
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   - component: {fileID: 1311958135}
   - component: {fileID: 1311958127}
   - component: {fileID: 1311958133}
   - component: {fileID: 1311958134}
   - component: {fileID: 1311958137}
-<<<<<<< HEAD
-  - component: {fileID: 1311958130}
-=======
   - component: {fileID: 1311958136}
   - component: {fileID: 1311958138}
   - component: {fileID: 1311958139}
   - component: {fileID: 1311958140}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -8048,15 +7999,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
   inventory: {fileID: 1311958138}
-<<<<<<< HEAD
-  weapon: {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
-  startingEquipment:
-  - {fileID: 0}
-=======
   weapon: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
   startingEquipment:
   - {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!114 &1311958130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8207,11 +8152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableSkills:
   - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
-<<<<<<< HEAD
-=======
   - {fileID: 0}
   - {fileID: 0}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   initialSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -8250,11 +8192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
-<<<<<<< HEAD
-  agent: {fileID: 1311958121}
-=======
   agent: {fileID: 0}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -8276,11 +8214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: f55500a62a334104bb2c51f67851d209, type: 2}
-<<<<<<< HEAD
-  inventory: {fileID: 1311958138}
-=======
   inventory: {fileID: 0}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   removalCostItem: {fileID: 0}
   removalCostCount: 0
 --- !u!114 &1311958137
@@ -8307,20 +8241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a18cc4d17aaf7a4a8fdad79c5ce509a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  columns: 10
-  rows: 4
-=======
   columns: 12
   rows: 5
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   startingItems:
   - item: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
     count: 1
   - item: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
     count: 1
-<<<<<<< HEAD
-=======
 --- !u!114 &1311958139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8349,7 +8276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 100
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &1324842714
 GameObject:
   m_ObjectHideFlags: 0
@@ -8386,13 +8312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 0, y: -161.25}
-  m_SizeDelta: {x: 150, y: 72}
-=======
   m_AnchoredPosition: {x: 0, y: -175}
   m_SizeDelta: {x: 172.8, y: 60}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324842716
 MonoBehaviour:
@@ -8492,10 +8413,6 @@ GameObject:
   - component: {fileID: 1391188066}
   - component: {fileID: 1391188065}
   - component: {fileID: 1391188064}
-<<<<<<< HEAD
-  - component: {fileID: 1391188067}
-=======
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   - component: {fileID: 1391188068}
   m_Layer: 5
   m_Name: Player_Control_Button_Inventory
@@ -8618,11 +8535,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391188062}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
---- !u!114 &1391188067
-=======
 --- !u!114 &1391188068
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8636,32 +8549,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotkey: 2
   panel: {fileID: 2080322462}
-<<<<<<< HEAD
---- !u!114 &1391188068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391188062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419475f87878ebe47b35031f43f61028, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 1311958138}
-  equipment: {fileID: 1311958129}
-  gridContainer: {fileID: 439619011}
-  cellSize: 84
-  gridOffset: {x: 8, y: 8}
-  cellGap: 5
-  cellColor: {r: 1, g: 1, b: 1, a: 0.07}
-  itemBackColor: {r: 0.12, g: 0.15, b: 0.22, a: 0.9}
-  hoverColor: {r: 1, g: 1, b: 1, a: 0.18}
-  dropOkColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.35}
-  dropBadColor: {r: 0.95, g: 0.2, b: 0.2, a: 0.35}
-=======
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &1441908786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,7 +9816,6 @@ GameObject:
   - component: {fileID: 1637478514}
   - component: {fileID: 1637478513}
   - component: {fileID: 1637478512}
-  - component: {fileID: 1637478515}
   m_Layer: 5
   m_Name: Player_Control_Button_Magic_Circuit
   m_TagString: Untagged
@@ -10039,20 +9925,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637478510}
   m_CullTransparentMesh: 1
---- !u!114 &1637478515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637478510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: babd04e9871ffca4db80834dd07cee90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hotkey: 1
-  panel: {fileID: 0}
 --- !u!1 &1656784253
 GameObject:
   m_ObjectHideFlags: 0
@@ -10572,13 +10444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: -215, y: 100}
-  m_SizeDelta: {x: 125, y: 250}
-=======
   m_AnchoredPosition: {x: -240, y: 66.87496}
   m_SizeDelta: {x: 115.2, y: 230.4}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710243588
 MonoBehaviour:
@@ -12050,13 +11917,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
-  m_AnchoredPosition: {x: 0, y: 13.975012}
-  m_SizeDelta: {x: 150, y: 252}
-=======
   m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 180, y: 201.6}
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2022360449
 MonoBehaviour:

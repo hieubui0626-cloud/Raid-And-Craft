@@ -14,15 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: Axe
   displayName: Axe
-<<<<<<< HEAD
-  description: Basic Axe
-  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  stackType: 1
-  maxStack: 1
-  gridSize: {x: 2, y: 3}
-  canRotate: 0
-  blockedUsage: 6
-=======
   description: 
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}
@@ -30,7 +21,6 @@ MonoBehaviour:
   maxStack: 1
   gridSize: {x: 1, y: 3}
   blockedUsage: 0
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   equipSlot: 1
   statModifiers:
   - stat: 5
@@ -50,8 +40,4 @@ MonoBehaviour:
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
-<<<<<<< HEAD
-  attackAnimation: 1
-=======
   attackAnimation: 0
->>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
