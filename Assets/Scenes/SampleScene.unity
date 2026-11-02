@@ -326,8 +326,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 160, y: -175}
   m_SizeDelta: {x: 125, y: 125}
+=======
+  m_AnchoredPosition: {x: 240, y: -140}
+  m_SizeDelta: {x: 115.2, y: 115.2}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85385643
 MonoBehaviour:
@@ -445,11 +450,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 969248825}
+  m_Father: {fileID: 1493835102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -216.87485, y: 336.25}
+  m_AnchoredPosition: {x: 68.125, y: -61.875}
   m_SizeDelta: {x: 100, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &88369627
@@ -537,7 +542,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -15.08374, y: 187.69905, z: -461.19366, w: 187.25644}
+  m_margin: {x: -15.08374, y: 187.69905, z: -71.157074, w: 187.25644}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1120,6 +1125,7 @@ Transform:
   - {fileID: 454900076}
   - {fileID: 1480064008}
   - {fileID: 1461441598}
+  - {fileID: 715366040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &178821093
@@ -1758,7 +1764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 491.87506, y: 36.24998}
+  m_AnchoredPosition: {x: 176.87506, y: 71.249985}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267874823
@@ -1869,7 +1875,11 @@ GameObject:
   - component: {fileID: 277119592}
   - component: {fileID: 277119595}
   m_Layer: 5
+<<<<<<< HEAD
   m_Name: Player_Overview_Equip_Offhand_Weapond
+=======
+  m_Name: Player_Overview_Equip_Offhand
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1891,8 +1901,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 215, y: 100}
   m_SizeDelta: {x: 125, y: 250}
+=======
+  m_AnchoredPosition: {x: 240, y: 66.87492}
+  m_SizeDelta: {x: 115.2, y: 230.4}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &277119592
 MonoBehaviour:
@@ -2351,8 +2366,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -112.5}
-  m_SizeDelta: {x: 200, y: 1000}
+  m_AnchoredPosition: {x: 0, y: -400.00067}
+  m_SizeDelta: {x: 200, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297572080
 MonoBehaviour:
@@ -2439,7 +2454,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -91.805115, y: 4.422592, z: -75.32379, w: -154.66443}
+  m_margin: {x: -91.805115, y: 4.422592, z: -75.32379, w: 303.0374}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3251,11 +3266,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 969248825}
+  m_Father: {fileID: 1493835102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -216.875, y: 368.125}
+  m_AnchoredPosition: {x: -131.875, y: -61.875}
   m_SizeDelta: {x: 100, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411745705
@@ -3343,7 +3358,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -15.08374, y: 187.69905, z: -459.58356, w: 190.06467}
+  m_margin: {x: -15.08374, y: 187.69905, z: -2.8393555, w: 190.06467}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3645,6 +3660,7 @@ GameObject:
   - component: {fileID: 439619014}
   - component: {fileID: 439619013}
   - component: {fileID: 439619012}
+  - component: {fileID: 439619015}
   m_Layer: 5
   m_Name: Player_Inventory_Viewport
   m_TagString: Untagged
@@ -3668,8 +3684,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -55.625}
-  m_SizeDelta: {x: 750, y: 810}
+  m_AnchoredPosition: {x: 0, y: -286.25}
+  m_SizeDelta: {x: 720, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439619012
 MonoBehaviour:
@@ -3739,6 +3755,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439619010}
   m_CullTransparentMesh: 1
+--- !u!114 &439619015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439619010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419475f87878ebe47b35031f43f61028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1311958138}
+  equipment: {fileID: 1311958129}
+  gridContainer: {fileID: 439619011}
+  cellSize: 60
+  gridOffset: {x: 0, y: 0}
+  cellGap: 3
+  cellColor: {r: 1, g: 1, b: 1, a: 0.07}
+  itemBackColor: {r: 0.12, g: 0.15, b: 0.22, a: 0.9}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.18}
+  dropOkColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.35}
+  dropBadColor: {r: 0.95, g: 0.2, b: 0.2, a: 0.35}
 --- !u!1 &448830739
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,6 +3961,116 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454900075}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &458556697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458556698}
+  - component: {fileID: 458556701}
+  - component: {fileID: 458556700}
+  - component: {fileID: 458556699}
+  m_Layer: 0
+  m_Name: Capsule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &458556698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458556697}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 715366040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &458556699
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458556697}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &458556700
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458556697}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &458556701
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458556697}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &506696557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,6 +4286,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551897183}
   m_CullTransparentMesh: 1
+--- !u!1 &552353906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552353907}
+  m_Layer: 0
+  m_Name: Player_Control_UI_Viewport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &552353907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552353906}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2080322463}
+  - {fileID: 1595814652}
+  m_Father: {fileID: 2067552951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &563264359
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,7 +4332,7 @@ GameObject:
   - component: {fileID: 563264361}
   - component: {fileID: 563264360}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4447,8 +4629,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: -160, y: -175}
   m_SizeDelta: {x: 125, y: 125}
+=======
+  m_AnchoredPosition: {x: -240, y: -140}
+  m_SizeDelta: {x: 115.2, y: 115.2}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &646942292
 MonoBehaviour:
@@ -4572,7 +4759,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 112, y: 100}
+=======
+  m_AnchoredPosition: {x: 136.25, y: 43.125}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693478695
@@ -4661,6 +4852,75 @@ MonoBehaviour:
   iconInset: 4
   fitColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.3}
   hoverColor: {r: 1, g: 1, b: 1, a: 0.15}
+<<<<<<< HEAD
+=======
+--- !u!1 &715366039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715366040}
+  - component: {fileID: 715366041}
+  m_Layer: 0
+  m_Name: NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &715366040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715366039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 458556698}
+  m_Father: {fileID: 178821092}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715366041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715366039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36372db78ee6f2743abc55c4b1f66cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Merchant
+  interactRange: 2.5
+  entries:
+  - item: {fileID: 11400000, guid: fb48c283a93cf384e966a42997a74b88, type: 2}
+    count: 0
+    price: 0
+  - item: {fileID: 11400000, guid: 957b1f36caa221240846a5168f642c38, type: 2}
+    count: 0
+    price: 0
+  - item: {fileID: 11400000, guid: 1e46499646f062042a6098edc27957fe, type: 2}
+    count: 0
+    price: 0
+  - item: {fileID: 11400000, guid: d2924aea77ddd624f83a2623022d69d9, type: 2}
+    count: 0
+    price: 0
+  - item: {fileID: 11400000, guid: 3bad2e52b79030c46ad1ae1d83dc0f29, type: 2}
+    count: 0
+    price: 0
+  showLabel: 1
+  labelHeight: 2.4
+  labelSize: 5
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &727487768
 GameObject:
   m_ObjectHideFlags: 0
@@ -5183,8 +5443,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 112, y: -70}
   m_SizeDelta: {x: 65, y: 60}
+=======
+  m_AnchoredPosition: {x: 135.5, y: -100}
+  m_SizeDelta: {x: 60, y: 60}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902108079
 MonoBehaviour:
@@ -5449,14 +5714,18 @@ RectTransform:
   - {fileID: 693478694}
   - {fileID: 902108078}
   - {fileID: 1027974451}
+<<<<<<< HEAD
   - {fileID: 411745704}
   - {fileID: 88369626}
   m_Father: {fileID: 1595814652}
+=======
+  m_Father: {fileID: 2080322463}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225.00008, y: -62.5}
-  m_SizeDelta: {x: 600, y: 775}
+  m_AnchoredPosition: {x: 0, y: 93.75}
+  m_SizeDelta: {x: 720, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969248826
 MonoBehaviour:
@@ -5876,7 +6145,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: -112, y: -70}
+=======
+  m_AnchoredPosition: {x: -135, y: -100}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027974452
@@ -5997,10 +6270,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1106130404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.22500002}
+  m_AnchorMin: {x: 0, y: 0.5333333}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 20, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1043494319
 MonoBehaviour:
@@ -6440,7 +6713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.875, y: 396.875}
+  m_AnchoredPosition: {x: 0, y: 363.75}
   m_SizeDelta: {x: 780, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1066303602
@@ -6528,7 +6801,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 11.31105, y: 2.59021, z: -3.2568054, w: 24.966797}
+  m_margin: {x: 21.491714, y: 6.0888977, z: 20.915558, w: 34.457993}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6576,7 +6849,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1109398263
 GameObject:
@@ -7213,7 +7486,7 @@ GameObject:
   - component: {fileID: 1230200081}
   - component: {fileID: 1230200082}
   m_Layer: 0
-  m_Name: Player_Control_UI_Viewport
+  m_Name: Player_Control_UI_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7240,7 +7513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 650, y: -453.5}
+  m_AnchoredPosition: {x: 650, y: -450}
   m_SizeDelta: {x: 575, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230200082
@@ -7303,8 +7576,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 234.875}
-  m_SizeDelta: {x: 144, y: 144}
+  m_AnchoredPosition: {x: 0, y: 150}
+  m_SizeDelta: {x: 115.2, y: 115.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243838576
 MonoBehaviour:
@@ -7609,14 +7882,24 @@ GameObject:
   - component: {fileID: 1311958131}
   - component: {fileID: 1311958129}
   - component: {fileID: 1311958132}
+<<<<<<< HEAD
   - component: {fileID: 1311958138}
   - component: {fileID: 1311958136}
+=======
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   - component: {fileID: 1311958135}
   - component: {fileID: 1311958127}
   - component: {fileID: 1311958133}
   - component: {fileID: 1311958134}
   - component: {fileID: 1311958137}
+<<<<<<< HEAD
   - component: {fileID: 1311958130}
+=======
+  - component: {fileID: 1311958136}
+  - component: {fileID: 1311958138}
+  - component: {fileID: 1311958139}
+  - component: {fileID: 1311958140}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -7765,9 +8048,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
   inventory: {fileID: 1311958138}
+<<<<<<< HEAD
   weapon: {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
   startingEquipment:
   - {fileID: 0}
+=======
+  weapon: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
+  startingEquipment:
+  - {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!114 &1311958130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7918,6 +8207,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableSkills:
   - {fileID: 11400000, guid: 92abea42867038b4e8aa712c7fb3e800, type: 2}
+<<<<<<< HEAD
+=======
+  - {fileID: 0}
+  - {fileID: 0}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   initialSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -7956,7 +8250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1311958132}
+<<<<<<< HEAD
   agent: {fileID: 1311958121}
+=======
+  agent: {fileID: 0}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -7978,7 +8276,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: f55500a62a334104bb2c51f67851d209, type: 2}
+<<<<<<< HEAD
   inventory: {fileID: 1311958138}
+=======
+  inventory: {fileID: 0}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   removalCostItem: {fileID: 0}
   removalCostCount: 0
 --- !u!114 &1311958137
@@ -8005,13 +8307,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a18cc4d17aaf7a4a8fdad79c5ce509a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   columns: 10
   rows: 4
+=======
+  columns: 12
+  rows: 5
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   startingItems:
   - item: {fileID: 11400000, guid: dfa23279937c02043aab08a6009d5546, type: 2}
     count: 1
   - item: {fileID: 11400000, guid: 56eedc17943ee744c864c29887ee5079, type: 2}
     count: 1
+<<<<<<< HEAD
+=======
+--- !u!114 &1311958139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311958120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ad6a47142551b4c8c90e2de7ecd487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1311958138}
+  maxDropDistance: 3
+  maxRayDistance: 200
+--- !u!114 &1311958140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311958120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5349b6221c986c749a0907ac6f36f10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 100
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &1324842714
 GameObject:
   m_ObjectHideFlags: 0
@@ -8048,8 +8386,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: -161.25}
   m_SizeDelta: {x: 150, y: 72}
+=======
+  m_AnchoredPosition: {x: 0, y: -175}
+  m_SizeDelta: {x: 172.8, y: 60}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1324842716
 MonoBehaviour:
@@ -8149,7 +8492,10 @@ GameObject:
   - component: {fileID: 1391188066}
   - component: {fileID: 1391188065}
   - component: {fileID: 1391188064}
+<<<<<<< HEAD
   - component: {fileID: 1391188067}
+=======
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   - component: {fileID: 1391188068}
   m_Layer: 5
   m_Name: Player_Control_Button_Inventory
@@ -8165,13 +8511,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391188062}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 998327221}
-  - {fileID: 2080322463}
   m_Father: {fileID: 1230200081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8273,7 +8618,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391188062}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!114 &1391188067
+=======
+--- !u!114 &1391188068
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8287,6 +8636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotkey: 2
   panel: {fileID: 2080322462}
+<<<<<<< HEAD
 --- !u!114 &1391188068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8310,6 +8660,8 @@ MonoBehaviour:
   hoverColor: {r: 1, g: 1, b: 1, a: 0.18}
   dropOkColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.35}
   dropBadColor: {r: 0.95, g: 0.2, b: 0.2, a: 0.35}
+=======
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
 --- !u!1 &1441908786
 GameObject:
   m_ObjectHideFlags: 0
@@ -8834,11 +9186,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 267874822}
+  - {fileID: 411745704}
+  - {fileID: 88369626}
   m_Father: {fileID: 1595814652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.8750305, y: 396.875}
+  m_AnchoredPosition: {x: 6.8750305, y: 361.875}
   m_SizeDelta: {x: 1155, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1493835103
@@ -8888,8 +9242,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8926,7 +9280,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 29.82051, y: 2.59021, z: 3.2123108, w: 24.966797}
+  m_margin: {x: 353.22754, y: 2.59021, z: 368.89163, w: 24.966797}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9113,7 +9467,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 190, y: 0}
-  m_SizeDelta: {x: 20, y: 775}
+  m_SizeDelta: {x: 20, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568931962
 MonoBehaviour:
@@ -9158,9 +9512,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1043494319}
   m_HandleRect: {fileID: 1043494318}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.775
-  m_NumberOfSteps: 0
+  m_Value: 1.000001
+  m_Size: 0.46666667
+  m_NumberOfSteps: 11
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9235,7 +9589,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 633367558}
-  - {fileID: 1595814652}
   m_Father: {fileID: 1230200081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9376,20 +9729,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595814651}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 969248825}
   - {fileID: 1493835102}
   - {fileID: 1843529648}
-  m_Father: {fileID: 1586546958}
+  m_Father: {fileID: 552353907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1172.5, y: 625}
-  m_SizeDelta: {x: 1100, y: 950}
+  m_AnchoredPosition: {x: -482, y: 38}
+  m_SizeDelta: {x: 450, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595814653
 MonoBehaviour:
@@ -10198,7 +10550,7 @@ GameObject:
   - component: {fileID: 1710243588}
   - component: {fileID: 1710243591}
   m_Layer: 5
-  m_Name: Player_Overview_Equip_Main_Weapond
+  m_Name: Player_Overview_Equip_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10220,8 +10572,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: -215, y: 100}
   m_SizeDelta: {x: 125, y: 250}
+=======
+  m_AnchoredPosition: {x: -240, y: 66.87496}
+  m_SizeDelta: {x: 115.2, y: 230.4}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710243588
 MonoBehaviour:
@@ -11045,8 +11402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -325, y: -62.5}
-  m_SizeDelta: {x: 400, y: 775}
+  m_AnchoredPosition: {x: 0, y: -62.5}
+  m_SizeDelta: {x: 400, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1843529649
 MonoBehaviour:
@@ -11237,6 +11594,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881333238}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1904638229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1904638230}
+  m_Layer: 0
+  m_Name: Item_Drop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1904638230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904638229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.99894, z: 0.0325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1909874941
 GameObject:
   m_ObjectHideFlags: 0
@@ -11662,8 +12050,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 13.975012}
   m_SizeDelta: {x: 150, y: 252}
+=======
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: 180, y: 201.6}
+>>>>>>> 4d711009 (- update combat step 3, rebuild skill system, - add base Magic_Circuit)
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2022360449
 MonoBehaviour:
@@ -12003,13 +12396,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054493974}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57c3884e2e67bfe4bac52c7ca1d06dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotId: slot_0
-  autoLoadOnStart: 1
+  autoLoadOnStart: 0
   autoSaveInterval: 60
 --- !u!114 &2054493981
 MonoBehaviour:
@@ -12157,6 +12550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 552353907}
   - {fileID: 1230200081}
   m_Father: {fileID: 563264363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12204,7 +12598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: 36.24998}
+  m_AnchoredPosition: {x: 325, y: 30}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074605128
@@ -12251,7 +12645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1595814651}
+      - m_Target: {fileID: 2080322462}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -12329,17 +12723,18 @@ RectTransform:
   m_GameObject: {fileID: 2080322462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1066303601}
+  - {fileID: 969248825}
   - {fileID: 439619011}
-  m_Father: {fileID: 1391188063}
+  m_Father: {fileID: 552353907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -187.5, y: 625}
-  m_SizeDelta: {x: 780, y: 950}
+  m_AnchoredPosition: {x: 490, y: 38}
+  m_SizeDelta: {x: 740, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2080322464
 MonoBehaviour:
@@ -12809,3 +13204,4 @@ SceneRoots:
   - {fileID: 563264363}
   - {fileID: 1794100198}
   - {fileID: 569517727}
+  - {fileID: 1904638230}

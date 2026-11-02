@@ -1,0 +1,3 @@
+repository "RPG_Prototype/RPG_Prototype@18967585643790@cloud"
+  path "/"
+    smartbranch "/main"
