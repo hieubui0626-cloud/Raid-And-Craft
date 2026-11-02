@@ -7,12 +7,14 @@ public enum Equipment_Slot
     MainHand = 1,  // Vũ khí chính
     OffHand = 2,   // Khiên, vũ khí phụ
     Head = 3,
-    Chest = 4,
-    Hands = 5,
-    Legs = 6,
-    Feet = 7,
+    Body = 4,
+    Gloves = 5,
+    Boots = 6,
+    Belt = 7,
     Amulet = 8,
-    Ring = 9,
+    Ring_R = 9,
+    Ring_L = 10,
+    
 
     // Thêm sau này: Belt, Cloak, Trinket...
 }

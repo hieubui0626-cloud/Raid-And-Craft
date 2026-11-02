@@ -43,6 +43,9 @@ public class Player_Combat : MonoBehaviour
         // Đang trỏ vào UI thì không đánh.
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
+        // Đang cầm vật phẩm trên con trỏ thì không đánh.
+        if (Item_Drag_Controller.IsHoldingItem) return;
+
         CastAtMouse(defaultAttack);
     }
 

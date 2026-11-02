@@ -16,3 +16,11 @@ Recordings/
 *.suo
 .DS_Store
 Thumbs.db
+# --- Git ---
+.git/
+# --- Unity Temp & Logs ---
+Logs/
+obj/
+.plastic/
+*.csproj
+*.sln

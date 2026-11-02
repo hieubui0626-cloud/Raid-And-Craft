@@ -36,6 +36,9 @@ public abstract class Item_Data : ScriptableObject
     [SerializeField] private string description;
     [SerializeField] private Sprite icon;
 
+    [Tooltip("Model 3D (prefab) hiện khi vật phẩm nằm trên đất. Bỏ trống = khối vuông tạm.")]
+    [SerializeField] private GameObject worldModel;
+
     [Header("Xếp chồng")]
     [Tooltip("Stackable: xếp chồng tới Max Stack. NonStackable: mỗi vật phẩm một chỗ (Max Stack bị bỏ qua). " +
              "Trang bị (Equippable_Item_Data) luôn NonStackable.")]
@@ -57,6 +60,7 @@ public abstract class Item_Data : ScriptableObject
     public string DisplayName => string.IsNullOrEmpty(displayName) ? name : displayName;
     public string Description => description;
     public Sprite Icon => icon;
+    public GameObject WorldModel => worldModel;
 
     // ------------------------------------------------------------------
     // XẾP CHỒNG

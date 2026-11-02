@@ -394,6 +394,26 @@ public class Item_Grid
         return true;
     }
 
+    /// <summary>Thả (TryDrop) món đang cầm tại origin có được không (không thay đổi gì). UI dùng để tô xanh/đỏ vùng thả.</summary>
+    public bool CanDrop(Grid_Placement held, Vector2Int origin)
+    {
+        if (held.IsEmpty || !FitsInBounds(held.Item, origin)) return false;
+
+        Vector2Int size = held.Item.GridSize;
+        int overlap = -1;
+        for (int dy = 0; dy < size.y; dy++)
+        {
+            for (int dx = 0; dx < size.x; dx++)
+            {
+                int occupant = cells[(origin.y + dy) * width + origin.x + dx];
+                if (occupant == -1) continue;
+                if (overlap == -1) overlap = occupant;
+                else if (overlap != occupant) return false;
+            }
+        }
+        return true;
+    }
+
     /// <summary>
     /// THẢ một chồng/món đang cầm (held) xuống lưới, góc trên-trái tại origin. Luật:
     ///   - Vùng thả trống: đặt vào.

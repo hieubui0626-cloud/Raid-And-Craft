@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>Vật phẩm cho sẵn lúc bắt đầu (để thử, chỉnh trong Inspector).</summary>
 [Serializable]
@@ -25,11 +26,13 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
     public event Action OnContainerChanged;
 
     [Header("Kích thước lưới")]
-    [Tooltip("Số ô chiều ngang. Có thể mở rộng khi đang chơi bằng TryResize.")]
-    [SerializeField, Min(1)] private int width = 10;
+    [Tooltip("Số CỘT (ô theo chiều ngang). Đổi lúc đang Play cũng được.")]
+    [FormerlySerializedAs("width")]
+    [SerializeField, Min(1)] private int columns = 10;
 
-    [Tooltip("Số ô chiều dọc.")]
-    [SerializeField, Min(1)] private int height = 4;
+    [Tooltip("Số HÀNG (ô theo chiều dọc). Đổi lúc đang Play cũng được.")]
+    [FormerlySerializedAs("height")]
+    [SerializeField, Min(1)] private int rows = 4;
 
     [Tooltip("Vật phẩm có sẵn lúc bắt đầu (để thử khi chưa có rơi đồ).")]
     [SerializeField] private List<Inventory_Starting_Item> startingItems = new List<Inventory_Starting_Item>();
@@ -52,7 +55,7 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
     {
         if (grid != null) return;
 
-        grid = new Item_Grid(width, height);
+        grid = new Item_Grid(columns, rows);
 
         foreach (Inventory_Starting_Item s in startingItems)
         {
@@ -67,6 +70,21 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
     {
         OnContainerChanged?.Invoke();
     }
+
+#if UNITY_EDITOR
+    // Sửa Columns/Rows trong Inspector lúc đang Play: lưới và UI đổi theo ngay.
+    // Thu nhỏ mà vật phẩm không còn nằm trọn thì bị từ chối và trả về số cũ.
+    private void OnValidate()
+    {
+        if (!Application.isPlaying || grid == null) return;
+
+        if (!TryResize(columns, rows))
+        {
+            columns = grid.Width;
+            rows = grid.Height;
+        }
+    }
+#endif
 
     // ------------------------------------------------------------------
     // ĐỌC (cho UI)
@@ -216,6 +234,13 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
 
         NotifyChanged();
         return true;
+    }
+
+    /// <summary>Thả (TryDrop) món đang cầm tại origin có được không (không đổi gì). UI dùng để tô xanh/đỏ vùng thả.</summary>
+    public bool CanDrop(Grid_Placement held, Vector2Int origin)
+    {
+        EnsureInitialized();
+        return grid.CanDrop(held, origin);
     }
 
     /// <summary>

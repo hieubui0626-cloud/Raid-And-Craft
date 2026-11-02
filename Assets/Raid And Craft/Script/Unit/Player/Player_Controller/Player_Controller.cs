@@ -116,6 +116,9 @@ public class Player_Controller : MonoBehaviour
         // Đang trỏ vào UI thì không coi là click di chuyển.
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
+        // Đang cầm vật phẩm trên con trỏ thì không tương tác với thế giới.
+        if (Item_Drag_Controller.IsHoldingItem) return;
+
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, groundMask, QueryTriggerInteraction.Ignore))
