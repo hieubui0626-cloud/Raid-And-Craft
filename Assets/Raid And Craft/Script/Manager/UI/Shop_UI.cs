@@ -187,7 +187,7 @@ public class Shop_UI : MonoBehaviour
     {
         if (!IsOpen) return;
 
-        coinText.text = "Coin: " + (wallet != null ? wallet.Coins.ToString("N0") : "0");
+        coinText.text = "Coin: " + (wallet != null ? Player_Wallet.FormatCoins(wallet.Coins) : "0");
 
         foreach (Row row in rows)
         {
@@ -198,7 +198,7 @@ public class Shop_UI : MonoBehaviour
             string name = entry.item != null ? entry.item.DisplayName : "(trống)";
             string amount = count > 1 ? " x" + count : string.Empty;
             string priceColor = affordable ? "#FFD27F" : "#FF6B6B";
-            row.Text.text = name + amount + "\n<size=85%><color=" + priceColor + ">" + entry.price.ToString("N0") + " Coin</color></size>";
+            row.Text.text = name + amount + "\n<size=85%><color=" + priceColor + ">" + Player_Wallet.FormatCoins(entry.price) + " Coin</color></size>";
             row.BuyButton.interactable = affordable && entry.item != null;
         }
     }
@@ -256,7 +256,7 @@ public class Shop_UI : MonoBehaviour
         icon.enabled = entry.item.Icon != null;
 
         // Tên + giá.
-        row.Text = UI_Builder.CreateText("Info", rowObject.transform, 18f, TextAlignmentOptions.MidlineLeft, true);
+        row.Text = CreateText("Info", rowObject.transform, 18f, TextAlignmentOptions.MidlineLeft);
         var textRect = (RectTransform)row.Text.transform;
         textRect.anchorMin = Vector2.zero;
         textRect.anchorMax = Vector2.one;
@@ -279,9 +279,9 @@ public class Shop_UI : MonoBehaviour
         row.BuyButton.targetGraphic = buttonImage;
         row.BuyButton.onClick.AddListener(() => Buy(row));
 
-        TextMeshProUGUI buttonText = UI_Builder.CreateText("Label", buttonObject.transform, 18f, TextAlignmentOptions.Center, true);
+        TextMeshProUGUI buttonText = CreateText("Label", buttonObject.transform, 18f, TextAlignmentOptions.Center);
         buttonText.text = "Mua";
-        UI_Builder.Stretch((RectTransform)buttonText.transform);
+        Stretch((RectTransform)buttonText.transform);
 
         rows.Add(row);
     }
@@ -300,8 +300,17 @@ public class Shop_UI : MonoBehaviour
 
     private void Build()
     {
-        canvas = UI_Builder.CreateOverlayCanvas("Shop_Canvas", transform, 80, withRaycaster: true); // Dưới tooltip (110, 115) và vật phẩm đang cầm (120).
-        GameObject canvasObject = canvas.gameObject;
+        var canvasObject = new GameObject("Shop_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+        canvasObject.transform.SetParent(transform, false);
+
+        canvas = canvasObject.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 80; // Dưới tooltip (110, 115) và vật phẩm đang cầm (120).
+
+        var scaler = canvasObject.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+        scaler.matchWidthOrHeight = 0.5f;
 
         // Bảng (chặn click ra thế giới nhờ Image bật Raycast Target).
         var panelObject = new GameObject("Panel", typeof(RectTransform), typeof(Image));
@@ -314,7 +323,7 @@ public class Shop_UI : MonoBehaviour
         panelObject.GetComponent<Image>().color = new Color(0.05f, 0.06f, 0.09f, 0.96f);
 
         // Tiêu đề.
-        titleText = UI_Builder.CreateText("Title", panel, 26f, TextAlignmentOptions.MidlineLeft, true);
+        titleText = CreateText("Title", panel, 26f, TextAlignmentOptions.MidlineLeft);
         titleText.fontStyle = FontStyles.Bold;
         SetTopRect((RectTransform)titleText.transform, 12f, 12f, 44f, 8f);
 
@@ -331,12 +340,12 @@ public class Shop_UI : MonoBehaviour
         var closeButton = closeObject.GetComponent<Button>();
         closeButton.targetGraphic = closeImage;
         closeButton.onClick.AddListener(Close);
-        TextMeshProUGUI closeText = UI_Builder.CreateText("X", closeObject.transform, 20f, TextAlignmentOptions.Center, true);
+        TextMeshProUGUI closeText = CreateText("X", closeObject.transform, 20f, TextAlignmentOptions.Center);
         closeText.text = "X";
-        UI_Builder.Stretch((RectTransform)closeText.transform);
+        Stretch((RectTransform)closeText.transform);
 
         // Dòng Coin.
-        coinText = UI_Builder.CreateText("Coin", panel, 20f, TextAlignmentOptions.MidlineLeft, true);
+        coinText = CreateText("Coin", panel, 20f, TextAlignmentOptions.MidlineLeft);
         coinText.color = new Color(1f, 0.82f, 0.5f);
         SetTopRect((RectTransform)coinText.transform, 12f, 12f, 30f, 52f);
 
@@ -352,7 +361,7 @@ public class Shop_UI : MonoBehaviour
         var viewportObject = new GameObject("Viewport", typeof(RectTransform), typeof(Image), typeof(RectMask2D));
         viewportObject.transform.SetParent(scrollObject.transform, false);
         var viewport = (RectTransform)viewportObject.transform;
-        UI_Builder.Stretch(viewport);
+        Stretch(viewport);
         var viewportImage = viewportObject.GetComponent<Image>();
         viewportImage.color = new Color(1f, 1f, 1f, 0.004f); // nhận con lăn chuột trên cả vùng trống
         viewportImage.raycastTarget = true;
@@ -383,7 +392,7 @@ public class Shop_UI : MonoBehaviour
         scroll.scrollSensitivity = 30f;
 
         // Thông báo cuối bảng.
-        messageText = UI_Builder.CreateText("Message", panel, 18f, TextAlignmentOptions.MidlineLeft, true);
+        messageText = CreateText("Message", panel, 18f, TextAlignmentOptions.MidlineLeft);
         var messageRect = (RectTransform)messageText.transform;
         messageRect.anchorMin = new Vector2(0f, 0f);
         messageRect.anchorMax = new Vector2(1f, 0f);
@@ -400,5 +409,25 @@ public class Shop_UI : MonoBehaviour
         rect.pivot = new Vector2(0.5f, 1f);
         rect.offsetMin = new Vector2(left, -top - height);
         rect.offsetMax = new Vector2(-right, -top);
+    }
+
+    private static TextMeshProUGUI CreateText(string objectName, Transform parent, float size, TextAlignmentOptions alignment)
+    {
+        var go = new GameObject(objectName, typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.fontSize = size;
+        tmp.alignment = alignment;
+        tmp.richText = true;
+        tmp.raycastTarget = false;
+        return tmp;
+    }
+
+    private static void Stretch(RectTransform rect)
+    {
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = rect.offsetMax = Vector2.zero;
     }
 }
