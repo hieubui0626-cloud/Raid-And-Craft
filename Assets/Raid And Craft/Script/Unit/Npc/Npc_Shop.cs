@@ -57,8 +57,10 @@ public class Npc_Shop : MonoBehaviour, IWorld_Interactable
 
     private void Start()
     {
-        BuildVisual();
+        // Collider TRƯỚC model: collider của khối tạm bị Destroy chỉ có hiệu lực cuối frame,
+        // nếu kiểm tra sau sẽ tưởng đã có collider và NPC không bấm được.
         BuildCollider();
+        BuildVisual();
         BuildLabel();
     }
 

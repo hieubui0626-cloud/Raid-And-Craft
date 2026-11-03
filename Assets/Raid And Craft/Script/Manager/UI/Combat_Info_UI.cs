@@ -173,18 +173,8 @@ public class Combat_Info_UI : MonoBehaviour
     private void BuildCanvas()
     {
         // Canvas riêng nằm ở gốc Scene (không lồng trong Canvas khác để không bị ảnh hưởng chế độ hiển thị của nó).
-        var canvasObject = new GameObject("Combat_Info_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler));
-
-        var canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = canvasSortingOrder;
-
-        var scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
-
-        canvasRoot = canvasObject.GetComponent<RectTransform>();
+        Canvas canvas = UI_Builder.CreateOverlayCanvas("Combat_Info_Canvas", null, canvasSortingOrder);
+        canvasRoot = canvas.GetComponent<RectTransform>();
     }
 
     private void HandleSettingsChanged()

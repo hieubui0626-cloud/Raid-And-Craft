@@ -136,8 +136,9 @@ public class World_Item : MonoBehaviour, IWorld_Interactable
             count = 1;
         }
 
-        BuildVisual();
+        // Collider TRƯỚC model (xem ghi chú ở Npc_Shop): tránh mất vùng bấm khi dùng khối tạm.
         BuildCollider();
+        BuildVisual();
         BuildLabel();
     }
 

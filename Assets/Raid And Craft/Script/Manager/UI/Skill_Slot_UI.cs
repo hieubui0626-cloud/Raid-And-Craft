@@ -129,7 +129,7 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (iconImage == null)
         {
             RectTransform rect = CreateChild("Icon");
-            Stretch(rect, 6f);
+            UI_Builder.Stretch(rect, 6f);
 
             iconImage = rect.gameObject.AddComponent<Image>();
             iconImage.preserveAspect = true;
@@ -139,14 +139,14 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (nameText == null)
         {
-            nameText = CreateText("Skill_Name", 14f, TextAlignmentOptions.Center);
-            Stretch(nameText.rectTransform, 4f);
+            nameText = UI_Builder.CreateText("Skill_Name", transform, 14f, TextAlignmentOptions.Center);
+            UI_Builder.Stretch(nameText.rectTransform, 4f);
         }
 
         if (hotkeyText == null)
         {
-            hotkeyText = CreateText("Hotkey", 16f, TextAlignmentOptions.TopLeft);
-            Stretch(hotkeyText.rectTransform, 4f);
+            hotkeyText = UI_Builder.CreateText("Hotkey", transform, 16f, TextAlignmentOptions.TopLeft);
+            UI_Builder.Stretch(hotkeyText.rectTransform, 4f);
             hotkeyText.fontStyle = FontStyles.Bold;
         }
 
@@ -184,24 +184,5 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         var childObject = new GameObject(childName, typeof(RectTransform));
         childObject.transform.SetParent(transform, false);
         return (RectTransform)childObject.transform;
-    }
-
-    private TextMeshProUGUI CreateText(string childName, float size, TextAlignmentOptions alignment)
-    {
-        RectTransform rect = CreateChild(childName);
-
-        var text = rect.gameObject.AddComponent<TextMeshProUGUI>();
-        text.fontSize = size;
-        text.alignment = alignment;
-        text.raycastTarget = false;
-        return text;
-    }
-
-    private static void Stretch(RectTransform rect, float inset)
-    {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(inset, inset);
-        rect.offsetMax = new Vector2(-inset, -inset);
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +8,7 @@ using UnityEngine;
 /// dùng để mua hàng của NPC (Npc_Shop). Sau này quái rơi coin thì gọi Add.
 /// Gắn lên Player (cùng object với Inventory). Không gắn thì World_Item_Picker tự thêm với số Coin mặc định bên dưới.
 /// Chỉnh số Coin: ô Coins trong Inspector (đang Play đổi số cũng cập nhật UI ngay), hoặc chuột phải component -> Debug.
+/// Ô Coin Text (TMP, tuỳ chọn): kéo một TextMeshPro vào, chữ tự cập nhật theo định dạng 1,234,567.
 /// Chưa lưu vào Save_Data (làm cùng Inventory sau).
 /// </summary>
 [DisallowMultipleComponent]
@@ -17,7 +20,25 @@ public class Player_Wallet : MonoBehaviour
     [Tooltip("Số Coin hiện có (lúc bắt đầu = số Coin khởi đầu để thử). Đổi trong lúc Play cũng được.")]
     [SerializeField, Min(0)] private int coins = 100;
 
+    [Header("Hiển thị (tuỳ chọn)")]
+    [Tooltip("Kéo một TextMeshPro (UI hoặc 3D) vào để hiện số Coin dạng 1,234,567. Bỏ trống thì không hiện.")]
+    [SerializeField] private TMP_Text coinText;
+
+    [Tooltip("{0} = số Coin đã định dạng x,xxx,xxx. Ví dụ \"Coin: {0}\".")]
+    [SerializeField] private string coinTextFormat = "{0}";
+
     public int Coins => coins;
+
+    /// <summary>Số Coin dạng 1,234,567 (dấu phẩy cố định, không phụ thuộc ngôn ngữ của máy).</summary>
+    public static string FormatCoins(int amount)
+    {
+        return amount.ToString("N0", CultureInfo.InvariantCulture);
+    }
+
+    private void Awake()
+    {
+        RefreshText();
+    }
 
     public bool CanAfford(int amount)
     {
@@ -31,7 +52,7 @@ public class Player_Wallet : MonoBehaviour
 
         long sum = (long)coins + amount;
         coins = sum > int.MaxValue ? int.MaxValue : (int)sum;
-        OnCoinsChanged?.Invoke(coins);
+        NotifyChanged();
     }
 
     /// <summary>Trừ Coin. False (không đổi gì) nếu không đủ.</summary>
@@ -41,7 +62,7 @@ public class Player_Wallet : MonoBehaviour
         if (amount == 0) return true;
 
         coins -= amount;
-        OnCoinsChanged?.Invoke(coins);
+        NotifyChanged();
         return true;
     }
 
@@ -49,7 +70,20 @@ public class Player_Wallet : MonoBehaviour
     public void SetCoins(int amount)
     {
         coins = Mathf.Max(0, amount);
+        NotifyChanged();
+    }
+
+    private void NotifyChanged()
+    {
+        RefreshText();
         OnCoinsChanged?.Invoke(coins);
+    }
+
+    private void RefreshText()
+    {
+        if (coinText == null) return;
+
+        coinText.text = string.Format(CultureInfo.InvariantCulture, coinTextFormat, FormatCoins(coins));
     }
 
 #if UNITY_EDITOR
@@ -57,7 +91,7 @@ public class Player_Wallet : MonoBehaviour
     private void OnValidate()
     {
         coins = Mathf.Max(0, coins);
-        if (Application.isPlaying) OnCoinsChanged?.Invoke(coins);
+        if (Application.isPlaying) NotifyChanged();
     }
 #endif
 

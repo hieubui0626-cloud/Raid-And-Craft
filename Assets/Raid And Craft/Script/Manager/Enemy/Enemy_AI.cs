@@ -110,7 +110,7 @@ public class Enemy_AI : MonoBehaviour
 
         if (caster == null)
         {
-            Debug.LogError($"[{nameof(Enemy_AI)}] Thiếu Skill_Caster (hãy gỡ Combat_Attacker cũ và thêm Skill_Caster).", this);
+            Debug.LogError($"[{nameof(Enemy_AI)}] Thiếu Skill_Caster (hãy thêm Skill_Caster).", this);
             enabled = false;
             return;
         }

@@ -187,7 +187,7 @@ public class Shop_UI : MonoBehaviour
     {
         if (!IsOpen) return;
 
-        coinText.text = "Coin: " + (wallet != null ? wallet.Coins.ToString("N0") : "0");
+        coinText.text = "Coin: " + (wallet != null ? Player_Wallet.FormatCoins(wallet.Coins) : "0");
 
         foreach (Row row in rows)
         {
@@ -198,7 +198,7 @@ public class Shop_UI : MonoBehaviour
             string name = entry.item != null ? entry.item.DisplayName : "(trống)";
             string amount = count > 1 ? " x" + count : string.Empty;
             string priceColor = affordable ? "#FFD27F" : "#FF6B6B";
-            row.Text.text = name + amount + "\n<size=85%><color=" + priceColor + ">" + entry.price.ToString("N0") + " Coin</color></size>";
+            row.Text.text = name + amount + "\n<size=85%><color=" + priceColor + ">" + Player_Wallet.FormatCoins(entry.price) + " Coin</color></size>";
             row.BuyButton.interactable = affordable && entry.item != null;
         }
     }

@@ -64,13 +64,13 @@ public abstract class Influ_Data : ScriptableObject
 public class Stat_Influ_Data : Influ_Data
 {
     [Header("Chỉ số cộng (giá trị x roll)")]
-    [SerializeField] private List<Weapon_Stat_Modifier> statModifiers = new List<Weapon_Stat_Modifier>();
+    [SerializeField] private List<Stat_Modifier_Entry> statModifiers = new List<Stat_Modifier_Entry>();
 
     public override void Apply(Influ_Context context, float roll, object source)
     {
         if (context.Stats == null) return;
 
-        foreach (Weapon_Stat_Modifier m in statModifiers)
+        foreach (Stat_Modifier_Entry m in statModifiers)
         {
             context.Stats.AddModifier(m.stat, new Player_Stat_Modifier(m.value * roll, m.modifierType, source));
         }

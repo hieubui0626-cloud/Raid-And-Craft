@@ -1,18 +1,6 @@
 using System;
 using UnityEngine;
 
-/// <summary>Một dòng cộng chỉ số của trang bị/rune (ví dụ +8 PhysicDamage, hoặc +20% ActionSpeed).</summary>
-[Serializable]
-public struct Weapon_Stat_Modifier
-{
-    public Player_Stat_Type stat;
-
-    [Tooltip("Flat: cộng thẳng. PercentAdd: 0.1 = +10% (các PercentAdd cộng dồn). PercentMult: 0.1 = x1.1 (nhân riêng).")]
-    public Player_Stat_Modifier_Type modifierType;
-
-    public float value;
-}
-
 /// <summary>
 /// Dữ liệu một loại vũ khí (tạo asset: chuột phải Project -> Create -> Raid And Craft -> Items -> Weapon).
 /// Là một vật phẩm trang bị (Equippable_Item_Data): nằm được trong Inventory, mặc vào ô Equip Slot (mặc định MainHand).

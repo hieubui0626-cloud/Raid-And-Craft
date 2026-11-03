@@ -24,6 +24,9 @@ public class World_Item_Picker : MonoBehaviour
 
     [SerializeField] private float maxRayDistance = 200f;
 
+    [Tooltip("Bật để in Console những gì tia chuột trúng mỗi lần click (tìm lý do không bấm được NPC/vật phẩm).")]
+    [SerializeField] private bool debugClicks;
+
     private NavMeshAgent agent;
     private Player_Wallet wallet;
     private IWorld_Interactable target;
@@ -83,6 +86,13 @@ public class World_Item_Picker : MonoBehaviour
 
             best = HitBuffer[i].distance;
             interactable = candidate;
+        }
+
+        if (debugClicks && interactable == null && Input_Manager.Instance != null && Input_Manager.Instance.LeftClickPressed)
+        {
+            var names = new System.Text.StringBuilder();
+            for (int i = 0; i < hits; i++) names.Append(HitBuffer[i].collider.name).Append(i < hits - 1 ? ", " : string.Empty);
+            Debug.Log($"[{nameof(World_Item_Picker)}] Click: tia trúng {hits} collider ({names}) nhưng không có IWorld_Interactable (World_Item/Npc_Shop) ở đó.", this);
         }
 
         return interactable != null;

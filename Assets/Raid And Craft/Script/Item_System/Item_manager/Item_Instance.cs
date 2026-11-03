@@ -19,8 +19,8 @@ public sealed class Item_Instance
     public Item_Data Base { get; }
     public int Tier { get; set; } = 1;
 
-    public List<Weapon_Stat_Modifier> BaseModifiers { get; } = new List<Weapon_Stat_Modifier>();
-    public List<Weapon_Stat_Modifier> AffixModifiers { get; } = new List<Weapon_Stat_Modifier>();
+    public List<Stat_Modifier_Entry> BaseModifiers { get; } = new List<Stat_Modifier_Entry>();
+    public List<Stat_Modifier_Entry> AffixModifiers { get; } = new List<Stat_Modifier_Entry>();
 
     /// <summary>Hiệu ứng đặc biệt (null = không có).</summary>
     public Influ_Data Influ { get; set; }
@@ -37,12 +37,12 @@ public sealed class Item_Instance
     public string DisplayName => Base.DisplayName;
 
     /// <summary>Mọi chỉ số cộng của món (Base rồi Affix). Influ không nằm trong đây vì có code riêng.</summary>
-    public IEnumerable<Weapon_Stat_Modifier> AllModifiers
+    public IEnumerable<Stat_Modifier_Entry> AllModifiers
     {
         get
         {
-            foreach (Weapon_Stat_Modifier m in BaseModifiers) yield return m;
-            foreach (Weapon_Stat_Modifier m in AffixModifiers) yield return m;
+            foreach (Stat_Modifier_Entry m in BaseModifiers) yield return m;
+            foreach (Stat_Modifier_Entry m in AffixModifiers) yield return m;
         }
     }
 

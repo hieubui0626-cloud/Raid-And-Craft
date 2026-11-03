@@ -154,22 +154,13 @@ public class Skill_Picker_UI : MonoBehaviour
 
     private void Build()
     {
-        var canvasObject = new GameObject("Skill_Picker_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-        canvasObject.transform.SetParent(transform, false);
-
-        canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 100; // Trên mọi UI khác.
-
-        var scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
+        canvas = UI_Builder.CreateOverlayCanvas("Skill_Picker_Canvas", transform, 100, withRaycaster: true); // Trên mọi UI khác.
+        GameObject canvasObject = canvas.gameObject;
 
         // Lớp nền phủ toàn màn hình: bấm ra ngoài thì đóng, đồng thời chặn click xuyên xuống thế giới game.
         var blocker = new GameObject("Blocker", typeof(RectTransform), typeof(Image), typeof(Button));
         blocker.transform.SetParent(canvasObject.transform, false);
-        Stretch((RectTransform)blocker.transform, 0f);
+        UI_Builder.Stretch((RectTransform)blocker.transform, 0f);
         blocker.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.2f);
         blocker.GetComponent<Button>().onClick.AddListener(Close);
 
@@ -178,7 +169,7 @@ public class Skill_Picker_UI : MonoBehaviour
         panel = (RectTransform)panelObject.transform;
         panelObject.GetComponent<Image>().color = new Color(0.08f, 0.09f, 0.12f, 0.97f);
 
-        titleText = CreateText(panel, "Title", 20f, TextAlignmentOptions.Center);
+        titleText = UI_Builder.CreateText("Title", panel, 20f, TextAlignmentOptions.Center);
         titleText.fontStyle = FontStyles.Bold;
         titleText.rectTransform.anchorMin = new Vector2(0f, 1f);
         titleText.rectTransform.anchorMax = new Vector2(1f, 1f);
@@ -187,7 +178,7 @@ public class Skill_Picker_UI : MonoBehaviour
         titleText.rectTransform.anchoredPosition = Vector2.zero;
 
         // Dòng gợi ý (chỉ hiện khi chưa có skill nào), nằm ngay dưới tiêu đề.
-        hintText = CreateText(panel, "Hint", 13f, TextAlignmentOptions.Center);
+        hintText = UI_Builder.CreateText("Hint", panel, 13f, TextAlignmentOptions.Center);
         hintText.color = new Color(0.8f, 0.8f, 0.8f);
         hintText.rectTransform.anchorMin = new Vector2(0f, 1f);
         hintText.rectTransform.anchorMax = new Vector2(1f, 1f);
@@ -281,7 +272,7 @@ public class Skill_Picker_UI : MonoBehaviour
         {
             var iconObject = new GameObject("Icon", typeof(RectTransform), typeof(Image));
             iconObject.transform.SetParent(cellObject.transform, false);
-            Stretch((RectTransform)iconObject.transform, 6f);
+            UI_Builder.Stretch((RectTransform)iconObject.transform, 6f);
 
             var iconImage = iconObject.GetComponent<Image>();
             iconImage.sprite = skill.icon;
@@ -291,13 +282,13 @@ public class Skill_Picker_UI : MonoBehaviour
         else
         {
             // Chưa có icon (hoặc ô Empty): hiện chữ co giãn vừa ô.
-            TextMeshProUGUI label = CreateText((RectTransform)cellObject.transform, "Label", 16f, TextAlignmentOptions.Center);
+            TextMeshProUGUI label = UI_Builder.CreateText("Label", (RectTransform)cellObject.transform, 16f, TextAlignmentOptions.Center);
             label.text = skill != null ? skill.displayName : "Empty";
             label.enableAutoSizing = true;
             label.fontSizeMin = 9f;
             label.fontSizeMax = 18f;
             if (skill == null) label.color = new Color(0.7f, 0.7f, 0.7f);
-            Stretch(label.rectTransform, 4f);
+            UI_Builder.Stretch(label.rectTransform, 4f);
         }
     }
 
@@ -306,25 +297,5 @@ public class Skill_Picker_UI : MonoBehaviour
         Action<Skill_Data> callback = onPicked;
         Close();
         callback?.Invoke(skill);
-    }
-
-    private static TextMeshProUGUI CreateText(RectTransform parent, string objectName, float size, TextAlignmentOptions alignment)
-    {
-        var textObject = new GameObject(objectName, typeof(RectTransform));
-        textObject.transform.SetParent(parent, false);
-
-        var text = textObject.AddComponent<TextMeshProUGUI>();
-        text.fontSize = size;
-        text.alignment = alignment;
-        text.raycastTarget = false;
-        return text;
-    }
-
-    private static void Stretch(RectTransform rect, float inset)
-    {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(inset, inset);
-        rect.offsetMax = new Vector2(-inset, -inset);
     }
 }

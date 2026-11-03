@@ -1,3 +1,4 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -76,7 +77,7 @@ public class Coin_Display_UI : MonoBehaviour
     {
         if (text == null) return;
 
-        text.text = string.Format(format, wallet != null ? wallet.Coins : 0);
+        text.text = string.Format(CultureInfo.InvariantCulture, format, wallet != null ? wallet.Coins : 0);
     }
 
     private TextMeshProUGUI CreateText()
