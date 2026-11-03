@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Giao diện lưới Inventory. Gắn lên object PANEL Inventory (cái được bật/tắt bằng phím B qua Panel_Hotkey_Toggle).
-/// Tự dựng lưới bằng code, mỗi ô = Cell Size (mặc định 48 đơn vị Canvas trên màn hình tham chiếu 1920x1080);
-/// vật phẩm Grid Size 2x3 vẽ sprite đúng 96x144.
+/// Tự dựng lưới bằng code, mỗi ô = Cell Size (đặt 60 đơn vị Canvas trên màn hình tham chiếu 1920x1080);
+/// vật phẩm Grid Size 2x3 vẽ sprite đúng 120x180 (w x Cell Size, h x Cell Size, không có khe hở).
+/// Nền ô / nền vật phẩm / hover / vùng thả có thể gán Sprite; bỏ trống thì dùng màu phẳng.
 /// Cách chơi (click-nhấc / click-thả):
 ///   - Chuột trái vào vật phẩm: nhấc lên con trỏ. Chuột trái vào lưới khi đang cầm: thả xuống
 ///     (ô trống = đặt, đè đúng một chồng cùng loại = gộp tới Max Stack và phần dư ở lại con trỏ, đè đúng một chồng khác = đổi chỗ).
@@ -36,10 +37,26 @@ public class Inventory_UI : MonoBehaviour
     [Tooltip("Khoảng cách từ góc trên-trái vùng chứa tới góc trên-trái lưới (X sang phải, Y xuống dưới).")]
     [SerializeField] private Vector2 gridOffset = new Vector2(8f, 8f);
 
-    [Tooltip("Khe hở giữa các ô (đơn vị Canvas).")]
-    [SerializeField, Min(0f)] private float cellGap = 1f;
+    [Tooltip("Khe hở giữa các ô (đơn vị Canvas). Dùng sprite vẽ đúng w x Cell Size thì để 0.")]
+    [SerializeField, Min(0f)] private float cellGap = 0f;
 
-    [Header("Màu")]
+    [Header("Sprite (tùy chọn)")]
+    [Tooltip("Sprite nền mỗi ô. Bỏ trống = dùng màu Cell Color. Có sprite thì ô hiện đúng màu gốc của sprite (không nhuộm).")]
+    [SerializeField] private Sprite cellSprite;
+
+    [Tooltip("Sprite nền vật phẩm (nằm dưới icon), kích thước nên = GridSize x Cell Size. Bỏ trống = dùng Item Back Color.")]
+    [SerializeField] private Sprite itemBackSprite;
+
+    [Tooltip("Sprite viền/sáng khi rê chuột vào vật phẩm. Bỏ trống = dùng Hover Color.")]
+    [SerializeField] private Sprite hoverSprite;
+
+    [Tooltip("Sprite vùng thả khi ĐƯỢC đặt. Bỏ trống = dùng Drop Ok Color.")]
+    [SerializeField] private Sprite dropOkSprite;
+
+    [Tooltip("Sprite vùng thả khi KHÔNG được đặt. Bỏ trống = dùng Drop Bad Color.")]
+    [SerializeField] private Sprite dropBadSprite;
+
+    [Header("Màu (dùng khi chưa gán sprite)")]
     [SerializeField] private Color cellColor = new Color(1f, 1f, 1f, 0.07f);
     [SerializeField] private Color itemBackColor = new Color(0.12f, 0.15f, 0.22f, 0.9f);
     [SerializeField] private Color hoverColor = new Color(1f, 1f, 1f, 0.18f);
@@ -196,7 +213,8 @@ public class Inventory_UI : MonoBehaviour
     private void ShowDropPreview(Grid_Placement held, Vector2Int origin)
     {
         PlaceRect(dropImage.rectTransform, origin, held.Size);
-        dropImage.color = inventory.CanDrop(held, origin) ? dropOkColor : dropBadColor;
+        bool canDrop = inventory.CanDrop(held, origin);
+        ApplyVisual(dropImage, canDrop ? dropOkSprite : dropBadSprite, canDrop ? dropOkColor : dropBadColor);
         dropImage.gameObject.SetActive(true);
     }
 
@@ -319,8 +337,8 @@ public class Inventory_UI : MonoBehaviour
         cellsRoot = CreateChild("Cells", gridRect);
         itemsRoot = CreateChild("Items", gridRect);
 
-        hoverImage = CreateOverlay("Hover_Highlight", hoverColor);
-        dropImage = CreateOverlay("Drop_Preview", dropOkColor);
+        hoverImage = CreateOverlay("Hover_Highlight", hoverSprite, hoverColor);
+        dropImage = CreateOverlay("Drop_Preview", dropOkSprite, dropOkColor);
 
         // Vùng bắt chuột phủ cả lưới, nằm trên cùng. Gần như trong suốt nhưng vẫn nhận raycast.
         RectTransform hit = CreateChild("Hit_Area", gridRect);
@@ -346,13 +364,30 @@ public class Inventory_UI : MonoBehaviour
         HideDropPreview();
     }
 
-    private Image CreateOverlay(string objectName, Color color)
+    // Có sprite: hiện đúng màu sprite (không nhuộm). Không có sprite: tô màu phẳng như cũ.
+    private static void ApplyVisual(Image image, Sprite sprite, Color fallbackColor)
+    {
+        if (sprite != null)
+        {
+            image.sprite = sprite;
+            image.type = Image.Type.Sliced; // sprite có Border thì co giãn 9-slice, không có thì vẽ bình thường
+            image.color = Color.white;
+        }
+        else
+        {
+            image.sprite = null;
+            image.type = Image.Type.Simple;
+            image.color = fallbackColor;
+        }
+    }
+
+    private Image CreateOverlay(string objectName, Sprite sprite, Color color)
     {
         var go = new GameObject(objectName, typeof(RectTransform), typeof(Image));
         go.transform.SetParent(gridRect, false);
 
         var image = go.GetComponent<Image>();
-        image.color = color;
+        ApplyVisual(image, sprite, color);
         image.raycastTarget = false;
         go.SetActive(false);
         return image;
@@ -395,7 +430,7 @@ public class Inventory_UI : MonoBehaviour
                 go.transform.SetParent(cellsRoot, false);
 
                 var image = go.GetComponent<Image>();
-                image.color = cellColor;
+                ApplyVisual(image, cellSprite, cellColor);
                 image.raycastTarget = false;
 
                 PlaceRect(image.rectTransform, new Vector2Int(x, y), Vector2Int.one);
@@ -428,7 +463,7 @@ public class Inventory_UI : MonoBehaviour
         go.transform.SetParent(itemsRoot, false);
 
         var back = go.GetComponent<Image>();
-        back.color = itemBackColor;
+        ApplyVisual(back, itemBackSprite, itemBackColor);
         back.raycastTarget = false;
         PlaceRect(back.rectTransform, placement.Origin, placement.Size);
 
