@@ -247,7 +247,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 
     private void ApplyItem(Item_Instance item)
     {
-        foreach (Weapon_Stat_Modifier m in item.AllModifiers)
+        foreach (Stat_Modifier_Entry m in item.AllModifiers)
         {
             stats.AddModifier(m.stat, new Player_Stat_Modifier(m.value, m.modifierType, item));
         }

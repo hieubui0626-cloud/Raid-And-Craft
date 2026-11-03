@@ -1,7 +1,7 @@
 using System;
 
 /// <summary>
-/// Cổng báo kết quả đòn đánh toàn game. Mọi thứ gây sát thương (Combat_Attacker, Skill_Caster, Skill_Projectile...)
+/// Cổng báo kết quả đòn đánh toàn game. Mọi thứ gây sát thương (Skill_Caster, Skill_Projectile...)
 /// gọi Report sau khi đòn chạm mục tiêu; UI số sát thương nổi, âm thanh trúng đòn... chỉ cần nghe MỘT chỗ này.
 /// (event C# chỉ được bắn từ bên trong class khai báo nó, nên các nơi khác phải gọi Report.)
 /// </summary>

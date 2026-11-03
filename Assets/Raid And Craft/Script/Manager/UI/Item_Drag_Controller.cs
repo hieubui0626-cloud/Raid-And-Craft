@@ -164,15 +164,11 @@ public class Item_Drag_Controller : MonoBehaviour
 
     private void Build()
     {
-        var canvasObject = new GameObject("Held_Item_Canvas", typeof(RectTransform), typeof(Canvas));
-        canvasObject.transform.SetParent(transform, false);
-
-        canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 120; // Trên mọi tooltip.
+        // Không có CanvasScaler: icon tự khớp tỉ lệ với Canvas chứa Inventory (xem bên dưới).
+        canvas = UI_Builder.CreateOverlayCanvas("Held_Item_Canvas", transform, 120, withScaler: false); // Trên mọi tooltip.
 
         var iconObject = new GameObject("Held_Icon", typeof(RectTransform), typeof(Image));
-        iconObject.transform.SetParent(canvasObject.transform, false);
+        iconObject.transform.SetParent(canvas.transform, false);
         icon = (RectTransform)iconObject.transform;
         icon.pivot = new Vector2(0.5f, 0.5f);
         icon.anchorMin = icon.anchorMax = new Vector2(0f, 0f);
@@ -181,31 +177,11 @@ public class Item_Drag_Controller : MonoBehaviour
         iconImage.raycastTarget = false;
         iconImage.preserveAspect = false;
 
-        nameText = CreateText("Name", iconObject.transform, 14f, TextAlignmentOptions.Center);
-        Stretch((RectTransform)nameText.transform, 2f);
+        nameText = UI_Builder.CreateText("Name", iconObject.transform, 14f, TextAlignmentOptions.Center);
+        UI_Builder.Stretch((RectTransform)nameText.transform, 2f);
 
-        countText = CreateText("Count", iconObject.transform, 16f, TextAlignmentOptions.BottomRight);
-        Stretch((RectTransform)countText.transform, 3f);
+        countText = UI_Builder.CreateText("Count", iconObject.transform, 16f, TextAlignmentOptions.BottomRight);
+        UI_Builder.Stretch((RectTransform)countText.transform, 3f);
         countText.fontStyle = FontStyles.Bold;
-    }
-
-    private static TextMeshProUGUI CreateText(string objectName, Transform parent, float size, TextAlignmentOptions alignment)
-    {
-        var go = new GameObject(objectName, typeof(RectTransform));
-        go.transform.SetParent(parent, false);
-
-        var tmp = go.AddComponent<TextMeshProUGUI>();
-        tmp.fontSize = size;
-        tmp.alignment = alignment;
-        tmp.raycastTarget = false;
-        return tmp;
-    }
-
-    private static void Stretch(RectTransform rect, float inset)
-    {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(inset, inset);
-        rect.offsetMax = new Vector2(-inset, -inset);
     }
 }

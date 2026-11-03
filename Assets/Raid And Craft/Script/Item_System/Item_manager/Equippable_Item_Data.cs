@@ -17,7 +17,7 @@ public abstract class Equippable_Item_Data : Item_Data
     [SerializeField] private Equipment_Slot equipSlot = Equipment_Slot.MainHand;
 
     [Header("Chỉ số base mặc định (món tạo từ asset sao chép dòng này làm Base Modifier; món craft tự roll riêng)")]
-    public List<Weapon_Stat_Modifier> statModifiers = new List<Weapon_Stat_Modifier>();
+    public List<Stat_Modifier_Entry> statModifiers = new List<Stat_Modifier_Entry>();
 
     protected override bool ForceNonStackable => true;
 

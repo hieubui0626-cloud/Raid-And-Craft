@@ -142,45 +142,6 @@ public class Skill_Tooltip_UI : MonoBehaviour
 
     private void Build()
     {
-        var canvasObject = new GameObject("Skill_Tooltip_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler));
-        canvasObject.transform.SetParent(transform, false);
-
-        canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 110; // Trên popup chọn skill (100).
-
-        var scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
-
-        var panelObject = new GameObject("Panel", typeof(RectTransform), typeof(Image), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
-        panelObject.transform.SetParent(canvasObject.transform, false);
-        panel = (RectTransform)panelObject.transform;
-        panel.sizeDelta = new Vector2(PanelWidth, 0f);
-
-        var background = panelObject.GetComponent<Image>();
-        background.color = new Color(0.05f, 0.06f, 0.09f, 0.96f);
-        background.raycastTarget = false;
-
-        var layout = panelObject.GetComponent<VerticalLayoutGroup>();
-        layout.padding = new RectOffset((int)Padding, (int)Padding, (int)Padding, (int)Padding);
-        layout.childControlWidth = true;
-        layout.childControlHeight = true;
-        layout.childForceExpandWidth = true;
-        layout.childForceExpandHeight = false;
-
-        var fitter = panelObject.GetComponent<ContentSizeFitter>();
-        fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-        var textObject = new GameObject("Text", typeof(RectTransform));
-        textObject.transform.SetParent(panel, false);
-
-        text = textObject.AddComponent<TextMeshProUGUI>();
-        text.fontSize = 18f;
-        text.richText = true;
-        text.alignment = TextAlignmentOptions.TopLeft;
-        text.raycastTarget = false;
+        canvas = UI_Builder.CreateTooltip("Skill_Tooltip_Canvas", transform, 110, PanelWidth, Padding, out panel, out text); // Trên popup chọn skill (100).
     }
 }

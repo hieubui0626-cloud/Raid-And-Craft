@@ -395,14 +395,7 @@ public class Inventory_UI : MonoBehaviour
 
     private static RectTransform CreateChild(string objectName, RectTransform parent)
     {
-        var go = new GameObject(objectName, typeof(RectTransform));
-        go.transform.SetParent(parent, false);
-
-        var rect = (RectTransform)go.transform;
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = rect.offsetMax = Vector2.zero;
-        return rect;
+        return UI_Builder.CreateStretchedChild(objectName, parent);
     }
 
     // Vẽ lại các ô nền khi kho đổi kích thước (mở rộng) và cập nhật cỡ lưới.
@@ -477,42 +470,22 @@ public class Inventory_UI : MonoBehaviour
             icon.sprite = sprite;
             icon.preserveAspect = false; // sprite vẽ đúng theo khối GridSize x ô cơ sở
             icon.raycastTarget = false;
-            Stretch((RectTransform)iconObject.transform, 0f);
+            UI_Builder.Stretch((RectTransform)iconObject.transform, 0f);
         }
         else
         {
-            TextMeshProUGUI label = CreateText("Name", go.transform, 13f, TextAlignmentOptions.Center);
+            TextMeshProUGUI label = UI_Builder.CreateText("Name", go.transform, 13f, TextAlignmentOptions.Center);
             label.text = placement.Item.DisplayName;
-            Stretch((RectTransform)label.transform, 2f);
+            UI_Builder.Stretch((RectTransform)label.transform, 2f);
         }
 
         if (placement.Count > 1)
         {
-            TextMeshProUGUI count = CreateText("Count", go.transform, 16f, TextAlignmentOptions.BottomRight);
+            TextMeshProUGUI count = UI_Builder.CreateText("Count", go.transform, 16f, TextAlignmentOptions.BottomRight);
             count.text = placement.Count.ToString();
             count.fontStyle = FontStyles.Bold;
-            Stretch((RectTransform)count.transform, 3f);
+            UI_Builder.Stretch((RectTransform)count.transform, 3f);
         }
-    }
-
-    private static TextMeshProUGUI CreateText(string objectName, Transform parent, float size, TextAlignmentOptions alignment)
-    {
-        var go = new GameObject(objectName, typeof(RectTransform));
-        go.transform.SetParent(parent, false);
-
-        var tmp = go.AddComponent<TextMeshProUGUI>();
-        tmp.fontSize = size;
-        tmp.alignment = alignment;
-        tmp.raycastTarget = false;
-        return tmp;
-    }
-
-    private static void Stretch(RectTransform rect, float inset)
-    {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(inset, inset);
-        rect.offsetMax = new Vector2(-inset, -inset);
     }
 
     private void OnValidate()

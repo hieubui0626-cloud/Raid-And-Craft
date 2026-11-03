@@ -101,8 +101,8 @@ public class Item_Tooltip_UI : MonoBehaviour
         AppendDescription(instanceToShow.Base);
         AppendWeaponInfo(instanceToShow.Base as Weapon_Data);
 
-        foreach (Weapon_Stat_Modifier m in instanceToShow.BaseModifiers) AppendModifier(m, BaseColor);
-        foreach (Weapon_Stat_Modifier m in instanceToShow.AffixModifiers) AppendModifier(m, AffixColor);
+        foreach (Stat_Modifier_Entry m in instanceToShow.BaseModifiers) AppendModifier(m, BaseColor);
+        foreach (Stat_Modifier_Entry m in instanceToShow.AffixModifiers) AppendModifier(m, AffixColor);
 
         if (instanceToShow.Influ != null)
         {
@@ -123,7 +123,7 @@ public class Item_Tooltip_UI : MonoBehaviour
 
         if (item is Rune_Data rune)
         {
-            foreach (Weapon_Stat_Modifier m in rune.StatModifiers) AppendModifier(m, AffixColor);
+            foreach (Stat_Modifier_Entry m in rune.StatModifiers) AppendModifier(m, AffixColor);
         }
         else if (item is Spell_Stone_Data stone)
         {
@@ -190,7 +190,7 @@ public class Item_Tooltip_UI : MonoBehaviour
     }
 
     // Flat: "+5 Stat" | PercentAdd: "+10% Stat" (giá trị x100) | PercentMult: "x1.1 Stat".
-    private void AppendModifier(Weapon_Stat_Modifier m, string color)
+    private void AppendModifier(Stat_Modifier_Entry m, string color)
     {
         string stat = Humanize(m.stat.ToString());
         string line;
@@ -264,45 +264,6 @@ public class Item_Tooltip_UI : MonoBehaviour
 
     private void Build()
     {
-        var canvasObject = new GameObject("Item_Tooltip_Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler));
-        canvasObject.transform.SetParent(transform, false);
-
-        canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 115; // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
-
-        var scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
-
-        var panelObject = new GameObject("Panel", typeof(RectTransform), typeof(Image), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
-        panelObject.transform.SetParent(canvasObject.transform, false);
-        panel = (RectTransform)panelObject.transform;
-        panel.sizeDelta = new Vector2(PanelWidth, 0f);
-
-        var background = panelObject.GetComponent<Image>();
-        background.color = new Color(0.05f, 0.06f, 0.09f, 0.96f);
-        background.raycastTarget = false;
-
-        var layout = panelObject.GetComponent<VerticalLayoutGroup>();
-        layout.padding = new RectOffset((int)Padding, (int)Padding, (int)Padding, (int)Padding);
-        layout.childControlWidth = true;
-        layout.childControlHeight = true;
-        layout.childForceExpandWidth = true;
-        layout.childForceExpandHeight = false;
-
-        var fitter = panelObject.GetComponent<ContentSizeFitter>();
-        fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-        var textObject = new GameObject("Text", typeof(RectTransform));
-        textObject.transform.SetParent(panel, false);
-
-        text = textObject.AddComponent<TextMeshProUGUI>();
-        text.fontSize = 18f;
-        text.richText = true;
-        text.alignment = TextAlignmentOptions.TopLeft;
-        text.raycastTarget = false;
+        canvas = UI_Builder.CreateTooltip("Item_Tooltip_Canvas", transform, 115, PanelWidth, Padding, out panel, out text); // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
     }
 }
