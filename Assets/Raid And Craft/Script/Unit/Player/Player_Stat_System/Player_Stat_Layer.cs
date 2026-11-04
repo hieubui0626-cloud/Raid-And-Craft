@@ -6,7 +6,7 @@ public enum Player_Stat_Layer
     Complex = 0,
     Offence = 1,
     Defence = 2,
-    
-    
+    Misc = 3, // Chỉ số gia tăng thêm: chain projectile, area modifier...
+
     // Thêm sau này: Speed, Resistance, Crafting...
 }

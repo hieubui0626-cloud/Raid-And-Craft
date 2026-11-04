@@ -1,14 +1,37 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Character Overview: hiện chỉ số của Player. Mỗi Layer (Complex / Offence / Defence / Misc) có thể hiện ở một
+/// TextMeshPro riêng (một canvas/panel riêng): điền danh sách Layer Views, mỗi phần tử = một Layer + một text.
+/// Danh sách Layer Views trống thì dùng ô Stats Text cũ (tất cả Layer gộp chung một text) để scene cũ không hỏng.
+/// </summary>
 public class Player_Stats_UI : MonoBehaviour
 {
+    [Serializable]
+    private struct Layer_View
+    {
+        public Player_Stat_Layer layer;
+        public TextMeshProUGUI text;
+    }
+
     [Header("References")]
     [SerializeField] private Character_Stats player_Stats;
+
+    [Header("Character Overview - mỗi Layer một text riêng")]
+    [Tooltip("Mỗi phần tử: chọn Layer và kéo TextMeshPro của canvas/panel hiển thị Layer đó vào. " +
+             "Để trống thì dùng Stats Text bên dưới (gộp mọi Layer).")]
+    [SerializeField] private List<Layer_View> layerViews = new List<Layer_View>();
+
+    [Tooltip("Bật: mỗi text có dòng tiêu đề tên Layer (ví dụ OFFENCE). Tắt nếu panel đã có tiêu đề riêng.")]
+    [SerializeField] private bool showLayerTitle = true;
+
+    [Tooltip("Cách cũ: một text chứa mọi Layer. Chỉ dùng khi Layer Views trống.")]
     [SerializeField] private TextMeshProUGUI stats_Text;
 
     [Header("Combat UI References")]
@@ -42,6 +65,7 @@ public class Player_Stats_UI : MonoBehaviour
         player_Stats.OnStatsChanged -= Update_Combat_UI;
         player_Stats.OnVitalsChanged -= Update_Combat_UI;
     }
+
     void Update_Combat_UI()
     {
         if (player_Stats == null) return;
@@ -60,33 +84,50 @@ public class Player_Stats_UI : MonoBehaviour
             slider.value = max > 0f ? current / max : 0f;
         }
     }
+
     private void Update_Overview_UI()
     {
-        if (stats_Text == null || player_Stats  == null) return;
+        if (player_Stats == null) return;
 
-        sb.Clear();
-
-        // Duyệt qua tất cả các Layer có trong enum Player_Stat_Layer
-        foreach (Player_Stat_Layer layer in Enum.GetValues(typeof(Player_Stat_Layer)))
+        if (layerViews != null && layerViews.Count > 0)
         {
-            var statsInLayer = player_Stats.GetStatsInLayer(layer);
-            if (statsInLayer.Count == 0) continue;
-
-            // Tiêu đề Layer, ví dụ: === ATTACK ===
-            sb.AppendLine($"<color=orange><b> {layer.ToString().ToUpper()} </b></color>");
-
-            foreach (Player_Stat stat in statsInLayer)
+            // Mỗi Layer một text riêng.
+            foreach (Layer_View view in layerViews)
             {
-                sb.AppendLine(BuildLine(stat));
-                string line = BuildLine(stat);
-                if (line != null) sb.AppendLine(line);
-            }
+                if (view.text == null) continue;
 
-            sb.AppendLine(); // Dòng trống giữa các Layer
+                sb.Clear();
+                AppendLayer(view.layer, showLayerTitle);
+                view.text.text = sb.ToString();
+            }
+            return;
         }
 
+        // Cách cũ: mọi Layer gộp chung một text.
+        if (stats_Text == null) return;
+
+        sb.Clear();
+        foreach (Player_Stat_Layer layer in Enum.GetValues(typeof(Player_Stat_Layer)))
+        {
+            if (AppendLayer(layer, true)) sb.AppendLine(); // Dòng trống giữa các Layer
+        }
         stats_Text.text = sb.ToString();
-        
+    }
+
+    // Thêm các dòng chỉ số của một Layer vào sb. Trả về false nếu Layer không có chỉ số nào.
+    private bool AppendLayer(Player_Stat_Layer layer, bool withTitle)
+    {
+        var statsInLayer = player_Stats.GetStatsInLayer(layer);
+        if (statsInLayer.Count == 0) return false;
+
+        if (withTitle) sb.AppendLine($"<color=orange><b> {layer.ToString().ToUpper()} </b></color>");
+
+        foreach (Player_Stat stat in statsInLayer)
+        {
+            string line = BuildLine(stat);
+            if (line != null) sb.AppendLine(line);
+        }
+        return true;
     }
 
     private string BuildLine(Player_Stat stat)
@@ -100,7 +141,12 @@ public class Player_Stats_UI : MonoBehaviour
             case Player_Stat_Type.PhysicDamageMax:
             case Player_Stat_Type.MagicDamageMax:
                 return null; // đã hiện chung dòng Min
-
+            case Player_Stat_Type.Strength:
+                return $"  Strength: <color=Red>{FormatValue(stat.Value)}</color>";
+            case Player_Stat_Type.Agility:
+                return $"  Agility: <color=Green>{FormatValue(stat.Value)}</color>";
+            case Player_Stat_Type.Intelligence:
+                return $"  Intelligen:<color=Blue>{FormatValue(stat.Value)}</color>";
             case Player_Stat_Type.LifeRegen:
                 return $"  Life Regen: <color=#FFFFFF>{FormatValue(stat.Value)}</color> per second";
 
@@ -115,7 +161,7 @@ public class Player_Stats_UI : MonoBehaviour
 
             case Player_Stat_Type.CriticalDamage:
                 return $"  Critical Damage: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
-            
+
             case Player_Stat_Type.MagicResistance:
                 return $"  Magic Resistance: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
 
@@ -130,8 +176,17 @@ public class Player_Stats_UI : MonoBehaviour
 
             case Player_Stat_Type.ChaosResistance:
                 return $"  Chaos Resistance: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
+
             case Player_Stat_Type.BlockChance:
                 return $"  Block Chance: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
+
+            // Misc
+            case Player_Stat_Type.ChainProjectile:
+                return $"  Chain Projectile: <color=#FFFFFF>{FormatValue(stat.Value)}</color>";
+
+            case Player_Stat_Type.AreaModifier:
+                return $"  Area Modifier: <color=#FFFFFF>{FormatValue(stat.Value)}%</color>";
+
             default:
                 return $"  {SplitCamelCase(stat.Type.ToString())}: <color=#FFFFFF>{FormatValue(stat.Value)}</color>";
         }
@@ -147,6 +202,7 @@ public class Player_Stats_UI : MonoBehaviour
     {
         return value.ToString("0.##");
     }
+
     private static string DamageRangeLine(string label, float a, float b)
     {
         return $"  {label}: <color=#FFFFFF>{FormatValue(Mathf.Min(a, b))} - {FormatValue(Mathf.Max(a, b))}</color>";

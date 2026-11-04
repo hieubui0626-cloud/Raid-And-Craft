@@ -27,6 +27,7 @@ public class Player_Controller : MonoBehaviour
 
     private NavMeshAgent agent;
     private Camera mainCamera;
+    private World_Item_Picker picker;
 
     private void Start()
     {
@@ -44,6 +45,10 @@ public class Player_Controller : MonoBehaviour
             enabled = false;
             return;
         }
+
+        // Nhặt/thả vật phẩm trên đất: tự thêm vào Player nếu chưa có.
+        picker = player.GetComponent<World_Item_Picker>();
+        if (picker == null) picker = player.AddComponent<World_Item_Picker>();
 
         mainCamera = Camera.main;
         if (mainCamera == null)
@@ -101,7 +106,7 @@ public class Player_Controller : MonoBehaviour
 
         if (input.LeftClickPressed || input.LeftClickHeld)
         {
-            HandleMovementClick(input.MousePosition);
+            HandleMovementClick(input.MousePosition, input.LeftClickPressed);
         }
     }
 
@@ -111,18 +116,30 @@ public class Player_Controller : MonoBehaviour
         FollowPlayerWithCamera();
     }
 
-    private void HandleMovementClick(Vector2 screenPosition)
+    private void HandleMovementClick(Vector2 screenPosition, bool pressed)
     {
         // Đang trỏ vào UI thì không coi là click di chuyển.
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
-        // Đang cầm vật phẩm trên con trỏ thì không tương tác với thế giới.
-        if (Item_Drag_Controller.IsHoldingItem) return;
-
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+
+        // Đang cầm vật phẩm trên con trỏ: click ra thế giới = thả xuống đất (gần Player), không di chuyển.
+        if (Item_Drag_Controller.IsHoldingItem)
+        {
+            if (pressed && picker != null) picker.DropHeld(ray);
+            return;
+        }
+
+        // Click trúng vật phẩm trên đất / NPC: đi tới và nhặt / mở cửa hàng. Giữ chuột trên đó không làm Player chạy đi chỗ khác.
+        if (picker != null && picker.TryGetInteractable(ray, out IWorld_Interactable interactable))
+        {
+            if (pressed) picker.SetTarget(interactable);
+            return;
+        }
 
         if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, groundMask, QueryTriggerInteraction.Ignore))
         {
+            if (picker != null) picker.CancelTarget();
             agent.SetDestination(hit.point);
         }
     }

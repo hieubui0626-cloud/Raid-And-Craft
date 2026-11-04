@@ -45,10 +45,10 @@ public static class Player_Stat_Layer_Map
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.LightningResistance, Player_Stat_Layer.Defence),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.ChaosResistance, Player_Stat_Layer.Defence),
         new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.BlockChance, Player_Stat_Layer.Defence),
-        
 
-        // Layer: Vitals
-       
+        // Layer: Misc
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.ChainProjectile, Player_Stat_Layer.Misc),
+        new KeyValuePair<Player_Stat_Type, Player_Stat_Layer>(Player_Stat_Type.AreaModifier, Player_Stat_Layer.Misc),
     };
 
     private static readonly Dictionary<Player_Stat_Type, Player_Stat_Layer> LayerByType = BuildLookup();

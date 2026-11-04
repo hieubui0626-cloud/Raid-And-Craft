@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Tương tác với thế giới của Player: nhặt vật phẩm trên đất, nói chuyện với NPC bán hàng (mọi IWorld_Interactable),
@@ -24,7 +28,7 @@ public class World_Item_Picker : MonoBehaviour
 
     [SerializeField] private float maxRayDistance = 200f;
 
-    [Tooltip("Bật để in Console những gì tia chuột trúng mỗi lần click (tìm lý do không bấm được NPC/vật phẩm).")]
+    [Tooltip("Bật để in Console báo cáo mỗi lần bấm chuột trái: UI nào chặn, tia chuột trúng collider nào (tìm lý do không bấm được NPC/vật phẩm).")]
     [SerializeField] private bool debugClicks;
 
     private NavMeshAgent agent;
@@ -45,6 +49,8 @@ public class World_Item_Picker : MonoBehaviour
 
     private void Update()
     {
+        if (debugClicks) LogClickDiagnostics();
+
         if (target == null) return;
 
         // Mục tiêu đã bị huỷ (vật phẩm được nhặt, NPC bị xoá).
@@ -86,13 +92,6 @@ public class World_Item_Picker : MonoBehaviour
 
             best = HitBuffer[i].distance;
             interactable = candidate;
-        }
-
-        if (debugClicks && interactable == null && Input_Manager.Instance != null && Input_Manager.Instance.LeftClickPressed)
-        {
-            var names = new System.Text.StringBuilder();
-            for (int i = 0; i < hits; i++) names.Append(HitBuffer[i].collider.name).Append(i < hits - 1 ? ", " : string.Empty);
-            Debug.Log($"[{nameof(World_Item_Picker)}] Click: tia trúng {hits} collider ({names}) nhưng không có IWorld_Interactable (World_Item/Npc_Shop) ở đó.", this);
         }
 
         return interactable != null;
@@ -145,5 +144,58 @@ public class World_Item_Picker : MonoBehaviour
         World_Item.Spawn(held.Item, held.Count, held.Instance, position);
         drag.Clear();
         return true;
+    }
+
+    // ------------------------------------------------------------------
+    // GỠ LỖI
+    // ------------------------------------------------------------------
+
+    // Mỗi lần bấm chuột trái: in ra những gì có thể chặn click (UI, camera, vật đang cầm) và những collider tia chuột trúng.
+    // Độc lập với Player_Controller, nên vẫn in được kể cả khi click không tới được code nhặt/mở shop.
+    private void LogClickDiagnostics()
+    {
+        Mouse mouse = Mouse.current;
+        if (mouse == null || !mouse.leftButton.wasPressedThisFrame) return;
+
+        var report = new StringBuilder("[World_Item_Picker] Click trái:");
+        Vector2 screen = mouse.position.ReadValue();
+
+        Camera cam = Camera.main;
+        report.Append(cam == null ? "\n- KHÔNG có Camera.main (cần tag MainCamera)." : "\n- Camera.main: " + cam.name);
+        report.Append("\n- Input_Manager: ").Append(Input_Manager.Instance != null ? "có" : "KHÔNG có");
+        report.Append("\n- Player_Controller trên Scene: ").Append(FindFirstObjectByType<Player_Controller>() != null ? "có" : "KHÔNG có");
+        report.Append("\n- Đang cầm vật phẩm: ").Append(Item_Drag_Controller.IsHoldingItem);
+
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem == null)
+        {
+            report.Append("\n- KHÔNG có EventSystem.");
+        }
+        else
+        {
+            var results = new List<RaycastResult>();
+            eventSystem.RaycastAll(new PointerEventData(eventSystem) { position = screen }, results);
+            report.Append("\n- IsPointerOverGameObject: ").Append(eventSystem.IsPointerOverGameObject());
+            if (results.Count > 0)
+            {
+                report.Append("\n- UI dưới con trỏ (trên cùng trước): ");
+                for (int i = 0; i < results.Count && i < 4; i++) report.Append(results[i].gameObject.name).Append(i < results.Count - 1 && i < 3 ? ", " : string.Empty);
+            }
+        }
+
+        if (cam != null)
+        {
+            int hits = Physics.RaycastNonAlloc(cam.ScreenPointToRay(screen), HitBuffer, maxRayDistance, ~0, QueryTriggerInteraction.Collide);
+            report.Append("\n- Tia chuột trúng ").Append(hits).Append(" collider");
+            for (int i = 0; i < hits; i++)
+            {
+                Collider hit = HitBuffer[i].collider;
+                bool interactable = hit.GetComponentInParent<IWorld_Interactable>() != null;
+                report.Append("\n    ").Append(hit.name).Append(hit.isTrigger ? " (trigger)" : string.Empty)
+                      .Append(interactable ? "  <== IWorld_Interactable" : string.Empty);
+            }
+        }
+
+        Debug.Log(report.ToString(), this);
     }
 }

@@ -8,7 +8,7 @@ public enum Player_Stat_Type
     Agility = 1,
     Intelligence = 2,
     MaxHealth = 3,
-    MaxMana = 4, 
+    MaxMana = 4,
     LifeRegen = 14,
     ManaRegen = 15,
     MovementSpeed = 25,
@@ -39,9 +39,8 @@ public enum Player_Stat_Type
     ChaosResistance = 20,
     BlockChance = 10,
 
-
-
-
-
+    // Layer: Misc (chỉ số gia tăng thêm, nguồn từ trang bị / Magic Circuit / modifier)
+    ChainProjectile = 30, // Số lần đạn nảy sang mục tiêu khác
+    AreaModifier = 31,    // % tăng vùng tác động (đơn vị %: 10 = +10%)
 
 }

@@ -16,10 +16,10 @@ MonoBehaviour:
   displayName: Recover Potion Small
   description: Recovery Heath and Mana
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  worldModel: {fileID: 0}
   stackType: 0
   maxStack: 20
   gridSize: {x: 1, y: 1}
-  canRotate: 1
-  blockedUsage: 3
+  blockedUsage: 4
   healthRestore: 50
   manaRestore: 50

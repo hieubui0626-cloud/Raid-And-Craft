@@ -71,7 +71,6 @@
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Rune_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Heal_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Combat_Formulas.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Combat_Attacker.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Stats.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Type.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Bar_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer_Map.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Restore_Potion_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Lock.cs" />
@@ -158,6 +158,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Equipment.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Builder.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
