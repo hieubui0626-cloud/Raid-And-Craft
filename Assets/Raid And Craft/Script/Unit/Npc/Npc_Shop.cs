@@ -35,6 +35,17 @@ public class Npc_Shop : MonoBehaviour, IWorld_Interactable
     [Header("Hàng bán")]
     [SerializeField] private List<Shop_Entry> entries = new List<Shop_Entry>();
 
+    [Header("Lưới cửa hàng")]
+    [Tooltip("Số CỘT của lưới hàng. Hàng xếp theo thứ tự trong Entries, từ trái sang phải, trên xuống dưới (mỗi món chiếm Grid Size ô).")]
+    [SerializeField, Min(1)] private int columns = 8;
+
+    [Tooltip("Số HÀNG của lưới hàng. Hết chỗ thì các mặt hàng thừa không hiện (có cảnh báo trong Console).")]
+    [SerializeField, Min(1)] private int rows = 6;
+
+    [Tooltip("Cạnh một ô của lưới hàng (đơn vị Canvas). 0 = dùng Cell Size của Inventory_UI (sau khi mở Inventory một lần; chưa mở thì 48). " +
+             "Nên điền đúng Cell Size của Inventory_UI (ví dụ 84) để vật phẩm to bằng nhau.")]
+    [SerializeField, Min(0f)] private float cellSize = 0f;
+
     [Header("Thẻ tên")]
     [SerializeField] private bool showLabel = true;
     [SerializeField, Min(0f)] private float labelHeight = 2.4f;
@@ -45,6 +56,9 @@ public class Npc_Shop : MonoBehaviour, IWorld_Interactable
 
     public string NpcName => npcName;
     public IReadOnlyList<Shop_Entry> Entries => entries;
+    public int Columns => columns;
+    public int Rows => rows;
+    public float CellSize => cellSize;
     public Vector3 Position => transform.position;
     public float InteractRange => interactRange;
 
@@ -54,6 +68,20 @@ public class Npc_Shop : MonoBehaviour, IWorld_Interactable
 
         Shop_UI.Instance.Open(this, interactor);
     }
+
+#if UNITY_EDITOR
+    // Cảnh báo khi cấu hình sai: Count > 1 trên vật phẩm không xếp chồng (trang bị) không có tác dụng, cửa hàng luôn bán 1.
+    private void OnValidate()
+    {
+        foreach (Shop_Entry entry in entries)
+        {
+            if (entry.item != null && !entry.item.CanStack && entry.count > 1)
+            {
+                Debug.LogWarning($"[{nameof(Npc_Shop)}] '{name}': '{entry.item.DisplayName}' không xếp chồng được nên Count {entry.count} bị bỏ qua (luôn bán 1 món mỗi lần). Đặt Count = 1.", this);
+            }
+        }
+    }
+#endif
 
     private void Start()
     {

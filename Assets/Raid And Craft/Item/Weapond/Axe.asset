@@ -40,4 +40,4 @@ MonoBehaviour:
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
-  attackAnimation: 0
+  attackAnimation: 1

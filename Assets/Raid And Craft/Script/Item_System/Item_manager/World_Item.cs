@@ -40,6 +40,11 @@ public class World_Item : MonoBehaviour, IWorld_Interactable
     public Vector3 Position => transform.position;
     public float InteractRange => pickupRange;
 
+    private float pickupReadyTime;
+
+    /// <summary>False trong khoảng ngắn sau khi vừa thả xuống: click không nhắm trúng vật phẩm (tránh tự chạy lại nhặt).</summary>
+    public bool IsPickupReady => Time.time >= pickupReadyTime;
+
     /// <summary>Player đã tới đủ gần: nhặt vào Inventory.</summary>
     public void Interact(World_Item_Picker interactor)
     {
@@ -51,7 +56,8 @@ public class World_Item : MonoBehaviour, IWorld_Interactable
     // ------------------------------------------------------------------
 
     /// <summary>Đặt một vật phẩm xuống đất. instance = món trang bị cụ thể (null thì trang bị sẽ có món mặc định).</summary>
-    public static World_Item Spawn(Item_Data item, int count, Item_Instance instance, Vector3 position)
+    /// <param name="pickupDelay">Giây vật phẩm chưa nhặt được bằng click (thả từ Inventory: tránh click thừa nhặt lại ngay).</param>
+    public static World_Item Spawn(Item_Data item, int count, Item_Instance instance, Vector3 position, float pickupDelay = 0f)
     {
         if (item == null || count <= 0) return null;
 
@@ -63,6 +69,7 @@ public class World_Item : MonoBehaviour, IWorld_Interactable
         worldItem.item = item;
         worldItem.count = count;
         worldItem.Instance = instance;
+        worldItem.pickupReadyTime = Time.time + Mathf.Max(0f, pickupDelay);
         worldItem.EnsureSetup();
         return worldItem;
     }

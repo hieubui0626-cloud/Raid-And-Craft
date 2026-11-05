@@ -23,6 +23,9 @@ public class Skill_Picker_UI : MonoBehaviour
     /// <summary>Rê chuột vào ô skill (skill khác null).</summary>
     public event Action<Skill_Data> OnHoverBegin;
 
+    /// <summary>Rê chuột vào ô vật phẩm dùng nhanh (vật phẩm, số lượng đang có).</summary>
+    public event Action<Item_Data, int> OnItemHoverBegin;
+
     /// <summary>Con trỏ rời ô skill hoặc popup đóng.</summary>
     public event Action OnHoverEnd;
 
@@ -39,6 +42,8 @@ public class Skill_Picker_UI : MonoBehaviour
     private TextMeshProUGUI hintText;
     private ScrollRect scrollRect;
     private Action<Skill_Data> onPicked;
+    private Action<Item_Data> onItemPicked;
+    private Func<Item_Data, int> countOf;
 
     public bool IsOpen => canvas != null && canvas.gameObject.activeSelf;
 
@@ -70,16 +75,20 @@ public class Skill_Picker_UI : MonoBehaviour
     /// onPicked: gọi khi chọn (null = bỏ trống).
     /// </summary>
     public void Open(string slotLabel, RectTransform anchor, Canvas anchorCanvas, IReadOnlyList<Skill_Data> skills,
-                     Skill_Data current, Action<Skill_Data> onPicked)
+                     Skill_Data current, Action<Skill_Data> onPicked,
+                     IReadOnlyList<Item_Data> quickItems = null, Item_Data currentItem = null,
+                     Action<Item_Data> onItemPicked = null, Func<Item_Data, int> countOf = null)
     {
         this.onPicked = onPicked;
-        titleText.text = $"Assign skill to slot {slotLabel}";
+        this.onItemPicked = onItemPicked;
+        this.countOf = countOf;
+        titleText.text = $"Assign to slot {slotLabel}";
 
-        int skillCount = RebuildCells(skills, current);
+        int skillCount = RebuildCells(skills, current, quickItems, currentItem);
         bool noSkills = skillCount == 0;
 
         hintText.gameObject.SetActive(noSkills);
-        hintText.text = "No skills yet. Add skills to 'Available Skills' on Player_Skill_Slots.";
+        hintText.text = "Nothing to assign. Add skills to Player_Skill_Slots or quick-use items to the Inventory.";
         float hintHeight = noSkills ? HintHeight : 0f;
 
         int cellCount = skillCount + 1; // + ô Empty
@@ -108,6 +117,8 @@ public class Skill_Picker_UI : MonoBehaviour
 
         if (canvas != null) canvas.gameObject.SetActive(false);
         onPicked = null;
+        onItemPicked = null;
+        countOf = null;
 
         if (wasOpen) OnHoverEnd?.Invoke();
     }
@@ -219,7 +230,8 @@ public class Skill_Picker_UI : MonoBehaviour
     }
 
     // Dựng lại các ô; trả về số skill (không tính ô Empty).
-    private int RebuildCells(IReadOnlyList<Skill_Data> skills, Skill_Data current)
+    private int RebuildCells(IReadOnlyList<Skill_Data> skills, Skill_Data current,
+                             IReadOnlyList<Item_Data> quickItems, Item_Data currentItem)
     {
         // Cấu hình lưới theo giá trị hiện tại (Configure có thể được gọi sau khi Build).
         grid.constraintCount = columns;
@@ -230,7 +242,7 @@ public class Skill_Picker_UI : MonoBehaviour
         // Destroy trễ tới cuối frame nên tách khỏi cây ngay để bố cục tính đúng.
         content.DetachChildren();
 
-        AddCell(null, current == null);
+        AddCell(null, current == null && currentItem == null);
 
         int count = 0;
         if (skills != null)
@@ -244,7 +256,71 @@ public class Skill_Picker_UI : MonoBehaviour
             }
         }
 
+        // Vật phẩm dùng nhanh quét từ Inventory (số lượng hiện ở góc ô).
+        if (quickItems != null)
+        {
+            foreach (Item_Data item in quickItems)
+            {
+                if (item == null) continue;
+
+                AddItemCell(item, item == currentItem);
+                count++;
+            }
+        }
+
         return count;
+    }
+
+    private void AddItemCell(Item_Data item, bool isCurrent)
+    {
+        var cellObject = new GameObject(item.DisplayName, typeof(RectTransform), typeof(Image), typeof(Button), typeof(Skill_Hover_Target));
+        cellObject.transform.SetParent(content, false);
+
+        var background = cellObject.GetComponent<Image>();
+        background.color = isCurrent ? new Color(0.25f, 0.4f, 0.6f, 1f) : new Color(0.17f, 0.22f, 0.18f, 1f); // nền hơi xanh lá: phân biệt với skill
+
+        int amount = countOf != null ? countOf(item) : 0;
+
+        var button = cellObject.GetComponent<Button>();
+        button.targetGraphic = background;
+        button.onClick.AddListener(() => PickItem(item));
+
+        var hover = cellObject.GetComponent<Skill_Hover_Target>();
+        hover.OnEnter = () => OnItemHoverBegin?.Invoke(item, amount);
+        hover.OnExit = () => OnHoverEnd?.Invoke();
+
+        if (item.Icon != null)
+        {
+            var iconObject = new GameObject("Icon", typeof(RectTransform), typeof(Image));
+            iconObject.transform.SetParent(cellObject.transform, false);
+            UI_Builder.Stretch((RectTransform)iconObject.transform, 6f);
+
+            var iconImage = iconObject.GetComponent<Image>();
+            iconImage.sprite = item.Icon;
+            iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+        }
+        else
+        {
+            TextMeshProUGUI label = UI_Builder.CreateText("Label", (RectTransform)cellObject.transform, 16f, TextAlignmentOptions.Center);
+            label.text = item.DisplayName;
+            label.enableAutoSizing = true;
+            label.fontSizeMin = 9f;
+            label.fontSizeMax = 18f;
+            UI_Builder.Stretch(label.rectTransform, 4f);
+        }
+
+        TextMeshProUGUI countLabel = UI_Builder.CreateText("Count", (RectTransform)cellObject.transform, 16f, TextAlignmentOptions.BottomRight);
+        countLabel.text = amount.ToString();
+        countLabel.fontStyle = FontStyles.Bold;
+        UI_Builder.Stretch(countLabel.rectTransform, 4f);
+    }
+
+    private void PickItem(Item_Data item)
+    {
+        Action<Item_Data> callback = onItemPicked;
+        Close();
+        callback?.Invoke(item);
     }
 
     private void AddCell(Skill_Data skill, bool isCurrent)

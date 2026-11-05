@@ -105,6 +105,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Animation\Skill_Animation_Driver.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\ISave_Provider.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Quick_Use.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Delivery.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Preview.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Damage_Effect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Draggable_Panel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Stat_Modifier_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_UI_Metrics.cs" />

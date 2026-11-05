@@ -26,6 +26,9 @@ public class World_Item_Picker : MonoBehaviour
     [Tooltip("Thả vật phẩm xa Player tối đa bao nhiêu mét.")]
     [SerializeField, Min(0.5f)] private float maxDropDistance = 3f;
 
+    [Tooltip("Giây sau khi thả mà click vào vật phẩm đó không nhặt lại (tránh click thừa/double click làm Player chạy lại nhặt).")]
+    [SerializeField, Min(0f)] private float dropPickupDelay = 0.8f;
+
     [SerializeField] private float maxRayDistance = 200f;
 
     [Tooltip("Bật để in Console báo cáo mỗi lần bấm chuột trái: UI nào chặn, tia chuột trúng collider nào (tìm lý do không bấm được NPC/vật phẩm).")]
@@ -90,6 +93,9 @@ public class World_Item_Picker : MonoBehaviour
             IWorld_Interactable candidate = HitBuffer[i].collider.GetComponentInParent<IWorld_Interactable>();
             if (candidate == null) continue;
 
+            // Vật phẩm vừa thả: bỏ qua, click đi tiếp xuống mặt đất như bình thường.
+            if (candidate is World_Item justDropped && !justDropped.IsPickupReady) continue;
+
             best = HitBuffer[i].distance;
             interactable = candidate;
         }
@@ -127,6 +133,7 @@ public class World_Item_Picker : MonoBehaviour
         Grid_Placement held = drag.Held;
         if (held.IsEmpty) return false;
 
+        CancelTarget(); // đang đi nhặt món khác thì thôi, tránh vừa thả xong lại chạy đi nhặt
         Vector3 position = transform.position + transform.forward * 1.2f;
 
         var plane = new Plane(Vector3.up, transform.position);
@@ -141,7 +148,7 @@ public class World_Item_Picker : MonoBehaviour
         // Đặt lên mặt NavMesh để vật phẩm nằm đúng mặt đất và Player tới nhặt được.
         position = NavMesh.SamplePosition(position, out NavMeshHit hit, 3f, NavMesh.AllAreas) ? hit.position : transform.position;
 
-        World_Item.Spawn(held.Item, held.Count, held.Instance, position);
+        World_Item.Spawn(held.Item, held.Count, held.Instance, position, dropPickupDelay);
         drag.Clear();
         return true;
     }

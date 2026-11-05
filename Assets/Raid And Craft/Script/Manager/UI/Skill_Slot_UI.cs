@@ -31,14 +31,20 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [Tooltip("Màu icon khi không đủ mana.")]
     [SerializeField] private Color noManaColor = new Color(0.4f, 0.4f, 0.6f);
 
+    private TextMeshProUGUI countText;
     private Button button;
     private Skill_Data skill;
+    private Item_Data quickItem;
+    private int quickCount;
     private bool built;
 
     public int Index { get; private set; }
 
     /// <summary>Skill đang gán trong ô (null = trống).</summary>
     public Skill_Data Skill => skill;
+
+    /// <summary>Vật phẩm dùng nhanh đang gán trong ô (null = không có). Ô chứa skill HOẶC vật phẩm.</summary>
+    public Item_Data QuickItem => quickItem;
     public RectTransform Rect => (RectTransform)transform;
 
     private void Awake()
@@ -76,19 +82,60 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (hotkeyText != null) hotkeyText.text = hotkeyLabel;
     }
 
-    /// <summary>Đổi skill hiển thị trong ô (null = ô trống).</summary>
+    /// <summary>Đổi skill hiển thị trong ô (null = ô trống). Có skill thì ô không còn hiện vật phẩm.</summary>
     public void SetSkill(Skill_Data newSkill)
     {
         skill = newSkill;
+        if (newSkill != null) quickItem = null;
+        Refresh();
+    }
 
-        bool hasIcon = newSkill != null && newSkill.icon != null;
-        iconImage.enabled = hasIcon;
-        iconImage.sprite = hasIcon ? newSkill.icon : null;
+    /// <summary>Đổi vật phẩm dùng nhanh hiển thị trong ô (null = bỏ). count = số món đang có trong Inventory.</summary>
+    public void SetQuickItem(Item_Data item, int count)
+    {
+        quickItem = item;
+        quickCount = count;
+        if (item != null) skill = null;
+        Refresh();
+    }
 
-        // Skill chưa có icon thì hiện tên cho dễ phân biệt.
-        nameText.text = (newSkill != null && !hasIcon) ? newSkill.displayName : string.Empty;
+    /// <summary>Chỉ cập nhật số lượng (Inventory đổi).</summary>
+    public void SetQuickCount(int count)
+    {
+        if (quickItem == null || quickCount == count) return;
 
-        if (newSkill == null) SetCooldownFraction(0f);
+        quickCount = count;
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        Sprite sprite = null;
+        string label = string.Empty;
+
+        if (skill != null)
+        {
+            sprite = skill.icon;
+            if (sprite == null) label = skill.displayName;
+        }
+        else if (quickItem != null)
+        {
+            sprite = quickItem.Icon;
+            if (sprite == null) label = quickItem.DisplayName;
+        }
+
+        iconImage.enabled = sprite != null;
+        iconImage.sprite = sprite;
+        nameText.text = label;
+
+        // Vật phẩm: hiện số lượng; hết hàng thì mờ đi.
+        countText.text = quickItem != null ? quickCount.ToString() : string.Empty;
+        Color tint = (quickItem != null && quickCount <= 0) ? noManaColor : normalColor;
+        iconImage.color = tint;
+        nameText.color = tint;
+        countText.color = quickItem != null && quickCount <= 0 ? new Color(1f, 0.5f, 0.5f) : Color.white;
+
+        if (skill == null) SetCooldownFraction(0f);
     }
 
     /// <summary>Cập nhật vòng hồi chiêu và màu thiếu mana (gọi mỗi frame).</summary>
@@ -175,8 +222,17 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             cooldownOverlay.gameObject.SetActive(false);
         }
 
+        if (countText == null)
+        {
+            countText = UI_Builder.CreateText("Quick_Count", transform, 16f, TextAlignmentOptions.BottomRight);
+            UI_Builder.Stretch(countText.rectTransform, 4f);
+            countText.fontStyle = FontStyles.Bold;
+            countText.raycastTarget = false;
+        }
+
         // Hotkey và cooldown nằm trên cùng để luôn thấy.
         hotkeyText.transform.SetAsLastSibling();
+        countText.transform.SetAsLastSibling();
     }
 
     private RectTransform CreateChild(string childName)

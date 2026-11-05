@@ -89,7 +89,7 @@ public class Item_Tooltip_UI : MonoBehaviour
     }
 
     /// <summary>Tooltip của một món trang bị cụ thể (chỉ số riêng của món đó).</summary>
-    public void Show(Item_Instance instanceToShow)
+    public void Show(Item_Instance instanceToShow, string footer = null)
     {
         if (instanceToShow == null) return;
 
@@ -109,11 +109,12 @@ public class Item_Tooltip_UI : MonoBehaviour
             sb.Append("<color=").Append(InfluColor).Append('>').Append(instanceToShow.Influ.Describe(instanceToShow.InfluRoll)).Append("</color>\n");
         }
 
+        AppendFooter(footer);
         Display();
     }
 
     /// <summary>Tooltip của vật phẩm xếp chồng (không có instance): Rune, Spell Stone, thuốc, nguyên liệu.</summary>
-    public void Show(Item_Data item, int count)
+    public void Show(Item_Data item, int count, string footer = null)
     {
         if (item == null) return;
 
@@ -140,7 +141,16 @@ public class Item_Tooltip_UI : MonoBehaviour
             sb.Append("<color=").Append(MutedColor).Append(">Stack: ").Append(count).Append('/').Append(item.MaxStack).Append("</color>\n");
         }
 
+        AppendFooter(footer);
         Display();
+    }
+
+    // Dòng thêm cuối tooltip (ví dụ giá trong cửa hàng). Rich text được.
+    private void AppendFooter(string footer)
+    {
+        if (string.IsNullOrEmpty(footer)) return;
+
+        sb.Append('\n').Append(footer).Append('\n');
     }
 
     private void Display()
