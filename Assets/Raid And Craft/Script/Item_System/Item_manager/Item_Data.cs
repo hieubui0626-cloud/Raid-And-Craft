@@ -52,9 +52,9 @@ public abstract class Item_Data : ScriptableObject
     [SerializeField] private Vector2Int gridSize = Vector2Int.one;
 
     [Header("Công dụng")]
-    [Tooltip("CHẶN bớt công dụng của vật phẩm này (ví dụ chặn MagicCircuit cho một Rune nhiệm vụ). " +
-             "Không bật thêm được công dụng mà loại vật phẩm không hỗ trợ.")]
-    [SerializeField] private Item_Usage blockedUsage = Item_Usage.None;
+    [Tooltip("Các công dụng ĐƯỢC PHÉP của vật phẩm này: tick = được dùng, bỏ tick = bị chặn (ví dụ bỏ MagicCircuit cho một Rune nhiệm vụ). " +
+             "Mặc định Everything. Tick công dụng mà loại vật phẩm không hỗ trợ cũng không có tác dụng (Equip chỉ có với trang bị, QuickUse chỉ với vật phẩm tiêu hao...).")]
+    [SerializeField] private Item_Usage allowedUsage = (Item_Usage)(-1);
 
     public string ItemId => string.IsNullOrEmpty(itemId) ? name : itemId;
     public string DisplayName => string.IsNullOrEmpty(displayName) ? name : displayName;
@@ -106,11 +106,11 @@ public abstract class Item_Data : ScriptableObject
     /// </summary>
     public virtual Item_Usage SupportedUsage => Item_Usage.None;
 
-    /// <summary>Công dụng bị chặn riêng cho asset này trong Inspector.</summary>
-    public Item_Usage BlockedUsage => blockedUsage;
+    /// <summary>Công dụng được phép đặt riêng cho asset này trong Inspector.</summary>
+    public Item_Usage AllowedUsage => allowedUsage;
 
-    /// <summary>Công dụng thực tế = loại hỗ trợ trừ phần bị chặn.</summary>
-    public Item_Usage Usage => SupportedUsage & ~blockedUsage;
+    /// <summary>Công dụng thực tế = loại vật phẩm hỗ trợ VÀ asset cho phép.</summary>
+    public Item_Usage Usage => SupportedUsage & allowedUsage;
 
     /// <summary>Tính năng X gọi hàm này trước khi nhận vật phẩm. Cần có đủ mọi cờ được hỏi.</summary>
     public bool CanBeUsedFor(Item_Usage usage)

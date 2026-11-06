@@ -422,8 +422,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\EnableSwitchAndShelveFeatureDialog.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Headless\HeadlessProgressControls.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Diff\Text\MessagePanel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Diff\Image\Toolbar\ImageDiffToolbar.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Platform\PlatformHotkeyConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Diff\Image\Toolbar\ImageDiffToolbar.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BranchExplorer\Virtualization\VirtualCanvasFiller.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\UI\DrawSplitter.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Rendering\CurrentLineHightlightRenderer.cs" />
@@ -776,9 +776,9 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CloudDrive\Workspaces\DirectoryContent\ProcessItemsGridViewEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Tool\FindTool.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Configuration\CloudEdition\Welcome\OrganizationPanel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BranchExplorer\Drawing\Shapes\ZIndex.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BranchExplorer\BranchExplorerEmptyStatePanel.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\Locks\LocksListView.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BranchExplorer\Drawing\Shapes\ZIndex.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\BranchExplorer\Drawing\Shapes\BranchCaptionShape.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\QueryVisualElementsExtensions.cs" />

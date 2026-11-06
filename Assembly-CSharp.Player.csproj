@@ -1083,6 +1083,10 @@
       <Project>{F95C6FF3-D523-13CB-5A69-5BE58A62DFC0}</Project>
       <Name>Unity.AppUI.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Animation.Rigging.Player.csproj">
+      <Project>{22D5E046-D46F-7CFE-FE2A-F1C23C3831E0}</Project>
+      <Name>Unity.Animation.Rigging.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Multiplayer.Center.Common.Player.csproj">
       <Project>{85A5B412-7D45-D705-6019-EAF85C650818}</Project>
       <Name>Unity.Multiplayer.Center.Common.Player</Name>

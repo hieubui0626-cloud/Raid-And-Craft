@@ -535,8 +535,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\ProjectionSolver\UniformSolverVar.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Geometry\Curves\RootFinder.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\Bundling\BundleBase.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\CycleRemoval\CycleRemoval.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\LargeGraphLayout\Interval.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\CycleRemoval\CycleRemoval.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\DataStructures\RBTree\RBColor.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\ScanSegmentVectorItem.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Geometry\Curves\Polyline.cs" />
@@ -551,8 +551,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\BasicObstacleSide.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\GlobalSuppressions.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\DataStructures\RBTree\DefaultComperer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\PathRefiner.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\DebugHelpers\Persistence\DoubleStreamElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\PathRefiner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Unity.InferenceEngine.Microsoft.Msagl.asmdef" />
