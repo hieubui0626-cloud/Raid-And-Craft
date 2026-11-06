@@ -20,7 +20,7 @@ MonoBehaviour:
   stackType: 1
   maxStack: 1
   gridSize: {x: 1, y: 3}
-  blockedUsage: 0
+  allowedUsage: 1
   equipSlot: 1
   statModifiers:
   - stat: 5

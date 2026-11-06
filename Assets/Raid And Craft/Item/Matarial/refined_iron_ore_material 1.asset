@@ -20,5 +20,5 @@ MonoBehaviour:
   stackType: 0
   maxStack: 50
   gridSize: {x: 1, y: 1}
-  blockedUsage: 0
+  allowedUsage: 0
   rarityTier: 4

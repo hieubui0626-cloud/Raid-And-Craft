@@ -16,11 +16,11 @@ MonoBehaviour:
   displayName: Rune Strength
   description: Gain 10 Strength when equip in Magic Circuit
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  worldModel: {fileID: 0}
   stackType: 1
   maxStack: 1
   gridSize: {x: 1, y: 1}
-  canRotate: 1
-  blockedUsage: 5
+  allowedUsage: 2
   statModifiers:
   - stat: 0
     modifierType: 0

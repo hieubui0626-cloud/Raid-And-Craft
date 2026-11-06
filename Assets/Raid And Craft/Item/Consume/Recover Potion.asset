@@ -20,6 +20,6 @@ MonoBehaviour:
   stackType: 0
   maxStack: 20
   gridSize: {x: 1, y: 1}
-  blockedUsage: 4
+  allowedUsage: 4
   healthRestore: 50
   manaRestore: 50
