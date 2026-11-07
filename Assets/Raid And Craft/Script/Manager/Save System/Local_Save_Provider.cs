@@ -12,12 +12,11 @@ using UnityEngine;
 public class Local_Save_Provider : ISave_Provider
 {
     private const string Extension = ".json";
-    private readonly string directory;
+    private string directory;
 
-    public Local_Save_Provider()
-    {
-        directory = Path.Combine(Application.persistentDataPath, "Saves");
-    }
+    // Lấy đường dẫn LƯỜI: Application.persistentDataPath bị cấm gọi trong hàm khởi tạo/khởi tạo field của MonoBehaviour
+    // (Save_Manager tạo provider này ở field), nên chỉ đọc khi thật sự cần.
+    private string Directory_ => directory ?? (directory = Path.Combine(Application.persistentDataPath, "Saves"));
 
     // ------------------------------------------------------------------
     // Đồng bộ
@@ -25,7 +24,7 @@ public class Local_Save_Provider : ISave_Provider
 
     public void Save(string slotId, string json)
     {
-        Directory.CreateDirectory(directory);
+        Directory.CreateDirectory(Directory_);
 
         string path = GetPath(slotId);
         string tmp = path + ".tmp";
@@ -76,6 +75,6 @@ public class Local_Save_Provider : ISave_Provider
     {
         // Chặn ký tự lạ trong tên slot để không thoát ra ngoài thư mục Saves.
         foreach (char c in Path.GetInvalidFileNameChars()) slotId = slotId.Replace(c, '_');
-        return Path.Combine(directory, slotId + Extension);
+        return Path.Combine(Directory_, slotId + Extension);
     }
 }

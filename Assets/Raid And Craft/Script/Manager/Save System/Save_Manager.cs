@@ -48,7 +48,9 @@ public class Save_Manager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        // DontDestroyOnLoad chỉ hoạt động với object gốc (không có cha); nằm dưới object cha thì bỏ qua để khỏi báo lỗi.
+        if (transform.parent == null) DontDestroyOnLoad(gameObject);
     }
 
     private void OnDestroy()

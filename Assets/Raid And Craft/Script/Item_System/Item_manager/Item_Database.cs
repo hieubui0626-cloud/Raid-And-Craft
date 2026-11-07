@@ -60,9 +60,13 @@ public class Item_Database : ScriptableObject
         {
             if (item == null) continue;
 
-            if (byId.ContainsKey(item.ItemId))
+            if (byId.TryGetValue(item.ItemId, out Item_Data existing))
             {
-                Debug.LogWarning($"[{nameof(Item_Database)}] Trùng itemId '{item.ItemId}' ({item.name}).", this);
+                if (existing != item)
+                {
+                    Debug.LogWarning($"[{nameof(Item_Database)}] Trùng itemId '{item.ItemId}' giữa '{existing.name}' và '{item.name}': " +
+                                     $"'{item.name}' sẽ bị nạp thành '{existing.name}'. Hãy sửa Item Id của một asset cho khác nhau.", item);
+                }
                 continue;
             }
             byId[item.ItemId] = item;
