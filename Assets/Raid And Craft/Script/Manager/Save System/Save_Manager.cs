@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Điều phối lưu/tải. Đặt 1 object trong Scene khởi đầu (cùng chỗ với Input_Manager).
@@ -26,6 +27,10 @@ public class Save_Manager : MonoBehaviour
     [Tooltip("Giây giữa hai lần tự lưu. 0 = tắt tự lưu theo chu kỳ.")]
     [SerializeField] private float autoSaveInterval = 60f;
 
+    [Tooltip("Lần tải đầu tiên: nếu save ghi Scene base khác Scene đang mở thì nạp Scene đó trước rồi mới áp save. " +
+             "Tắt khi muốn thử riêng một Scene trong Editor.")]
+    [SerializeField] private bool loadSavedScene = true;
+
     private readonly Local_Save_Provider local = new Local_Save_Provider();
     private ISave_Provider cloud; // null cho tới khi gắn cloud
     private Player_Save player;
@@ -35,9 +40,13 @@ public class Save_Manager : MonoBehaviour
     private bool saveBlocked;
     private bool blockedWarned;
     private float autoSaveTimer;
+    private bool sceneResolved; // đã xét việc chuyển Scene theo save trong lần chạy này chưa (chỉ làm một lần, tránh lặp)
 
     public string SlotId => slotId;
     public bool HasCloud => cloud != null;
+
+    /// <summary>Tên Scene base gần nhất Player đã ở. Player_Save cập nhật khi lưu ở Scene base; ở Scene tạm vẫn giữ giá trị này để lưu lại.</summary>
+    public string LastBaseScene { get; set; } = string.Empty;
 
     private void Awake()
     {
@@ -168,6 +177,10 @@ public class Save_Manager : MonoBehaviour
             if (data == null || player == null) return false;
 
             revision = data.revision;
+            LastBaseScene = data.player.baseSceneName ?? string.Empty;
+
+            // Save ghi Player ở Scene base khác Scene đang mở: nạp Scene đó trước. Player ở Scene mới sẽ tự đăng ký lại và nạp save ở đó.
+            if (TryRedirectToSavedScene(data)) return false;
 
             bool applied;
             try { applied = player.Apply(data.player); }
@@ -192,6 +205,26 @@ public class Save_Manager : MonoBehaviour
         {
             busy = false;
         }
+    }
+
+    private bool TryRedirectToSavedScene(Save_Data data)
+    {
+        if (sceneResolved) return false;
+        sceneResolved = true;
+        if (!loadSavedScene || player == null) return false;
+
+        string target = data.player.baseSceneName;
+        if (string.IsNullOrEmpty(target) || target == player.gameObject.scene.name) return false;
+
+        if (!Application.CanStreamedLevelBeLoaded(target))
+        {
+            Debug.LogWarning($"[{nameof(Save_Manager)}] Save ghi Scene base '{target}' nhưng Scene này không nằm trong Build Settings, " +
+                             "nên ở lại Scene hiện tại (vị trí sẽ không được áp).");
+            return false;
+        }
+
+        SceneManager.LoadScene(target);
+        return true;
     }
 
     private async Task<Save_Data> ReadNewestAsync()

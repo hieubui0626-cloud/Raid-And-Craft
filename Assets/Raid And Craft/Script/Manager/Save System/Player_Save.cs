@@ -67,8 +67,7 @@ public class Player_Save : MonoBehaviour
 
     public void Capture(Player_Save_Data data)
     {
-        data.position = transform.position;
-        data.rotationY = transform.eulerAngles.y;
+        CaptureLocation(data);
 
         if (stats == null) return;
 
@@ -82,6 +81,32 @@ public class Player_Save : MonoBehaviour
         }
 
         CaptureProgress(data);
+    }
+
+    // Giống các ARPG khác: chỉ lưu vị trí ở Scene base (Scene_Info.Kind = Base, hoặc Scene không có Scene_Info).
+    // Ở Scene tạm (Arena, map...) không lưu vị trí, chỉ nhớ Scene base gần nhất để lần sau vào lại đó.
+    private void CaptureLocation(Player_Save_Data data)
+    {
+        string sceneName = gameObject.scene.name;
+        Scene_Info info = FindFirstObjectByType<Scene_Info>();
+        bool inBase = info == null || info.Kind == Scene_Kind.Base;
+        Save_Manager manager = Save_Manager.Instance;
+
+        if (inBase)
+        {
+            if (manager != null) manager.LastBaseScene = sceneName;
+            data.baseSceneName = sceneName;
+            data.noPosition = false;
+            data.position = transform.position;
+            data.rotationY = transform.eulerAngles.y;
+        }
+        else
+        {
+            data.baseSceneName = manager != null ? manager.LastBaseScene : string.Empty;
+            data.noPosition = true;
+            data.position = Vector3.zero;
+            data.rotationY = 0f;
+        }
     }
 
     private void CaptureProgress(Player_Save_Data data)
@@ -229,16 +254,23 @@ public class Player_Save : MonoBehaviour
             stats.SetVitals(data.currentHealth, data.currentMana);
         }
 
-        // NavMeshAgent phải Warp, gán transform.position trực tiếp sẽ bị agent kéo lại.
-        bool warped = false;
-        if (agent != null && agent.enabled && agent.isOnNavMesh)
+        // Chỉ áp vị trí khi save có vị trí (lưu ở Scene base) VÀ đang ở đúng Scene đó (tránh đặt toạ độ của map này vào map khác).
+        // Ngược lại giữ nguyên chỗ xuất hiện mặc định của Scene.
+        bool samePlace = string.IsNullOrEmpty(data.baseSceneName) || data.baseSceneName == gameObject.scene.name;
+        if (!data.noPosition && samePlace)
         {
-            agent.ResetPath();
-            warped = agent.Warp(data.position);
-        }
-        if (!warped) transform.position = data.position;
+            // NavMeshAgent phải Warp, gán transform.position trực tiếp sẽ bị agent kéo lại.
+            bool warped = false;
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+            {
+                agent.ResetPath();
+                warped = agent.Warp(data.position);
+            }
+            if (!warped) transform.position = data.position;
 
-        transform.rotation = Quaternion.Euler(0f, data.rotationY, 0f);
+            transform.rotation = Quaternion.Euler(0f, data.rotationY, 0f);
+        }
+
         return ok;
     }
 

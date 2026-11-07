@@ -37,8 +37,21 @@ public class Save_Data
 [Serializable]
 public class Player_Save_Data
 {
+    /// <summary>Vị trí/hướng: CHỈ có nghĩa khi noPosition = false (lúc lưu Player đang ở Scene base).</summary>
     public Vector3 position;
     public float rotationY;
+
+    /// <summary>
+    /// Tên Scene "base" gần nhất Player đã ở (Scene_Kind.Base). Mở game lại sẽ nạp Scene này trước, rồi mới áp save.
+    /// Rỗng = chưa biết (save cũ): giữ nguyên Scene đang mở.
+    /// </summary>
+    public string baseSceneName;
+
+    /// <summary>
+    /// true khi lúc lưu Player đang ở Scene tạm (Scene_Kind.Instance): không lưu vị trí, nạp lại sẽ đứng ở điểm mặc định của Scene base.
+    /// Save cũ không có cờ này (= false) nên vẫn áp vị trí như trước.
+    /// </summary>
+    public bool noPosition;
 
     public float currentHealth;
     public float currentMana;
