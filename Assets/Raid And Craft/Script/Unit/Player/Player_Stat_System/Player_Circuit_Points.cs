@@ -7,7 +7,7 @@ using UnityEngine;
 /// - Tổng điểm tối đa = tổng điểm ở cấp tối đa (MaxTotalPoints): cấp tối đa quyết định Magic Circuit lớn cỡ nào.
 /// - Đã tiêu / còn lại: Magic Circuit gọi TrySpend khi mở khoá/nâng một nút, Refund khi gỡ, ResetSpent khi respec.
 /// - Điểm còn lại âm (IsOverspent) có thể xảy ra nếu cấp tụt xuống (trần cấp bị hạ): Magic Circuit tự quyết cách xử lý.
-/// Gắn lên PlayerPrefab cùng Character_Level. Số điểm đã tiêu CHƯA được lưu vào Save_Data (lưu cùng Magic Circuit).
+/// Gắn lên PlayerPrefab cùng Character_Level. Số điểm đã tiêu do Player_Save lưu (cùng Magic Circuit); tổng điểm suy ra từ cấp độ nên không lưu.
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Character_Level))]

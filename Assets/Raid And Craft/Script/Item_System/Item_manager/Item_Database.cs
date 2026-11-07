@@ -33,6 +33,24 @@ public class Item_Database : ScriptableObject
         byId = null;
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("Thu thập mọi vật phẩm trong project")]
+    private void CollectAll()
+    {
+        items.Clear();
+        foreach (string guid in UnityEditor.AssetDatabase.FindAssets("t:Item_Data"))
+        {
+            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+            var item = UnityEditor.AssetDatabase.LoadAssetAtPath<Item_Data>(path);
+            if (item != null) items.Add(item);
+        }
+
+        byId = null;
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log($"[{nameof(Item_Database)}] Đã thu thập {items.Count} vật phẩm.", this);
+    }
+#endif
+
     private void EnsureBuilt()
     {
         if (byId != null) return;

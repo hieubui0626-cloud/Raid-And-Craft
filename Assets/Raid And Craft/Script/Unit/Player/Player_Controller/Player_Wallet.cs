@@ -9,7 +9,7 @@ using UnityEngine;
 /// Gắn lên Player (cùng object với Inventory). Không gắn thì World_Item_Picker tự thêm với số Coin mặc định bên dưới.
 /// Chỉnh số Coin: ô Coins trong Inspector (đang Play đổi số cũng cập nhật UI ngay), hoặc chuột phải component -> Debug.
 /// Ô Coin Text (TMP, tuỳ chọn): kéo một TextMeshPro vào, chữ tự cập nhật theo định dạng 1,234,567.
-/// Chưa lưu vào Save_Data (làm cùng Inventory sau).
+/// Player_Save lưu số Coin.
 /// </summary>
 [DisallowMultipleComponent]
 public class Player_Wallet : MonoBehaviour

@@ -12,7 +12,7 @@ using UnityEngine;
 ///   Ô MainHand trống = tay không.
 /// - Mặc được hay không do Item_Usage.Equip quyết định (item.CanBeUsedFor).
 /// - Đổi ô Weapon/Starting Equipment trong Inspector lúc đang Play KHÔNG cập nhật chỉ số, hãy dùng các hàm Equip/Unequip.
-/// - Chưa được lưu trong Save_Data (làm cùng Inventory sau).
+/// - Player_Save lưu từng món (cả roll Base/Affix/Influ) và nạp lại bằng UnequipAllDirect + EquipDirect.
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Character_Stats))]
@@ -222,6 +222,15 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 
         SetSlot(slot, null);
         return true;
+    }
+
+    /// <summary>Tháo thẳng MỌI món đang mặc, KHÔNG trả về kho (load save: mặc lại đúng bộ đã lưu).</summary>
+    public void UnequipAllDirect()
+    {
+        EnsureInitialized();
+
+        var slots = new List<Equipment_Slot>(equipped.Keys);
+        foreach (Equipment_Slot slot in slots) SetSlot(slot, null);
     }
 
     // ------------------------------------------------------------------

@@ -7,7 +7,7 @@ using UnityEngine;
 /// - Một ô chứa skill HOẶC vật phẩm: gán vật phẩm thì skill của ô bị bỏ, gán skill thì vật phẩm bị bỏ.
 /// - Ô giữ loại vật phẩm; hết hàng trong Inventory thì ô vẫn nhớ (hiện số 0, mờ) và dùng được lại khi có hàng.
 /// Skill_Bar_UI tự thêm component này lên Player (cùng object với Player_Skill_Slots) nếu chưa có.
-/// Chưa lưu vào Save_Data.
+/// Player_Save lưu loại vật phẩm của từng ô (itemId).
 /// </summary>
 [DisallowMultipleComponent]
 public class Player_Quick_Use : MonoBehaviour
@@ -97,6 +97,18 @@ public class Player_Quick_Use : MonoBehaviour
     public void Clear(int index)
     {
         Assign(index, null);
+    }
+
+    /// <summary>Bỏ trống cả 10 ô (load save).</summary>
+    public void ClearAll()
+    {
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (slots[i] == null) continue;
+
+            slots[i] = null;
+            OnSlotChanged?.Invoke(i, null);
+        }
     }
 
     public int FindSlot(Item_Data item)

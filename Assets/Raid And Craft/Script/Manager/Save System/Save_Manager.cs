@@ -32,6 +32,8 @@ public class Save_Manager : MonoBehaviour
 
     private long revision;
     private bool busy;
+    private bool saveBlocked;
+    private bool blockedWarned;
     private float autoSaveTimer;
 
     public string SlotId => slotId;
@@ -85,7 +87,7 @@ public class Save_Manager : MonoBehaviour
 
     public async Task SaveGameAsync()
     {
-        if (player == null || busy) return;
+        if (player == null || busy || IsSaveBlocked()) return;
         busy = true;
 
         try
@@ -110,10 +112,30 @@ public class Save_Manager : MonoBehaviour
     /// <summary>Lưu đồng bộ chỉ ra local - dùng lúc app tạm dừng/thoát, khi không kịp chờ async.</summary>
     private void SaveLocalBlocking()
     {
-        if (player == null) return;
+        if (player == null || IsSaveBlocked()) return;
 
         try { local.Save(slotId, BuildJson()); }
         catch (Exception e) { Debug.LogError($"[{nameof(Save_Manager)}] Lưu local thất bại: {e.Message}"); }
+    }
+
+    // Đang bị chặn lưu (lần nạp trước lỗi). Cảnh báo một lần, không spam mỗi lần tự lưu.
+    private bool IsSaveBlocked()
+    {
+        if (!saveBlocked) return false;
+
+        if (!blockedWarned)
+        {
+            blockedWarned = true;
+            Debug.LogWarning($"[{nameof(Save_Manager)}] Đang chặn lưu vì lần nạp save trước chưa trọn vẹn (xem lỗi lúc nạp).");
+        }
+        return true;
+    }
+
+    [ContextMenu("Debug: Bỏ chặn lưu")]
+    public void UnblockSaving()
+    {
+        saveBlocked = false;
+        blockedWarned = false;
     }
 
     private string BuildJson()
@@ -144,10 +166,25 @@ public class Save_Manager : MonoBehaviour
             if (data == null || player == null) return false;
 
             revision = data.revision;
-            player.Apply(data.player);
+
+            bool applied;
+            try { applied = player.Apply(data.player); }
+            catch (Exception e)
+            {
+                Debug.LogError($"[{nameof(Save_Manager)}] Lỗi khi áp save: {e}");
+                applied = false;
+            }
+
+            // Nạp lỗi/dở thì Player đang ở trạng thái thiếu dữ liệu: nếu cho tự lưu sẽ GHI ĐÈ bản save tốt bằng bản thiếu.
+            if (!applied)
+            {
+                saveBlocked = true;
+                Debug.LogError($"[{nameof(Save_Manager)}] Nạp save chưa trọn vẹn nên TẠM CHẶN lưu để không ghi đè save cũ. " +
+                               "Xem các lỗi phía trên, sửa rồi chạy lại. (Chuột phải Save_Manager -> Debug: Bỏ chặn lưu nếu cố ý muốn lưu tiếp.)");
+            }
 
             OnLoaded?.Invoke();
-            return true;
+            return applied;
         }
         finally
         {
@@ -186,7 +223,9 @@ public class Save_Manager : MonoBehaviour
                 return null;
             }
 
-            // Chỗ migrate save cũ: if (data.version < 2) { ...; data.version = 2; }
+            // Chỗ migrate save cũ. v1 -> v2: chỉ thêm field mới; save v1 có hasProgress = false nên Player_Save giữ nguyên
+            // Inventory/trang bị/skill hiện có. Khi đổi cấu trúc cũ ở các phiên bản sau, thêm: if (data.version < 3) { ...; data.version = 3; }
+            if (data.version < 2) data.version = 2;
             return data;
         }
         catch (Exception e)
@@ -202,6 +241,7 @@ public class Save_Manager : MonoBehaviour
 
     public void DeleteSave()
     {
+        UnblockSaving(); // xoá save = bắt đầu lại, không còn gì để bảo vệ
         local.Delete(slotId);
         if (cloud != null) RunSafe(cloud.DeleteAsync(slotId), "xoá cloud");
     }
