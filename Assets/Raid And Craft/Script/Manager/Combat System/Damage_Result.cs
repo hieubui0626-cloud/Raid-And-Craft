@@ -11,7 +11,10 @@ public enum Damage_Outcome
     Ignored = 3,
 }
 
-/// <summary>Kết quả trả về cho bên tấn công/UI: dùng để hiện số sát thương, chữ "Miss/Block", báo hạ gục...</summary>
+/// <summary>
+/// Kết quả trả về cho bên tấn công/UI: dùng để hiện số sát thương, chữ "Miss/Block", báo hạ gục...
+/// Không đổi constructor hiện tại để giữ tương thích với các call-site cũ.
+/// </summary>
 public readonly struct Damage_Result
 {
     public readonly Damage_Outcome outcome;
@@ -22,6 +25,9 @@ public readonly struct Damage_Result
 
     /// <summary>Đòn này là đòn kết liễu.</summary>
     public readonly bool wasKilled;
+
+    /// <summary>True chỉ khi đòn thực sự trúng và làm giảm máu. Dùng để lọc HitTargets/Ailment.</summary>
+    public bool WasSuccessfulHit => outcome == Damage_Outcome.Hit && damageDealt > 0f;
 
     public Damage_Result(Damage_Outcome outcome, bool isCritical, float damageDealt, bool wasKilled)
     {
