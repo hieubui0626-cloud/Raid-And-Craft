@@ -8,7 +8,7 @@ using UnityEngine;
 /// - Slots: skill đang gán vào từng ô. Giữ phím của ô nào thì Player thi triển skill của ô đó về phía con trỏ (Player_Combat.CastAtMouse).
 /// - Đòn đánh mặc định (chuột phải) không nằm trong ô, vẫn do Player_Combat lo.
 /// Chỉ lo DỮ LIỆU và nhận phím; hiển thị là việc của Skill_Bar_UI. Gắn lên PlayerPrefab.
-/// Chưa lưu vào Save_Data (làm sau khi có danh sách skill để tra cứu theo id).
+/// Player_Save lưu kho skill (trừ skill do Magic Circuit thêm) và 10 ô theo SkillId, tra lại qua Skill_Database.
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Player_Combat))]
@@ -147,6 +147,32 @@ public class Player_Skill_Slots : MonoBehaviour
 
         OnAvailableSkillsChanged?.Invoke();
         return true;
+    }
+
+    /// <summary>
+    /// Load save: thay TOÀN BỘ kho skill bằng danh sách này và bỏ trống cả 10 ô (gán lại sau bằng Assign).
+    /// Chỉ truyền skill KHÔNG do Magic Circuit thêm; Magic Circuit tự Learn lại skill của nó khi nạp.
+    /// </summary>
+    public void ReplaceAvailableSkills(IEnumerable<Skill_Data> skills)
+    {
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (slots[i] == null) continue;
+
+            slots[i] = null;
+            OnSlotChanged?.Invoke(i, null);
+        }
+
+        availableSkills.Clear();
+        if (skills != null)
+        {
+            foreach (Skill_Data skill in skills)
+            {
+                if (skill != null && !availableSkills.Contains(skill)) availableSkills.Add(skill);
+            }
+        }
+
+        OnAvailableSkillsChanged?.Invoke();
     }
 
     private static bool IsValidSlot(int index)

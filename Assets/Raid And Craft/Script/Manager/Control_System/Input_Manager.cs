@@ -56,7 +56,7 @@ public class Input_Manager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Giữ lại khi chuyển Scene
+        if (transform.parent == null) DontDestroyOnLoad(gameObject); // Giữ lại khi chuyển Scene (chỉ chạy với object gốc)
     }
 
     private void OnDestroy()

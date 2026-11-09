@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774c0bb6f5a31004c8747e8809c515f7, type: 3}
   m_Name: Rune_Intellingent
   m_EditorClassIdentifier: 
-  itemId: Rune_Strength
-  displayName: Rune Strength
+  itemId: Rune_Intellingent
+  displayName: Rune Intellingent
   description: Gain 10 Intellingent when equip in Magic Circuit
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}

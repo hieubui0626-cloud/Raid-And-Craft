@@ -181,8 +181,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Utils\MessageUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Markup\Renderers\FencedCodeBlockRenderer.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Data\CodeLineMarkingType.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\UserAttentionNotifier.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\Virtualization\ChatGroupFooter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\UserAttentionNotifier.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ChatElements\FunctionCall\Interactions\PlanReviewHeaderActions.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ChatElements\ChatElementUser.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\NewSkillsNotificationPanel.cs" />
@@ -271,8 +271,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Markup\MarkdownAPI.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\PreviewChip.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\Virtualization\ConversationFlattener.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\PromptPopup\PromptPopupWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ImeCompositionErrorWorkaround.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\PromptPopup\PromptPopupWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\Annotations\NativeScreenCapture.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Utils\SettingsProviderSearchHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ChatElements\FunctionCall\GetObjectDataFunctionCallElement.cs" />
@@ -310,8 +310,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\ConversationSearch\ConversationSearchResult.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ChatElements\CompletedActionsSection.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Events\EventExpandedViewRequested.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\GatewayPreferencesProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\Settings\SkillDetailsBlock.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\GatewayPreferencesProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ProgressElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Data\UserInteractionId.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.assistant@1b11b9bfd84a\Editor\UI\Scripts\Components\ChatElements\FunctionCall\Interactions\AskUserOptionRow.cs" />
@@ -1645,13 +1645,13 @@
       <Project>{178EF6B3-9CE6-137B-DBA2-6FE906F1D08F}</Project>
       <Name>Unity.AI.Toolkit.Async</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{A18FBD0B-E23B-B387-FF54-E2FF313B7614}</Project>

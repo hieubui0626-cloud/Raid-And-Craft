@@ -1,0 +1,1506 @@
+fileFormatVersion: 2
+guid: f850bc6b1d192ab479e4032e51632572
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 86ac56b01ed8be64db0743948503be99
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  multiSpriteImportData: []
+  layeredSpriteImportData:
+  - name: Close_Button
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1564
+      y: 873
+      width: 36
+      height: 36
+    spriteID: 5d8ff5ca041693e4189f83dac0068db0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1564, y: 873}
+    spritePosition: {x: 1691, y: 917}
+  - name: Character_Overview_Misc
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1696
+      y: 4
+      width: 239
+      height: 561
+    spriteID: 3373a7eda801ba44eaa8b0fef202611f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1695, y: 2}
+    spritePosition: {x: 824, y: 238}
+  - name: Character_Overview_Defence
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 775
+      width: 239
+      height: 561
+    spriteID: 2789a8bd5548f834e8c0876581b55292
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 3, y: 773}
+    spritePosition: {x: 569, y: 238}
+  - name: Character_Overview_Offence
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 251
+      y: 775
+      width: 239
+      height: 561
+    spriteID: 498054654460d0e42ba44ca65f917394
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 250, y: 773}
+    spritePosition: {x: 312, y: 238}
+  - name: Character_Overview_Complex
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 498
+      y: 775
+      width: 239
+      height: 561
+    spriteID: 32b42b40ae00a2041af1fa5efd1c47f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 497, y: 773}
+    spritePosition: {x: 57, y: 238}
+  - name: Inventory_Pannel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 1082
+      height: 763
+    spriteID: b9785ecca861b594bbdd75e1e73b3d3c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 22, y: 208}
+  - name: Inventory_Equip_Amulet
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1510
+      y: 873
+      width: 46
+      height: 46
+    spriteID: 103e16efe1eaa32458e2b337669b1706
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1509, y: 872}
+    spritePosition: {x: 1536, y: 707}
+  - name: Inventory_Equip_Ring_L
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1717
+      y: 944
+      width: 46
+      height: 46
+    spriteID: f6e4cce898a1ee24d816b3685f27d219
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1716, y: 942}
+    spritePosition: {x: 1319, y: 593}
+  - name: Inventory_Equip_Ring_R
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1771
+      y: 944
+      width: 46
+      height: 46
+    spriteID: a5b6b60144b099a4690f3974eb2c4fa6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1770, y: 942}
+    spritePosition: {x: 1536, y: 593}
+  - name: Inventory_Equip_Belt
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1706
+      y: 775
+      width: 143
+      height: 47
+    spriteID: 359caa0e3866d744e81b4aae18e50023
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1705, y: 774}
+    spritePosition: {x: 1379, y: 531}
+  - name: Inventory_Equip_Gloves
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1510
+      y: 775
+      width: 90
+      height: 90
+    spriteID: a54db69062b35c64b868770771745e94
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1509, y: 774}
+    spritePosition: {x: 1213, y: 539}
+  - name: Inventory_Equip_Boots
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1608
+      y: 775
+      width: 90
+      height: 90
+    spriteID: ee05c55931ae3284bac70265ba4de006
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1607, y: 774}
+    spritePosition: {x: 1597, y: 539}
+  - name: Inventory_Equip_Off_Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1943
+      y: 194
+      width: 90
+      height: 182
+    spriteID: abb28a491615115438c9f333d85396e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1942, y: 192}
+    spritePosition: {x: 1596, y: 658}
+  - name: Inventory_Equip_Main_Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1943
+      y: 4
+      width: 91
+      height: 182
+    spriteID: 9565ffb24fd1a954b8d764ea1714f28b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1942, y: 2}
+    spritePosition: {x: 1212, y: 658}
+  - name: Inventory_Equip_Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1943
+      y: 384
+      width: 91
+      height: 90
+    spriteID: 5c957a37896fee64c93d7524d8e29d0b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1941, y: 383}
+    spritePosition: {x: 1404, y: 770}
+  - name: Inventory_Equip_Body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 745
+      y: 775
+      width: 143
+      height: 161
+    spriteID: 9a4777a3ea09cd0428e5a55c76704666
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 744, y: 773}
+    spritePosition: {x: 1379, y: 595}
+  - name: Inventory_Grid
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1825
+      y: 944
+      width: 45
+      height: 45
+    spriteID: d2c0b592ecbcb1d448b3039a9e37824a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1823, y: 943}
+    spritePosition: {x: 1164, y: 414}
+  - name: Inventory_Pannel_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1094
+      y: 4
+      width: 594
+      height: 763
+    spriteID: 2565cc3531c74394ab64e5c35cb3bfa6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1094, y: 4}
+    spritePosition: {x: 1152, y: 208}
+  - name: Setting
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1943
+      y: 482
+      width: 73
+      height: 73
+    spriteID: 19e76eea552fc7544b6c1ea5fce3648c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1943, y: 482}
+    spritePosition: {x: 1746, y: 38}
+  - name: Map
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1857
+      y: 775
+      width: 73
+      height: 73
+    spriteID: 452b1ca87acef504781fcee9d2630873
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1857, y: 775}
+    spritePosition: {x: 1654, y: 38}
+  - name: Inventory
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1938
+      y: 775
+      width: 73
+      height: 73
+    spriteID: 53b357ff01f7e724eb08680e5211f757
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1938, y: 775}
+    spritePosition: {x: 1562, y: 38}
+  - name: ' Magic Circuit'
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 745
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 86ba8ee687b047b4d9efb082eb442fab
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 745, y: 944}
+    spritePosition: {x: 1471, y: 38}
+  - name: Character_Overview
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 826
+      y: 944
+      width: 73
+      height: 73
+    spriteID: e03f30e59fe0655458b718dbce95b78f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 826, y: 944}
+    spritePosition: {x: 1379, y: 38}
+  - name: Quick_Slot_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 907
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 531e83a02b4eae14e9527693750361b2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 907, y: 944}
+    spritePosition: {x: 1091, y: 35}
+  - name: Quick_Slot_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 988
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 466aba1d8231e9d4c9ac16c6b4a2b7fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 988, y: 944}
+    spritePosition: {x: 1007, y: 35}
+  - name: Quick_Slot_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1069
+      y: 944
+      width: 73
+      height: 73
+    spriteID: ba8ceb3c9ee28254eba0647419b8e047
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1069, y: 944}
+    spritePosition: {x: 923, y: 35}
+  - name: Quick_Slot_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1150
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 29df648f3960ce14289e8f71ba6ad51e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1150, y: 944}
+    spritePosition: {x: 839, y: 35}
+  - name: Quick_Slot_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1231
+      y: 944
+      width: 73
+      height: 73
+    spriteID: de601d000898fcb4d8310821b7fe80b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1231, y: 944}
+    spritePosition: {x: 755, y: 34}
+  - name: Quick_Slot_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1312
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 84193713d14f8aa4fb3af69e414dbf24
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1312, y: 944}
+    spritePosition: {x: 1091, y: 111}
+  - name: Quick_Slot_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1393
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 06bf36ffad7912b47a8090e2868d8832
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1393, y: 944}
+    spritePosition: {x: 1007, y: 111}
+  - name: Quick_Slot_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1474
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 57a387d5cf060464eaf8d98684af1ecd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1474, y: 944}
+    spritePosition: {x: 923, y: 111}
+  - name: Quick_Slot_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1555
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 78f295a636e16604297655ce33ed4761
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1555, y: 944}
+    spritePosition: {x: 839, y: 111}
+  - name: Quick_Slot_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1636
+      y: 944
+      width: 73
+      height: 73
+    spriteID: 4c9d3b8d034d4714294e01ea44f36061
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1636, y: 944}
+    spritePosition: {x: 755, y: 110}
+  - name: Mana_Pull_Screen
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1696
+      y: 573
+      width: 157
+      height: 158
+    spriteID: 75e0ce79fd0ff7445967b7ff047fc3b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1696, y: 573}
+    spritePosition: {x: 1166, y: 30}
+  - name: Mana_Pull
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 896
+      y: 775
+      width: 146
+      height: 146
+    spriteID: 6843ebf8666e7ea40a18585dae694283
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 894, y: 774}
+    spritePosition: {x: 1171, y: 37}
+  - name: Mana_Pull_Base
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1204
+      y: 775
+      width: 145
+      height: 146
+    spriteID: df6f5b2fa3028b74f9e801ad3b713643
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1204, y: 775}
+    spritePosition: {x: 1172, y: 37}
+  - name: HP_Pull_Screen
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1861
+      y: 573
+      width: 157
+      height: 158
+    spriteID: 212c4c6de619a434ba52612b8e2ca426
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1861, y: 573}
+    spritePosition: {x: 596, y: 30}
+  - name: HP_Pull copy 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1050
+      y: 775
+      width: 146
+      height: 146
+    spriteID: e3b219b22e129e14c86bf9c8498d9ba6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1048, y: 774}
+    spritePosition: {x: 601, y: 37}
+  - name: HP_Pull_Base
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1357
+      y: 775
+      width: 145
+      height: 146
+    spriteID: 2552bedc1ac876947a449e7bfcf49bc9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1357, y: 775}
+    spritePosition: {x: 601, y: 37}
+  spriteImportData: []
+  rigSpriteImportData: []
+  sharedRigSpriteImportData: []
+  mosaicSpriteImportData: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: iPhone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 0
+  generateTileAssets: 0
+  tilePaletteCellLayout: 0
+  tilePaletteHexagonLayout: 0
+  tilePaletteCellSize: {x: 1, y: 1, z: 0}
+  tilePaletteCellSizing: 0
+  transparencySortMode: 0
+  transparencySortAxis: {x: 0, y: 0, z: 1}
+  tileTemplate: {instanceID: 0}
+  padding: 4
+  spriteSizeExpand: 0
+  skeletonAssetReferenceID: 
+  pipeline: {instanceID: 0}
+  pipelineVersion: 
+  spritePackingTag: 
+  resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: Close_Button
+    spriteName: Close_Button
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5d8ff5ca041693e4189f83dac0068db0
+    layerID: 108
+    mosaicPosition: {x: 1564, y: 873}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Character_Overview
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: d84c6704e7a8493458893494bf6c905b
+    layerID: 125
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Character_Overview_Misc
+    spriteName: Character_Overview_Misc
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 3373a7eda801ba44eaa8b0fef202611f
+    layerID: 128
+    mosaicPosition: {x: 1696, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Character_Overview_Defence
+    spriteName: Character_Overview_Defence
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 2789a8bd5548f834e8c0876581b55292
+    layerID: 127
+    mosaicPosition: {x: 4, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Character_Overview_Offence
+    spriteName: Character_Overview_Offence
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 498054654460d0e42ba44ca65f917394
+    layerID: 126
+    mosaicPosition: {x: 251, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Character_Overview_Complex
+    spriteName: Character_Overview_Complex
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 32b42b40ae00a2041af1fa5efd1c47f2
+    layerID: 112
+    mosaicPosition: {x: 498, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Pannel
+    spriteName: Inventory_Pannel
+    isGroup: 0
+    parentIndex: 1
+    spriteID: b9785ecca861b594bbdd75e1e73b3d3c
+    layerID: 150
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 9fea9e195940642458b2891eb3b71a5d
+    layerID: 65
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Inventory_Equip_Amulet
+    spriteName: Inventory_Equip_Amulet
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 103e16efe1eaa32458e2b337669b1706
+    layerID: 77
+    mosaicPosition: {x: 1510, y: 873}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Ring_L
+    spriteName: Inventory_Equip_Ring_L
+    isGroup: 0
+    parentIndex: 7
+    spriteID: f6e4cce898a1ee24d816b3685f27d219
+    layerID: 76
+    mosaicPosition: {x: 1717, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Ring_R
+    spriteName: Inventory_Equip_Ring_R
+    isGroup: 0
+    parentIndex: 7
+    spriteID: a5b6b60144b099a4690f3974eb2c4fa6
+    layerID: 75
+    mosaicPosition: {x: 1771, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Belt
+    spriteName: Inventory_Equip_Belt
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 359caa0e3866d744e81b4aae18e50023
+    layerID: 74
+    mosaicPosition: {x: 1706, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Gloves
+    spriteName: Inventory_Equip_Gloves
+    isGroup: 0
+    parentIndex: 7
+    spriteID: a54db69062b35c64b868770771745e94
+    layerID: 81
+    mosaicPosition: {x: 1510, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Boots
+    spriteName: Inventory_Equip_Boots
+    isGroup: 0
+    parentIndex: 7
+    spriteID: ee05c55931ae3284bac70265ba4de006
+    layerID: 80
+    mosaicPosition: {x: 1608, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Off_Hand
+    spriteName: Inventory_Equip_Off_Hand
+    isGroup: 0
+    parentIndex: 7
+    spriteID: abb28a491615115438c9f333d85396e7
+    layerID: 79
+    mosaicPosition: {x: 1943, y: 194}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Main_Hand
+    spriteName: Inventory_Equip_Main_Hand
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 9565ffb24fd1a954b8d764ea1714f28b
+    layerID: 78
+    mosaicPosition: {x: 1943, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Head
+    spriteName: Inventory_Equip_Head
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 5c957a37896fee64c93d7524d8e29d0b
+    layerID: 73
+    mosaicPosition: {x: 1943, y: 384}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Equip_Body
+    spriteName: Inventory_Equip_Body
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 9a4777a3ea09cd0428e5a55c76704666
+    layerID: 72
+    mosaicPosition: {x: 745, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Grid
+    spriteName: Inventory_Grid
+    isGroup: 0
+    parentIndex: 7
+    spriteID: d2c0b592ecbcb1d448b3039a9e37824a
+    layerID: 71
+    mosaicPosition: {x: 1825, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory_Pannel
+    spriteName: Inventory_Pannel_1
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 2565cc3531c74394ab64e5c35cb3bfa6
+    layerID: 151
+    mosaicPosition: {x: 1094, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Control_UI
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 9fa79f425114b46469669daae54d7aae
+    layerID: 63
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Setting
+    spriteName: Setting
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 19e76eea552fc7544b6c1ea5fce3648c
+    layerID: 62
+    mosaicPosition: {x: 1943, y: 482}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Map
+    spriteName: Map
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 452b1ca87acef504781fcee9d2630873
+    layerID: 61
+    mosaicPosition: {x: 1857, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Inventory
+    spriteName: Inventory
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 53b357ff01f7e724eb08680e5211f757
+    layerID: 60
+    mosaicPosition: {x: 1938, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: ' Magic Circuit'
+    spriteName: ' Magic Circuit'
+    isGroup: 0
+    parentIndex: 20
+    spriteID: 86ba8ee687b047b4d9efb082eb442fab
+    layerID: 59
+    mosaicPosition: {x: 745, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Character_Overview
+    spriteName: Character_Overview
+    isGroup: 0
+    parentIndex: 20
+    spriteID: e03f30e59fe0655458b718dbce95b78f
+    layerID: 58
+    mosaicPosition: {x: 826, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Combat_UI
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 96b1fbb47dfb40b4196c708696d12801
+    layerID: 4
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Quick_Slot_10
+    spriteName: Quick_Slot_10
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 531e83a02b4eae14e9527693750361b2
+    layerID: 57
+    mosaicPosition: {x: 907, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_9
+    spriteName: Quick_Slot_9
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 466aba1d8231e9d4c9ac16c6b4a2b7fd
+    layerID: 56
+    mosaicPosition: {x: 988, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_8
+    spriteName: Quick_Slot_8
+    isGroup: 0
+    parentIndex: 26
+    spriteID: ba8ceb3c9ee28254eba0647419b8e047
+    layerID: 55
+    mosaicPosition: {x: 1069, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_7
+    spriteName: Quick_Slot_7
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 29df648f3960ce14289e8f71ba6ad51e
+    layerID: 54
+    mosaicPosition: {x: 1150, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_6
+    spriteName: Quick_Slot_6
+    isGroup: 0
+    parentIndex: 26
+    spriteID: de601d000898fcb4d8310821b7fe80b5
+    layerID: 53
+    mosaicPosition: {x: 1231, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_5
+    spriteName: Quick_Slot_5
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 84193713d14f8aa4fb3af69e414dbf24
+    layerID: 52
+    mosaicPosition: {x: 1312, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_4
+    spriteName: Quick_Slot_4
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 06bf36ffad7912b47a8090e2868d8832
+    layerID: 51
+    mosaicPosition: {x: 1393, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_3
+    spriteName: Quick_Slot_3
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 57a387d5cf060464eaf8d98684af1ecd
+    layerID: 50
+    mosaicPosition: {x: 1474, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_2
+    spriteName: Quick_Slot_2
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 78f295a636e16604297655ce33ed4761
+    layerID: 49
+    mosaicPosition: {x: 1555, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Quick_Slot_1
+    spriteName: Quick_Slot_1
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 4c9d3b8d034d4714294e01ea44f36061
+    layerID: 48
+    mosaicPosition: {x: 1636, y: 944}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mana_Pull
+    spriteName: 
+    isGroup: 1
+    parentIndex: 26
+    spriteID: a76615d79913ad84697c6a7bfbee7e79
+    layerID: 31
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Mana_Pull_Screen
+    spriteName: Mana_Pull_Screen
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 75e0ce79fd0ff7445967b7ff047fc3b7
+    layerID: 30
+    mosaicPosition: {x: 1696, y: 573}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mana_Pull
+    spriteName: Mana_Pull
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 6843ebf8666e7ea40a18585dae694283
+    layerID: 10
+    mosaicPosition: {x: 896, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mana_Pull_Base
+    spriteName: Mana_Pull_Base
+    isGroup: 0
+    parentIndex: 37
+    spriteID: df6f5b2fa3028b74f9e801ad3b713643
+    layerID: 28
+    mosaicPosition: {x: 1204, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HP_Pull
+    spriteName: 
+    isGroup: 1
+    parentIndex: 26
+    spriteID: 2c38f4ba4bbc70e498a332a550f6ca35
+    layerID: 16
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: HP_Pull_Screen
+    spriteName: HP_Pull_Screen
+    isGroup: 0
+    parentIndex: 41
+    spriteID: 212c4c6de619a434ba52612b8e2ca426
+    layerID: 19
+    mosaicPosition: {x: 1861, y: 573}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HP_Pull copy 2
+    spriteName: HP_Pull copy 2
+    isGroup: 0
+    parentIndex: 41
+    spriteID: e3b219b22e129e14c86bf9c8498d9ba6
+    layerID: 18
+    mosaicPosition: {x: 1050, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HP_Pull_Base
+    spriteName: HP_Pull_Base
+    isGroup: 0
+    parentIndex: 41
+    spriteID: 2552bedc1ac876947a449e7bfcf49bc9
+    layerID: 21
+    mosaicPosition: {x: 1357, y: 775}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Layer 2
+    spriteName: 
+    isGroup: 0
+    parentIndex: 26
+    spriteID: 1b93dc255bc0fda409963d8c775abd32
+    layerID: 3
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  mosaicPSDLayers: []
+  rigPSDLayers: []
+  sharedRigPSDLayers: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

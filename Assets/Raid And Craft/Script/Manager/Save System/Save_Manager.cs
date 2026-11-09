@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Điều phối lưu/tải. Đặt 1 object trong Scene khởi đầu (cùng chỗ với Input_Manager).
@@ -26,16 +27,26 @@ public class Save_Manager : MonoBehaviour
     [Tooltip("Giây giữa hai lần tự lưu. 0 = tắt tự lưu theo chu kỳ.")]
     [SerializeField] private float autoSaveInterval = 60f;
 
+    [Tooltip("Lần tải đầu tiên: nếu save ghi Scene base khác Scene đang mở thì nạp Scene đó trước rồi mới áp save. " +
+             "Tắt khi muốn thử riêng một Scene trong Editor.")]
+    [SerializeField] private bool loadSavedScene = true;
+
     private readonly Local_Save_Provider local = new Local_Save_Provider();
     private ISave_Provider cloud; // null cho tới khi gắn cloud
     private Player_Save player;
 
     private long revision;
     private bool busy;
+    private bool saveBlocked;
+    private bool blockedWarned;
     private float autoSaveTimer;
+    private bool sceneResolved; // đã xét việc chuyển Scene theo save trong lần chạy này chưa (chỉ làm một lần, tránh lặp)
 
     public string SlotId => slotId;
     public bool HasCloud => cloud != null;
+
+    /// <summary>Tên Scene base gần nhất Player đã ở. Player_Save cập nhật khi lưu ở Scene base; ở Scene tạm vẫn giữ giá trị này để lưu lại.</summary>
+    public string LastBaseScene { get; set; } = string.Empty;
 
     private void Awake()
     {
@@ -46,7 +57,9 @@ public class Save_Manager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        // DontDestroyOnLoad chỉ hoạt động với object gốc (không có cha); nằm dưới object cha thì bỏ qua để khỏi báo lỗi.
+        if (transform.parent == null) DontDestroyOnLoad(gameObject);
     }
 
     private void OnDestroy()
@@ -85,7 +98,7 @@ public class Save_Manager : MonoBehaviour
 
     public async Task SaveGameAsync()
     {
-        if (player == null || busy) return;
+        if (player == null || busy || IsSaveBlocked()) return;
         busy = true;
 
         try
@@ -107,13 +120,70 @@ public class Save_Manager : MonoBehaviour
         }
     }
 
+    /// <summary>Lưu NGAY, đồng bộ (chỉ local). Dùng trước khi chuyển Scene. False nếu không lưu được (chưa có Player, đang bị chặn lưu, lỗi ghi file).</summary>
+    public bool SaveNow()
+    {
+        if (player == null || IsSaveBlocked()) return false;
+
+        try
+        {
+            local.Save(slotId, BuildJson());
+            OnSaved?.Invoke();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[{nameof(Save_Manager)}] Lưu local thất bại: {e.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>Có file save (hợp lệ) cho slot này không - dùng cho nút Continue của Main Menu.</summary>
+    public bool HasSave => ReadLocalOrNull() != null;
+
+    /// <summary>
+    /// Tên Scene base ghi trong save, để Main Menu nạp khi bấm Continue. Trả về false nếu chưa có save;
+    /// save cũ không ghi tên Scene thì true với sceneName rỗng (Main Menu tự chọn Scene mặc định).
+    /// </summary>
+    public bool TryGetSavedBaseScene(out string sceneName)
+    {
+        Save_Data data = ReadLocalOrNull();
+        sceneName = data != null ? data.player.baseSceneName ?? string.Empty : string.Empty;
+        return data != null;
+    }
+
+    private Save_Data ReadLocalOrNull()
+    {
+        return ParseOrNull(local.Load(slotId)) ?? ParseOrNull(local.Load(slotId, backup: true));
+    }
+
     /// <summary>Lưu đồng bộ chỉ ra local - dùng lúc app tạm dừng/thoát, khi không kịp chờ async.</summary>
     private void SaveLocalBlocking()
     {
-        if (player == null) return;
+        if (player == null || IsSaveBlocked()) return;
 
         try { local.Save(slotId, BuildJson()); }
         catch (Exception e) { Debug.LogError($"[{nameof(Save_Manager)}] Lưu local thất bại: {e.Message}"); }
+    }
+
+    // Đang bị chặn lưu (lần nạp trước lỗi). Cảnh báo một lần, không spam mỗi lần tự lưu.
+    private bool IsSaveBlocked()
+    {
+        if (!saveBlocked) return false;
+
+        if (!blockedWarned)
+        {
+            blockedWarned = true;
+            Debug.LogWarning($"[{nameof(Save_Manager)}] Đang chặn lưu vì lần nạp save trước chưa trọn vẹn (xem lỗi lúc nạp).");
+        }
+        return true;
+    }
+
+    [ContextMenu("Debug: Bỏ chặn lưu")]
+    public void UnblockSaving()
+    {
+        saveBlocked = false;
+        blockedWarned = false;
     }
 
     private string BuildJson()
@@ -144,15 +214,54 @@ public class Save_Manager : MonoBehaviour
             if (data == null || player == null) return false;
 
             revision = data.revision;
-            player.Apply(data.player);
+            LastBaseScene = data.player.baseSceneName ?? string.Empty;
+
+            // Save ghi Player ở Scene base khác Scene đang mở: nạp Scene đó trước. Player ở Scene mới sẽ tự đăng ký lại và nạp save ở đó.
+            if (TryRedirectToSavedScene(data)) return false;
+
+            bool applied;
+            try { applied = player.Apply(data.player); }
+            catch (Exception e)
+            {
+                Debug.LogError($"[{nameof(Save_Manager)}] Lỗi khi áp save: {e}");
+                applied = false;
+            }
+
+            // Nạp lỗi/dở thì Player đang ở trạng thái thiếu dữ liệu: nếu cho tự lưu sẽ GHI ĐÈ bản save tốt bằng bản thiếu.
+            if (!applied)
+            {
+                saveBlocked = true;
+                Debug.LogError($"[{nameof(Save_Manager)}] Nạp save chưa trọn vẹn nên TẠM CHẶN lưu để không ghi đè save cũ. " +
+                               "Xem các lỗi phía trên, sửa rồi chạy lại. (Chuột phải Save_Manager -> Debug: Bỏ chặn lưu nếu cố ý muốn lưu tiếp.)");
+            }
 
             OnLoaded?.Invoke();
-            return true;
+            return applied;
         }
         finally
         {
             busy = false;
         }
+    }
+
+    private bool TryRedirectToSavedScene(Save_Data data)
+    {
+        if (sceneResolved) return false;
+        sceneResolved = true;
+        if (!loadSavedScene || player == null) return false;
+
+        string target = data.player.baseSceneName;
+        if (string.IsNullOrEmpty(target) || target == player.gameObject.scene.name) return false;
+
+        if (!Application.CanStreamedLevelBeLoaded(target))
+        {
+            Debug.LogWarning($"[{nameof(Save_Manager)}] Save ghi Scene base '{target}' nhưng Scene này không nằm trong Build Settings, " +
+                             "nên ở lại Scene hiện tại (vị trí sẽ không được áp).");
+            return false;
+        }
+
+        SceneManager.LoadScene(target);
+        return true;
     }
 
     private async Task<Save_Data> ReadNewestAsync()
@@ -186,7 +295,9 @@ public class Save_Manager : MonoBehaviour
                 return null;
             }
 
-            // Chỗ migrate save cũ: if (data.version < 2) { ...; data.version = 2; }
+            // Chỗ migrate save cũ. v1 -> v2: chỉ thêm field mới; save v1 có hasProgress = false nên Player_Save giữ nguyên
+            // Inventory/trang bị/skill hiện có. Khi đổi cấu trúc cũ ở các phiên bản sau, thêm: if (data.version < 3) { ...; data.version = 3; }
+            if (data.version < 2) data.version = 2;
             return data;
         }
         catch (Exception e)
@@ -202,6 +313,7 @@ public class Save_Manager : MonoBehaviour
 
     public void DeleteSave()
     {
+        UnblockSaving(); // xoá save = bắt đầu lại, không còn gì để bảo vệ
         local.Delete(slotId);
         if (cloud != null) RunSafe(cloud.DeleteAsync(slotId), "xoá cloud");
     }

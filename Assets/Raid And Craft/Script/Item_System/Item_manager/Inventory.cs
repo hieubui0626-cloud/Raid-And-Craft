@@ -5,7 +5,7 @@ using UnityEngine;
 /// Inventory của nhân vật: kho dạng LƯỚI kiểu PoE (mỗi vật phẩm chiếm Grid Size ô, xoay được, xếp chồng tới Max Stack).
 /// Toàn bộ logic nằm trong Grid_Item_Container / Item_Grid; lớp này chỉ là "kho chính của Player".
 /// Kho phụ (Stash...) làm bằng cách kế thừa Grid_Item_Container giống lớp này.
-/// Chưa có UI, chưa lưu vào Save_Data. Gắn lên PlayerPrefab.
+/// Được lưu bởi Player_Save (vị trí từng vật phẩm + từng món trang bị). Gắn lên PlayerPrefab.
 /// </summary>
 [DisallowMultipleComponent]
 public class Inventory : Grid_Item_Container

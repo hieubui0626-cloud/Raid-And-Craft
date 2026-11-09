@@ -18,7 +18,7 @@ public struct Inventory_Starting_Item
 /// Trang bị cho sẵn ở Starting Items tự có một Item_Instance mặc định (Base Modifier sao chép từ asset).
 /// Muốn có kho mới (Stash, rương): kế thừa lớp này (không cần viết gì thêm), gắn lên object, chỉnh Width/Height.
 /// Chuyển vật phẩm giữa hai kho: Item_Transfer.TryMove(kho_a, kho_b, vật_phẩm, số_lượng).
-/// Chưa lưu vào Save_Data (làm sau, tra vật phẩm qua Item_Database).
+/// Lưu/nạp: Player_Save chụp từng chỗ (GetPlacement) và nạp lại bằng ClearAll + TryPlace (vật phẩm tra qua Item_Database).
 /// </summary>
 public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
 {
@@ -266,6 +266,16 @@ public abstract class Grid_Item_Container : MonoBehaviour, IItem_Container
 
         NotifyChanged();
         return true;
+    }
+
+    /// <summary>Xoá sạch mọi vật phẩm trong kho (load save, đặt lại kho). Kích thước lưới giữ nguyên.</summary>
+    public void ClearAll()
+    {
+        EnsureInitialized();
+        if (grid.PlacementCount == 0) return;
+
+        grid.Clear();
+        NotifyChanged();
     }
 
     /// <summary>Đổi kích thước lưới (mở rộng kho). Thu nhỏ chỉ được khi mọi vật phẩm vẫn nằm trọn trong lưới mới.</summary>

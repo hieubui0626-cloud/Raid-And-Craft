@@ -151,6 +151,8 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\IDamageable.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Codec.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Scene_Info.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Bar_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer_Map.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Builder.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -179,6 +182,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Tooltip_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Skill_Slots.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Effect.cs" />
@@ -1031,6 +1035,10 @@
       <Project>{CB1B0BE6-AC29-D23F-F390-8C09B4EF5AD7}</Project>
       <Name>Unity.InferenceEngine.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Player.csproj">
+      <Project>{03210044-C216-66D5-4508-D73FEDD60C5A}</Project>
+      <Name>Unity.Recorder.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.Player.csproj">
       <Project>{78686DD6-7F74-E4EB-2F7C-0912045B9281}</Project>
       <Name>Unity.RenderPipeline.Universal.ShaderLibrary.Player</Name>
@@ -1071,9 +1079,17 @@
       <Project>{0BC137B0-4E31-6888-490F-F9E4CD7F8802}</Project>
       <Name>Unity.Collections.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.Player.csproj">
+      <Project>{F9B7299A-DCB3-B25D-4290-98C78173C709}</Project>
+      <Name>Unity.Recorder.Base.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Core.Player.csproj">
       <Project>{BEA903D3-CF99-06A7-397E-815EF8EB285E}</Project>
       <Name>Unity.VisualScripting.Core.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InternalAPIEngineBridge.001.Player.csproj">
+      <Project>{C359ABE0-A31B-218F-220F-D9049B4F23B0}</Project>
+      <Name>Unity.InternalAPIEngineBridge.001.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Config.Runtime.Player.csproj">
       <Project>{B9BD8590-9796-3A9B-CEF2-2BCDAC1AA095}</Project>
@@ -1095,13 +1111,13 @@
       <Project>{C8AC21C4-A827-7A41-CE31-4E4161EAB81B}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.InferenceEngine.Tokenization.Player.csproj">
-      <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
-      <Name>Unity.InferenceEngine.Tokenization.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{51EA57FE-698C-76E8-D681-264ACB67B17D}</Project>
       <Name>Unity.TextMeshPro.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Common.Runtime.Player.csproj">
+      <Project>{89C68F68-6BCC-2AC5-9460-D029C2179C36}</Project>
+      <Name>Unity.2D.Common.Runtime.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.Player.csproj">
       <Project>{AE76C007-6BD6-3894-5AD0-3623ECF063BB}</Project>
@@ -1118,6 +1134,10 @@
     <ProjectReference Include="Unity.AI.MCP.Runtime.Player.csproj">
       <Project>{9F53E2B0-0ED4-A62B-7490-502ECEFE1988}</Project>
       <Name>Unity.AI.MCP.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InferenceEngine.Tokenization.Player.csproj">
+      <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
+      <Name>Unity.InferenceEngine.Tokenization.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Burst.Player.csproj">
       <Project>{9D70CE3A-D266-483D-FBED-C37E187DC6D7}</Project>

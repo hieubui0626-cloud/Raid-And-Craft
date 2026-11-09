@@ -9,7 +9,7 @@ using UnityEngine;
 /// - Node thuộc vùng (zone) có thể làm Rune mạnh hơn (runeEffectBonus).
 /// - Gỡ vật phẩm: trả về Inventory, có thể tốn phí (removalCostItem x removalCostCount, hiện để 0 = miễn phí).
 /// - Gỡ node (respec từng node): chỉ khi các node còn lại vẫn nối với node xuất phát; vật phẩm trong node trả về Inventory, hoàn điểm.
-/// Chưa lưu vào Save_Data (cần lưu: node đã mở + vật phẩm theo ô). Chưa có UI.
+/// Player_Save lưu node đã mở + vật phẩm theo ô (xem ResetState/RestoreUnlocked/RestoreSocket). Chưa có UI.
 /// Gắn lên PlayerPrefab (cùng Character_Stats, Player_Skill_Slots, Player_Circuit_Points, Inventory).
 /// </summary>
 [DisallowMultipleComponent]
@@ -258,6 +258,90 @@ public class Magic_Circuit : MonoBehaviour
 
         skillRefs.Remove(skill);
         if (learnedByCircuit.Remove(skill)) skillSlots.Forget(skill);
+    }
+
+    // ------------------------------------------------------------------
+    // LƯU / NẠP (Player_Save gọi)
+    // ------------------------------------------------------------------
+
+    /// <summary>Id các node đã mở (gồm cả node xuất phát).</summary>
+    public IEnumerable<string> UnlockedNodeIds => unlocked;
+
+    /// <summary>Số ô của node đã mở (0 nếu node chưa mở).</summary>
+    public int GetSocketCount(string nodeId)
+    {
+        return nodeId != null && sockets.TryGetValue(nodeId, out Item_Data[] arr) ? arr.Length : 0;
+    }
+
+    /// <summary>
+    /// Skill này do Spell Stone của Circuit thêm vào kho (nên KHÔNG lưu vào kho skill gốc: Circuit tự thêm lại khi nạp).
+    /// </summary>
+    public bool IsLearnedByCircuit(Skill_Data skill)
+    {
+        return skill != null && learnedByCircuit.Contains(skill);
+    }
+
+    /// <summary>
+    /// Load save, bước 1: đưa Circuit về trạng thái mới (chỉ node xuất phát, mọi ô trống). Thu hồi chỉ số/skill của mọi vật phẩm đang lắp
+    /// nhưng KHÔNG trả vật phẩm về Inventory và KHÔNG hoàn điểm (Player_Save nạp lại Inventory và điểm đã tiêu từ bản save).
+    /// </summary>
+    public void ResetState()
+    {
+        if (layout == null) return;
+
+        foreach (KeyValuePair<string, Item_Data[]> pair in sockets)
+        {
+            Item_Data[] items = pair.Value;
+            Socket_Source[] itemSources = sources[pair.Key];
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] is Circuit_Item_Data circuitItem) circuitItem.Remove(this, itemSources[i]);
+            }
+        }
+
+        sockets.Clear();
+        sources.Clear();
+        unlocked.Clear();
+        skillRefs.Clear();
+        learnedByCircuit.Clear();
+
+        Circuit_Node start = layout.StartNode;
+        if (start != null) UnlockInternal(start);
+    }
+
+    /// <summary>Load save, bước 2: mở node theo bản save, KHÔNG tốn điểm và không kiểm tra node kề. False nếu node không còn trong Layout.</summary>
+    public bool RestoreUnlocked(string nodeId)
+    {
+        if (layout == null || !layout.TryGetNode(nodeId, out Circuit_Node node)) return false;
+
+        if (!unlocked.Contains(nodeId)) UnlockInternal(node);
+        return true;
+    }
+
+    /// <summary>
+    /// Load save, bước 3: lắp vật phẩm vào ô theo bản save, KHÔNG lấy từ Inventory (vật phẩm đã được lưu riêng trong ô).
+    /// False nếu không lắp được (node chưa mở/không còn, ô không có, ô đã có đồ, vật phẩm không còn lắp được);
+    /// Player_Save trả vật phẩm đó về Inventory để không mất.
+    /// </summary>
+    public bool RestoreSocket(string nodeId, int socketIndex, Item_Data item)
+    {
+        if (item == null || !(item is Circuit_Item_Data circuitItem) || !item.CanBeUsedFor(Item_Usage.MagicCircuit)) return false;
+        if (nodeId == null || !sockets.TryGetValue(nodeId, out Item_Data[] arr)) return false;
+        if (socketIndex < 0 || socketIndex >= arr.Length || arr[socketIndex] != null) return false;
+
+        arr[socketIndex] = item;
+
+        var source = new Socket_Source(nodeId, socketIndex);
+        sources[nodeId][socketIndex] = source;
+        circuitItem.Apply(this, source, GetEffectMultiplier(nodeId));
+        return true;
+    }
+
+    /// <summary>Load save, bước cuối: báo UI vẽ lại một lần sau khi nạp xong (ResetState/Restore* không bắn sự kiện từng bước).</summary>
+    public void NotifyRestored()
+    {
+        OnCircuitChanged?.Invoke();
     }
 
     // ------------------------------------------------------------------

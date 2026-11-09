@@ -151,6 +151,8 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\IDamageable.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Codec.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Scene_Info.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Bar_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer_Map.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Builder.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -179,6 +182,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Tooltip_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Skill_Slots.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Effect.cs" />
@@ -1239,25 +1243,41 @@
       <Project>{B5633C3A-D3A7-8A88-4045-ACB5D27D6D89}</Project>
       <Name>Unity.AppUI.Navigation.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="PsdPlugin.csproj">
+      <Project>{D67DE736-111D-2787-FF1E-898A455A7FB4}</Project>
+      <Name>PsdPlugin</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.csproj">
       <Project>{764FBB1E-28C1-7633-E646-B34484560D8E}</Project>
       <Name>Unity.AI.Navigation</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
-      <Project>{6F274EBB-AD7F-DB88-C247-0E65FD73DD3D}</Project>
-      <Name>Unity.Animation.Rigging.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AI.Assistant.Integrations.Profiler.Editor.csproj">
       <Project>{450AA8B4-6AF8-FF2D-7B84-1D530E2668A6}</Project>
       <Name>Unity.AI.Assistant.Integrations.Profiler.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="HFDownloader.csproj">
-      <Project>{5B4144B1-FFCF-DFFD-8E68-2696AC03E452}</Project>
-      <Name>HFDownloader</Name>
+    <ProjectReference Include="Unity.2D.Common.Editor.csproj">
+      <Project>{40923ABB-91B6-172E-CE2A-A2F8638888EB}</Project>
+      <Name>Unity.2D.Common.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
+      <Project>{6F274EBB-AD7F-DB88-C247-0E65FD73DD3D}</Project>
+      <Name>Unity.Animation.Rigging.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Common.Path.Editor.csproj">
+      <Project>{43E4CF12-D53D-2735-2705-30C8CAE699A3}</Project>
+      <Name>Unity.2D.Common.Path.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.InferenceEngine.csproj">
       <Project>{67948363-FB69-8AE2-F149-706FE055B01A}</Project>
       <Name>Unity.InferenceEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{A10AAF73-56FB-D882-09BC-5FDD1613DA96}</Project>
+      <Name>Unity.Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="HFDownloader.csproj">
+      <Project>{5B4144B1-FFCF-DFFD-8E68-2696AC03E452}</Project>
+      <Name>HFDownloader</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
       <Project>{30C58E07-4022-5361-FA8F-D68C1E075B14}</Project>
@@ -1319,6 +1339,10 @@
       <Project>{E8397138-AC2E-D6F7-8266-B7E70BD48E2B}</Project>
       <Name>Unity.InferenceEngine.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.InternalAPIEditorBridge.001.csproj">
+      <Project>{02336B09-D36C-D06B-B99B-DB4487FBF727}</Project>
+      <Name>Unity.InternalAPIEditorBridge.001</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AppUI.Redux.csproj">
       <Project>{F5C1B079-8C7B-550B-5D96-EB83AB535A87}</Project>
       <Name>Unity.AppUI.Redux</Name>
@@ -1331,6 +1355,10 @@
       <Project>{4A740F71-E843-F11D-6B77-DDE91F60F4E5}</Project>
       <Name>Unity.AI.Tracing</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Bindings.OpenImageIO.Editor.csproj">
+      <Project>{00F4CD10-D509-3543-6B4A-0B2960C96FB5}</Project>
+      <Name>Unity.Bindings.OpenImageIO.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AI.Assistant.Runtime.csproj">
       <Project>{8B9F3ED7-30A1-99C6-EC91-2B463C9BD0BF}</Project>
       <Name>Unity.AI.Assistant.Runtime</Name>
@@ -1342,6 +1370,10 @@
     <ProjectReference Include="PPv2URPConverters.csproj">
       <Project>{F7A7849F-6953-5DAA-47C4-BECEFCE12866}</Project>
       <Name>PPv2URPConverters</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{A5B0DBF1-14BB-14E4-C416-479652037BC5}</Project>
+      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AI.Assistant.Annotations.Editor.csproj">
       <Project>{018D5674-6A7E-E629-F0B4-07B295B0447C}</Project>
@@ -1362,6 +1394,14 @@
     <ProjectReference Include="Unity.VisualScripting.Core.csproj">
       <Project>{BC911683-624E-7326-792D-FDBE699284BD}</Project>
       <Name>Unity.VisualScripting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InternalAPIEngineBridge.001.csproj">
+      <Project>{FA298040-64AD-AAA8-19A8-43825F56507B}</Project>
+      <Name>Unity.InternalAPIEngineBridge.001</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
+      <Project>{921EFE5E-EC52-6DB7-F7D2-BFC84DC2533E}</Project>
+      <Name>Unity.2D.Tilemap.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Config.Runtime.csproj">
       <Project>{02091E39-468F-350A-FD24-FC19ACFFE75F}</Project>
@@ -1411,10 +1451,6 @@
       <Project>{0A44E605-2745-7176-D45B-5A645158731F}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.InferenceEngine.Tokenization.csproj">
-      <Project>{2AB43B6E-AE6F-D177-E981-5AFE504EEB00}</Project>
-      <Name>Unity.InferenceEngine.Tokenization</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
       <Project>{1A26E734-4F2C-A173-26FF-749DCA5C1299}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
@@ -1435,9 +1471,9 @@
       <Project>{7E627908-C261-06D3-A132-EE912011CC19}</Project>
       <Name>Unity.InferenceEngine.MacBLAS</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
-      <Project>{EEE8BF17-E56F-6202-90EA-6FD17BA971CA}</Project>
-      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
+    <ProjectReference Include="Unity.2D.Common.Runtime.csproj">
+      <Project>{6D0F6318-87F5-4C8A-044D-8F58F5F1E00F}</Project>
+      <Name>Unity.2D.Common.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
       <Project>{20F60567-EC19-99C6-3148-EE8E65324D31}</Project>
@@ -1450,6 +1486,10 @@
     <ProjectReference Include="Unity.Mathematics.csproj">
       <Project>{B88AAE17-2B60-9A33-541B-66DAFDE73D3D}</Project>
       <Name>Unity.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
+      <Project>{EEE8BF17-E56F-6202-90EA-6FD17BA971CA}</Project>
+      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
       <Project>{4E6FA566-F832-9628-6536-5154FAF095BE}</Project>
@@ -1474,6 +1514,18 @@
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
       <Project>{168257C8-AB59-621F-6992-5FC6E1025FBB}</Project>
       <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InferenceEngine.Tokenization.csproj">
+      <Project>{2AB43B6E-AE6F-D177-E981-5AFE504EEB00}</Project>
+      <Name>Unity.InferenceEngine.Tokenization</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Psdimporter.Editor.csproj">
+      <Project>{4B0FCBFD-E281-0422-1D40-0D3F4E790488}</Project>
+      <Name>Unity.2D.Psdimporter.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{57D6C747-102B-5162-3FEB-C2B7836C96A6}</Project>
+      <Name>Unity.Recorder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{74495391-5AF7-E2ED-2496-C7F9077D58A7}</Project>

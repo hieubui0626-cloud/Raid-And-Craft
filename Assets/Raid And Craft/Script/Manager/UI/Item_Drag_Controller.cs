@@ -28,6 +28,18 @@ public class Item_Drag_Controller : MonoBehaviour
     /// <summary>Có đang cầm vật phẩm không (không tự tạo controller khi hỏi).</summary>
     public static bool IsHoldingItem => instance != null && !instance.held.IsEmpty;
 
+    /// <summary>
+    /// Thứ đang cầm trên con trỏ (rỗng nếu không cầm gì), không tự tạo controller.
+    /// Player_Save dùng để không làm mất vật phẩm đang cầm khi lưu: món nhấc khỏi Inventory chỉ còn nằm ở đây.
+    /// </summary>
+    public static Grid_Placement PeekHeld => instance != null ? instance.held : default;
+
+    /// <summary>Bỏ thứ đang cầm (không trả về kho). Load save dùng, vì bản save đã chứa đủ vật phẩm.</summary>
+    public static void DiscardHeldIfAny()
+    {
+        if (instance != null) instance.Clear();
+    }
+
     /// <summary>Trả vật phẩm đang cầm về Inventory (nếu có). Không tự tạo controller.</summary>
     public static void ReturnHeldIfAny()
     {

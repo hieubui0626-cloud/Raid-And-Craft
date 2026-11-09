@@ -198,8 +198,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\DebugHelpers\Persistence\GeometryToken.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\ProximityOverlapRemoval\StressEnergy\ExampleStressMajorization.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\Layered\LayerInserter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\CycleRemoval\GraphForCycleRemoval.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\IntPair.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\CycleRemoval\GraphForCycleRemoval.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\MDS\Transform.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\HighBendVertexEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Geometry\Curves\PenetrationDepth.cs" />
@@ -356,9 +356,9 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Obstacle.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\OpenVertexEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\ProximityOverlapRemoval\StressEnergy\NodeVoting.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\LongestNudgedSegment.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\DataStructures\SymmetricTuple.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\Path.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\LongestNudgedSegment.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\Bundling\BundleRouter.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\NeighborSides.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\ProjectionSolver\Constraint.cs" />
@@ -465,8 +465,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\AxisCoordinateEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\Layered\Ordering\Ordering.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\DebugHelpers\Show.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutEditing\ObstacleCalculator.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\GraphAlgorithms\CycleRemoval\NodeInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutEditing\ObstacleCalculator.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\ValidateArg.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\Nudging\FreeSpaceFinder.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\Layered\ProperLayeredGraph.cs" />
@@ -481,8 +481,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Geometry\IRectangle.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\GraphmapsWithMesh\MsaglUtilities.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\MultiScale\MultiScaleLayout.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\ProjectionSolver\Solver.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\Bundling\IMetroMapOrderingAlgorithm.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\ProjectionSolver\Solver.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\Bundling\HubDebugger.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Geometry\RectanglePacking\RectanglePacking.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Layout\LargeGraphLayout\DeviceIndependedZoomCalculatorForNodes.cs" />
@@ -513,8 +513,8 @@
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Spline\ConeSpanner\LowestVertexEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Rectilinear\ObstaclePortEntrance.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutEditing\NodeRestoreData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\Node.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\MultiEdgeRouter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Core\Layout\Node.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\Diagonal.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Routing\Visibility\VisibilityGraph.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.inference@9a123aee5df7\ThirdParty\Microsoft.Msagl\Miscellaneous\LayoutHelpers.cs" />
@@ -1632,13 +1632,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{A18FBD0B-E23B-B387-FF54-E2FF313B7614}</Project>
