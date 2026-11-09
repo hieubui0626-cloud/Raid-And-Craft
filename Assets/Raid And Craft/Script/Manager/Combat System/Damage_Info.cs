@@ -57,7 +57,7 @@ public struct Damage_Info
     /// <summary>Gán sát thương không âm; damage âm không được dùng để hồi máu.</summary>
     public void Set(Damage_Type type, float value)
     {
-        float safeValue = Math.Max(0f, value);
+        float safeValue = float.IsNaN(value) || float.IsInfinity(value) ? 0f : Math.Max(0f, value);
         switch (type)
         {
             case Damage_Type.Physic: physic = safeValue; break;
