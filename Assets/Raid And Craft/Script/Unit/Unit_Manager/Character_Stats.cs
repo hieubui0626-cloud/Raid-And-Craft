@@ -58,6 +58,12 @@ public class Character_Stats : MonoBehaviour, IDamageable
     public event Action OnRevive;
 
     /// <summary>
+    /// Bên gây sát thương (qua TakeDamage(Damage_Info), đòn trúng) GẦN NHẤT. Khi OnDeath bắn, đây là kẻ hạ gục (kill credit: EXP, rơi đồ).
+    /// Null nếu chưa bị đòn nào có nguồn (DoT/môi trường không có nguồn không ghi đè giá trị này).
+    /// </summary>
+    public Character_Stats LastAttacker { get; private set; }
+
+    /// <summary>
     /// Chỉ số nền mặc định. Chỉ số nào KHÔNG có trong danh sách Inspector (ví dụ prefab cũ tạo trước khi thêm MovementSpeed)
     /// sẽ lấy giá trị ở đây thay vì 0. Muốn một chỉ số bằng 0 thật: thêm dòng của nó vào danh sách Inspector với giá trị 0.
     /// </summary>
@@ -442,6 +448,7 @@ public class Character_Stats : MonoBehaviour, IDamageable
             return new Damage_Result(outcome, false, 0f, false);
         }
 
+        if (info.source != null) LastAttacker = info.source;
         float dealt = TakeDamage(finalDamage);
         return new Damage_Result(Damage_Outcome.Hit, info.isCritical, dealt, IsDead);
     }
@@ -498,6 +505,7 @@ public class Character_Stats : MonoBehaviour, IDamageable
         if (!IsDead) return;
 
         IsDead = false;
+        LastAttacker = null;
         float percent = Mathf.Clamp(healthPercent, 0.01f, 1f);
         SetVital(MaxHealth * percent, MaxHealth, true);
         OnRevive?.Invoke();

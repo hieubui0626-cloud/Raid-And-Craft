@@ -81,6 +81,9 @@ public class Player_Save_Data
     /// <summary>10 ô quick-use: itemId, chuỗi rỗng = không có vật phẩm.</summary>
     public List<string> quickUseItemIds = new List<string>();
 
+    /// <summary>EXP hiện có trong cấp hiện tại (cấp độ nằm trong chỉ số gốc CharacterLevel).</summary>
+    public int experience;
+
     /// <summary>Các điểm dịch chuyển nhanh (portal) đã mở.</summary>
     public List<Fast_Travel_Entry> fastTravel = new List<Fast_Travel_Entry>();
 

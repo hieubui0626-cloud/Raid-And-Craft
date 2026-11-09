@@ -37,6 +37,21 @@ public class Level_Config : ScriptableObject
     [Tooltip("Tăng cấp xong thì hồi đầy máu/mana.")]
     public bool restoreOnLevelUp = true;
 
+    [Header("Kinh nghiệm (EXP)")]
+    [Tooltip("EXP cần để lên từ cấp 1 lên cấp 2. Cấp N cần: Base x N ^ Exponent (làm tròn). " +
+             "Ví dụ Base 50, Exponent 1.6: cấp 1 -> 50, cấp 10 -> ~1990, cấp 50 -> ~26000.")]
+    [Min(1)] public int baseExpRequired = 50;
+
+    [Tooltip("Độ dốc đường cong EXP: 1 = tăng đều, càng cao càng khó lên cấp ở cấp cao.")]
+    [Min(0f)] public float expExponent = 1.6f;
+
+    /// <summary>EXP cần để lên từ cấp này lên cấp kế (tối thiểu 1).</summary>
+    public int GetExpRequired(int level)
+    {
+        double required = baseExpRequired * System.Math.Pow(Mathf.Max(1, level), expExponent);
+        return required >= int.MaxValue ? int.MaxValue : Mathf.Max(1, (int)System.Math.Round(required));
+    }
+
     [Header("Điểm Magic Circuit")]
     [Tooltip("Số điểm Magic Circuit có ngay ở cấp 1.")]
     [Min(0)] public int startingCircuitPoints = 1;

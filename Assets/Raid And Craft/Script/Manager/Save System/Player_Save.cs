@@ -169,6 +169,9 @@ public class Player_Save : MonoBehaviour
         Player_Circuit_Points points = GetComponent<Player_Circuit_Points>();
         data.circuitSpentPoints = points != null ? points.SpentPoints : 0;
 
+        Player_Experience experience = GetComponent<Player_Experience>();
+        data.experience = experience != null ? experience.CurrentExp : 0;
+
         data.fastTravel.Clear();
         Player_Fast_Travel fastTravel = GetComponent<Player_Fast_Travel>();
         if (fastTravel != null) data.fastTravel.AddRange(fastTravel.Entries);
@@ -299,6 +302,7 @@ public class Player_Save : MonoBehaviour
         Player_Wallet wallet = GetComponent<Player_Wallet>();
         Player_Circuit_Points points = GetComponent<Player_Circuit_Points>();
         Player_Fast_Travel fastTravel = GetComponent<Player_Fast_Travel>();
+        Player_Experience experience = GetComponent<Player_Experience>();
         Magic_Circuit circuit = GetComponent<Magic_Circuit>();
         bool circuitActive = circuit != null && circuit.enabled;
 
@@ -378,6 +382,7 @@ public class Player_Save : MonoBehaviour
         }
 
         if (points != null) ok &= Section("điểm Circuit", () => points.SetSpent(data.circuitSpentPoints));
+        if (experience != null) ok &= Section("kinh nghiệm", () => experience.SetExp(data.experience));
         if (fastTravel != null) ok &= Section("dịch chuyển nhanh", () => fastTravel.RestoreAll(data.fastTravel));
 
         if (orphans.Count > 0 && inventory != null)
