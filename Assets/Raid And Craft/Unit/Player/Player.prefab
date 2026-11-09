@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotId: slot_0
-  autoLoadOnStart: 1
+  autoLoadOnStart: 0
   autoSaveInterval: 60
   loadSavedScene: 1
 --- !u!114 &106801433799054152

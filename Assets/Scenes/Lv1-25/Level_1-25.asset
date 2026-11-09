@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b43aa26763d5498735c914e113d32, type: 3}
+  m_Name: Level_1-25
+  m_EditorClassIdentifier: 
+  displayName: Level_1-25_Modifier
+  description: 
+  levelOffset: 1
+  tierOffset: 5
+  expMultiplier: 1
+  coinMultiplier: 1
+  dropChanceMultiplier: 1
+  dropCountMultiplier: 1
+  extraFamilies:
+  - family: {fileID: 11400000, guid: 510e5de0e940b9944beb90662600fcbd, type: 2}
+    weight: 0
