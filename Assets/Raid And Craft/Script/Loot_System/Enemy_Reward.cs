@@ -25,6 +25,10 @@ public struct Material_Drop_Slot
 [RequireComponent(typeof(Character_Stats))]
 public class Enemy_Reward : MonoBehaviour
 {
+    [Header("Hạng quái")]
+    [Tooltip("Hạng quyết định hệ số thưởng riêng của Scene (Rank_Rule trong Scene_Rules): Normal = quái thường, Boss = trùm. Scene không khai báo hạng thì hệ số bằng 1.")]
+    [SerializeField] private Enemy_Rank rank = Enemy_Rank.Normal;
+
     [Header("Kinh nghiệm")]
     [Tooltip("EXP cho người hạ gục.")]
     [SerializeField, Min(0)] private int exp = 10;
@@ -35,7 +39,7 @@ public class Enemy_Reward : MonoBehaviour
     [SerializeField, Min(0)] private int coinMax;
 
     [Header("Nguyên liệu theo Scene")]
-    [Tooltip("Mỗi ô tung riêng; nguyên liệu cụ thể (họ, tier) do Scene_Rules của Scene hiện tại chọn, nên cùng quái ở Scene khác rơi khác. " +
+    [Tooltip("Mỗi ô tung riêng (xác suất nhân hệ số rơi của Scene/modifier/hạng, nên quái KHÔNG phải lúc nào cũng rơi); nguyên liệu cụ thể (họ, tier) do Scene_Rules của Scene hiện tại chọn, nên cùng quái ở Scene khác rơi khác. " +
              "Scene không có Rules thì các ô này không rơi gì.")]
     [SerializeField] private List<Material_Drop_Slot> materialSlots = new List<Material_Drop_Slot>
     {
@@ -72,11 +76,11 @@ public class Enemy_Reward : MonoBehaviour
     private void HandleDeath()
     {
         GameObject receiver = ResolveReceiver();
-        Scene_Rules rules = Scene_Info.Active != null ? Scene_Info.Active.Rules : null;
+        Scene_Rule_Values rules = Scene_Info.Active != null ? Scene_Info.Active.Values : null;
 
         if (receiver != null)
         {
-            int finalExp = rules != null ? rules.ScaleExp(exp) : exp;
+            int finalExp = rules != null ? rules.ScaleExp(exp, rank) : exp;
             if (finalExp > 0)
             {
                 var experience = receiver.GetComponent<Player_Experience>();
@@ -84,6 +88,7 @@ public class Enemy_Reward : MonoBehaviour
             }
 
             int coin = Random.Range(Mathf.Min(coinMin, coinMax), Mathf.Max(coinMin, coinMax) + 1);
+            if (rules != null) coin = rules.ScaleCoin(coin, rank);
             if (coin > 0)
             {
                 var wallet = receiver.GetComponent<Player_Wallet>();
@@ -102,12 +107,14 @@ public class Enemy_Reward : MonoBehaviour
         return GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void DropLoot(Scene_Rules rules)
+    private void DropLoot(Scene_Rule_Values rules)
     {
         DropBuffer.Clear();
         foreach (Loot_Table table in lootTables)
         {
-            if (table != null) table.Roll(DropBuffer);
+            if (table == null) continue;
+            if (rules != null) table.Roll(DropBuffer, rules.DropChanceFactor(rank), rules.DropCountFactor(rank));
+            else table.Roll(DropBuffer);
         }
 
         // Nguyên liệu do Scene chọn (họ + tier theo level Scene).
@@ -115,7 +122,7 @@ public class Enemy_Reward : MonoBehaviour
         {
             foreach (Material_Drop_Slot slot in materialSlots)
             {
-                if (slot.chance <= 0f || UnityEngine.Random.value > slot.chance) continue;
+                if (slot.chance <= 0f || UnityEngine.Random.value > rules.ScaleDropChance(slot.chance, rank)) continue;
 
                 Material_Item_Data material = rules.RollMaterial();
                 if (material == null) continue;
@@ -125,6 +132,8 @@ public class Enemy_Reward : MonoBehaviour
                 {
                     int min = Mathf.Max(1, slot.minCount);
                     count = UnityEngine.Random.Range(min, Mathf.Max(min, slot.maxCount) + 1);
+                    count = rules.ScaleCount(count, rank);
+                    if (count <= 0) continue;
                 }
 
                 DropBuffer.Add(new Loot_Drop { item = material, count = count });

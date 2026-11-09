@@ -13,6 +13,33 @@ public struct Scene_Family_Entry
 }
 
 /// <summary>
+/// Hệ số theo HẠNG quái (thường, boss...) trong một Scene. Nhân với hệ số chung của Scene (và modifier) khi tính thưởng.
+/// Hạng không có trong danh sách = mọi hệ số bằng 1.
+/// </summary>
+[Serializable]
+public struct Rank_Rule
+{
+    public Enemy_Rank rank;
+
+    [Tooltip("Nhân vào xác suất rơi của từng ô (kết quả kẹp tối đa 100%). Boss thường > 1.")]
+    [Min(0f)] public float dropChanceMultiplier;
+
+    [Tooltip("Nhân vào số lượng rơi (số lẻ được làm tròn ngẫu nhiên: 1.5 = 1 hoặc 2).")]
+    [Min(0f)] public float dropCountMultiplier;
+
+    [Tooltip("Nhân vào EXP gốc của quái.")]
+    [Min(0f)] public float expMultiplier;
+
+    [Tooltip("Nhân vào Coin.")]
+    [Min(0f)] public float coinMultiplier;
+
+    public static Rank_Rule Neutral(Enemy_Rank rank)
+    {
+        return new Rank_Rule { rank = rank, dropChanceMultiplier = 1f, dropCountMultiplier = 1f, expMultiplier = 1f, coinMultiplier = 1f };
+    }
+}
+
+/// <summary>
 /// QUY CHẾ CỦA SCENE (tạo asset: Create -> Raid And Craft -> Scene Rules, kéo vào ô Rules của Scene_Info).
 /// Scene quyết định cho quái ở đó: level, hệ số EXP, những họ nguyên liệu có thể rơi và tier của món rơi.
 /// Nhờ vậy CÙNG MỘT loại quái rơi đồ khác nhau tuỳ Scene: quái chỉ khai báo "rơi nguyên liệu với xác suất/số lượng này" (Enemy_Reward),
@@ -31,6 +58,23 @@ public class Scene_Rules : ScriptableObject
     [Tooltip("Nhân với EXP gốc của quái (Enemy_Reward) khi hạ quái trong Scene này.")]
     [SerializeField, Min(0f)] private float expMultiplier = 1f;
 
+    [Tooltip("Nhân với Coin của quái trong Scene này.")]
+    [SerializeField, Min(0f)] private float coinMultiplier = 1f;
+
+    [Header("Hệ số rơi (không phải lúc nào quái chết cũng rớt đồ)")]
+    [Tooltip("Nhân vào xác suất rơi của MỌI ô rơi trong Scene này (0.5 = rơi ít một nửa). Kết quả từng ô kẹp trong 0..100%.")]
+    [SerializeField, Min(0f)] private float dropChanceMultiplier = 1f;
+
+    [Tooltip("Nhân vào số lượng rơi trong Scene này.")]
+    [SerializeField, Min(0f)] private float dropCountMultiplier = 1f;
+
+    [Tooltip("Hệ số riêng cho từng HẠNG quái (nhân thêm vào hệ số chung ở trên). Mặc định: boss rơi chắc hơn, nhiều hơn, thưởng nhiều hơn.")]
+    [SerializeField] private List<Rank_Rule> rankRules = new List<Rank_Rule>
+    {
+        new Rank_Rule { rank = Enemy_Rank.Normal, dropChanceMultiplier = 1f, dropCountMultiplier = 1f, expMultiplier = 1f, coinMultiplier = 1f },
+        new Rank_Rule { rank = Enemy_Rank.Boss, dropChanceMultiplier = 3f, dropCountMultiplier = 2f, expMultiplier = 5f, coinMultiplier = 5f },
+    };
+
     [Header("Nguyên liệu rơi")]
     [Tooltip("Các họ nguyên liệu quái trong Scene có thể rơi. Trống = Scene này không rơi nguyên liệu theo quy chế.")]
     [SerializeField] private List<Scene_Family_Entry> materialFamilies = new List<Scene_Family_Entry>();
@@ -46,50 +90,25 @@ public class Scene_Rules : ScriptableObject
 
     public int SceneLevel => Mathf.Max(1, sceneLevel);
     public float ExpMultiplier => expMultiplier;
+    public float CoinMultiplier => coinMultiplier;
+    public float DropChanceMultiplier => dropChanceMultiplier;
+    public float DropCountMultiplier => dropCountMultiplier;
     public IReadOnlyList<Scene_Family_Entry> MaterialFamilies => materialFamilies;
+    public int LevelsPerTier => Mathf.Max(1, levelsPerTier);
+    public float HigherTierChance => higherTierChance;
+    public float LowerTierChance => lowerTierChance;
+
+    /// <summary>Hệ số của một hạng quái; hạng chưa khai báo thì mọi hệ số bằng 1.</summary>
+    public Rank_Rule GetRankRule(Enemy_Rank rank)
+    {
+        foreach (Rank_Rule rule in rankRules)
+        {
+            if (rule.rank == rank) return rule;
+        }
+
+        return Rank_Rule.Neutral(rank);
+    }
 
     /// <summary>Tier chính của món rơi theo level Scene (tối thiểu 1).</summary>
     public int MainTier => 1 + (SceneLevel - 1) / Mathf.Max(1, levelsPerTier);
-
-    /// <summary>EXP cuối cùng của một quái có EXP gốc baseExp trong Scene này.</summary>
-    public int ScaleExp(int baseExp)
-    {
-        return Mathf.Max(0, Mathf.RoundToInt(baseExp * expMultiplier));
-    }
-
-    /// <summary>Tung tier cho một món rơi: có thể lệch 1 bậc so với tier chính (không xuống dưới 1).</summary>
-    public int RollTier()
-    {
-        int main = MainTier;
-        float roll = UnityEngine.Random.value;
-
-        if (roll < higherTierChance) return main + 1;
-        if (roll < higherTierChance + lowerTierChance) return Mathf.Max(1, main - 1);
-        return main;
-    }
-
-    /// <summary>Chọn một họ theo trọng số rồi lấy món đúng tier tung được. Null nếu Scene không có họ nào dùng được.</summary>
-    public Material_Item_Data RollMaterial()
-    {
-        float total = 0f;
-        foreach (Scene_Family_Entry entry in materialFamilies)
-        {
-            if (entry.family != null && entry.weight > 0f) total += entry.weight;
-        }
-
-        if (total <= 0f) return null;
-
-        float pick = UnityEngine.Random.value * total;
-        Material_Family chosen = null;
-        foreach (Scene_Family_Entry entry in materialFamilies)
-        {
-            if (entry.family == null || entry.weight <= 0f) continue;
-
-            chosen = entry.family;
-            pick -= entry.weight;
-            if (pick < 0f) break;
-        }
-
-        return chosen != null ? chosen.GetForTier(RollTier()) : null;
-    }
 }

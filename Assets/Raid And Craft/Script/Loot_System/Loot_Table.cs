@@ -38,12 +38,15 @@ public class Loot_Table : ScriptableObject
     public IReadOnlyList<Loot_Entry> Entries => entries;
 
     /// <summary>Tung mọi dòng, thêm các món rơi vào results.</summary>
-    public void Roll(List<Loot_Drop> results)
+    public void Roll(List<Loot_Drop> results) => Roll(results, 1f, 1f);
+
+    /// <summary>Tung có hệ số: chanceFactor nhân xác suất (kẹp 0..1), countFactor nhân số lượng (phần lẻ làm tròn ngẫu nhiên).</summary>
+    public void Roll(List<Loot_Drop> results, float chanceFactor, float countFactor)
     {
         foreach (Loot_Entry entry in entries)
         {
             if (entry.item == null || entry.chance <= 0f) continue;
-            if (UnityEngine.Random.value > entry.chance) continue;
+            if (UnityEngine.Random.value > Mathf.Clamp01(entry.chance * chanceFactor)) continue;
 
             int count = 1;
             if (entry.item.CanStack)
@@ -51,6 +54,8 @@ public class Loot_Table : ScriptableObject
                 int min = Mathf.Max(1, entry.minCount);
                 int max = Mathf.Max(min, entry.maxCount);
                 count = UnityEngine.Random.Range(min, max + 1);
+                if (!Mathf.Approximately(countFactor, 1f)) count = Scene_Rule_Values.RoundStochastic(count * countFactor);
+                if (count <= 0) continue;
             }
 
             results.Add(new Loot_Drop { item = entry.item, count = count });

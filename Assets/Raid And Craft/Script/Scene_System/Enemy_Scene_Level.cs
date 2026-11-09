@@ -12,10 +12,11 @@ public class Enemy_Scene_Level : MonoBehaviour
     private void Start()
     {
         Scene_Info info = Scene_Info.Active;
-        if (info == null || info.Rules == null) return;
+        Scene_Rule_Values rules = info != null ? info.Values : null;
+        if (rules == null) return;
 
         var level = GetComponent<Character_Level>();
-        level.SetLevel(info.Rules.SceneLevel);
+        level.SetLevel(rules.Level);
 
         var stats = GetComponent<Character_Stats>();
         if (stats != null && !stats.IsDead) stats.RestoreFull();
