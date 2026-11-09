@@ -14,4 +14,5 @@ public class Material_Item_Data : Item_Data
     [SerializeField, Min(1)] private int rarityTier = 1;
 
     public int RarityTier => Mathf.Max(1, rarityTier);
+
 }

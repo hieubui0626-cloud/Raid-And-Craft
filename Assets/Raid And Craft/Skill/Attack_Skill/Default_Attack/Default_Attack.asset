@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillId: Default_Attack
   displayName: Default Attack
-  icon: {fileID: 0}
+  icon: {fileID: -7397836648516717801, guid: f850bc6b1d192ab479e4032e51632572, type: 3}
   description: Normal Attack by your weapond
   category: 0
   manaCost: 5
@@ -35,4 +35,4 @@ MonoBehaviour:
     useWeaponAnimation: 1
     scaleSpeedWithActionSpeed: 1
   effects:
-  - {fileID: 11400000, guid: 02382a01514c4594c969aca2cc720f4e, type: 2}
+  - {fileID: 11400000, guid: 9192959662a0d9549bd7aaf99e297992, type: 2}

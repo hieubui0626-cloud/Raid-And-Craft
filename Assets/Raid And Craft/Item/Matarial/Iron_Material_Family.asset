@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d6f03a126bc3b40b43fbe62fe22589, type: 3}
+  m_Name: Iron_Material_Family
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: d2924aea77ddd624f83a2623022d69d9, type: 2}
+  - {fileID: 11400000, guid: 3bad2e52b79030c46ad1ae1d83dc0f29, type: 2}
+  - {fileID: 11400000, guid: 1e46499646f062042a6098edc27957fe, type: 2}
+  - {fileID: 11400000, guid: 957b1f36caa221240846a5168f642c38, type: 2}
+  - {fileID: 11400000, guid: fb48c283a93cf384e966a42997a74b88, type: 2}
