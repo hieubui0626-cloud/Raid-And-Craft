@@ -123,7 +123,11 @@ public class Damage_Effect : Skill_Effect
             Character_Stats target = found[i];
             Damage_Result result = target.TakeDamage(info);
             Combat_Events.Report(context.Stats, target, result);
-            context.AddHit(target);
+
+            // Chỉ mục tiêu thực sự mất HP mới được đưa sang các Skill_Effect tiếp theo.
+            // Evaded / Blocked / Ignored không được xem là HitTargets.
+            if (result.WasSuccessfulHit)
+                context.AddHit(target);
         }
 
         Skill_Targeting.Release(found);
