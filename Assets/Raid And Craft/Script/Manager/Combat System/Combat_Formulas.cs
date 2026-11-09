@@ -193,57 +193,76 @@ public static class Combat_Formulas
     /// </summary>
     public static Damage_Outcome Resolve(Damage_Info info, Character_Stats defender, out float finalDamage)
     {
-        return Resolve(info, defender, Random.value, Random.value, out finalDamage);
+        Damage_Info ignoredBreakdown;
+        return Resolve(info, defender, Random.value, Random.value, out finalDamage, out ignoredBreakdown);
     }
 
     /// <summary>Như trên nhưng truyền sẵn hai kết quả roll (0..1) cho né và đỡ để test hoặc replay.</summary>
     public static Damage_Outcome Resolve(Damage_Info info, Character_Stats defender, float hitRoll, float blockRoll, out float finalDamage)
     {
+        Damage_Info ignoredBreakdown;
+        return Resolve(info, defender, hitRoll, blockRoll, out finalDamage, out ignoredBreakdown);
+    }
+
+    /// <summary>
+    /// Resolve mở rộng: ngoài tổng sát thương trả về breakdown theo từng Damage_Type sau mitigation.
+    /// Các overload cũ vẫn được giữ nguyên để tương thích với call-site hiện tại.
+    /// </summary>
+    public static Damage_Outcome Resolve(
+        Damage_Info info, Character_Stats defender, float hitRoll, float blockRoll,
+        out float finalDamage, out Damage_Info mitigatedBreakdown)
+    {
         finalDamage = 0f;
+        mitigatedBreakdown = default;
         if (defender == null || info.TotalRaw <= 0f) return Damage_Outcome.Ignored;
 
-        // 1) Né: Accuracy của đòn so với Evade của bên nhận.
         if (!info.cannotBeEvaded)
         {
             float hitChance = HitChance(info.accuracy, defender.GetValue(Player_Stat_Type.Evade));
             if (hitRoll >= hitChance) return Damage_Outcome.Evaded;
         }
 
-        // 2) Đỡ: đỡ được thì không nhận sát thương nào.
         if (!info.cannotBeBlocked)
         {
             float blockChance = BlockProbability(defender.GetValue(Player_Stat_Type.BlockChance));
             if (blockRoll < blockChance) return Damage_Outcome.Blocked;
         }
 
-        // 3) Giảm sát thương từng loại.
-        finalDamage = MitigatedTotal(info, defender);
+        mitigatedBreakdown = MitigateByType(info, defender);
+        finalDamage = mitigatedBreakdown.TotalRaw;
         return Damage_Outcome.Hit;
+    }
+
+    /// <summary>
+    /// Trả về breakdown sát thương sau mitigation theo từng Damage_Type.
+    /// Metadata từ đòn gốc được giữ lại, nhưng các giá trị damage được thay bằng lượng sau giảm.
+    /// </summary>
+    public static Damage_Info MitigateByType(Damage_Info info, Character_Stats defender)
+    {
+        Damage_Info result = info;
+        foreach (Damage_Type type in Damage_Info.AllTypes)
+        {
+            float raw = info.Get(type);
+            if (raw <= 0f)
+            {
+                result.Set(type, 0f);
+                continue;
+            }
+
+            float reduction;
+            if (TryGetResistanceStat(type, out Player_Stat_Type resistStat))
+                reduction = ResistanceReduction(defender.GetValue(resistStat));
+            else
+                reduction = ArmorReduction(defender.GetValue(Player_Stat_Type.Armor), raw);
+
+            result.Set(type, raw * (1f - reduction));
+        }
+        return result;
     }
 
     /// <summary>Tổng sát thương sau khi áp Armor (vật lý) và kháng (các loại còn lại).</summary>
     public static float MitigatedTotal(Damage_Info info, Character_Stats defender)
     {
-        float total = 0f;
-
-        foreach (Damage_Type type in Damage_Info.AllTypes)
-        {
-            float raw = info.Get(type);
-            if (raw <= 0f) continue;
-
-            float reduction;
-            if (TryGetResistanceStat(type, out Player_Stat_Type resistStat))
-            {
-                reduction = ResistanceReduction(defender.GetValue(resistStat));
-            }
-            else
-            {
-                reduction = ArmorReduction(defender.GetValue(Player_Stat_Type.Armor), raw);
-            }
-
-            total += raw * (1f - reduction);
-        }
-
-        return total;
+        return MitigateByType(info, defender).TotalRaw;
     }
 }
