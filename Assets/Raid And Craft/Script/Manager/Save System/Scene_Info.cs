@@ -20,9 +20,41 @@ public class Scene_Info : MonoBehaviour
 {
     [SerializeField] private Scene_Kind kind = Scene_Kind.Base;
 
+    [Tooltip("Quy chế của Scene cho quái: level, hệ số EXP, họ nguyên liệu rơi và tier. Trống = quái giữ level prefab, EXP gốc, không rơi nguyên liệu theo quy chế.")]
+    [SerializeField] private Scene_Rules rules;
+
     [Tooltip("Cho phép dịch chuyển nhanh (Map) khi đang ở Scene này. Thường tắt ở Scene tạm (Arena, hầm ngục).")]
     [SerializeField] private bool allowFastTravel = true;
 
+    private static Scene_Info active;
+
+    /// <summary>Scene_Info của Scene đang chơi (tự tìm lần đầu). Null nếu Scene không có.</summary>
+    public static Scene_Info Active
+    {
+        get
+        {
+            if (active == null) active = FindFirstObjectByType<Scene_Info>();
+            return active;
+        }
+    }
+
     public Scene_Kind Kind => kind;
+    public Scene_Rules Rules => rules;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        active = null;
+    }
+
+    private void OnEnable()
+    {
+        active = this;
+    }
+
+    private void OnDisable()
+    {
+        if (active == this) active = null;
+    }
     public bool AllowFastTravel => allowFastTravel;
 }
