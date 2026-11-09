@@ -442,15 +442,16 @@ public class Character_Stats : MonoBehaviour, IDamageable
         EnsureInitialized();
         if (IsDead) return Damage_Result.Ignored;
 
-        Damage_Outcome outcome = Combat_Formulas.Resolve(info, this, out float finalDamage);
+        Damage_Outcome outcome = Combat_Formulas.Resolve(
+            info, this, UnityEngine.Random.value, UnityEngine.Random.value,
+            out float finalDamage, out Damage_Info mitigatedBreakdown);
+
         if (outcome != Damage_Outcome.Hit)
-        {
             return new Damage_Result(outcome, false, 0f, false);
-        }
 
         if (info.source != null) LastAttacker = info.source;
         float dealt = TakeDamage(finalDamage);
-        return new Damage_Result(Damage_Outcome.Hit, info.isCritical, dealt, IsDead);
+        return new Damage_Result(Damage_Outcome.Hit, info.isCritical, dealt, IsDead, mitigatedBreakdown);
     }
 
     /// <summary>Hồi máu (amount dương). Trả về lượng máu thực sự hồi. Đang chết thì không hồi được, hãy dùng Revive.</summary>
