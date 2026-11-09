@@ -30,6 +30,16 @@ public struct Damage_Info
     /// <summary>Đòn không thể bị đỡ.</summary>
     public bool cannotBeBlocked;
 
+    /// <summary>
+    /// Đòn này không được phép tạo Ailment mới. Dùng cho DoT tick, phản sát thương
+    /// hoặc damage phụ để ngăn vòng lặp Ailment.
+    /// Mặc định false để không làm thay đổi hành vi các đòn đánh hiện tại.
+    /// </summary>
+    public bool cannotApplyAilments;
+
+    /// <summary>Đánh dấu damage tick theo thời gian; hiện chỉ là metadata, không tự đổi công thức damage.</summary>
+    public bool isDamageOverTime;
+
     public float Get(Damage_Type type)
     {
         switch (type)
@@ -44,28 +54,41 @@ public struct Damage_Info
         }
     }
 
+    /// <summary>Gán sát thương không âm; damage âm không được dùng để hồi máu.</summary>
     public void Set(Damage_Type type, float value)
     {
+        float safeValue = float.IsNaN(value) || float.IsInfinity(value) ? 0f : Math.Max(0f, value);
         switch (type)
         {
-            case Damage_Type.Physic: physic = value; break;
-            case Damage_Type.Magic: magic = value; break;
-            case Damage_Type.Fire: fire = value; break;
-            case Damage_Type.Cold: cold = value; break;
-            case Damage_Type.Lightning: lightning = value; break;
-            case Damage_Type.Chaos: chaos = value; break;
+            case Damage_Type.Physic: physic = safeValue; break;
+            case Damage_Type.Magic: magic = safeValue; break;
+            case Damage_Type.Fire: fire = safeValue; break;
+            case Damage_Type.Cold: cold = safeValue; break;
+            case Damage_Type.Lightning: lightning = safeValue; break;
+            case Damage_Type.Chaos: chaos = safeValue; break;
         }
     }
 
-    /// <summary>Tổng sát thương thô (chưa giảm).</summary>
-    public float TotalRaw => physic + magic + fire + cold + lightning + chaos;
+    /// <summary>Tổng sát thương thô hợp lệ (chưa giảm), bỏ qua giá trị âm/NaN.</summary>
+    public float TotalRaw =>
+        Safe(physic) + Safe(magic) + Safe(fire) +
+        Safe(cold) + Safe(lightning) + Safe(chaos);
 
-    /// <summary>Trả về bản sao với mọi loại sát thương nhân thêm một hệ số.</summary>
+    public bool HasDamage(Damage_Type type) => Safe(Get(type)) > 0f;
+
+    /// <summary>Trả về bản sao với mọi loại sát thương nhân thêm một hệ số không âm.</summary>
     public Damage_Info Scaled(float multiplier)
     {
         Damage_Info copy = this;
-        foreach (Damage_Type type in AllTypes) copy.Set(type, Get(type) * multiplier);
+        float safeMultiplier = Safe(multiplier);
+        foreach (Damage_Type type in AllTypes)
+            copy.Set(type, Safe(Get(type)) * safeMultiplier);
         return copy;
+    }
+
+    private static float Safe(float value)
+    {
+        return float.IsNaN(value) || float.IsInfinity(value) || value <= 0f ? 0f : value;
     }
 
     public static readonly Damage_Type[] AllTypes = (Damage_Type[])Enum.GetValues(typeof(Damage_Type));
