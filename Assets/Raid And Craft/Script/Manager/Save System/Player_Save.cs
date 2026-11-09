@@ -54,6 +54,9 @@ public class Player_Save : MonoBehaviour
         }
 
         Save_Manager.Instance.Register(this);
+
+        // Chưa có file save (lần đầu) thì Apply không chạy: vẫn phải đặt Player vào điểm xuất hiện. Đã đặt rồi thì hàm này không làm gì.
+        Scene_Transition.PlaceAtPendingSpawn(transform, agent);
     }
 
     private void OnDestroy()
@@ -166,6 +169,10 @@ public class Player_Save : MonoBehaviour
         Player_Circuit_Points points = GetComponent<Player_Circuit_Points>();
         data.circuitSpentPoints = points != null ? points.SpentPoints : 0;
 
+        data.fastTravel.Clear();
+        Player_Fast_Travel fastTravel = GetComponent<Player_Fast_Travel>();
+        if (fastTravel != null) data.fastTravel.AddRange(fastTravel.Entries);
+
         data.circuitUnlockedNodes.Clear();
         data.circuitSockets.Clear();
         if (circuitActive)
@@ -271,6 +278,8 @@ public class Player_Save : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, data.rotationY, 0f);
         }
 
+        // Vừa qua cổng/dịch chuyển sang Scene này: đặt Player vào điểm xuất hiện đã chọn (ghi đè vị trí trong save).
+        Scene_Transition.PlaceAtPendingSpawn(transform, agent);
         return ok;
     }
 
@@ -289,6 +298,7 @@ public class Player_Save : MonoBehaviour
         Player_Quick_Use quickUse = GetComponent<Player_Quick_Use>();
         Player_Wallet wallet = GetComponent<Player_Wallet>();
         Player_Circuit_Points points = GetComponent<Player_Circuit_Points>();
+        Player_Fast_Travel fastTravel = GetComponent<Player_Fast_Travel>();
         Magic_Circuit circuit = GetComponent<Magic_Circuit>();
         bool circuitActive = circuit != null && circuit.enabled;
 
@@ -368,6 +378,7 @@ public class Player_Save : MonoBehaviour
         }
 
         if (points != null) ok &= Section("điểm Circuit", () => points.SetSpent(data.circuitSpentPoints));
+        if (fastTravel != null) ok &= Section("dịch chuyển nhanh", () => fastTravel.RestoreAll(data.fastTravel));
 
         if (orphans.Count > 0 && inventory != null)
         {

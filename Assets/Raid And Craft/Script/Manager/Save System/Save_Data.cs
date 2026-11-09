@@ -81,6 +81,9 @@ public class Player_Save_Data
     /// <summary>10 ô quick-use: itemId, chuỗi rỗng = không có vật phẩm.</summary>
     public List<string> quickUseItemIds = new List<string>();
 
+    /// <summary>Các điểm dịch chuyển nhanh (portal) đã mở.</summary>
+    public List<Fast_Travel_Entry> fastTravel = new List<Fast_Travel_Entry>();
+
     public int circuitSpentPoints;
     public List<string> circuitUnlockedNodes = new List<string>();
     public List<Circuit_Socket_Save> circuitSockets = new List<Circuit_Socket_Save>();

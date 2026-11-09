@@ -120,6 +120,43 @@ public class Save_Manager : MonoBehaviour
         }
     }
 
+    /// <summary>Lưu NGAY, đồng bộ (chỉ local). Dùng trước khi chuyển Scene. False nếu không lưu được (chưa có Player, đang bị chặn lưu, lỗi ghi file).</summary>
+    public bool SaveNow()
+    {
+        if (player == null || IsSaveBlocked()) return false;
+
+        try
+        {
+            local.Save(slotId, BuildJson());
+            OnSaved?.Invoke();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[{nameof(Save_Manager)}] Lưu local thất bại: {e.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>Có file save (hợp lệ) cho slot này không - dùng cho nút Continue của Main Menu.</summary>
+    public bool HasSave => ReadLocalOrNull() != null;
+
+    /// <summary>
+    /// Tên Scene base ghi trong save, để Main Menu nạp khi bấm Continue. Trả về false nếu chưa có save;
+    /// save cũ không ghi tên Scene thì true với sceneName rỗng (Main Menu tự chọn Scene mặc định).
+    /// </summary>
+    public bool TryGetSavedBaseScene(out string sceneName)
+    {
+        Save_Data data = ReadLocalOrNull();
+        sceneName = data != null ? data.player.baseSceneName ?? string.Empty : string.Empty;
+        return data != null;
+    }
+
+    private Save_Data ReadLocalOrNull()
+    {
+        return ParseOrNull(local.Load(slotId)) ?? ParseOrNull(local.Load(slotId, backup: true));
+    }
+
     /// <summary>Lưu đồng bộ chỉ ra local - dùng lúc app tạm dừng/thoát, khi không kịp chờ async.</summary>
     private void SaveLocalBlocking()
     {

@@ -20,5 +20,9 @@ public class Scene_Info : MonoBehaviour
 {
     [SerializeField] private Scene_Kind kind = Scene_Kind.Base;
 
+    [Tooltip("Cho phép dịch chuyển nhanh (Map) khi đang ở Scene này. Thường tắt ở Scene tạm (Arena, hầm ngục).")]
+    [SerializeField] private bool allowFastTravel = true;
+
     public Scene_Kind Kind => kind;
+    public bool AllowFastTravel => allowFastTravel;
 }
