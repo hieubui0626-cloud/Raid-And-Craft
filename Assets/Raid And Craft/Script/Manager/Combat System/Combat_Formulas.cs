@@ -183,6 +183,35 @@ public static class Combat_Formulas
         return info;
     }
 
+    /// <summary>
+    /// Dựng đòn theo profile: mỗi stat nguồn có multiplier riêng. Các loại có multiplier = 0 sẽ bị bỏ qua.
+    /// Dùng chung cho Weapon Attack và Spell; vẫn roll crit một lần cho toàn bộ đòn.
+    /// </summary>
+    public static Damage_Info BuildAttack(Character_Stats attacker, float multiplier, Damage_Scaling_Profile profile)
+    {
+        var info = new Damage_Info { source = attacker };
+        if (attacker == null) return info;
+
+        float safeMultiplier = Mathf.Max(0f, multiplier);
+        foreach (Damage_Type type in Damage_Info.AllTypes)
+        {
+            float typeMultiplier = profile.GetMultiplier(type);
+            if (typeMultiplier <= 0f) continue;
+            info.Set(type, RollDamage(attacker, type) * safeMultiplier * typeMultiplier);
+        }
+
+        info.accuracy = attacker.GetValue(Player_Stat_Type.Accuracy);
+
+        float critChance = CritProbability(attacker.GetValue(Player_Stat_Type.CriticalChance));
+        if (UnityEngine.Random.value < critChance)
+        {
+            info.isCritical = true;
+            info = info.Scaled(CritMultiplier(attacker.GetValue(Player_Stat_Type.CriticalDamage)));
+        }
+
+        return info;
+    }
+
     // ------------------------------------------------------------------
     // BÊN NHẬN: xử lý đòn
     // ------------------------------------------------------------------
