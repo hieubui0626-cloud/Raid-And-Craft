@@ -29,8 +29,9 @@ MonoBehaviour:
   - stat: 28
     modifierType: 0
     value: 10
+  attackArchetype: 1
   damageTypes: 00000000
-  damageMultiplier: 1
+  damageMultiplier: 2
   attackDelivery:
     type: 0
     range: 2

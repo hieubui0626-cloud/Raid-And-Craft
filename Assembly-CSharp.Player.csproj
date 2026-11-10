@@ -84,6 +84,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Status\Status_Effect_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Balance_Config.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Fast_Travel_Point.cs" />
