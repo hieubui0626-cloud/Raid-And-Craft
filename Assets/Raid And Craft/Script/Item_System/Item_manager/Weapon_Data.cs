@@ -13,6 +13,9 @@ using UnityEngine;
 public class Weapon_Data : Equippable_Item_Data
 {
     [Header("Đòn đánh mặc định khi cầm vũ khí này")]
+    [Tooltip("Auto suy ra từ damageTypes[0] để giữ tương thích asset cũ. Chọn rõ Physical/Magic nếu vũ khí có cấu hình đặc biệt.")]
+    public Weapon_Attack_Archetype attackArchetype = Weapon_Attack_Archetype.Auto;
+
     [Tooltip("Các loại sát thương đòn mang theo. Kiếm = Physic, trượng = Magic.")]
     public Damage_Type[] damageTypes = { Damage_Type.Physic };
 
