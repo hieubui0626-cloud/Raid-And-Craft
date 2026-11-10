@@ -136,6 +136,12 @@ public class Item_Tooltip_UI : MonoBehaviour
             if (potion.ManaRestore > 0f) sb.Append("Restore <color=#7FB2FF>").Append(potion.ManaRestore.ToString("0.#")).Append("</color> Mana\n");
         }
 
+        if (item is Consumable_Item_Data consumable && consumable.Family != null && consumable.Family.Cooldown > 0f)
+        {
+            sb.Append("Cooldown: <color=#FFD27F>").Append(consumable.Family.Cooldown.ToString("0.#")).Append("s</color> <color=")
+              .Append(MutedColor).Append(">(").Append(consumable.Family.DisplayName).Append(")</color>\n");
+        }
+
         if (item.CanStack)
         {
             sb.Append("<color=").Append(MutedColor).Append(">Stack: ").Append(count).Append('/').Append(item.MaxStack).Append("</color>\n");
