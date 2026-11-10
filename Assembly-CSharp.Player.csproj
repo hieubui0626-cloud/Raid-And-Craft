@@ -108,6 +108,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Level_Config.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Combat_Events.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Usage.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Cooldown_Tracker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Animation\Skill_Animation_Driver.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Family_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Grid_Item_Container.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_State.cs" />

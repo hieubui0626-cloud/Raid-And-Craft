@@ -141,7 +141,14 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     /// <summary>Cập nhật vòng hồi chiêu và màu thiếu mana (gọi mỗi frame).</summary>
     public void UpdateState(Skill_Caster caster, Character_Stats stats)
     {
-        if (skill == null || caster == null) return;
+        // Ô vật phẩm tiêu hao: hồi chiêu dùng chung theo family (Consumable_Family_Data).
+        if (skill == null)
+        {
+            if (quickItem is Consumable_Item_Data consumable) SetCooldownFraction(consumable.GetCooldownFraction(stats));
+            return;
+        }
+
+        if (caster == null) return;
 
         float duration = caster.GetCooldownDuration(skill);
         float remaining = caster.GetCooldownRemaining(skill);
@@ -160,7 +167,7 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     // Lớp phủ che từ đáy lên: anchorMax.y = phần hồi chiêu còn lại (1 = che kín, 0 = không che).
-    private void SetCooldownFraction(float fraction)
+    public void SetCooldownFraction(float fraction)
     {
         bool visible = fraction > 0.001f;
         if (cooldownOverlay.gameObject.activeSelf != visible) cooldownOverlay.gameObject.SetActive(visible);

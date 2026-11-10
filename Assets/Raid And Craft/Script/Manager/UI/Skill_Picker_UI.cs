@@ -91,7 +91,7 @@ public class Skill_Picker_UI : MonoBehaviour
         hintText.text = "Nothing to assign. Add skills to Player_Skill_Slots or quick-use items to the Inventory.";
         float hintHeight = noSkills ? HintHeight : 0f;
 
-        int cellCount = skillCount + 1; // + ô Empty
+        int cellCount = skillCount; // + ô Empty
         int rowsNeeded = Mathf.CeilToInt(cellCount / (float)columns);
 
         float contentHeight = RowsHeight(rowsNeeded);
@@ -242,7 +242,7 @@ public class Skill_Picker_UI : MonoBehaviour
         // Destroy trễ tới cuối frame nên tách khỏi cây ngay để bố cục tính đúng.
         content.DetachChildren();
 
-        AddCell(null, current == null && currentItem == null);
+        
 
         int count = 0;
         if (skills != null)
