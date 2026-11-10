@@ -4,33 +4,39 @@ using UnityEngine;
 
 /// <summary>
 /// Gây sát thương: quạt cận chiến hoặc đạn. Có thể lấy cách đánh/loại sát thương từ vũ khí đang cầm.
-/// Mục tiêu trúng đòn tức thời được ghi vào context.HitTargets để hiệu ứng sau (làm chậm...) dùng lại.
+/// Mục tiêu trúng đòn tức thời được ghi vào context.HitTargets để hiệu ứng sau dùng lại.
 /// </summary>
 [CreateAssetMenu(menuName = "Raid And Craft/Skill Effects/Damage", fileName = "Effect_Damage")]
 public class Damage_Effect : Skill_Effect
 {
     [Header("Sát thương")]
-    [Tooltip("Hệ số nhân lên chỉ số sát thương của nhân vật (1 = bằng chỉ số).")]
+    [Tooltip("Hệ số riêng của skill, nhân thêm sau scaling profile.")]
     [Min(0f)] public float damageMultiplier = 1f;
     public Damage_Type[] damageTypes = { Damage_Type.Physic };
 
+    [Header("Damage Scaling")]
+    [Tooltip("Bật để lấy multiplier từ Damage_Balance_Config. Weapon Attack tự bật và tự chọn profile theo vũ khí.")]
+    public bool useBalanceProfile;
+    [SerializeField] private Damage_Scaling_Profile_Type scalingProfile = Damage_Scaling_Profile_Type.PureMagicSpell;
+    [Tooltip("Dùng chung một asset cho nhiều skill để cân bằng toàn cục. Để trống sẽ dùng baseline mặc định trong code.")]
+    [SerializeField] private Damage_Balance_Config balanceConfig;
+
     [Header("Cách ra đòn")]
-    [Tooltip("Bật: lấy delivery, loại sát thương, hệ số từ vũ khí đang cầm (hệ số nhân với hệ số bên trên). " +
-             "Tay không hoặc không có vũ khí thì dùng cấu hình bên dưới.")]
+    [Tooltip("Bật: lấy delivery và profile Physical/Magic từ vũ khí đang cầm. Elemental damage luôn được cộng theo profile. Tay không dùng Physical Weapon profile.")]
     public bool useWeaponAttack;
     public Skill_Delivery delivery = new Skill_Delivery();
 
     [Tooltip("Tầm đạn dùng cho AI/tooltip (≈ tốc độ × thời gian sống của đạn). Chỉ dùng khi delivery là Projectile.")]
     [Min(0f)] public float projectileReach = 10f;
 
-    // ------------------------------------------------------------------
-
     public override void Execute(Skill_Context context)
     {
-        Skill_Caster caster = context.Caster;
-        Resolve(caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier);
+        Resolve(context.Caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier,
+                out bool useProfile, out Damage_Scaling_Profile_Type profileType);
 
-        Damage_Info info = Combat_Formulas.BuildAttack(context.Stats, multiplier, types);
+        Damage_Info info = useProfile
+            ? Combat_Formulas.BuildAttack(context.Stats, multiplier, GetProfile(profileType))
+            : Combat_Formulas.BuildAttack(context.Stats, multiplier, types);
 
         switch (d.type)
         {
@@ -45,7 +51,7 @@ public class Damage_Effect : Skill_Effect
 
     public override float GetReach(Skill_Caster caster, Skill_Data skill)
     {
-        Resolve(caster, out Skill_Delivery d, out _, out _);
+        Resolve(caster, out Skill_Delivery d, out _, out _, out _, out _);
         return d.type == Skill_Delivery_Type.Melee_Arc ? d.range : projectileReach * 0.9f;
     }
 
@@ -54,24 +60,54 @@ public class Damage_Effect : Skill_Effect
         Character_Stats stats = caster.Stats;
         if (stats == null) return;
 
-        Resolve(caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier);
+        Resolve(caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier,
+                out bool useProfile, out Damage_Scaling_Profile_Type profileType);
 
         float totalMin = 0f, totalMax = 0f;
         var parts = new List<string>();
-        if (types != null)
+
+        if (useProfile)
+        {
+            Damage_Scaling_Profile profile = GetProfile(profileType);
+            foreach (Damage_Type type in Damage_Info.AllTypes)
+            {
+                float typeMultiplier = multiplier * profile.GetMultiplier(type);
+                if (typeMultiplier <= 0f) continue;
+
+                Combat_Formulas.GetDamageRange(stats, type, out float lo, out float hi);
+                lo *= typeMultiplier;
+                hi *= typeMultiplier;
+                totalMin += lo;
+                totalMax += hi;
+                parts.Add(Mathf.Approximately(lo, hi)
+                    ? $"{lo:0.##} {type}"
+                    : $"{lo:0.##}-{hi:0.##} {type}");
+            }
+        }
+        else if (types != null)
         {
             foreach (Damage_Type type in types)
             {
                 Combat_Formulas.GetDamageRange(stats, type, out float lo, out float hi);
-                lo *= multiplier; hi *= multiplier;
-                totalMin += lo; totalMax += hi;
-                parts.Add(Mathf.Approximately(lo, hi) ? $"{lo:0.##} {type}" : $"{lo:0.##}-{hi:0.##} {type}");
+                lo *= multiplier;
+                hi *= multiplier;
+                totalMin += lo;
+                totalMax += hi;
+                parts.Add(Mathf.Approximately(lo, hi)
+                    ? $"{lo:0.##} {type}"
+                    : $"{lo:0.##}-{hi:0.##} {type}");
             }
         }
 
-        if (totalMax <= 0f) { preview.Add("Damage", "0 (damage stat is 0)"); return; }
+        if (totalMax <= 0f)
+        {
+            preview.Add("Damage", "0 (damage stat is 0)");
+            return;
+        }
 
-        string range = Mathf.Approximately(totalMin, totalMax) ? $"{totalMax:0.##}" : $"{totalMin:0.##}-{totalMax:0.##}";
+        string range = Mathf.Approximately(totalMin, totalMax)
+            ? $"{totalMax:0.##}"
+            : $"{totalMin:0.##}-{totalMax:0.##}";
         preview.Add("Damage", parts.Count > 1 ? $"{range} ({string.Join(" + ", parts)})" : range);
 
         float crit = 1f + stats.GetValue(Player_Stat_Type.CriticalDamage) / 100f;
@@ -85,29 +121,42 @@ public class Damage_Effect : Skill_Effect
             : "Projectile");
     }
 
-    // ------------------------------------------------------------------
+    private Damage_Scaling_Profile GetProfile(Damage_Scaling_Profile_Type type)
+    {
+        return balanceConfig != null
+            ? balanceConfig.GetProfile(type)
+            : Damage_Balance_Config.GetBuiltInProfile(type);
+    }
 
-    private void Resolve(Skill_Caster caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier)
+    private void Resolve(
+        Skill_Caster caster,
+        out Skill_Delivery d,
+        out Damage_Type[] types,
+        out float multiplier,
+        out bool useProfile,
+        out Damage_Scaling_Profile_Type profileType)
     {
         d = delivery;
         types = damageTypes;
         multiplier = damageMultiplier;
+        useProfile = useBalanceProfile;
+        profileType = scalingProfile;
 
         if (!useWeaponAttack) return;
+
+        // Weapon Attack luôn dùng scaling profile chung, không còn giới hạn damage theo damageTypes cũ.
+        useProfile = true;
+        profileType = Damage_Scaling_Profile_Type.PhysicalWeapon;
 
         ISkill_Weapon_Source source = caster.WeaponSource;
         if (source != null && source.TryGetWeaponAttack(out Skill_Weapon_Attack weapon))
         {
             d = weapon.Delivery;
-            types = weapon.DamageTypes;
             multiplier = damageMultiplier * weapon.DamageMultiplier;
+            profileType = weapon.Archetype == Weapon_Attack_Archetype.Magic
+                ? Damage_Scaling_Profile_Type.MagicWeapon
+                : Damage_Scaling_Profile_Type.PhysicalWeapon;
         }
-    }
-
-    // Damage_Type.Physic -> Player_Stat_Type.PhysicDamage, Fire -> FireDamage...
-    private static float GetDamageStat(Character_Stats stats, Damage_Type type)
-    {
-        return Enum.TryParse(type + "Damage", out Player_Stat_Type statType) ? stats.GetValue(statType) : 0f;
     }
 
     private static void PerformMeleeArc(Skill_Context context, Skill_Delivery d, Damage_Info info)
@@ -124,8 +173,6 @@ public class Damage_Effect : Skill_Effect
             Damage_Result result = target.TakeDamage(info);
             Combat_Events.Report(context.Stats, target, result);
 
-            // Chỉ mục tiêu thực sự mất HP mới được đưa sang các Skill_Effect tiếp theo.
-            // Evaded / Blocked / Ignored không được xem là HitTargets.
             if (result.WasSuccessfulHit)
                 context.AddHit(target);
         }
