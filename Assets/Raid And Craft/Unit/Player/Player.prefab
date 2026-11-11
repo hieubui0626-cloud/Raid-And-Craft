@@ -1,5 +1,112 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1393837129708003013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7565984808180530540}
+  - component: {fileID: 8059840674925292972}
+  - component: {fileID: 3354203302744627601}
+  - component: {fileID: 4621252055690514173}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7565984808180530540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393837129708003013}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8813738781937196859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8059840674925292972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393837129708003013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c3884e2e67bfe4bac52c7ca1d06dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotId: slot_0
+  autoLoadOnStart: 0
+  autoSaveInterval: 60
+  loadSavedScene: 1
+--- !u!114 &3354203302744627601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393837129708003013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bae6288c4686004797bea9ac4dbec45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  canvasSortingOrder: -10
+  textFontSize: 28
+  textSpawnHeight: 1.8
+  textLifetime: 0.9
+  textRiseSpeed: 70
+  criticalScale: 1.5
+  damageDealtColor: {r: 1, g: 1, b: 1, a: 1}
+  damageTakenColor: {r: 1, g: 0.3, b: 0.3, a: 1}
+  criticalColor: {r: 1, g: 0.8, b: 0.1, a: 1}
+  missColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+  blockColor: {r: 0.45, g: 0.75, b: 1, a: 1}
+  barSize: {x: 90, y: 10}
+  barHeight: 2.2
+  hideBarWhenFull: 0
+  barBackgroundColor: {r: 0, g: 0, b: 0, a: 0.65}
+  barFillColor: {r: 0.85, g: 0.15, b: 0.15, a: 1}
+--- !u!114 &4621252055690514173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393837129708003013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abad71f63f3b5e4a808ffda14c596ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_Stats: {fileID: 1172134268808376540}
+  layerViews:
+  - layer: 0
+    text: {fileID: 1181127441564855678}
+  - layer: 1
+    text: {fileID: 2415656508259502707}
+  - layer: 2
+    text: {fileID: 5540333473541886567}
+  - layer: 3
+    text: {fileID: 4241326781662092493}
+  showLayerTitle: 1
+  stats_Text: {fileID: 0}
+  Combat_UI_Text_Health: {fileID: 3362848898272004614}
+  Combat_UI_Health_Bar: {fileID: 5897998384678365384}
+  Combat_UI_Text_Mana: {fileID: 5788866808200545164}
+  Combat_UI_Mana_Bar: {fileID: 2922565488799176748}
 --- !u!1 &6986446369057350650
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,6 +158,7 @@ Transform:
   m_Children:
   - {fileID: 6826885417236273020}
   - {fileID: 2127068681480545758}
+  - {fileID: 7565984808180530540}
   - {fileID: 5100705140052561726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

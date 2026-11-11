@@ -29,7 +29,9 @@ MonoBehaviour:
   - stat: 28
     modifierType: 0
     value: 7
+  weaponFamily: 4
   attackArchetype: 1
+  attackSources: 
   damageTypes: 00000000
   damageMultiplier: 1.5
   attackDelivery:
@@ -41,4 +43,4 @@ MonoBehaviour:
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
-  attackAnimation: 0
+  attackAnimation: 3

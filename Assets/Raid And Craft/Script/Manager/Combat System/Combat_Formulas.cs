@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random; // Fixes the ambiguity
 
 /// <summary>
 /// Nơi DUY NHẤT chứa công thức chiến đấu và các hằng số cân bằng (balance). Muốn chỉnh độ khó/cảm giác game: sửa ở đây.
@@ -210,6 +213,60 @@ public static class Combat_Formulas
         }
 
         return info;
+    }
+
+    /// <summary>
+    /// Dựng damage theo cấu hình riêng của Skill: mỗi Damage Type có multiplier và flat damage độc lập.
+    /// Flat damage vẫn gây sát thương khi Attack Stat tương ứng bằng 0.
+    /// Global multiplier (effect/weapon) được áp dụng sau khi cộng scaling và flat của từng type.
+    /// </summary>
+    public static Damage_Info BuildSkillAttack(
+        Character_Stats attacker, float globalMultiplier, List<Skill_Damage_Entry> entries, Damage_Type[] availableSources = null)
+    {
+        var info = new Damage_Info { source = attacker };
+        if (attacker == null) return info;
+
+        float safeGlobalMultiplier = IsFinite(globalMultiplier) ? Mathf.Max(0f, globalMultiplier) : 0f;
+
+        if (entries != null)
+        {
+            for (int i = 0; i < entries.Count; i++)
+            {
+                Skill_Damage_Entry entry = entries[i];
+                if (entry == null) continue;
+
+                float sourceMultiplier = IsFinite(entry.damageMultiplier)
+                    ? Mathf.Max(0f, entry.damageMultiplier)
+                    : 0f;
+                float flatDamage = IsFinite(entry.flatDamage)
+                    ? Mathf.Max(0f, entry.flatDamage)
+                    : 0f;
+
+                bool sourceAvailable = availableSources == null || Array.IndexOf(availableSources, entry.damageType) >= 0;
+                float rolledSourceDamage = sourceMultiplier > 0f && sourceAvailable
+                    ? RollDamage(attacker, entry.damageType) * sourceMultiplier
+                    : 0f;
+
+                float value = (rolledSourceDamage + flatDamage) * safeGlobalMultiplier;
+                info.Set(entry.damageType, info.Get(entry.damageType) + value);
+            }
+        }
+
+        info.accuracy = attacker.GetValue(Player_Stat_Type.Accuracy);
+
+        float critChance = CritProbability(attacker.GetValue(Player_Stat_Type.CriticalChance));
+        if (UnityEngine.Random.value < critChance)
+        {
+            info.isCritical = true;
+            info = info.Scaled(CritMultiplier(attacker.GetValue(Player_Stat_Type.CriticalDamage)));
+        }
+
+        return info;
+    }
+
+    private static bool IsFinite(float value)
+    {
+        return !float.IsNaN(value) && !float.IsInfinity(value);
     }
 
     // ------------------------------------------------------------------
