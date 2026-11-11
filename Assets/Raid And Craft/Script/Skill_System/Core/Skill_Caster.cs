@@ -158,8 +158,36 @@ public class Skill_Caster : MonoBehaviour
     public bool CanCast(Skill_Data skill)
     {
         if (skill == null || stats == null || stats.IsDead || !skill.HasEffects || !IsReady(skill)) return false;
+        if (!CanUseWeaponRequirement(skill)) return false;
         if (IsCastLocked) return false;
         return skill.manaCost <= 0f || stats.CurrentMana >= skill.manaCost;
+    }
+
+    /// <summary>Kiểm tra riêng điều kiện Weapon Family/Unarmed; UI có thể dùng để hiển thị Skill khả dụng.</summary>
+    public bool CanUseWeaponRequirement(Skill_Data skill)
+    {
+        if (skill == null || skill.weaponRequirement == null) return skill != null;
+
+        Skill_Weapon_Requirement requirement = skill.weaponRequirement;
+        bool hasWeapon = WeaponSource != null &&
+                         WeaponSource.TryGetWeaponAttack(out Skill_Weapon_Attack weapon);
+
+        switch (requirement.mode)
+        {
+            case Skill_Weapon_Requirement_Mode.AllWeapons:
+                return hasWeapon || requirement.allowUnarmed;
+
+            case Skill_Weapon_Requirement_Mode.Restricted:
+                if (!hasWeapon) return requirement.allowUnarmed;
+                return requirement.allowedFamilies != null &&
+                       requirement.allowedFamilies.Contains(weapon.Family);
+
+            case Skill_Weapon_Requirement_Mode.Unarmed:
+                return !hasWeapon;
+
+            default:
+                return false;
+        }
     }
 
     // ------------------------------------------------------------------

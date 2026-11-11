@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +8,40 @@ using UnityEngine;
 /// Mọi hành vi (gây sát thương, hồi máu, làm chậm...) nằm trong các asset Skill_Effect.
 /// Thêm hành vi mới = viết thêm một class kế thừa Skill_Effect, KHÔNG sửa file này.
 /// </summary>
+public enum Weapon_Family
+{
+    Unclassified = 0,
+    Melee_One_Hand = 1,
+    Melee_Two_Hand = 2,
+    Ranged_One_Hand = 3,
+    Ranged_Two_Hand = 4,
+    Magic_One_Hand = 5,
+    Magic_Two_Hand = 6
+}
+
+public enum Skill_Weapon_Requirement_Mode
+{
+    AllWeapons = 0,
+    Restricted = 1,
+    Unarmed = 2
+}
+
+[Serializable]
+public class Skill_Weapon_Requirement
+{
+    public Skill_Weapon_Requirement_Mode mode = Skill_Weapon_Requirement_Mode.AllWeapons;
+    public List<Weapon_Family> allowedFamilies = new List<Weapon_Family>();
+    public bool allowUnarmed = true;
+}
+
+[Serializable]
+public class Skill_Damage_Entry
+{
+    public Damage_Type damageType;
+    [Min(0f)] public float flatDamage;
+    [Min(0f)] public float damageMultiplier = 1f;
+}
+
 [CreateAssetMenu(menuName = "Raid And Craft/Skill Data", fileName = "Skill_New")]
 public class Skill_Data : ScriptableObject
 {
@@ -18,6 +54,15 @@ public class Skill_Data : ScriptableObject
 
     [Tooltip("Loại skill (Attack / Spell). Chỉ để phân loại/lọc/hiển thị, không đổi cách skill chạy.")]
     public Skill_Category category = Skill_Category.Attack;
+
+    [Header("Weapon Requirement")]
+    [Tooltip("AllWeapons = mọi vũ khí; Restricted = chỉ các Weapon Family được chọn; Unarmed = chỉ tay không.")]
+    public Skill_Weapon_Requirement weaponRequirement = new Skill_Weapon_Requirement();
+
+    [Header("Skill Damage Configuration")]
+    [Tooltip("Bật để dùng multiplier/flat riêng của Skill thay cho Damage Scaling Profile dùng chung cũ.")]
+    public bool useSkillDamageConfiguration;
+    public List<Skill_Damage_Entry> damageEntries = new List<Skill_Damage_Entry>();
 
     [Header("Chi phí và hồi chiêu")]
     [Min(0f)] public float manaCost;

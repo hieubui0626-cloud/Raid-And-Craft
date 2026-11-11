@@ -12,6 +12,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Raid And Craft/Items/Weapon", fileName = "Weapon_New")]
 public class Weapon_Data : Equippable_Item_Data
 {
+    [Header("Weapon Classification")]
+    [Tooltip("Họ vũ khí dùng để kiểm tra Skill Requirement. Unclassified không hợp lệ với Skill Restricted cho tới khi được phân loại.")]
+    public Weapon_Family weaponFamily = Weapon_Family.Unclassified;
+
     [Header("Đòn đánh mặc định khi cầm vũ khí này")]
     [Tooltip("Auto suy ra từ damageTypes[0] để giữ tương thích asset cũ. Chọn rõ Physical/Magic nếu vũ khí có cấu hình đặc biệt.")]
     public Weapon_Attack_Archetype attackArchetype = Weapon_Attack_Archetype.Auto;

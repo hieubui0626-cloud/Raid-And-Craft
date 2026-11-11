@@ -17,6 +17,30 @@ MonoBehaviour:
   icon: {fileID: -7397836648516717801, guid: f850bc6b1d192ab479e4032e51632572, type: 3}
   description: Normal Attack by your weapond
   category: 0
+  weaponRequirement:
+    mode: 0
+    allowedFamilies: []
+    allowUnarmed: 1
+  useSkillDamageConfiguration: 1
+  damageEntries:
+  - damageType: 0
+    flatDamage: 0
+    damageMultiplier: 2
+  - damageType: 1
+    flatDamage: 0
+    damageMultiplier: 1.1
+  - damageType: 2
+    flatDamage: 0
+    damageMultiplier: 0.4
+  - damageType: 3
+    flatDamage: 0
+    damageMultiplier: 0.4
+  - damageType: 4
+    flatDamage: 0
+    damageMultiplier: 0.4
+  - damageType: 5
+    flatDamage: 0
+    damageMultiplier: 0.4
   manaCost: 5
   usesActionSpeed: 1
   cooldown: 1

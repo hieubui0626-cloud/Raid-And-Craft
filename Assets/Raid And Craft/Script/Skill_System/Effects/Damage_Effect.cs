@@ -34,9 +34,13 @@ public class Damage_Effect : Skill_Effect
         Resolve(context.Caster, out Skill_Delivery d, out Damage_Type[] types, out float multiplier,
                 out bool useProfile, out Damage_Scaling_Profile_Type profileType);
 
-        Damage_Info info = useProfile
-            ? Combat_Formulas.BuildAttack(context.Stats, multiplier, GetProfile(profileType))
-            : Combat_Formulas.BuildAttack(context.Stats, multiplier, types);
+        Damage_Info info;
+        if (context.Skill.useSkillDamageConfiguration)
+            info = Combat_Formulas.BuildSkillAttack(context.Stats, multiplier, context.Skill.damageEntries);
+        else
+            info = useProfile
+                ? Combat_Formulas.BuildAttack(context.Stats, multiplier, GetProfile(profileType))
+                : Combat_Formulas.BuildAttack(context.Stats, multiplier, types);
 
         switch (d.type)
         {
@@ -66,7 +70,27 @@ public class Damage_Effect : Skill_Effect
         float totalMin = 0f, totalMax = 0f;
         var parts = new List<string>();
 
-        if (useProfile)
+        if (skill.useSkillDamageConfiguration)
+        {
+            if (skill.damageEntries != null)
+            {
+                foreach (Skill_Damage_Entry entry in skill.damageEntries)
+                {
+                    if (entry == null) continue;
+
+                    Combat_Formulas.GetDamageRange(stats, entry.damageType, out float lo, out float hi);
+                    lo = (lo * Mathf.Max(0f, entry.damageMultiplier) + Mathf.Max(0f, entry.flatDamage)) * multiplier;
+                    hi = (hi * Mathf.Max(0f, entry.damageMultiplier) + Mathf.Max(0f, entry.flatDamage)) * multiplier;
+                    totalMin += lo;
+                    totalMax += hi;
+                    if (lo > 0f || hi > 0f)
+                        parts.Add(Mathf.Approximately(lo, hi)
+                            ? $"{lo:0.##} {entry.damageType}"
+                            : $"{lo:0.##}-{hi:0.##} {entry.damageType}");
+                }
+            }
+        }
+        else if (useProfile)
         {
             Damage_Scaling_Profile profile = GetProfile(profileType);
             foreach (Damage_Type type in Damage_Info.AllTypes)
