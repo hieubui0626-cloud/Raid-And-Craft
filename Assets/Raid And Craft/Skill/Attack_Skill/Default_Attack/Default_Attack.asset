@@ -25,7 +25,7 @@ MonoBehaviour:
   damageEntries:
   - damageType: 0
     flatDamage: 0
-    damageMultiplier: 2
+    damageMultiplier: 1
   - damageType: 1
     flatDamage: 0
     damageMultiplier: 1.1
