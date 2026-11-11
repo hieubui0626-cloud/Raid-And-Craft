@@ -20,7 +20,10 @@ public class Weapon_Data : Equippable_Item_Data
     [Tooltip("Auto suy ra từ damageTypes[0] để giữ tương thích asset cũ. Chọn rõ Physical/Magic nếu vũ khí có cấu hình đặc biệt.")]
     public Weapon_Attack_Archetype attackArchetype = Weapon_Attack_Archetype.Auto;
 
-    [Tooltip("Các loại sát thương đòn mang theo. Kiếm = Physic, trượng = Magic.")]
+    [Tooltip("Các Attack Source được skill đọc khi đánh bằng vũ khí này. Để trống: tự suy ra theo Archetype cũ (Physical/Magic + elemental).")]
+    public Damage_Type[] attackSources = new Damage_Type[0];
+
+    [Tooltip("Các loại sát thương đòn mang theo của cấu hình cũ; giữ để tương thích các Damage_Effect chưa chuyển sang Skill Damage Configuration.")]
     public Damage_Type[] damageTypes = { Damage_Type.Physic };
 
     [Tooltip("Hệ số nhân lên sát thương của đòn đánh mặc định (đòn nặng của rìu > 1, dao găm < 1).")]

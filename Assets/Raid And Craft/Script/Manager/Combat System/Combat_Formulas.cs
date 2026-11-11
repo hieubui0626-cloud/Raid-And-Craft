@@ -219,7 +219,7 @@ public static class Combat_Formulas
     /// Global multiplier (effect/weapon) được áp dụng sau khi cộng scaling và flat của từng type.
     /// </summary>
     public static Damage_Info BuildSkillAttack(
-        Character_Stats attacker, float globalMultiplier, List<Skill_Damage_Entry> entries)
+        Character_Stats attacker, float globalMultiplier, List<Skill_Damage_Entry> entries, Damage_Type[] availableSources = null)
     {
         var info = new Damage_Info { source = attacker };
         if (attacker == null) return info;
@@ -240,7 +240,8 @@ public static class Combat_Formulas
                     ? Mathf.Max(0f, entry.flatDamage)
                     : 0f;
 
-                float rolledSourceDamage = sourceMultiplier > 0f
+                bool sourceAvailable = availableSources == null || Array.IndexOf(availableSources, entry.damageType) >= 0;
+                float rolledSourceDamage = sourceMultiplier > 0f && sourceAvailable
                     ? RollDamage(attacker, entry.damageType) * sourceMultiplier
                     : 0f;
 

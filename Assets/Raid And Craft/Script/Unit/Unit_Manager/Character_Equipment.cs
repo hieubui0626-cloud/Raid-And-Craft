@@ -61,7 +61,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             return false;
         }
 
-        attack = new Skill_Weapon_Attack(w.attackDelivery, w.damageTypes, w.damageMultiplier, w.attackAnimation, w.attackArchetype, w.weaponFamily);
+        attack = new Skill_Weapon_Attack(w.attackDelivery, w.damageTypes, w.damageMultiplier, w.attackAnimation, w.attackArchetype, w.weaponFamily, w.attackSources);
         return true;
     }
 

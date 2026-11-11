@@ -31,7 +31,7 @@ public class Skill_Weapon_Requirement
 {
     public Skill_Weapon_Requirement_Mode mode = Skill_Weapon_Requirement_Mode.AllWeapons;
     public List<Weapon_Family> allowedFamilies = new List<Weapon_Family>();
-    public bool allowUnarmed = true;
+    public bool allowUnarmed;
 }
 
 [Serializable]

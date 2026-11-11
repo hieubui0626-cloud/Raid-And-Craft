@@ -12,6 +12,7 @@ public readonly struct Skill_Weapon_Attack
 {
     public readonly Skill_Delivery Delivery;
     public readonly Damage_Type[] DamageTypes;
+    public readonly Damage_Type[] AttackSources;
     public readonly float DamageMultiplier;
     public readonly Weapon_Attack_Archetype Archetype;
     public readonly Weapon_Family Family;
@@ -22,10 +23,12 @@ public readonly struct Skill_Weapon_Attack
     public Skill_Weapon_Attack(Skill_Delivery delivery, Damage_Type[] damageTypes, float damageMultiplier,
                                Skill_Animation_Type animation = Skill_Animation_Type.None,
                                Weapon_Attack_Archetype archetype = Weapon_Attack_Archetype.Auto,
-                               Weapon_Family family = Weapon_Family.Unclassified)
+                               Weapon_Family family = Weapon_Family.Unclassified,
+                               Damage_Type[] attackSources = null)
     {
         Delivery = delivery;
         DamageTypes = damageTypes;
+        AttackSources = attackSources;
         DamageMultiplier = damageMultiplier;
         Animation = animation;
         Family = family;

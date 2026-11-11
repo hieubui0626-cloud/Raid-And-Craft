@@ -169,8 +169,9 @@ public class Skill_Caster : MonoBehaviour
         if (skill == null || skill.weaponRequirement == null) return skill != null;
 
         Skill_Weapon_Requirement requirement = skill.weaponRequirement;
+        Skill_Weapon_Attack weapon = default;
         bool hasWeapon = WeaponSource != null &&
-                         WeaponSource.TryGetWeaponAttack(out Skill_Weapon_Attack weapon);
+                         WeaponSource.TryGetWeaponAttack(out weapon);
 
         switch (requirement.mode)
         {
