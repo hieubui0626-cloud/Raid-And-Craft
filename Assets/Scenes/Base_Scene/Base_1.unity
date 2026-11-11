@@ -1345,8 +1345,7 @@ MonoBehaviour:
   labelSize: 5
   targetScene: World_1-1
   targetSpawnId: Level_Scene_1_ID
-  conditions:
-  - {fileID: 11400000, guid: 09085380e623cd441a18331cd4af0dba, type: 2}
+  conditions: []
   lockedMessage: "C\u1ED5ng n\xE0y ch\u01B0a m\u1EDF."
 --- !u!65 &2065137782
 BoxCollider:

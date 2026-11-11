@@ -94,6 +94,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Tooltip_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Instance.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Pointer_Relay.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Player_Death_Respawn.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Targeting.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Locked_Travel_Condition.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\IItem_Container.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Weapon_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Magic_Circuit\Magic_Circuit.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Pause_Menu.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Equipment_Slot_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Enemy\Enemy_AI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Player_Stats_UI.cs" />
