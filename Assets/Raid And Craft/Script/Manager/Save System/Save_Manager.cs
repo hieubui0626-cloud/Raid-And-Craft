@@ -31,6 +31,12 @@ public class Save_Manager : MonoBehaviour
              "Tắt khi muốn thử riêng một Scene trong Editor.")]
     [SerializeField] private bool loadSavedScene = true;
 
+    [Tooltip("Tên Scene Main Menu (Pause Menu dùng khi bấm 'Về Main Menu'). Phải có trong Build Settings.")]
+    [SerializeField] private string mainMenuScene = "Main_Menu";
+
+    [Tooltip("Scene base dùng khi cần 'về base' mà save chưa ghi Scene nào (ví dụ chết ở Scene tạm trước lần lưu đầu).")]
+    [SerializeField] private string fallbackBaseScene;
+
     private readonly Local_Save_Provider local = new Local_Save_Provider();
     private ISave_Provider cloud; // null cho tới khi gắn cloud
     private Player_Save player;
@@ -43,6 +49,8 @@ public class Save_Manager : MonoBehaviour
     private bool sceneResolved; // đã xét việc chuyển Scene theo save trong lần chạy này chưa (chỉ làm một lần, tránh lặp)
 
     public string SlotId => slotId;
+    public string MainMenuScene => mainMenuScene;
+    public string FallbackBaseScene => fallbackBaseScene;
     public bool HasCloud => cloud != null;
 
     /// <summary>Tên Scene base gần nhất Player đã ở. Player_Save cập nhật khi lưu ở Scene base; ở Scene tạm vẫn giữ giá trị này để lưu lại.</summary>
