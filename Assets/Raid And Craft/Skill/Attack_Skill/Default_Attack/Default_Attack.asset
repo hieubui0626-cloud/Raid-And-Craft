@@ -19,7 +19,7 @@ MonoBehaviour:
   category: 0
   weaponRequirement:
     mode: 0
-    allowedFamilies: []
+    allowedFamilies: 05000000
     allowUnarmed: 1
   useSkillDamageConfiguration: 1
   damageEntries:

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random; // Fixes the ambiguity
 
 /// <summary>
 /// Nơi DUY NHẤT chứa công thức chiến đấu và các hằng số cân bằng (balance). Muốn chỉnh độ khó/cảm giác game: sửa ở đây.
