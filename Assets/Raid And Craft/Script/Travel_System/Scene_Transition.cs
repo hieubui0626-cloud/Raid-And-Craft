@@ -91,6 +91,44 @@ public static class Scene_Transition
         return true;
     }
 
+    /// <summary>Scene base để quay về: Scene base gần nhất đã ghi (Save_Manager.LastBaseScene), không có thì Fallback Base Scene của Save_Manager.</summary>
+    public static string ResolveBaseScene()
+    {
+        Save_Manager manager = Save_Manager.Instance;
+        if (manager == null) return string.Empty;
+
+        return string.IsNullOrEmpty(manager.LastBaseScene) ? manager.FallbackBaseScene ?? string.Empty : manager.LastBaseScene;
+    }
+
+    /// <summary>Về Scene base gần nhất, đứng ở điểm xuất hiện spawnId (rỗng = mặc định). Dùng khi chết, hoặc nút "Về base".</summary>
+    public static bool ReturnToBase(string spawnId = "")
+    {
+        return Travel(ResolveBaseScene(), spawnId);
+    }
+
+    /// <summary>Lưu rồi về Scene Main Menu (tên lấy từ Save_Manager.MainMenuScene). Trả lại tốc độ thời gian bình thường trước khi nạp.</summary>
+    public static bool GoToMainMenu()
+    {
+        if (IsTransitioning) return false;
+
+        Save_Manager manager = Save_Manager.Instance;
+        string menu = manager != null ? manager.MainMenuScene : string.Empty;
+        if (string.IsNullOrEmpty(menu) || !Application.CanStreamedLevelBeLoaded(menu))
+        {
+            Debug.LogError($"[{nameof(Scene_Transition)}] Scene Main Menu '{menu}' trống hoặc không có trong Build Settings (chỉnh ở Save_Manager).");
+            ReportMessage("Không về được Main Menu.");
+            return false;
+        }
+
+        Time.timeScale = 1f;
+        manager.SaveNow();
+
+        hasPending = false;
+        IsTransitioning = true;
+        SceneManager.LoadScene(menu);
+        return true;
+    }
+
     /// <summary>Player_Save gọi sau khi nạp save ở Scene mới: nếu có lần chuyển đang chờ thì đặt Player vào điểm xuất hiện đã nhớ (chỉ một lần).</summary>
     public static bool PlaceAtPendingSpawn(Transform player, NavMeshAgent agent)
     {

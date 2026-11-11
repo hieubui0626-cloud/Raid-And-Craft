@@ -44,6 +44,11 @@ public class Map_Panel_UI : MonoBehaviour
 
     public bool IsOpen => canvas != null && canvas.gameObject.activeSelf;
 
+    /// <summary>Bảng Map đang mở, hoặc vừa đóng trong frame này (Esc đóng Map thì Pause Menu không mở theo). Không tạo Map_Panel_UI.</summary>
+    public static bool IsOpenOrJustClosed => instance != null && (instance.IsOpen || instance.closedFrame == Time.frameCount);
+
+    private int closedFrame = -1;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -87,6 +92,7 @@ public class Map_Panel_UI : MonoBehaviour
     public void Close()
     {
         Unsubscribe();
+        closedFrame = Time.frameCount;
         if (canvas != null) canvas.gameObject.SetActive(false);
     }
 
