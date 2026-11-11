@@ -30,6 +30,8 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Color normalColor = Color.white;
     [Tooltip("Màu icon khi không đủ mana.")]
     [SerializeField] private Color noManaColor = new Color(0.4f, 0.4f, 0.6f);
+    [Tooltip("Màu icon khi vũ khí hiện tại không đáp ứng Weapon Requirement của skill.")]
+    [SerializeField] private Color unavailableWeaponColor = new Color(0.35f, 0.35f, 0.35f);
 
     private TextMeshProUGUI countText;
     private Button button;
@@ -160,8 +162,11 @@ public class Skill_Slot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         SetCooldownFraction(fraction);
 
+        bool weaponUnavailable = !caster.CanUseWeaponRequirement(skill);
         bool lackMana = stats != null && skill.manaCost > 0f && stats.CurrentMana < skill.manaCost;
-        Color tint = lackMana ? noManaColor : normalColor;
+        Color tint = weaponUnavailable
+            ? unavailableWeaponColor
+            : lackMana ? noManaColor : normalColor;
         iconImage.color = tint;
         nameText.color = tint;
     }
