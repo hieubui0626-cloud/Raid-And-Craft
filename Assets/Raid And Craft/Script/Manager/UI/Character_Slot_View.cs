@@ -25,6 +25,62 @@ public class Character_Slot_View : MonoBehaviour
 
     private int index;
     private bool wired;
+    private Image highlightImage;
+    private Color normalColor;
+    private bool highlightReady;
+
+    private static readonly Color SelectedTint = new Color(1f, 0.95f, 0.6f, 1f);
+
+    /// <summary>
+    /// Dùng khi dựng từ PREFAB (Character_Select_Menu: Slot Panel + hai prefab). Tự tìm các phần theo TÊN object con:
+    /// Character_Name, Character_Level, Character_Master_Class (chữ), Delete_Character (nút X); bấm vào thẻ = chọn (Button gốc, tự thêm nếu thiếu);
+    /// ô "+" bấm vào = tạo (Button gốc, tự thêm nếu thiếu). Không có Selected Mark thì thẻ được chọn đổi màu nền.
+    /// </summary>
+    public void BindPrefabs(GameObject filled, GameObject create)
+    {
+        filledRoot = filled;
+        emptyRoot = create;
+
+        if (filled != null)
+        {
+            nameText = FindText(filled.transform, "Character_Name");
+            levelText = FindText(filled.transform, "Character_Level");
+            classText = FindText(filled.transform, "Character_Master_Class");
+
+            Transform del = FindChild(filled.transform, "Delete_Character");
+            deleteButton = del != null ? del.GetComponent<Button>() : null;
+            if (del != null && deleteButton == null) deleteButton = del.gameObject.AddComponent<Button>();
+
+            selectButton = filled.GetComponent<Button>();
+            if (selectButton == null) selectButton = filled.AddComponent<Button>();
+            if (selectButton.targetGraphic == null) selectButton.targetGraphic = filled.GetComponent<Graphic>();
+            highlightImage = filled.GetComponent<Image>();
+        }
+
+        if (create != null)
+        {
+            // Prefab đã có sẵn Button (ở gốc hoặc nút "+" bên trong) thì dùng nó; chưa có thì thêm vào gốc.
+            addButton = create.GetComponentInChildren<Button>(true);
+            if (addButton == null) addButton = create.AddComponent<Button>();
+            if (addButton.targetGraphic == null) addButton.targetGraphic = create.GetComponent<Graphic>();
+        }
+    }
+
+    private static Transform FindChild(Transform root, string childName)
+    {
+        foreach (Transform t in root.GetComponentsInChildren<Transform>(true))
+        {
+            if (t != root && t.name == childName) return t;
+        }
+
+        return null;
+    }
+
+    private static TMP_Text FindText(Transform root, string childName)
+    {
+        Transform t = FindChild(root, childName);
+        return t != null ? t.GetComponent<TMP_Text>() : null;
+    }
 
     /// <summary>Dùng khi dựng bằng code (menu tự dựng).</summary>
     public void Bind(GameObject filled, GameObject empty, TMP_Text name, TMP_Text level, TMP_Text cls, Button select, Button add, Button delete, GameObject selected)
@@ -55,5 +111,12 @@ public class Character_Slot_View : MonoBehaviour
         if (levelText != null) levelText.text = "Level: " + summary.level;
         if (classText != null) classText.text = "Class: " + (string.IsNullOrEmpty(summary.className) ? "-" : summary.className);
         if (selectedMark != null) selectedMark.SetActive(filled && selected);
+
+        // Không có Selected Mark: đổi màu nền thẻ (chỉ khi dựng từ prefab, highlightImage được gán ở BindPrefabs).
+        if (highlightImage != null)
+        {
+            if (!highlightReady) { normalColor = highlightImage.color; highlightReady = true; }
+            highlightImage.color = filled && selected ? SelectedTint : normalColor;
+        }
     }
 }

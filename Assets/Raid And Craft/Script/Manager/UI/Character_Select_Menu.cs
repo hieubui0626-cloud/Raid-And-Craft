@@ -26,7 +26,17 @@ public class Character_Select_Menu : MonoBehaviour
     [Tooltip("Nhân vật cũ mà save chưa ghi Scene thì vào Scene này (thường cũng là Base_1).")]
     [SerializeField] private string defaultContinueScene;
 
-    [Header("Giao diện tự vẽ (tuỳ chọn - bỏ trống thì tự dựng)")]
+    [Header("Giao diện từ PREFAB (khuyên dùng khi đã có prefab thẻ nhân vật và ô '+')")]
+    [Tooltip("Object chứa danh sách (Content của ScrollView hoặc panel có Vertical Layout Group). Điền cùng hai prefab bên dưới thì menu tự tạo mỗi nhân vật một thẻ / ô '+'.")]
+    [SerializeField] private RectTransform slotPanel;
+
+    [Tooltip("Prefab thẻ nhân vật. Cần các object con tên Character_Name, Character_Level, Character_Master_Class (TMP) và Delete_Character (nút X).")]
+    [SerializeField] private GameObject characterSlotPrefab;
+
+    [Tooltip("Prefab ô '+' (tạo nhân vật mới). Bấm vào bất kỳ chỗ nào của ô là tạo.")]
+    [SerializeField] private GameObject createSlotPrefab;
+
+    [Header("Giao diện tự vẽ từng ô (tuỳ chọn, thay cho prefab)")]
     [Tooltip("Các ô nhân vật theo thứ tự (ô đầu = nhân vật 1). Số ô nên bằng Save_Manager.Max Character Slots.")]
     [SerializeField] private List<Character_Slot_View> slotViews = new List<Character_Slot_View>();
     [SerializeField] private Button playButton;
@@ -53,7 +63,8 @@ public class Character_Select_Menu : MonoBehaviour
         Time.timeScale = 1f;
         EnsureEventSystem();
 
-        if (slotViews.Count == 0) BuildDefaultUI();
+        if (slotViews.Count == 0 && slotPanel != null && characterSlotPrefab != null && createSlotPrefab != null) BuildFromPrefabs();
+        else if (slotViews.Count == 0) BuildDefaultUI();
 
         if (playButton != null) playButton.onClick.AddListener(OnPlay);
         if (backButton != null) backButton.onClick.AddListener(OnBack);
@@ -251,6 +262,32 @@ public class Character_Select_Menu : MonoBehaviour
     private static readonly Color EmptyColor = new Color(0.16f, 0.16f, 0.16f, 1f);
     private static readonly Color DarkText = new Color(0.12f, 0.12f, 0.12f, 1f);
     private static readonly Color ButtonColor = new Color(0.14f, 0.2f, 0.3f, 1f);
+
+    // Mỗi nhân vật (slot) = một thẻ + một ô "+" cạnh nhau trong panel, chỉ một trong hai bật tuỳ slot có nhân vật hay chưa.
+    private void BuildFromPrefabs()
+    {
+        Save_Manager manager = Save_Manager.Instance;
+        int count = manager != null ? manager.MaxCharacterSlots : 5;
+
+        // Dọn bản mẫu đặt sẵn trong Scene (object con có tên bắt đầu bằng tên prefab) để khỏi trùng với thẻ tự tạo. Object khác (thanh cuộn...) giữ nguyên.
+        for (int i = slotPanel.childCount - 1; i >= 0; i--)
+        {
+            Transform child = slotPanel.GetChild(i);
+            if (child.name.StartsWith(characterSlotPrefab.name) || child.name.StartsWith(createSlotPrefab.name)) Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject filled = Instantiate(characterSlotPrefab, slotPanel, false);
+            GameObject create = Instantiate(createSlotPrefab, slotPanel, false);
+            filled.name = "Character_Slot_" + (i + 1);
+            create.name = "Character_Create_" + (i + 1);
+
+            var view = filled.AddComponent<Character_Slot_View>();
+            view.BindPrefabs(filled, create);
+            slotViews.Add(view);
+        }
+    }
 
     private void BuildDefaultUI()
     {
