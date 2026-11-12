@@ -1076,6 +1076,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &1203594960690159287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1375,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &1788387539426746362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,6 +2038,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &2184758510643135521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2757,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &2771289873180501063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,6 +2897,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &2863554058318298808
 GameObject:
   m_ObjectHideFlags: 0
@@ -5272,6 +5277,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &4869906504914919018
 GameObject:
   m_ObjectHideFlags: 0
@@ -7713,6 +7719,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &6933102071753142800
 GameObject:
   m_ObjectHideFlags: 0
@@ -8188,6 +8195,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &7419312984880889528
 GameObject:
   m_ObjectHideFlags: 0
@@ -8460,6 +8468,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &7529991813422118281
 GameObject:
   m_ObjectHideFlags: 0
@@ -9324,6 +9333,7 @@ MonoBehaviour:
   cooldownOverlay: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   noManaColor: {r: 0.4, g: 0.4, b: 0.6, a: 1}
+  unavailableWeaponColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
 --- !u!1 &8527638908596309399
 GameObject:
   m_ObjectHideFlags: 0
