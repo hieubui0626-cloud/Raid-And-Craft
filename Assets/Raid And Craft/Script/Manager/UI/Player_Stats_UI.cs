@@ -22,6 +22,7 @@ public class Player_Stats_UI : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Character_Stats player_Stats;
+    [SerializeField] private Character_Level player_Level;
 
     [Header("Character Overview - mỗi Layer một text riêng")]
     [Tooltip("Mỗi phần tử: chọn Layer và kéo TextMeshPro của canvas/panel hiển thị Layer đó vào. " +
@@ -33,6 +34,10 @@ public class Player_Stats_UI : MonoBehaviour
 
     [Tooltip("Cách cũ: một text chứa mọi Layer. Chỉ dùng khi Layer Views trống.")]
     [SerializeField] private TextMeshProUGUI stats_Text;
+
+    [Tooltip("Chacracter Overview")]
+    [SerializeField] private TextMeshProUGUI CharacterName;
+    [SerializeField] private TextMeshProUGUI CharacterLevel;
 
     [Header("Combat UI References")]
     [SerializeField] private TextMeshProUGUI Combat_UI_Text_Health;
@@ -89,6 +94,17 @@ public class Player_Stats_UI : MonoBehaviour
     {
         if (player_Stats == null) return;
 
+        if(player_Level != null)
+        {
+            CharacterLevel.text = "Level:" + player_Level.Level.ToString();
+        }
+        
+        if (Save_Manager.Instance != null)
+        {
+            CharacterName.text = Save_Manager.Instance.CharacterName;
+
+        }
+
         if (layerViews != null && layerViews.Count > 0)
         {
             // Mỗi Layer một text riêng.
@@ -111,6 +127,7 @@ public class Player_Stats_UI : MonoBehaviour
         {
             if (AppendLayer(layer, true)) sb.AppendLine(); // Dòng trống giữa các Layer
         }
+        
         stats_Text.text = sb.ToString();
     }
 
@@ -134,6 +151,7 @@ public class Player_Stats_UI : MonoBehaviour
     {
         switch (stat.Type)
         {
+            
             case Player_Stat_Type.PhysicDamageMin:
                 return DamageRangeLine("Physic Damage", stat.Value, player_Stats.GetValue(Player_Stat_Type.PhysicDamageMax));
             case Player_Stat_Type.MagicDamageMin:

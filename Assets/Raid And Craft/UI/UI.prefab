@@ -3448,7 +3448,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5942342295146374164}
   - component: {fileID: 4382215413751210814}
-  - component: {fileID: 1081983877283948962}
   m_Layer: 0
   m_Name: Player_Combat_Button
   m_TagString: Untagged
@@ -3509,33 +3508,6 @@ MonoBehaviour:
   m_Spacing: {x: 15, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &1081983877283948962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3261236075592292836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f1a4d0290ee364ab1bd82f18b3c441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillSlots: {fileID: 216713597106127348, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
-  slotUIs:
-  - {fileID: 5068847951020581515}
-  - {fileID: 2663231806609159391}
-  - {fileID: 1253699021948042456}
-  - {fileID: 9104596190338390447}
-  - {fileID: 3150198173808656570}
-  - {fileID: 4757317424234807616}
-  - {fileID: 7462139224223294966}
-  - {fileID: 7191861821673443135}
-  - {fileID: 4599288816526681355}
-  - {fileID: 3773428464674837786}
-  pickerColumns: 3
-  pickerVisibleRows: 3
-  pickerCellSize: 72
 --- !u!1 &3278417453324698509
 GameObject:
   m_ObjectHideFlags: 0
@@ -6111,7 +6083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5847258356491768626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7430,6 +7402,8 @@ GameObject:
   - component: {fileID: 5947875348431555658}
   - component: {fileID: 4281348185087986421}
   - component: {fileID: 7911048583825396427}
+  - component: {fileID: 7853990306518929667}
+  - component: {fileID: 6306517660683587480}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -7565,6 +7539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_Stats: {fileID: 1172134268808376540, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  player_Level: {fileID: 0}
   layerViews:
   - layer: 0
     text: {fileID: 4339618810886118461}
@@ -7576,10 +7551,67 @@ MonoBehaviour:
     text: {fileID: 1621684311333399950}
   showLayerTitle: 1
   stats_Text: {fileID: 0}
+  CharacterName: {fileID: 5365201859974070970}
+  CharacterLevel: {fileID: 8891386321773850343}
   Combat_UI_Text_Health: {fileID: 213468223916030789}
   Combat_UI_Health_Bar: {fileID: 9044564227546470795}
   Combat_UI_Text_Mana: {fileID: 8938368480325923535}
   Combat_UI_Mana_Bar: {fileID: 347428792592558447}
+--- !u!114 &7853990306518929667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866337105091158978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f1a4d0290ee364ab1bd82f18b3c441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSlots: {fileID: 216713597106127348, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  slotUIs:
+  - {fileID: 5068847951020581515}
+  - {fileID: 2663231806609159391}
+  - {fileID: 1253699021948042456}
+  - {fileID: 9104596190338390447}
+  - {fileID: 3150198173808656570}
+  - {fileID: 4757317424234807616}
+  - {fileID: 7462139224223294966}
+  - {fileID: 7191861821673443135}
+  - {fileID: 4599288816526681355}
+  - {fileID: 3773428464674837786}
+  pickerColumns: 3
+  pickerVisibleRows: 3
+  pickerCellSize: 72
+--- !u!114 &6306517660683587480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866337105091158978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419475f87878ebe47b35031f43f61028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  equipment: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  gridContainer: {fileID: 5576834721740690718}
+  cellSize: 60
+  gridOffset: {x: 0, y: 0}
+  cellGap: 0
+  cellSprite: {fileID: -1353571417266762301, guid: f850bc6b1d192ab479e4032e51632572, type: 3}
+  itemBackSprite: {fileID: 0}
+  hoverSprite: {fileID: 0}
+  dropOkSprite: {fileID: 0}
+  dropBadSprite: {fileID: 0}
+  cellColor: {r: 1, g: 1, b: 1, a: 0.07}
+  itemBackColor: {r: 0.12, g: 0.15, b: 0.22, a: 0.9}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.18}
+  dropOkColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.35}
+  dropBadColor: {r: 0.95, g: 0.2, b: 0.2, a: 0.35}
 --- !u!1 &6919790383403358655
 GameObject:
   m_ObjectHideFlags: 0
@@ -7807,7 +7839,6 @@ GameObject:
   - component: {fileID: 1310969796461424822}
   - component: {fileID: 7857441268012464512}
   - component: {fileID: 8916640400656886235}
-  - component: {fileID: 84233372687526715}
   m_Layer: 0
   m_Name: Player_Inventory_Viewport
   m_TagString: Untagged
@@ -7903,34 +7934,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &84233372687526715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7080879046277328924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419475f87878ebe47b35031f43f61028, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
-  equipment: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
-  gridContainer: {fileID: 5576834721740690718}
-  cellSize: 60
-  gridOffset: {x: 0, y: 0}
-  cellGap: 0
-  cellSprite: {fileID: -1353571417266762301, guid: f850bc6b1d192ab479e4032e51632572, type: 3}
-  itemBackSprite: {fileID: 0}
-  hoverSprite: {fileID: 0}
-  dropOkSprite: {fileID: 0}
-  dropBadSprite: {fileID: 0}
-  cellColor: {r: 1, g: 1, b: 1, a: 0.07}
-  itemBackColor: {r: 0.12, g: 0.15, b: 0.22, a: 0.9}
-  hoverColor: {r: 1, g: 1, b: 1, a: 0.18}
-  dropOkColor: {r: 0.2, g: 0.9, b: 0.3, a: 0.35}
-  dropBadColor: {r: 0.95, g: 0.2, b: 0.2, a: 0.35}
 --- !u!1 &7146887558716650523
 GameObject:
   m_ObjectHideFlags: 0
