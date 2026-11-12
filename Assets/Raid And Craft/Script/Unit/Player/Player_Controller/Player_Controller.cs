@@ -96,6 +96,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Update()
     {
+        if (player == null) return; // Player đã bị huỷ (đổi Scene): không làm gì nữa
         if (stats != null && stats.IsDead) return;
 
         Input_Manager input = Input_Manager.Instance;
@@ -146,6 +147,14 @@ public class Player_Controller : MonoBehaviour
 
     private void FollowPlayerWithCamera()
     {
+        // Đổi Scene: camera cũ bị huỷ (Scene mới có Main Camera riêng). Player hoặc camera đã huỷ thì dừng/tìm lại, không báo lỗi mỗi frame.
+        if (player == null) return;
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null) return;
+        }
+
         Vector3 targetPosition = player.transform.position + cameraOffset;
 
         // Làm mượt không phụ thuộc framerate (Lerp với speed * deltaTime thì phụ thuộc).

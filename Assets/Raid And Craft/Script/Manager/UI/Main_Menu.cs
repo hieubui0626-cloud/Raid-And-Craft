@@ -23,7 +23,7 @@ public class Main_Menu : MonoBehaviour
     [Tooltip("Scene base đầu tiên của game (New Game vào đây khi chưa có Scene tạo nhân vật; Continue dùng khi save chưa ghi Scene).")]
     [SerializeField] private string newGameScene;
 
-    [Tooltip("Scene tạo nhân vật (tuỳ chọn). Điền thì New Game vào đây trước; Scene đó khi xong tự nạp New Game Scene bằng Main_Menu.StartFirstScene(). Trống = vào thẳng New Game Scene.")]
+    [Tooltip("Scene chọn/tạo nhân vật (Character_Select_Menu). Điền thì nút Start/New Game vào đây; Scene đó lo tạo nhân vật rồi vào game. Trống = vào thẳng New Game Scene.")]
     [SerializeField] private string characterCreationScene;
 
     [Header("Giao diện")]
@@ -31,6 +31,10 @@ public class Main_Menu : MonoBehaviour
     [SerializeField] private string gameTitle = "Raid And Craft";
 
     [Header("Nút tự vẽ (tuỳ chọn - để trống cả ba thì Main_Menu tự dựng menu)")]
+    [Tooltip("Start: vào Scene chọn nhân vật (Character Creation Scene).")]
+    [SerializeField] private Button startButton;
+    [Tooltip("Setting: chưa có màn cài đặt, hiện thông báo.")]
+    [SerializeField] private Button settingButton;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button quitButton;
@@ -46,7 +50,10 @@ public class Main_Menu : MonoBehaviour
         Time.timeScale = 1f;
         EnsureEventSystem();
 
-        if (continueButton == null && newGameButton == null && quitButton == null) BuildDefaultUI();
+        if (startButton == null && settingButton == null && continueButton == null && newGameButton == null && quitButton == null) BuildDefaultUI();
+
+        if (startButton != null) startButton.onClick.AddListener(OnStart);
+        if (settingButton != null) settingButton.onClick.AddListener(OnSetting);
 
         if (continueButton != null) continueButton.onClick.AddListener(OnContinue);
         if (newGameButton != null) newGameButton.onClick.AddListener(OnNewGame);
@@ -71,6 +78,25 @@ public class Main_Menu : MonoBehaviour
     private void RefreshContinueButton()
     {
         if (continueButton != null) continueButton.interactable = Save_Manager.Instance != null && Save_Manager.Instance.HasSave;
+    }
+
+    /// <summary>Start: sang màn chọn/tạo nhân vật (Character Creation Scene).</summary>
+    public void OnStart()
+    {
+        if (loading) return;
+
+        if (string.IsNullOrEmpty(characterCreationScene))
+        {
+            SetStatus("Chưa điền Scene chọn nhân vật (Character Creation Scene) trong Main_Menu.");
+            return;
+        }
+
+        Load(characterCreationScene);
+    }
+
+    public void OnSetting()
+    {
+        SetStatus("Chưa có màn Setting.");
     }
 
     public void OnContinue()
@@ -179,8 +205,16 @@ public class Main_Menu : MonoBehaviour
         TextMeshProUGUI title = AddText(rect, gameTitle, 56f, 120f);
         title.fontStyle = FontStyles.Bold;
 
-        continueButton = AddButton(rect, "Continue");
-        newGameButton = AddButton(rect, "New Game");
+        if (!string.IsNullOrEmpty(characterCreationScene))
+        {
+            startButton = AddButton(rect, "Start");
+        }
+        else
+        {
+            continueButton = AddButton(rect, "Continue");
+            newGameButton = AddButton(rect, "New Game");
+        }
+
         quitButton = AddButton(rect, "Quit");
 
         statusText = AddText(rect, string.Empty, 20f, 60f);
