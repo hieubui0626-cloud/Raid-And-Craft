@@ -44,16 +44,59 @@ public class Player_Quick_Use : MonoBehaviour
         if (skillSlots != null) skillSlots.OnSlotChanged -= HandleSkillChanged;
     }
 
+    private bool warnedMissing;
+
     private void Update()
     {
         Input_Manager input = Input_Manager.Instance;
-        if (input == null || inventory == null) return;
+        if (input == null || inventory == null || stats == null)
+        {
+            // Chỉ cảnh báo MỘT lần, và chỉ khi có ô đang gán vật phẩm (để biết vì sao bấm phím không dùng được).
+            if (!warnedMissing && HasAnyItem())
+            {
+                warnedMissing = true;
+                Debug.LogWarning($"[{nameof(Player_Quick_Use)}] Không dùng nhanh được vì thiếu: " +
+                                 (input == null ? "Input_Manager " : string.Empty) +
+                                 (inventory == null ? "Inventory (cùng object với Player_Quick_Use) " : string.Empty) +
+                                 (stats == null ? "Character_Stats (cùng object)" : string.Empty), this);
+            }
+            return;
+        }
 
         for (int i = 0; i < SlotCount; i++)
         {
             if (slots[i] == null || !input.IsSkillSlotPressed(i)) continue;
 
-            if (slots[i] is Consumable_Item_Data consumable) consumable.TryConsume(stats, inventory);
+            if (!(slots[i] is Consumable_Item_Data consumable)) continue;
+
+            if (!consumable.TryConsume(stats, inventory))
+            {
+                Debug.Log($"[{nameof(Player_Quick_Use)}] Ô {i + 1} ({slots[i].name}) không dùng được: " +
+                          (inventory.CountOf(slots[i]) <= 0 ? "hết vật phẩm trong Inventory." : "TryUse trả về false (ví dụ đã đầy máu/mana, hoặc điều kiện của vật phẩm)."), this);
+            }
+        }
+    }
+
+    private bool HasAnyItem()
+    {
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (slots[i] != null) return true;
+        }
+
+        return false;
+    }
+
+    [ContextMenu("Debug: Báo cáo Quick Use")]
+    private void DebugReport()
+    {
+        Debug.Log($"[{nameof(Player_Quick_Use)}] Input_Manager: {(Input_Manager.Instance != null ? "có" : "KHÔNG CÓ")}; " +
+                  $"Inventory: {(inventory != null ? "có" : "KHÔNG CÓ")}; Character_Stats: {(stats != null ? "có" : "KHÔNG CÓ")}; " +
+                  $"Player_Skill_Slots: {(skillSlots != null ? "có" : "KHÔNG CÓ")}; số Player_Quick_Use trong Scene: {FindObjectsByType<Player_Quick_Use>(FindObjectsSortMode.None).Length}", this);
+
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (slots[i] != null) Debug.Log($"  Ô {i + 1}: {slots[i].name}, trong kho: {CountOf(slots[i])}", this);
         }
     }
 
