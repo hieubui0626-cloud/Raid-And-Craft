@@ -401,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 87204966}
   - component: {fileID: 87204965}
+  - component: {fileID: 87204967}
   m_Layer: 0
   m_Name: Main_Game_Manager
   m_TagString: Untagged
@@ -421,6 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotId: slot_0
+  slotPrefix: slot_
+  maxCharacterSlots: 5
   autoLoadOnStart: 1
   autoSaveInterval: 60
   loadSavedScene: 1
@@ -441,6 +444,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &87204967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87204964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d4c64e22b66df40a819c92236b85ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &659891556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,8 +1999,10 @@ MonoBehaviour:
   newGameScene: Base_1
   characterCreationScene: Character_Scene
   gameTitle: Raid And Craft
-  continueButton: {fileID: 2071667032}
-  newGameButton: {fileID: 1224713178}
+  startButton: {fileID: 2071667032}
+  settingButton: {fileID: 1224713178}
+  continueButton: {fileID: 0}
+  newGameButton: {fileID: 0}
   quitButton: {fileID: 1955632546}
   statusText: {fileID: 0}
 --- !u!1 &2016449100

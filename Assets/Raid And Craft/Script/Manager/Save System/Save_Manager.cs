@@ -21,6 +21,12 @@ public class Save_Manager : MonoBehaviour
     [Tooltip("Mỗi slot một file save. Sau này có nhiều nhân vật/tài khoản thì đổi theo slot.")]
     [SerializeField] private string slotId = "slot_0";
 
+    [Tooltip("Tiền tố tên file của các nhân vật: slot_0, slot_1... (mỗi nhân vật một slot). Slot 'Slot Id' ở trên là slot dùng khi chạy thẳng một Scene trong Editor.")]
+    [SerializeField] private string slotPrefix = "slot_";
+
+    [Tooltip("Số nhân vật tối đa (số ô ở màn chọn nhân vật).")]
+    [SerializeField, Min(1)] private int maxCharacterSlots = 5;
+
     [Tooltip("Tự tải save (nếu có) ngay khi Player đăng ký.")]
     [SerializeField] private bool autoLoadOnStart = true;
 
@@ -49,6 +55,11 @@ public class Save_Manager : MonoBehaviour
     private bool sceneResolved; // đã xét việc chuyển Scene theo save trong lần chạy này chưa (chỉ làm một lần, tránh lặp)
 
     public string SlotId => slotId;
+    public int MaxCharacterSlots => Mathf.Max(1, maxCharacterSlots);
+
+    /// <summary>Tên/lớp của nhân vật đang chơi (slot hiện tại). Lưu cùng save.</summary>
+    public string CharacterName { get; private set; } = string.Empty;
+    public string CharacterClass { get; private set; } = string.Empty;
     public string MainMenuScene => mainMenuScene;
     public string FallbackBaseScene => fallbackBaseScene;
     public bool HasCloud => cloud != null;
@@ -79,6 +90,92 @@ public class Save_Manager : MonoBehaviour
     public void SetCloudProvider(ISave_Provider provider)
     {
         cloud = provider;
+    }
+
+    // ------------------------------------------------------------------
+    // Nhân vật (mỗi nhân vật một slot)
+    // ------------------------------------------------------------------
+
+    /// <summary>Tóm tắt một nhân vật để hiện ở màn chọn nhân vật.</summary>
+    public struct Character_Summary
+    {
+        public int index;
+        public bool exists;
+        public string name;
+        public string className;
+        public int level;
+        public string baseScene;
+    }
+
+    public string SlotIdOf(int index) => slotPrefix + index;
+
+    /// <summary>Đọc tóm tắt nhân vật ở ô index (không đổi slot hiện tại). Ô trống: exists = false.</summary>
+    public Character_Summary GetSummary(int index)
+    {
+        var summary = new Character_Summary { index = index, name = string.Empty, className = string.Empty, level = 1, baseScene = string.Empty };
+
+        string id = SlotIdOf(index);
+        Save_Data data = ParseOrNull(local.Load(id)) ?? ParseOrNull(local.Load(id, backup: true));
+        if (data == null) return summary;
+
+        summary.exists = true;
+        summary.name = string.IsNullOrEmpty(data.characterName) ? $"Character {index + 1}" : data.characterName;
+        summary.className = data.characterClass ?? string.Empty;
+        summary.baseScene = data.player.baseSceneName ?? string.Empty;
+
+        foreach (Stat_Save_Entry entry in data.player.baseStats)
+        {
+            if (entry.type == (int)Player_Stat_Type.CharacterLevel) summary.level = Mathf.Max(1, Mathf.RoundToInt(entry.baseValue));
+        }
+
+        return summary;
+    }
+
+    /// <summary>Chọn nhân vật ở ô index làm slot hiện tại (mọi lưu/tải sau đó dùng slot này). Gọi trước khi nạp Scene chơi.</summary>
+    public void SelectSlot(int index)
+    {
+        slotId = SlotIdOf(index);
+        revision = 0;
+        saveBlocked = false;
+        blockedWarned = false;
+        sceneResolved = false;
+        LastBaseScene = string.Empty;
+        CharacterName = string.Empty;
+        CharacterClass = string.Empty;
+
+        Save_Data data = ReadLocalOrNull();
+        if (data == null) return;
+
+        CharacterName = data.characterName ?? string.Empty;
+        CharacterClass = data.characterClass ?? string.Empty;
+        LastBaseScene = data.player.baseSceneName ?? string.Empty;
+    }
+
+    /// <summary>Tạo nhân vật mới ở ô index (xoá save cũ của ô đó) và chọn làm slot hiện tại. Player khởi đầu như prefab; file save ghi ngay khi vào Scene chơi.</summary>
+    public void CreateCharacter(int index, string characterName, string characterClass = "")
+    {
+        slotId = SlotIdOf(index);
+        local.Delete(slotId);
+        if (cloud != null) RunSafe(cloud.DeleteAsync(slotId), "xoá cloud");
+
+        SelectSlot(index);
+        CharacterName = characterName ?? string.Empty;
+        CharacterClass = characterClass ?? string.Empty;
+    }
+
+    /// <summary>Xoá nhân vật ở ô index. Nếu là slot đang chọn thì bỏ chọn luôn.</summary>
+    public void DeleteCharacter(int index)
+    {
+        string id = SlotIdOf(index);
+        local.Delete(id);
+        if (cloud != null) RunSafe(cloud.DeleteAsync(id), "xoá cloud");
+
+        if (slotId == id)
+        {
+            CharacterName = string.Empty;
+            CharacterClass = string.Empty;
+            LastBaseScene = string.Empty;
+        }
     }
 
     // ------------------------------------------------------------------
@@ -200,6 +297,8 @@ public class Save_Manager : MonoBehaviour
         {
             revision = ++revision,
             saveTimeUtc = DateTime.UtcNow.ToString("o"),
+            characterName = CharacterName,
+            characterClass = CharacterClass,
         };
         player.Capture(data.player);
 
@@ -219,9 +318,16 @@ public class Save_Manager : MonoBehaviour
         try
         {
             Save_Data data = await ReadNewestAsync();
-            if (data == null || player == null) return false;
+            if (data == null || player == null)
+            {
+                // Nhân vật MỚI (vừa tạo ở màn chọn nhân vật, chưa có file): lưu ngay trạng thái khởi đầu để nhân vật hiện trong danh sách.
+                if (data == null && player != null && !string.IsNullOrEmpty(CharacterName)) SaveNow();
+                return false;
+            }
 
             revision = data.revision;
+            CharacterName = data.characterName ?? CharacterName;
+            CharacterClass = data.characterClass ?? CharacterClass;
             LastBaseScene = data.player.baseSceneName ?? string.Empty;
 
             // Save ghi Player ở Scene base khác Scene đang mở: nạp Scene đó trước. Player ở Scene mới sẽ tự đăng ký lại và nạp save ở đó.

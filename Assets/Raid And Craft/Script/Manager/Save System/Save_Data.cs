@@ -31,6 +31,10 @@ public class Save_Data
     /// <summary>Thời điểm lưu (UTC, ISO 8601) - chỉ để hiển thị/gỡ lỗi.</summary>
     public string saveTimeUtc;
 
+    /// <summary>Tên và lớp nhân vật của slot này (hiện ở màn chọn nhân vật). Rỗng = save cũ chưa có tên.</summary>
+    public string characterName;
+    public string characterClass;
+
     public Player_Save_Data player = new Player_Save_Data();
 }
 
