@@ -134,6 +134,7 @@ public class Save_Manager : MonoBehaviour
     /// <summary>Chọn nhân vật ở ô index làm slot hiện tại (mọi lưu/tải sau đó dùng slot này). Gọi trước khi nạp Scene chơi.</summary>
     public void SelectSlot(int index)
     {
+        Scene_State_Store.Clear(); // trạng thái Scene thuộc về nhân vật: đổi slot thì nạp lại từ save của slot đó
         slotId = SlotIdOf(index);
         revision = 0;
         saveBlocked = false;
@@ -166,6 +167,7 @@ public class Save_Manager : MonoBehaviour
     /// <summary>Xoá nhân vật ở ô index. Nếu là slot đang chọn thì bỏ chọn luôn.</summary>
     public void DeleteCharacter(int index)
     {
+        Scene_State_Store.Clear();
         string id = SlotIdOf(index);
         local.Delete(id);
         if (cloud != null) RunSafe(cloud.DeleteAsync(id), "xoá cloud");
@@ -255,6 +257,13 @@ public class Save_Manager : MonoBehaviour
         Save_Data data = ReadLocalOrNull();
         sceneName = data != null ? data.player.baseSceneName ?? string.Empty : string.Empty;
         return data != null;
+    }
+
+    /// <summary>Trạng thái các Scene ghi trong save hiện tại (Scene_State_Store nạp khi cần). Danh sách trống nếu chưa có save.</summary>
+    public System.Collections.Generic.List<Scene_State_Entry> ReadSceneStates()
+    {
+        Save_Data data = ReadLocalOrNull();
+        return data != null && data.player.sceneStates != null ? data.player.sceneStates : new System.Collections.Generic.List<Scene_State_Entry>();
     }
 
     private Save_Data ReadLocalOrNull()
@@ -428,6 +437,7 @@ public class Save_Manager : MonoBehaviour
     public void DeleteSave()
     {
         UnblockSaving(); // xoá save = bắt đầu lại, không còn gì để bảo vệ
+        Scene_State_Store.Clear();
         local.Delete(slotId);
         if (cloud != null) RunSafe(cloud.DeleteAsync(slotId), "xoá cloud");
     }

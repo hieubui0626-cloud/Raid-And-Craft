@@ -18,6 +18,9 @@ public class Travel_Gate : Travel_Point_Base
     [Tooltip("Id của Scene_Spawn_Point ở Scene đích. Trống hoặc không tìm thấy = điểm mặc định (Is Default).")]
     [SerializeField] private string targetSpawnId = "";
 
+    [Tooltip("Bật: đi qua cổng luôn mở một lượt MỚI ở Scene đích (quái hồi sinh đầy đủ, bất kể quy chế reset). Dùng cho cổng 'Bắt đầu lượt farm mới'.")]
+    [SerializeField] private bool freshStart;
+
     [Header("Điều kiện mở cổng (tuỳ chọn)")]
     [Tooltip("Mọi điều kiện phải đạt mới đi qua được. Tạo asset: Create -> Raid And Craft -> Travel. Trống = luôn mở.")]
     [SerializeField] private List<Travel_Condition> conditions = new List<Travel_Condition>();
@@ -45,7 +48,7 @@ public class Travel_Gate : Travel_Point_Base
             return;
         }
 
-        Scene_Transition.Travel(targetScene, targetSpawnId);
+        Scene_Transition.Travel(targetScene, targetSpawnId, freshStart);
     }
 
     protected override Color LabelColor => new Color(1f, 0.82f, 0.5f);

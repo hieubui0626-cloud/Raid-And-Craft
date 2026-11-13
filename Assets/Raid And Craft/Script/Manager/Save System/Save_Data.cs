@@ -91,9 +91,27 @@ public class Player_Save_Data
     /// <summary>Các điểm dịch chuyển nhanh (portal) đã mở.</summary>
     public List<Fast_Travel_Entry> fastTravel = new List<Fast_Travel_Entry>();
 
+    /// <summary>Trạng thái các Scene đã vào (quái đã hạ...) để Instance nhớ giữa các lần vào; reset theo quy chế Scene_Rules. Xem Scene_State_Store.</summary>
+    public List<Scene_State_Entry> sceneStates = new List<Scene_State_Entry>();
+
     public int circuitSpentPoints;
     public List<string> circuitUnlockedNodes = new List<string>();
     public List<Circuit_Socket_Save> circuitSockets = new List<Circuit_Socket_Save>();
+}
+
+/// <summary>Trạng thái một Scene của nhân vật: Id các điểm spawn đã hạ quái, lúc rời Scene và Scene đã dọn sạch chưa.</summary>
+[Serializable]
+public class Scene_State_Entry
+{
+    public string sceneName;
+
+    /// <summary>Lần cuối Player ở Scene này (UTC ticks); 0 = chưa rõ. Dùng tính "rời Scene bao lâu".</summary>
+    public long leftUtcTicks;
+
+    /// <summary>Mọi điểm spawn của Scene đều đã bị hạ quái (lúc lưu).</summary>
+    public bool cleared;
+
+    public List<string> deadSpawnIds = new List<string>();
 }
 
 /// <summary>Lưu type dạng số nguyên (giá trị enum không đổi theo quy tắc của Player_Stat_Type) để đổi tên enum không làm hỏng save.</summary>
