@@ -176,6 +176,9 @@ public class Player_Save : MonoBehaviour
         Player_Fast_Travel fastTravel = GetComponent<Player_Fast_Travel>();
         if (fastTravel != null) data.fastTravel.AddRange(fastTravel.Entries);
 
+        data.sceneStates.Clear();
+        Scene_State_Store.Capture(data.sceneStates);
+
         data.circuitUnlockedNodes.Clear();
         data.circuitSockets.Clear();
         if (circuitActive)

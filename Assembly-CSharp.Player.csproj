@@ -65,70 +65,33 @@
   <ItemGroup>
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Travel_Gate.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Picker_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Local_Save_Provider.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Scene_Rule_Values.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Projectile.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Scene_Rules.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Rune_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Heal_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Combat_Formulas.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Stats.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Type.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Material_Family.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Material_Item_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equippable_Item_Data.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Status\Status_Effect_Controller.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Balance_Config.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Fast_Travel_Point.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Spell_Stone_Data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Database.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Tooltip_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Instance.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Pointer_Relay.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Player_Death_Respawn.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Targeting.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Locked_Travel_Condition.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Player_Spawner.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\IItem_Container.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Item_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Npc\Npc_Shop.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\IWorld_Interactable.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Main_Menu.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Coin_Display_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Animation_Type.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Timing.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\World_Item.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Level_Config.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Combat_Events.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Usage.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Cooldown_Tracker.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Animation\Skill_Animation_Driver.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\ISave_Provider.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Quick_Use.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Delivery.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Preview.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Wallet.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Info.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Animation_Config.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Character_Select_Menu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Inventory.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Type.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Context.cs" />
@@ -136,93 +99,134 @@
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Damage_Effect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Draggable_Panel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Stat_Modifier_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Map_Button.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_UI_Metrics.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Enemy_Rank.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Result.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Caster.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Combat_Info_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Travel_Condition.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Experience.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Panel_Hotkey_Toggle.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Magic_Circuit\Magic_Circuit_Layout.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Combat.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Enemy_Scene_Level.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Loot_System\Loot_Table.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equipment_Slot.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Scene_Transition.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Drag_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Character_Level.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\IDamageable.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Codec.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Lock.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Equipment.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Database.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Map_Panel_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Data.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Basic_Scene_Rule_Modifier.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Panel_Hotkey.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Shop_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Scene_State_Store.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Grid.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Database.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Skill_Slots.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Enemy_Spawn_Point.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Slot_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Scene_Spawn_Point.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Controller.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Weapon_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Enemy\Enemy_AI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Picker_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Local_Save_Provider.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Rune_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Heal_Effect.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Type.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Material_Family.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equippable_Item_Data.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Status\Status_Effect_Controller.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Balance_Config.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Fast_Travel_Point.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Spell_Stone_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Database.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Tooltip_UI.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Instance.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Player_Death_Respawn.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Targeting.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Locked_Travel_Condition.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Player_Spawner.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\IItem_Container.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Npc\Npc_Shop.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Main_Menu.cs" />
+    <Compile Include="Assets\Package\WaterWorks\Scripts\Water_Settings.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Timing.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Level_Config.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Cooldown_Tracker.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Animation\Skill_Animation_Driver.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\ISave_Provider.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Delivery.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Preview.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Character_Select_Menu.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Draggable_Panel.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Result.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Caster.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Travel_Condition.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Panel_Hotkey_Toggle.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Combat.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Enemy_Scene_Level.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Scene_Transition.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Codec.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Scene_Info.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Bar_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Layer_Map.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Restore_Potion_Data.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Lock.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Loot_System\Enemy_Reward.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Equipment.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
+    <Compile Include="Assets\Package\WaterWorks\Scripts\Water_Volume.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Builder.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Scene_Rule_Modifier.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Map_Panel_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Consumable_Family_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Grid_Item_Container.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_State.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Travel_Point_Base.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\ISkill_Weapon_Source.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Scene_System\Basic_Scene_Rule_Modifier.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Panel_Hotkey.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Shop_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Effects\Blade_Storm_Effect.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Item_Grid.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Player_Fast_Travel.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Tooltip_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Database.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Skill_Slots.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Category.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Slot_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Travel_System\Scene_Spawn_Point.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Controller.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Weapon_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Character_Slot_View.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Magic_Circuit\Magic_Circuit.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Pause_Menu.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Equipment_Slot_UI.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Manager\Enemy\Enemy_AI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Player_Stats_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Hover_Target.cs" />
   </ItemGroup>
@@ -238,7 +242,9 @@
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Package\WaterWorks\Shaders\Volumetric_Water.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Package\WaterWorks\Shaders\WaterSSR.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -250,6 +256,8 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Package\WaterWorks\DOCUMENTATION.txt" />
+    <None Include="Assets\Package\WaterWorks\Shaders\Water_Volume.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -1052,10 +1060,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.InputSystem.ForUI.Player.csproj">
-      <Project>{1A87C60D-202F-21EB-767A-967FB58A2E08}</Project>
-      <Name>Unity.InputSystem.ForUI.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Player.csproj">
       <Project>{3B091D94-08F8-D3C9-D353-031BF17DC9DA}</Project>
       <Name>Unity.AI.Navigation.Player</Name>
@@ -1064,29 +1068,9 @@
       <Project>{CB1B0BE6-AC29-D23F-F390-8C09B4EF5AD7}</Project>
       <Name>Unity.InferenceEngine.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Recorder.Player.csproj">
-      <Project>{03210044-C216-66D5-4508-D73FEDD60C5A}</Project>
-      <Name>Unity.Recorder.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.Player.csproj">
-      <Project>{78686DD6-7F74-E4EB-2F7C-0912045B9281}</Project>
-      <Name>Unity.RenderPipeline.Universal.ShaderLibrary.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.Player.csproj">
-      <Project>{D0CCD329-7131-C2DA-9D83-65C8F30F5FD0}</Project>
-      <Name>Unity.RenderPipelines.Universal.Shaders.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Player.csproj">
       <Project>{3B8795DB-F460-8C3A-10B4-DCB47DE0FC82}</Project>
       <Name>Unity.Timeline.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.Player.csproj">
-      <Project>{2D694E59-61ED-F58C-9D1B-EE9328992424}</Project>
-      <Name>Unity.RenderPipelines.Core.Runtime.Shared.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.Player.csproj">
-      <Project>{0B627B5B-6BF7-386C-C214-8B80C4C1A7CB}</Project>
-      <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.Player.csproj">
       <Project>{C548E306-BED5-728C-A93C-9656184DA7DA}</Project>
@@ -1095,18 +1079,6 @@
     <ProjectReference Include="Unity.RenderPipelines.GPUDriven.Runtime.Player.csproj">
       <Project>{17018C6C-A7D4-7327-030E-4B255A3DAC56}</Project>
       <Name>Unity.RenderPipelines.GPUDriven.Runtime.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AppUI.Redux.Player.csproj">
-      <Project>{EB1A5845-479D-CA19-5926-E3A3285FD9CA}</Project>
-      <Name>Unity.AppUI.Redux.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AI.Tracing.Player.csproj">
-      <Project>{50C53723-03E1-C77A-33E0-608E74922211}</Project>
-      <Name>Unity.AI.Tracing.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Collections.Player.csproj">
-      <Project>{0BC137B0-4E31-6888-490F-F9E4CD7F8802}</Project>
-      <Name>Unity.Collections.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Recorder.Base.Player.csproj">
       <Project>{F9B7299A-DCB3-B25D-4290-98C78173C709}</Project>
@@ -1124,33 +1096,21 @@
       <Project>{B9BD8590-9796-3A9B-CEF2-2BCDAC1AA095}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AppUI.Player.csproj">
-      <Project>{F95C6FF3-D523-13CB-5A69-5BE58A62DFC0}</Project>
-      <Name>Unity.AppUI.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Animation.Rigging.Player.csproj">
       <Project>{22D5E046-D46F-7CFE-FE2A-F1C23C3831E0}</Project>
       <Name>Unity.Animation.Rigging.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Multiplayer.Center.Common.Player.csproj">
-      <Project>{85A5B412-7D45-D705-6019-EAF85C650818}</Project>
-      <Name>Unity.Multiplayer.Center.Common.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
       <Project>{C8AC21C4-A827-7A41-CE31-4E4161EAB81B}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.InferenceEngine.Tokenization.Player.csproj">
+      <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
+      <Name>Unity.InferenceEngine.Tokenization.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{51EA57FE-698C-76E8-D681-264ACB67B17D}</Project>
       <Name>Unity.TextMeshPro.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Common.Runtime.Player.csproj">
-      <Project>{89C68F68-6BCC-2AC5-9460-D029C2179C36}</Project>
-      <Name>Unity.2D.Common.Runtime.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Mathematics.Player.csproj">
-      <Project>{AE76C007-6BD6-3894-5AD0-3623ECF063BB}</Project>
-      <Name>Unity.Mathematics.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.Player.csproj">
       <Project>{FCF53052-14A1-0F78-D0C0-D7F69B3A2CB9}</Project>
@@ -1160,18 +1120,6 @@
       <Project>{2AD17FC9-01DA-52D6-00DA-C7CA9B14F3B6}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AI.MCP.Runtime.Player.csproj">
-      <Project>{9F53E2B0-0ED4-A62B-7490-502ECEFE1988}</Project>
-      <Name>Unity.AI.MCP.Runtime.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.InferenceEngine.Tokenization.Player.csproj">
-      <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
-      <Name>Unity.InferenceEngine.Tokenization.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Burst.Player.csproj">
-      <Project>{9D70CE3A-D266-483D-FBED-C37E187DC6D7}</Project>
-      <Name>Unity.Burst.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Player.csproj">
       <Project>{2BEB666B-301F-1F05-45A7-EF610B0CEB22}</Project>
       <Name>Unity.RenderPipelines.Core.Runtime.Player</Name>
@@ -1180,6 +1128,74 @@
       <Project>{D4C2A017-4F86-5E48-1978-CCB05717F950}</Project>
       <Name>Unity.VisualScripting.Flow.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.Player.csproj">
+      <Project>{2F596189-C784-00B3-B705-BBB871E7FF51}</Project>
+      <Name>Unity.RenderPipelines.Universal.2D.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.ForUI.Player.csproj">
+      <Project>{1A87C60D-202F-21EB-767A-967FB58A2E08}</Project>
+      <Name>Unity.InputSystem.ForUI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Player.csproj">
+      <Project>{03210044-C216-66D5-4508-D73FEDD60C5A}</Project>
+      <Name>Unity.Recorder.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.Player.csproj">
+      <Project>{78686DD6-7F74-E4EB-2F7C-0912045B9281}</Project>
+      <Name>Unity.RenderPipeline.Universal.ShaderLibrary.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.Player.csproj">
+      <Project>{D0CCD329-7131-C2DA-9D83-65C8F30F5FD0}</Project>
+      <Name>Unity.RenderPipelines.Universal.Shaders.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.Player.csproj">
+      <Project>{2D694E59-61ED-F58C-9D1B-EE9328992424}</Project>
+      <Name>Unity.RenderPipelines.Core.Runtime.Shared.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.Player.csproj">
+      <Project>{0B627B5B-6BF7-386C-C214-8B80C4C1A7CB}</Project>
+      <Name>UnityEngine.UI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AppUI.Redux.Player.csproj">
+      <Project>{EB1A5845-479D-CA19-5926-E3A3285FD9CA}</Project>
+      <Name>Unity.AppUI.Redux.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AI.Tracing.Player.csproj">
+      <Project>{50C53723-03E1-C77A-33E0-608E74922211}</Project>
+      <Name>Unity.AI.Tracing.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Collections.Player.csproj">
+      <Project>{0BC137B0-4E31-6888-490F-F9E4CD7F8802}</Project>
+      <Name>Unity.Collections.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="MCPForUnity.Runtime.Player.csproj">
+      <Project>{1104EF6E-53AD-4EAE-3E49-02D2162221C3}</Project>
+      <Name>MCPForUnity.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AppUI.Player.csproj">
+      <Project>{F95C6FF3-D523-13CB-5A69-5BE58A62DFC0}</Project>
+      <Name>Unity.AppUI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Multiplayer.Center.Common.Player.csproj">
+      <Project>{85A5B412-7D45-D705-6019-EAF85C650818}</Project>
+      <Name>Unity.Multiplayer.Center.Common.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Common.Runtime.Player.csproj">
+      <Project>{89C68F68-6BCC-2AC5-9460-D029C2179C36}</Project>
+      <Name>Unity.2D.Common.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.Player.csproj">
+      <Project>{AE76C007-6BD6-3894-5AD0-3623ECF063BB}</Project>
+      <Name>Unity.Mathematics.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AI.MCP.Runtime.Player.csproj">
+      <Project>{9F53E2B0-0ED4-A62B-7490-502ECEFE1988}</Project>
+      <Name>Unity.AI.MCP.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Burst.Player.csproj">
+      <Project>{9D70CE3A-D266-483D-FBED-C37E187DC6D7}</Project>
+      <Name>Unity.Burst.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Rendering.LightTransport.Runtime.Player.csproj">
       <Project>{0369DF7F-5A71-4700-6687-7016ED173FB4}</Project>
       <Name>Unity.Rendering.LightTransport.Runtime.Player</Name>
@@ -1187,10 +1203,6 @@
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{7DF1E007-5AF8-1457-D776-927B998344B3}</Project>
       <Name>Unity.InputSystem.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.Player.csproj">
-      <Project>{2F596189-C784-00B3-B705-BBB871E7FF51}</Project>
-      <Name>Unity.RenderPipelines.Universal.2D.Runtime.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

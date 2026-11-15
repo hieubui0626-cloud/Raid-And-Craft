@@ -294,6 +294,7 @@ MonoBehaviour:
   labelSize: 5
   targetScene: Base_1
   targetSpawnId: Base_Scene_1_ID
+  freshStart: 0
   conditions: []
   lockedMessage: "C\u1ED5ng n\xE0y ch\u01B0a m\u1EDF."
 --- !u!65 &208477431
@@ -429,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kind: 1
-  rules: {fileID: 0}
+  rules: {fileID: 11400000, guid: 69a9d0b37fe5c9e47937df1031600d3a, type: 2}
   allowFastTravel: 1
   startingModifiers: []
 --- !u!4 &628501553
@@ -481,6 +482,7 @@ Transform:
   m_Children:
   - {fileID: 2132598741}
   - {fileID: 208477429}
+  - {fileID: 1789528364}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1258145312
@@ -652,6 +654,54 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1789528363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789528364}
+  - component: {fileID: 1789528365}
+  m_Layer: 0
+  m_Name: Enemy Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789528364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789528363}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1258145311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789528365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789528363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e477ee1feaf455541b8b88f58d7d50d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 0}
+  spawnId: 
+  scatterRadius: 3
+  snapDistance: 3
 --- !u!1 &2132598740
 GameObject:
   m_ObjectHideFlags: 0

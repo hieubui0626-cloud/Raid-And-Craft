@@ -64,7 +64,7 @@ public static class Scene_Transition
     }
 
     /// <summary>Lưu rồi sang Scene khác, đứng ở điểm spawnId của Scene đó (rỗng = điểm mặc định). False nếu không đi được.</summary>
-    public static bool Travel(string sceneName, string spawnId)
+    public static bool Travel(string sceneName, string spawnId, bool freshStart = false)
     {
         if (IsTransitioning) return false;
 
@@ -83,6 +83,9 @@ public static class Scene_Transition
         }
 
         if (Save_Manager.Instance != null) Save_Manager.Instance.SaveNow();
+
+        // freshStart: Scene đích bắt đầu lượt MỚI (quái hồi sinh đầy đủ) dù chưa tới hạn reset. Làm sau khi lưu để save vẫn giữ trạng thái cũ nếu bị lỗi giữa chừng.
+        if (freshStart) Scene_State_Store.ResetScene(sceneName);
 
         hasPending = true;
         pendingSpawnId = spawnId ?? string.Empty;

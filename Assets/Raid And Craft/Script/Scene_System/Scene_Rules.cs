@@ -61,6 +61,16 @@ public class Scene_Rules : ScriptableObject
     [Tooltip("Nhân với Coin của quái trong Scene này.")]
     [SerializeField, Min(0f)] private float coinMultiplier = 1f;
 
+    [Header("Trạng thái Scene (quái đã hạ có được nhớ không)")]
+    [Tooltip("Bật: quái đã hạ (qua Enemy_Spawn_Point) được nhớ theo nhân vật, vào lại vẫn chưa hồi sinh cho tới khi Scene được reset. Tắt: mỗi lần vào là một lượt mới đầy quái.")]
+    [SerializeField] private bool persistState = true;
+
+    [Tooltip("Rời Scene quá số phút này thì lần vào sau Scene được reset (quái hồi sinh đầy đủ). 0 = không reset theo thời gian.")]
+    [SerializeField, Min(0f)] private float resetAfterMinutes = 30f;
+
+    [Tooltip("Hạ hết mọi điểm spawn rồi rời Scene thì lần vào sau là lượt mới (vòng farm: dọn sạch, ra, vào lại).")]
+    [SerializeField] private bool resetWhenCleared = true;
+
     [Header("Hệ số rơi (không phải lúc nào quái chết cũng rớt đồ)")]
     [Tooltip("Nhân vào xác suất rơi của MỌI ô rơi trong Scene này (0.5 = rơi ít một nửa). Kết quả từng ô kẹp trong 0..100%.")]
     [SerializeField, Min(0f)] private float dropChanceMultiplier = 1f;
@@ -91,6 +101,9 @@ public class Scene_Rules : ScriptableObject
     public int SceneLevel => Mathf.Max(1, sceneLevel);
     public float ExpMultiplier => expMultiplier;
     public float CoinMultiplier => coinMultiplier;
+    public bool PersistState => persistState;
+    public float ResetAfterMinutes => resetAfterMinutes;
+    public bool ResetWhenCleared => resetWhenCleared;
     public float DropChanceMultiplier => dropChanceMultiplier;
     public float DropCountMultiplier => dropCountMultiplier;
     public IReadOnlyList<Scene_Family_Entry> MaterialFamilies => materialFamilies;

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.coplaydev.unity-mcp": "file:D:/Hieu/software/Unity/Package/unity-mcp-beta/MCPForUnity",
     "com.unity.2d.psdimporter": "10.1.1",
     "com.unity.ai.assistant": "2.20.0-pre.2",
     "com.unity.ai.inference": "2.6.1",

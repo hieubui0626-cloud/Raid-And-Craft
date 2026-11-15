@@ -119,6 +119,7 @@ public class Scene_Info : MonoBehaviour
 
     private void OnEnable()
     {
+        Scene_State_Store.NotifySceneEntered();
         active = this;
     }
 
