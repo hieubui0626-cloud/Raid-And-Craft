@@ -438,6 +438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: 'startingEquipment.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3127435634036000069, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: slot
       value: 2
@@ -480,14 +484,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[5].item
       value: 
       objectReference: {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: startingItems.Array.data[6].item
+      value: 
+      objectReference: {fileID: 11400000, guid: f871e3ef815033d47a0eb7ac14f77b27, type: 2}
+    - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[5].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: startingItems.Array.data[6].count
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8813738781937196859, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
