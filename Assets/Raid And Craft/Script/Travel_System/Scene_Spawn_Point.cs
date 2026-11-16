@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Điểm xuất hiện của Player trong một Scene: nơi Player đứng khi đi qua cổng (Travel_Gate) hoặc dịch chuyển nhanh tới đây
-/// (Fast_Travel_Point). Đặt một object trống ở chỗ muốn, đặt Spawn Id (duy nhất trong Scene), hướng mũi tên xanh = hướng Player nhìn.
+/// Điểm xuất hiện của Player trong một Scene: nơi Player đứng khi đi qua cổng (Travel_Gate) hoặc tới Scene này từ World Map (Map_Gate, Map_Exit_Gate).
+/// Đặt một object trống ở chỗ muốn, đặt Spawn Id (duy nhất trong Scene), hướng mũi tên xanh = hướng Player nhìn.
 /// Đánh dấu Is Default ở một điểm để làm chỗ xuất hiện mặc định khi không chỉ định (hoặc chỉ định Id không tồn tại).
 /// </summary>
 [DisallowMultipleComponent]

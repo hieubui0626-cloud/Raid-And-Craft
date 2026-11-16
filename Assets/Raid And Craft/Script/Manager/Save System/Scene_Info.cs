@@ -25,9 +25,6 @@ public class Scene_Info : MonoBehaviour
     [Tooltip("Quy chế của Scene cho quái: level, hệ số EXP, họ nguyên liệu rơi và tier. Trống = quái giữ level prefab, EXP gốc, không rơi nguyên liệu theo quy chế.")]
     [SerializeField] private Scene_Rules rules;
 
-    [Tooltip("Cho phép dịch chuyển nhanh (Map) khi đang ở Scene này. Thường tắt ở Scene tạm (Arena, hầm ngục).")]
-    [SerializeField] private bool allowFastTravel = true;
-
     [Tooltip("Modifier đang bật ngay khi vào Scene (map modifier). Thêm/bớt lúc chạy bằng AddModifier/RemoveModifier. Không lưu vào save: Scene dựng lại quy chế mỗi lần nạp.")]
     [SerializeField] private List<Scene_Rule_Modifier> startingModifiers = new List<Scene_Rule_Modifier>();
 
@@ -127,5 +124,4 @@ public class Scene_Info : MonoBehaviour
     {
         if (active == this) active = null;
     }
-    public bool AllowFastTravel => allowFastTravel;
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Gốc của các vật bấm được trong thế giới để đi/dịch chuyển (Travel_Gate, Fast_Travel_Point): click chuột trái, Player đi tới rồi gọi OnInteract.
+/// Gốc của các vật bấm được trong thế giới để đi/dịch chuyển (Travel_Gate, Map_Gate, Map_Exit_Gate): click chuột trái, Player đi tới rồi gọi OnInteract.
 /// Lo phần dùng chung: Collider (tự thêm trigger nếu chưa có) và thẻ tên nổi giống Npc_Shop.
 /// </summary>
 public abstract class Travel_Point_Base : MonoBehaviour, IWorld_Interactable

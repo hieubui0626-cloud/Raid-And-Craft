@@ -61,7 +61,7 @@ public class Pause_Menu : MonoBehaviour
         if (Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame) return;
 
         if (IsOpen) Close();
-        else if (!Map_Panel_UI.IsOpenOrJustClosed) Open();
+        else if (!World_Map_UI.IsOpenOrJustClosed) Open();
     }
 
     public void Open()

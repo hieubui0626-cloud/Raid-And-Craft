@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3324501017384507432}
   - component: {fileID: 5386266101837663526}
   - component: {fileID: 5368301865138733213}
+  - component: {fileID: 1306957691899794386}
   m_Layer: 6
   m_Name: Enemy_Boss_Source_Prefab
   m_TagString: Enemy
@@ -359,6 +360,18 @@ MonoBehaviour:
     target: 16
     multiplier: 0.2
   enableRegen: 1
+--- !u!114 &1306957691899794386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183225339859694739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd87acd6cdf13bf41b53de911e181be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &745456006337069250
 GameObject:
   m_ObjectHideFlags: 0

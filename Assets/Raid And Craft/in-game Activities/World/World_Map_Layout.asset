@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbac092684e2ab44b151f6a5509c8ee, type: 3}
+  m_Name: World_Map_Layout
+  m_EditorClassIdentifier: 
+  nodes:
+  - id: W_0_1
+    displayName: The Path of Saint Moutain party Camp
+    description: Path in the edge of the forest in front of the Saint Moutain camp
+    type: 1
+    sceneName: The Path
+    spawnId: W_0_1
+    isStart: 1
+    neighborIds: []
+    rules: {fileID: 11400000, guid: 69974f2db5c3a5f4bbd2c61773bc67fe, type: 2}
+    modifiers: []
+  - id: Base_1_1
+    displayName: Saint Moutain party Camp
+    description: ' camp of Saint Moutain Party'
+    type: 0
+    sceneName: The Camp
+    spawnId: Base_1_1
+    isStart: 0
+    neighborIds:
+    - W_0_1
+    - W_1_1
+    rules: {fileID: 0}
+    modifiers: []
+  - id: W_1_1
+    displayName: 'The Fog Hill '
+    description: The Hill front Thanh Van village
+    type: 1
+    sceneName: 'The Fog Hill '
+    spawnId: W_1_1
+    isStart: 0
+    neighborIds:
+    - W_1_2
+    rules: {fileID: 11400000, guid: 69a9d0b37fe5c9e47937df1031600d3a, type: 2}
+    modifiers: []
+  - id: W_1_2
+    displayName: The Dark Paddy Filed
+    description: The Paddy Field of Thanh Van village have a path to villager
+    type: 1
+    sceneName: The Dark Paddy Filed
+    spawnId: W_1_2
+    isStart: 0
+    neighborIds:
+    - W_0_1
+    rules: {fileID: 11400000, guid: 5c3d10154708805459939847cdb5c624, type: 2}
+    modifiers: []

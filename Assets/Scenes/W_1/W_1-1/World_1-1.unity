@@ -431,7 +431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 1
   rules: {fileID: 11400000, guid: 69a9d0b37fe5c9e47937df1031600d3a, type: 2}
-  allowFastTravel: 1
   startingModifiers: []
 --- !u!4 &628501553
 Transform:

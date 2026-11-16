@@ -27,8 +27,8 @@ GameObject:
   - component: {fileID: 1294769661293109137}
   - component: {fileID: -5531907300575598299}
   - component: {fileID: 5637358514875878801}
-  - component: {fileID: 4129359611486884412}
   - component: {fileID: 7829245241434466366}
+  - component: {fileID: 6533520213543347931}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -462,18 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5727eedbcfec181449a5487d321468c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4129359611486884412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6986446369057350650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54493e1a79faec41bab6ea700b46015, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7829245241434466366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,6 +476,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnDelay: 3
   reviveHealthPercent: 0.5
+--- !u!114 &6533520213543347931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6986446369057350650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5b6863d5ac6a34b81da30cdb4ded97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layout: {fileID: 11400000, guid: 8198e1db28440f244a1384cf89f27fcc, type: 2}
+  autoReturnOnComplete: 1
+  returnDelay: 6
 --- !u!1001 &5553653632228016500
 PrefabInstance:
   m_ObjectHideFlags: 0

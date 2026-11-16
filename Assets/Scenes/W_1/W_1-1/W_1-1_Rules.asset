@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6bc037e45c00b949a4843166c95aee2, type: 3}
-  m_Name: World_1-1_Rule
+  m_Name: W_1-1_Rules
   m_EditorClassIdentifier: 
-  sceneLevel: 1
+  sceneLevel: 2
   expMultiplier: 1
   coinMultiplier: 1
   persistState: 1

@@ -88,8 +88,8 @@ public class Player_Save_Data
     /// <summary>EXP hiện có trong cấp hiện tại (cấp độ nằm trong chỉ số gốc CharacterLevel).</summary>
     public int experience;
 
-    /// <summary>Các điểm dịch chuyển nhanh (portal) đã mở.</summary>
-    public List<Fast_Travel_Entry> fastTravel = new List<Fast_Travel_Entry>();
+    /// <summary>Id các Instance đã Complete trên World Map. Trạng thái Unlocked suy ra từ đây (xem Player_Map_Progress). Save cũ không có field này nên coi như chưa Complete nào.</summary>
+    public List<string> completedMapNodes = new List<string>();
 
     /// <summary>Trạng thái các Scene đã vào (quái đã hạ...) để Instance nhớ giữa các lần vào; reset theo quy chế Scene_Rules. Xem Scene_State_Store.</summary>
     public List<Scene_State_Entry> sceneStates = new List<Scene_State_Entry>();
