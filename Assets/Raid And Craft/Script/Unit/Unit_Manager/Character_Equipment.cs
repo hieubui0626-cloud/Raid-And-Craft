@@ -93,17 +93,47 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     // ------------------------------------------------------------------
 
     /// <summary>Gợi ý cho UI làm xám nút: món này mặc được không (chưa đảm bảo TryEquip thành công: còn phụ thuộc kho).</summary>
-    public bool CanEquip(Item_Instance item)
+    public bool CanEquip(Item_Data item)
     {
-        return item != null && CanEquip(item.Base);
+        if (item == null)
+            return false;
+
+        if (!(item is Equippable_Item_Data equippable))
+            return false;
+
+        return CanEquip(item, equippable.EquipSlot);
     }
 
     /// <summary>Loại vật phẩm này mặc được không (ô trang bị hợp lệ và công dụng Equip không bị chặn).</summary>
-    public bool CanEquip(Item_Data item)
+    public bool CanEquip(Item_Data item, Equipment_Slot targetSlot)
     {
-        return item is Equippable_Item_Data equippable
-            && equippable.EquipSlot != Equipment_Slot.None
-            && equippable.CanBeUsedFor(Item_Usage.Equip);
+        if (!(item is Equippable_Item_Data equippable))
+            return false;
+
+        if (targetSlot == Equipment_Slot.None)
+            return false;
+
+        if (!equippable.CanBeUsedFor(Item_Usage.Equip))
+            return false;
+
+        // Weapon: kiểm tra slot bằng Weapon Data.
+        if (equippable is Weapon_Data weaponData)
+        {
+            if (!weaponData.CanEquipInSlot(targetSlot))
+                return false;
+        }
+        else
+        {
+            // Các trang bị không phải Weapon vẫn sử dụng EquipSlot cũ.
+            if (equippable.EquipSlot != targetSlot)
+                return false;
+        }
+
+        return Equipment_Validator.CanEquip(
+            equippable,
+            targetSlot,
+            equipped,
+            out _);
     }
 
     /// <summary>
@@ -113,7 +143,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     public bool TryEquip(Item_Instance item)
     {
         EnsureInitialized();
-        if (!CanEquip(item) || inventory == null || !inventory.HasInstance(item)) return false;
+        if (!CanEquip(item.Base) || inventory == null || !inventory.HasInstance(item)) return false;
 
         Equipment_Slot slot = item.Base.EquipSlot;
         equipped.TryGetValue(slot, out Item_Instance oldItem);
@@ -180,18 +210,39 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     /// Món cũ ở ô (nếu có) được trả về qua previous để con trỏ cầm tiếp (null = con trỏ trống).
     /// False (không đổi gì, previous = held) nếu sai ô, không mặc được, hoặc món đó vẫn còn trong kho.
     /// </summary>
-    public bool TryEquipHeld(Equipment_Slot targetSlot, Item_Instance held, out Item_Instance previous)
+
+    public bool TryEquipHeld(
+        Equipment_Slot targetSlot,
+        Item_Instance held,
+        out Item_Instance previous)
     {
         previous = held;
         EnsureInitialized();
-        if (!CanEquip(held) || held.Base.EquipSlot != targetSlot) return false;
-        if (inventory != null && inventory.HasInstance(held)) return false;
 
-        equipped.TryGetValue(targetSlot, out Item_Instance oldItem);
+        if (held == null)
+            return false;
+
+        if (!(held.Base is Equippable_Item_Data equippable))
+            return false;
+
+        // Kiểm tra theo slot người chơi thực sự thả vào.
+        if (!CanEquip(held.Base, targetSlot))
+            return false;
+
+        if (inventory != null && inventory.HasInstance(held))
+            return false;
+
+        equipped.TryGetValue(
+            targetSlot,
+            out Item_Instance oldItem);
+
+        // Chỉ thay đổi Equipment sau khi toàn bộ kiểm tra thành công.
         SetSlot(targetSlot, held);
+
         previous = oldItem;
         return true;
     }
+
 
     // ------------------------------------------------------------------
     // MẶC / THÁO THẲNG, KHÔNG QUA KHO (Enemy, thử nghiệm, load save)
@@ -201,7 +252,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     public bool EquipDirect(Item_Instance item)
     {
         EnsureInitialized();
-        if (!CanEquip(item)) return false;
+        if (!CanEquip(item.Base)) return false;
         if (GetEquipped(item.Base.EquipSlot) == item) return false;
 
         SetSlot(item.Base.EquipSlot, item);

@@ -129,8 +129,14 @@ public class Equipment_Slot_UI : MonoBehaviour, IPointerClickHandler, IPointerEn
         Color color = default;
         bool show = false;
 
-        Grid_Placement held = Item_Drag_Controller.IsHoldingItem ? Item_Drag_Controller.Instance.Held : default;
-        if (!held.IsEmpty && held.Instance != null && held.Item.EquipSlot == slot && equipment.CanEquip(held.Instance))
+        Grid_Placement held = Item_Drag_Controller.IsHoldingItem
+            ? Item_Drag_Controller.Instance.Held
+            : default;
+
+        if (!held.IsEmpty &&
+            held.Instance != null &&
+            equipment != null &&
+            equipment.CanEquip(held.Instance.Base, slot))
         {
             color = fitColor;
             show = true;
@@ -141,8 +147,11 @@ public class Equipment_Slot_UI : MonoBehaviour, IPointerClickHandler, IPointerEn
             show = true;
         }
 
-        if (highlightImage.gameObject.activeSelf != show) highlightImage.gameObject.SetActive(show);
-        if (show) highlightImage.color = color;
+        if (highlightImage.gameObject.activeSelf != show)
+            highlightImage.gameObject.SetActive(show);
+
+        if (show)
+            highlightImage.color = color;
     }
 
     private void ShowTooltip()

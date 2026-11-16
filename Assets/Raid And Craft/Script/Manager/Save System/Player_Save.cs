@@ -469,18 +469,53 @@ public class Player_Save : MonoBehaviour
 
     private void RestoreEquipment(Character_Equipment equipment, Inventory inventory, List<Equipment_Save_Entry> saved)
     {
-        equipment.UnequipAllDirect(); // bỏ cả trang bị khởi đầu của Inspector, bản save là chuẩn
+        equipment.UnequipAllDirect();
 
-        foreach (Equipment_Save_Entry entry in saved)
+        List<Equipment_Save_Entry> ordered =
+            new List<Equipment_Save_Entry>(saved);
+
+        // MainHand luôn được phục hồi trước.
+        ordered.Sort((a, b) =>
         {
-            Item_Instance instance = Save_Codec.FromSave(entry.item, itemDatabase, influDatabase);
-            if (instance == null) continue;
+            Equipment_Slot slotA = (Equipment_Slot)a.slot;
+            Equipment_Slot slotB = (Equipment_Slot)b.slot;
 
-            if (equipment.EquipDirect(instance)) continue;
+            int priorityA =
+                slotA == Equipment_Slot.MainHand ? 0 :
+                slotA == Equipment_Slot.OffHand ? 1 : 2;
 
-            // Không mặc lại được (ví dụ asset đổi sang không mặc được): trả về Inventory để không mất.
-            Debug.LogWarning($"[{nameof(Player_Save)}] Không mặc lại được '{instance.DisplayName}', chuyển vào Inventory.", this);
-            if (inventory == null || !inventory.AddInstance(instance)) Debug.LogWarning($"[{nameof(Player_Save)}] Mất '{instance.DisplayName}' (Inventory hết chỗ).", this);
+            int priorityB =
+                slotB == Equipment_Slot.MainHand ? 0 :
+                slotB == Equipment_Slot.OffHand ? 1 : 2;
+
+            return priorityA.CompareTo(priorityB);
+        });
+
+        foreach (Equipment_Save_Entry entry in ordered)
+        {
+            Item_Instance instance = Save_Codec.FromSave(
+                entry.item,
+                itemDatabase,
+                influDatabase);
+
+            if (instance == null)
+                continue;
+
+            if (equipment.EquipDirect(instance))
+                continue;
+
+            // Không làm mất trang bị nếu không tương thích.
+            Debug.LogWarning(
+                $"[{nameof(Player_Save)}] Không mặc lại được '{instance.DisplayName}', chuyển vào Inventory.",
+                this);
+
+            if (inventory == null ||
+                !inventory.AddInstance(instance))
+            {
+                Debug.LogWarning(
+                    $"[{nameof(Player_Save)}] Mất '{instance.DisplayName}' vì Inventory hết chỗ.",
+                    this);
+            }
         }
     }
 

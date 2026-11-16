@@ -254,7 +254,9 @@ public class Inventory_UI : MonoBehaviour
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
             // Chuột phải: mặc trang bị.
-            if (placement.Instance != null && equipment != null && equipment.CanEquip(placement.Instance))
+            if (placement.Instance != null &&
+                equipment != null &&
+                equipment.CanEquip(placement.Instance.Base))
             {
                 Item_Tooltip_UI.HideIfExists();
                 equipment.TryEquip(placement.Instance);

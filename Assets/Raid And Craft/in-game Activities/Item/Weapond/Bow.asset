@@ -30,6 +30,8 @@ MonoBehaviour:
     modifierType: 0
     value: 7
   weaponFamily: 4
+  weaponKind: 4
+  handType: 2
   attackArchetype: 1
   attackSources: 
   damageTypes: 00000000

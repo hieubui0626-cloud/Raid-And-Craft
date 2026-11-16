@@ -118,6 +118,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Drag_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Character_Level.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Equipment_Validator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\IDamageable.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Codec.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
