@@ -38,6 +38,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 
     private readonly Dictionary<Equipment_Slot, Item_Instance> equipped = new Dictionary<Equipment_Slot, Item_Instance>();
     private bool initialized;
+    private bool nextAlternateIsOffHand;
 
     /// <summary>Mọi món đang mặc (ô -> món). Ô trống không có trong danh sách.</summary>
     public IReadOnlyDictionary<Equipment_Slot, Item_Instance> Equipped => equipped;
@@ -51,17 +52,114 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         return equipped.TryGetValue(slot, out Item_Instance item) ? item : null;
     }
 
-    /// <summary>Cho Damage_Effect (Use Weapon Attack). Tay không = false, effect dùng delivery của chính nó.</summary>
-    public bool TryGetWeaponAttack(out Skill_Weapon_Attack attack)
+    private bool TryBuildWeaponAttack(
+        Skill_Weapon_Source_Slot sourceSlot,
+        out Skill_Weapon_Attack attack)
     {
-        Weapon_Data w = Weapon;
+        Weapon_Data w = null;
+
+        switch (sourceSlot)
+        {
+            case Skill_Weapon_Source_Slot.MainHand:
+                w = Weapon;
+                break;
+
+            case Skill_Weapon_Source_Slot.OffHand:
+                w = GetEquipped(Equipment_Slot.OffHand)?.Base
+                    as Weapon_Data;
+                break;
+        }
+
         if (w == null)
         {
             attack = default;
             return false;
         }
 
-        attack = new Skill_Weapon_Attack(w.attackDelivery, w.damageTypes, w.damageMultiplier, w.attackAnimation, w.attackArchetype, w.weaponFamily, w.attackSources);
+        Equipment_Slot equipmentSlot =
+            sourceSlot == Skill_Weapon_Source_Slot.MainHand
+                ? Equipment_Slot.MainHand
+                : Equipment_Slot.OffHand;
+
+        if (!w.CanAttackFromSlot(equipmentSlot))
+        {
+            attack = default;
+            return false;
+        }
+
+        attack = new Skill_Weapon_Attack(
+            w.attackDelivery,
+            w.damageTypes,
+            w.damageMultiplier,
+            w.attackAnimation,
+            w.attackArchetype,
+            w.weaponFamily,
+            w.attackSources
+        );
+
+        return true;
+    }
+
+    public bool TryGetWeaponAttack(out Skill_Weapon_Attack attack)
+    {
+        return TryBuildWeaponAttack(
+            Skill_Weapon_Source_Slot.MainHand,
+            out attack
+        );
+    }
+
+    public bool TryGetWeaponAttack(
+        Skill_Weapon_Source_Slot sourceSlot,
+        out Skill_Weapon_Attack attack)
+    {
+        return TryBuildWeaponAttack(sourceSlot, out attack);
+    }
+
+    public bool TryGetAlternateWeaponAttack(
+        out Skill_Weapon_Attack attack)
+    {
+        bool hasMain = TryBuildWeaponAttack(
+            Skill_Weapon_Source_Slot.MainHand,
+            out Skill_Weapon_Attack mainAttack
+        );
+
+        bool hasOff = TryBuildWeaponAttack(
+            Skill_Weapon_Source_Slot.OffHand,
+            out Skill_Weapon_Attack offAttack
+        );
+
+        if (!hasMain && !hasOff)
+        {
+            attack = default;
+            nextAlternateIsOffHand = false;
+            return false;
+        }
+
+        if (hasMain && !hasOff)
+        {
+            attack = mainAttack;
+            nextAlternateIsOffHand = false;
+            return true;
+        }
+
+        if (!hasMain && hasOff)
+        {
+            attack = offAttack;
+            nextAlternateIsOffHand = false;
+            return true;
+        }
+
+        if (nextAlternateIsOffHand)
+        {
+            attack = offAttack;
+            nextAlternateIsOffHand = false;
+        }
+        else
+        {
+            attack = mainAttack;
+            nextAlternateIsOffHand = true;
+        }
+
         return true;
     }
 

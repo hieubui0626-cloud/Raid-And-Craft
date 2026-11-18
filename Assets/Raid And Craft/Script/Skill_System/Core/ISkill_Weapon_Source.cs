@@ -1,11 +1,35 @@
 /// <summary>
+/// Nguồn vũ khí độc lập với Equipment_Slot.
+/// </summary>
+public enum Skill_Weapon_Source_Slot
+{
+    MainHand = 0,
+    OffHand = 1
+}
+
+/// <summary>
 /// Cầu nối giữa skill và vũ khí, để skill system KHÔNG phụ thuộc trực tiếp Character_Equipment/Weapon_Data.
 /// Character_Equipment implement ISkill_Weapon_Source.
 /// </summary>
 public interface ISkill_Weapon_Source
 {
-    /// <summary>Trả false nếu đang tay không (Damage_Effect dùng delivery của chính nó, animation dùng loại của skill).</summary>
+    /// <summary>
+    /// Trả false nếu đang tay không.
+    /// </summary>
     bool TryGetWeaponAttack(out Skill_Weapon_Attack attack);
+
+    /// <summary>
+    /// Lấy dữ liệu tấn công từ một tay cụ thể.
+    /// </summary>
+    bool TryGetWeaponAttack(
+        Skill_Weapon_Source_Slot sourceSlot,
+        out Skill_Weapon_Attack attack);
+
+    /// <summary>
+    /// Lấy dữ liệu tấn công kế tiếp theo cơ chế Alternate.
+    /// </summary>
+    bool TryGetAlternateWeaponAttack(
+        out Skill_Weapon_Attack attack);
 }
 
 public readonly struct Skill_Weapon_Attack

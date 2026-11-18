@@ -39,7 +39,7 @@ public class Map_Node_Data
     [Tooltip("Id của Scene_Spawn_Point nơi Player xuất hiện khi đi tới node này. Trống = điểm mặc định (Is Default).")]
     public string spawnId = "";
 
-    [Tooltip("Node khởi đầu: mở sẵn từ đầu game. Cần đúng MỘT node, có thể là Base hoặc Instance.")]
+    [Tooltip("Node khởi đầu: mở sẵn từ đầu game (Base hoặc Instance đều được). Cần đúng MỘT node.")]
     public bool isStart;
 
     [Tooltip("Các node nối với node này. Chỉ cần khai báo MỘT phía, hệ thống tự nối hai chiều.")]
@@ -70,7 +70,7 @@ public class Map_Node_Data
 
 /// <summary>
 /// Bản đồ thế giới (tạo asset: Create -> Raid And Craft -> World Map Layout). Chỉ là DỮ LIỆU: node, đường nối, loại.
-/// <summary>Trạng thái node. Base chỉ có Locked/Unlocked; Instance có thêm Complete.</summary>
+/// Trạng thái (node nào Unlocked/Complete) nằm ở Player_Map_Progress và được suy ra từ danh sách Instance đã Complete.
 /// </summary>
 [CreateAssetMenu(menuName = "Raid And Craft/World Map Layout", fileName = "World_Map_Layout")]
 public class World_Map_Layout : ScriptableObject
@@ -187,12 +187,11 @@ public class World_Map_Layout : ScriptableObject
                 if (!adjacency[node.id].Contains(neighborId)) adjacency[node.id].Add(neighborId);
                 if (!adjacency[neighborId].Contains(node.id)) adjacency[neighborId].Add(node.id);
             }
-        }   
+        }
 
         if (startNode == null && nodeById.Count > 0)
         {
             Debug.LogWarning($"[{nameof(World_Map_Layout)}] Chưa có node xuất phát (isStart).", this);
         }
-        
     }
 }

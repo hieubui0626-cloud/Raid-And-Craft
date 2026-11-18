@@ -23,8 +23,16 @@ public class World_Map_Node_View : MonoBehaviour, IPointerEnterHandler, IPointer
     [Tooltip("Bật khi Player đang đứng ở node này (viền sáng, v.v.). Không bắt buộc.")]
     [SerializeField] private GameObject currentVisual;
 
+    [Header("Hoặc đổi Sprite theo trạng thái (không bắt buộc)")]
+    [Tooltip("Image sẽ đổi Sprite. Trống = Image trên chính nút này. Dùng khi ổ khoá/dấu hoàn thành nằm ngay trong Sprite của nút.")]
+    [SerializeField] private Image stateImage;
+    [SerializeField] private Sprite lockedSprite;
+    [SerializeField] private Sprite unlockedSprite;
+    [SerializeField] private Sprite completeSprite;
+
     private World_Map_UI owner;
     private Button button;
+    private bool checkedSetup;
 
     public string NodeId => nodeId;
 
@@ -47,10 +55,57 @@ public class World_Map_Node_View : MonoBehaviour, IPointerEnterHandler, IPointer
     /// <summary>World_Map_UI gọi mỗi lần làm mới: đổi hình theo trạng thái. isCurrent = Player đang ở node này.</summary>
     public void Apply(Map_Node_State state, bool isCurrent)
     {
+        CheckSetupOnce();
+
+        Sprite sprite = state == Map_Node_State.Complete ? completeSprite : state == Map_Node_State.Unlocked ? unlockedSprite : lockedSprite;
+        if (sprite != null)
+        {
+            Image image = stateImage != null ? stateImage : GetComponent<Image>();
+            if (image != null) image.sprite = sprite;
+        }
+
         if (lockedVisual != null) lockedVisual.SetActive(state == Map_Node_State.Locked);
         if (unlockedVisual != null) unlockedVisual.SetActive(state == Map_Node_State.Unlocked);
         if (completeVisual != null) completeVisual.SetActive(state == Map_Node_State.Complete);
         if (currentVisual != null) currentVisual.SetActive(isCurrent);
+    }
+
+    // Báo lỗi cài đặt hay gặp (một lần mỗi nút) để khỏi phải đoán vì sao hình không đổi.
+    private void CheckSetupOnce()
+    {
+        if (checkedSetup) return;
+        checkedSetup = true;
+
+        bool anyVisual = lockedVisual != null || unlockedVisual != null || completeVisual != null || currentVisual != null;
+        bool anySprite = lockedSprite != null || unlockedSprite != null || completeSprite != null;
+        if (!anyVisual && !anySprite)
+        {
+            Debug.LogWarning($"[{nameof(World_Map_Node_View)}] Nút '{name}' (id '{nodeId}') chưa gán Visual hay Sprite theo trạng thái nên hình sẽ không đổi (ổ khoá nằm sẵn trong Sprite của nút sẽ luôn hiện).", this);
+        }
+
+        CheckVisual(lockedVisual, "Locked Visual");
+        CheckVisual(unlockedVisual, "Unlocked Visual");
+        CheckVisual(completeVisual, "Complete Visual");
+        CheckVisual(currentVisual, "Current Visual");
+
+        if (lockedVisual != null && lockedVisual == unlockedVisual)
+        {
+            Debug.LogError($"[{nameof(World_Map_Node_View)}] Nút '{name}': Locked Visual và Unlocked Visual đang là cùng một object.", this);
+        }
+    }
+
+    private void CheckVisual(GameObject visual, string field)
+    {
+        if (visual == null) return;
+
+        if (!visual.scene.IsValid())
+        {
+            Debug.LogError($"[{nameof(World_Map_Node_View)}] Nút '{name}': {field} đang trỏ tới asset (Prefab) trong Project, không phải object trong Scene nên bật/tắt không có tác dụng. Kéo object con trong Hierarchy.", this);
+        }
+        else if (visual == gameObject || transform.IsChildOf(visual.transform))
+        {
+            Debug.LogError($"[{nameof(World_Map_Node_View)}] Nút '{name}': {field} là chính nút này hoặc object cha của nó. Phải là object CON (ổ khoá, dấu hoàn thành...).", this);
+        }
     }
 
     private void HandleClick()

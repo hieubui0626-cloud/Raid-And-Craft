@@ -35,6 +35,15 @@ public abstract class Travel_Point_Base : MonoBehaviour, IWorld_Interactable
 
     protected abstract void OnInteract(World_Item_Picker interactor);
 
+    /// <summary>Đổi chữ và màu thẻ tên (ví dụ cổng đang khoá). Gọi trước khi thẻ được dựng thì bị bỏ qua, Start dựng lại theo displayName.</summary>
+    protected void SetLabel(string text, Color color)
+    {
+        if (label == null) return;
+
+        label.text = text;
+        label.color = color;
+    }
+
     protected virtual void Start()
     {
         BuildCollider();

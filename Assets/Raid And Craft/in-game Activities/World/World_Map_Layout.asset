@@ -13,47 +13,49 @@ MonoBehaviour:
   m_Name: World_Map_Layout
   m_EditorClassIdentifier: 
   nodes:
-  - id: W_0_1
+  - id: W_0-1
     displayName: The Path of Saint Moutain party Camp
     description: Path in the edge of the forest in front of the Saint Moutain camp
     type: 1
-    sceneName: The Path
-    spawnId: W_0_1
+    sceneName: W_0-1
+    spawnId: 
     isStart: 1
-    neighborIds: []
+    neighborIds:
+    - Base_1-1
     rules: {fileID: 11400000, guid: 69974f2db5c3a5f4bbd2c61773bc67fe, type: 2}
     modifiers: []
-  - id: Base_1_1
+  - id: Base_1-1
     displayName: Saint Moutain party Camp
     description: ' camp of Saint Moutain Party'
     type: 0
-    sceneName: The Camp
-    spawnId: Base_1_1
+    sceneName: Base_1-1
+    spawnId: 
     isStart: 0
     neighborIds:
-    - W_0_1
-    - W_1_1
+    - W_1-1
+    - W_0-1
     rules: {fileID: 0}
     modifiers: []
-  - id: W_1_1
+  - id: W_1-1
     displayName: 'The Fog Hill '
     description: The Hill front Thanh Van village
     type: 1
-    sceneName: 'The Fog Hill '
-    spawnId: W_1_1
+    sceneName: W_1-1
+    spawnId: 
     isStart: 0
     neighborIds:
-    - W_1_2
+    - W_1-2
+    - Base_1-1
     rules: {fileID: 11400000, guid: 69a9d0b37fe5c9e47937df1031600d3a, type: 2}
     modifiers: []
-  - id: W_1_2
+  - id: W_1-2
     displayName: The Dark Paddy Filed
     description: The Paddy Field of Thanh Van village have a path to villager
     type: 1
-    sceneName: The Dark Paddy Filed
-    spawnId: W_1_2
+    sceneName: W_1-2
+    spawnId: 
     isStart: 0
     neighborIds:
-    - W_0_1
+    - W_1-1
     rules: {fileID: 11400000, guid: 5c3d10154708805459939847cdb5c624, type: 2}
     modifiers: []

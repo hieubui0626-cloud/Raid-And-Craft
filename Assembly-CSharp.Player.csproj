@@ -1115,6 +1115,10 @@
       <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
       <Name>Unity.InferenceEngine.Tokenization.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Profiling.Core.Player.csproj">
+      <Project>{4C745FB8-FAD1-CF3E-978B-75901E19C923}</Project>
+      <Name>Unity.Profiling.Core.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{51EA57FE-698C-76E8-D681-264ACB67B17D}</Project>
       <Name>Unity.TextMeshPro.Player</Name>
@@ -1155,6 +1159,10 @@
       <Project>{D0CCD329-7131-C2DA-9D83-65C8F30F5FD0}</Project>
       <Name>Unity.RenderPipelines.Universal.Shaders.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ResourceManager.Player.csproj">
+      <Project>{C44EC6A4-EE92-B363-05F3-815E6371047A}</Project>
+      <Name>Unity.ResourceManager.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.Player.csproj">
       <Project>{2D694E59-61ED-F58C-9D1B-EE9328992424}</Project>
       <Name>Unity.RenderPipelines.Core.Runtime.Shared.Player</Name>
@@ -1174,6 +1182,14 @@
     <ProjectReference Include="Unity.Collections.Player.csproj">
       <Project>{0BC137B0-4E31-6888-490F-F9E4CD7F8802}</Project>
       <Name>Unity.Collections.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ScriptableBuildPipeline.Player.csproj">
+      <Project>{9CA7E88E-ECAD-6C68-8876-F1985EE32925}</Project>
+      <Name>Unity.ScriptableBuildPipeline.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Addressables.Player.csproj">
+      <Project>{9F013611-72BB-0C4B-B83C-E9B5C8BB1016}</Project>
+      <Name>Unity.Addressables.Player</Name>
     </ProjectReference>
     <ProjectReference Include="MCPForUnity.Runtime.Player.csproj">
       <Project>{1104EF6E-53AD-4EAE-3E49-02D2162221C3}</Project>
@@ -1206,6 +1222,10 @@
     <ProjectReference Include="Unity.Rendering.LightTransport.Runtime.Player.csproj">
       <Project>{0369DF7F-5A71-4700-6687-7016ED173FB4}</Project>
       <Name>Unity.Rendering.LightTransport.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Localization.Player.csproj">
+      <Project>{1E7C6A86-79D7-D465-4815-830C58D7CF37}</Project>
+      <Name>Unity.Localization.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{7DF1E007-5AF8-1457-D776-927B998344B3}</Project>

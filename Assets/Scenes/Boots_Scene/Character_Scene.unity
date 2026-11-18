@@ -2406,8 +2406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b375c504a7d05094180c2c654f0abb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCharacterScene: Base_1
-  defaultContinueScene: Base_1
+  newCharacterScene: W_0-1
+  defaultContinueScene: W_0-1
   slotPanel: {fileID: 331072077}
   characterSlotPrefab: {fileID: 7364008693311578872, guid: 636b39ba76171204484378212a0c083a, type: 3}
   createSlotPrefab: {fileID: 7364008693311578872, guid: 47686c60ee0f25c458269093be389ef0, type: 3}

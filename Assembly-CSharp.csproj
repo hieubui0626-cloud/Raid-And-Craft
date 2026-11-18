@@ -1383,6 +1383,10 @@
       <Project>{2AB43B6E-AE6F-D177-E981-5AFE504EEB00}</Project>
       <Name>Unity.InferenceEngine.Tokenization</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Profiling.Core.csproj">
+      <Project>{6EAAFB43-4B33-593B-E7B1-ED60EA63EB84}</Project>
+      <Name>Unity.Profiling.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AppUI.Editor.csproj">
       <Project>{36510EA0-FF2D-C315-CAD1-244C1D5F28C6}</Project>
       <Name>Unity.AppUI.Editor</Name>
@@ -1447,6 +1451,10 @@
       <Project>{0EE1BCB7-BAE8-FD70-596E-9E31FD1924C4}</Project>
       <Name>Unity.Searcher.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Addressables.Editor.csproj">
+      <Project>{6B361D2C-999D-C090-DBDB-F2949B104CC1}</Project>
+      <Name>Unity.Addressables.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
       <Project>{6F274EBB-AD7F-DB88-C247-0E65FD73DD3D}</Project>
       <Name>Unity.Animation.Rigging.Editor</Name>
@@ -1475,6 +1483,10 @@
       <Project>{A5DB25B9-543C-CFC5-0200-A2793B90ED10}</Project>
       <Name>Unity.RenderPipelines.Universal.Shaders</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ResourceManager.csproj">
+      <Project>{63B2E556-3AA3-83C0-8A93-40BFAD163F6D}</Project>
+      <Name>Unity.ResourceManager</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InferenceEngine.iOSBLAS.csproj">
       <Project>{A1346A6C-55E3-CC11-4130-DA159694EC2D}</Project>
       <Name>Unity.InferenceEngine.iOSBLAS</Name>
@@ -1494,6 +1506,10 @@
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ScriptableBuildPipeline.Editor.csproj">
+      <Project>{C20679B5-348E-26F6-C16C-7DDC6CC15894}</Project>
+      <Name>Unity.ScriptableBuildPipeline.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.Editor.csproj">
       <Project>{E006F271-606F-98C1-EC2E-8BD1F85B4700}</Project>
@@ -1526,6 +1542,14 @@
     <ProjectReference Include="Unity.Collections.csproj">
       <Project>{4D8BC3AF-B095-5893-D9EC-FE3960390EC0}</Project>
       <Name>Unity.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ScriptableBuildPipeline.csproj">
+      <Project>{CF36F304-687C-3FA5-C9DB-474990F835D3}</Project>
+      <Name>Unity.ScriptableBuildPipeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Addressables.csproj">
+      <Project>{DB6CC6C5-16AC-5263-080E-2F62A2A24592}</Project>
+      <Name>Unity.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Rendering.LightTransport.Editor.csproj">
       <Project>{D3E8CB77-A69B-2B12-EA10-D2124529D618}</Project>
@@ -1591,6 +1615,10 @@
       <Project>{4E6FA566-F832-9628-6536-5154FAF095BE}</Project>
       <Name>Unity.RenderPipelines.Core.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Localization.Editor.csproj">
+      <Project>{441F3DEE-63BF-A1F5-4A44-A9ACCA253631}</Project>
+      <Name>Unity.Localization.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AI.MCP.Runtime.csproj">
       <Project>{270F81FF-F327-D952-A525-A734073C0859}</Project>
       <Name>Unity.AI.MCP.Runtime</Name>
@@ -1614,6 +1642,10 @@
     <ProjectReference Include="Unity.Rendering.LightTransport.Runtime.csproj">
       <Project>{E9C15EB7-053F-8344-34E5-AF5E05D3FE78}</Project>
       <Name>Unity.Rendering.LightTransport.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Localization.csproj">
+      <Project>{65D1A923-FE2E-1908-41D8-866206DE0BE9}</Project>
+      <Name>Unity.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.csproj">
       <Project>{05BF177E-BCB9-1FEF-78A4-BF5A81EA8975}</Project>

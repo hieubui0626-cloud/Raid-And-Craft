@@ -85,13 +85,21 @@ public class Map_Pan_Zoom : MonoBehaviour, IBeginDragHandler, IDragHandler, IScr
     /// <summary>Đặt zoom (kẹp trong min..max) rồi căn giữa Viewport vào target (một RectTransform con của Content).</summary>
     public void FocusOn(RectTransform target, float zoom)
     {
-        if (content == null || target == null) return;
+        if (target == null) return;
+        FocusOnWorldPoint(target.position, zoom);
+    }
+
+    /// <summary>Như FocusOn nhưng theo một điểm trong thế giới (position của một RectTransform bất kỳ thuộc Content).</summary>
+    public void FocusOnWorldPoint(Vector3 worldPoint, float zoom)
+    {
+        if (content == null) return;
+
+        // Điểm trong toạ độ riêng của Content (không phụ thuộc scale), rồi đưa nó về tâm Viewport ở scale mới.
+        Vector3 inContent = content.InverseTransformPoint(worldPoint);
 
         float scale = Mathf.Clamp(zoom, minZoom, maxZoom);
         content.localScale = new Vector3(scale, scale, 1f);
 
-        // Vị trí của target trong toạ độ Content, rồi đưa nó về tâm Viewport.
-        Vector3 inContent = content.InverseTransformPoint(target.position);
         Vector2 viewportCenter = viewport.rect.center;
         content.localPosition = viewportCenter - (Vector2)inContent * scale;
         Clamp();
