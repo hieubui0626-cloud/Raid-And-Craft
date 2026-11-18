@@ -22,6 +22,7 @@ public class Player_Stats_UI : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Character_Stats player_Stats;
+    [SerializeField] private Character_Equipment player_Equipment;
     [SerializeField] private Character_Level player_Level;
 
     [Header("Character Overview - mỗi Layer một text riêng")]
@@ -52,23 +53,48 @@ public class Player_Stats_UI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (player_Stats == null) return;
+        if (player_Stats == null)
+            return;
+
+        if (player_Equipment == null)
+        {
+            player_Equipment =
+                player_Stats.GetComponent<Character_Equipment>();
+        }
 
         player_Stats.OnStatsChanged += Update_Overview_UI;
-        player_Stats.OnStatsChanged += Update_Combat_UI;   // Max đổi
+        player_Stats.OnStatsChanged += Update_Combat_UI;
         player_Stats.OnVitalsChanged += Update_Combat_UI;
 
-        Update_Overview_UI(); // Vẽ lại ngay: chỉ số có thể đã đổi lúc UI đang tắt.
+        if (player_Equipment != null)
+        {
+            player_Equipment.OnEquipmentChanged +=
+                HandleEquipmentChanged;
+        }
+
+        Update_Overview_UI();
         Update_Combat_UI();
     }
 
     private void OnDisable()
     {
-        if (player_Stats == null) return;
+        if (player_Stats != null)
+        {
+            player_Stats.OnStatsChanged -=
+                Update_Overview_UI;
 
-        player_Stats.OnStatsChanged -= Update_Overview_UI;
-        player_Stats.OnStatsChanged -= Update_Combat_UI;
-        player_Stats.OnVitalsChanged -= Update_Combat_UI;
+            player_Stats.OnStatsChanged -=
+                Update_Combat_UI;
+
+            player_Stats.OnVitalsChanged -=
+                Update_Combat_UI;
+        }
+
+        if (player_Equipment != null)
+        {
+            player_Equipment.OnEquipmentChanged -=
+                HandleEquipmentChanged;
+        }
     }
 
     void Update_Combat_UI()
@@ -132,19 +158,191 @@ public class Player_Stats_UI : MonoBehaviour
     }
 
     // Thêm các dòng chỉ số của một Layer vào sb. Trả về false nếu Layer không có chỉ số nào.
-    private bool AppendLayer(Player_Stat_Layer layer, bool withTitle)
+    private bool AppendLayer(
+        Player_Stat_Layer layer,
+        bool withTitle)
     {
-        var statsInLayer = player_Stats.GetStatsInLayer(layer);
-        if (statsInLayer.Count == 0) return false;
+        var statsInLayer =
+            player_Stats.GetStatsInLayer(layer);
 
-        if (withTitle) sb.AppendLine($"<color=orange><b> {layer.ToString().ToUpper()} </b></color>");
+        if (statsInLayer.Count == 0)
+            return false;
+
+        if (withTitle)
+        {
+            sb.AppendLine(
+                $"<color=orange><b> {layer.ToString().ToUpper()} </b></color>"
+            );
+        }
 
         foreach (Player_Stat stat in statsInLayer)
         {
+            if (stat.Type == Player_Stat_Type.PhysicDamageMin)
+            {
+                if (AppendWeaponDamageLines(
+                    Damage_Type.Physic,
+                    "Physical Damage"
+                ))
+                {
+                    continue;
+                }
+            }
+
+            if (stat.Type == Player_Stat_Type.MagicDamageMin)
+            {
+                if (AppendWeaponDamageLines(
+                    Damage_Type.Magic,
+                    "Magic Damage"
+                ))
+                {
+                    continue;
+                }
+            }
+
             string line = BuildLine(stat);
-            if (line != null) sb.AppendLine(line);
+
+            if (line != null)
+                sb.AppendLine(line);
         }
+
         return true;
+    }
+
+    private bool AppendWeaponDamageLines(
+        Damage_Type damageType,
+        string damageLabel)
+    {
+        if (player_Equipment == null)
+            return false;
+
+        bool hasMainWeapon =
+            player_Equipment.TryGetWeaponAttack(
+                Skill_Weapon_Source_Slot.MainHand,
+                out Skill_Weapon_Attack mainAttack
+            );
+
+        bool hasOffWeapon =
+            player_Equipment.TryGetWeaponAttack(
+                Skill_Weapon_Source_Slot.OffHand,
+                out Skill_Weapon_Attack offAttack
+            );
+
+        bool mainCarriesDamage =
+            hasMainWeapon &&
+            WeaponCarriesDamageType(
+                mainAttack,
+                damageType
+            );
+
+        bool offCarriesDamage =
+            hasOffWeapon &&
+            WeaponCarriesDamageType(
+                offAttack,
+                damageType
+            );
+
+        if (!mainCarriesDamage && !offCarriesDamage)
+            return false;
+
+        sb.AppendLine(
+            $"  <color=#FFFFFF>{damageLabel}</color>"
+        );
+
+        if (mainCarriesDamage)
+        {
+            Item_Instance offHand =
+                player_Equipment.GetEquipped(
+                    Equipment_Slot.OffHand
+                );
+
+            sb.AppendLine(
+                BuildWeaponDamageLine(
+                    "    Main Hand",
+                    damageType,
+                    offHand
+                )
+            );
+        }
+
+        if (offCarriesDamage)
+        {
+            Item_Instance mainHand =
+                player_Equipment.GetEquipped(
+                    Equipment_Slot.MainHand
+                );
+
+            sb.AppendLine(
+                BuildWeaponDamageLine(
+                    "    Off Hand",
+                    damageType,
+                    mainHand
+                )
+            );
+        }
+
+        return true;
+    }
+
+    private static bool WeaponCarriesDamageType(
+    Skill_Weapon_Attack attack,
+    Damage_Type damageType)
+    {
+        if (attack.AttackSources != null &&
+            attack.AttackSources.Length > 0)
+        {
+            return Array.IndexOf(
+                attack.AttackSources,
+                damageType
+            ) >= 0;
+        }
+
+        if (attack.DamageTypes != null &&
+            attack.DamageTypes.Length > 0)
+        {
+            return Array.IndexOf(
+                attack.DamageTypes,
+                damageType
+            ) >= 0;
+        }
+
+        return attack.Archetype ==
+            Weapon_Attack_Archetype.Magic
+            ? damageType == Damage_Type.Magic
+            : damageType == Damage_Type.Physic;
+    }
+
+    private string BuildWeaponDamageLine(
+        string label,
+        Damage_Type damageType,
+        object excludedSource)
+    {
+        Player_Stat_Type minStat =
+        Combat_Formulas.GetOffenceStat(
+            damageType
+        );
+
+        Player_Stat_Type maxStat =
+        Combat_Formulas.GetOffenceMaxStat(
+            damageType
+        );
+
+        float min =
+        player_Stats.GetValueExcludingSource(
+            minStat,
+            excludedSource
+        );
+
+        float max =
+        player_Stats.GetValueExcludingSource(
+            maxStat,
+            excludedSource
+        );
+
+        return DamageRangeLine(
+            label,
+            min,
+            max
+        );
     }
 
     private string BuildLine(Player_Stat stat)
@@ -224,5 +422,13 @@ public class Player_Stats_UI : MonoBehaviour
     private static string DamageRangeLine(string label, float a, float b)
     {
         return $"  {label}: <color=#FFFFFF>{FormatValue(Mathf.Min(a, b))} - {FormatValue(Mathf.Max(a, b))}</color>";
+    }
+
+    private void HandleEquipmentChanged(
+        Equipment_Slot slot,
+        Item_Instance oldItem,
+        Item_Instance newItem)
+    {
+        Update_Overview_UI();
     }
 }

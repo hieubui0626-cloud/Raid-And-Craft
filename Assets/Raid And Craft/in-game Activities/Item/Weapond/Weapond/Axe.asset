@@ -33,7 +33,7 @@ MonoBehaviour:
   weaponKind: 2
   handType: 1
   attackArchetype: 1
-  attackSources: 
+  attackSources: 00000000
   damageTypes: 00000000
   damageMultiplier: 2
   attackDelivery:

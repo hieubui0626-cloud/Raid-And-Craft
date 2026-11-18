@@ -135,6 +135,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   startingEquipment:
   - {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
+  showAttackSourceDebug: 1
 --- !u!114 &603003315755472178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1178,10 @@ PrefabInstance:
       propertyPath: CharacterLevel
       value: 
       objectReference: {fileID: 3924331055575379859}
+    - target: {fileID: 7911048583825396427, guid: 0ac4242e4de9bb1409e73412fce00f97, type: 3}
+      propertyPath: player_Equipment
+      value: 
+      objectReference: {fileID: 2504697917920924712}
     - target: {fileID: 7985046903012311610, guid: 0ac4242e4de9bb1409e73412fce00f97, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -782,8 +782,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\WorkspaceWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Diff\Asset\Content\ContentRow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Api\UnityVersionControlUiApi.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\UVCSPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Document\IUndoableOperation.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\UVCSPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\CodeEditor\Indentation\CSharp\CSharpIndentationStrategy.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\Properties\CommentsPanel.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4\Editor\Views\PendingChanges\Changelists\ChangelistMenu.cs" />
@@ -1992,13 +1992,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{E07E4702-4628-55CA-AC71-8B023DE59730}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{A18FBD0B-E23B-B387-FF54-E2FF313B7614}</Project>

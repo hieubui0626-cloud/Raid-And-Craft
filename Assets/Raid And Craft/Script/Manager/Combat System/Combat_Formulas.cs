@@ -110,17 +110,72 @@ public static class Combat_Formulas
     }
 
     /// <summary>Khoảng sát thương của một loại. Nếu modifier làm Max thấp hơn Min thì tự hoán đổi.</summary>
-    public static void GetDamageRange(Character_Stats stats, Damage_Type type, out float min, out float max)
+    /// <summary>
+    /// Khoảng sát thương của một loại damage.
+    /// </summary>
+    public static void GetDamageRange(
+        Character_Stats stats,
+        Damage_Type type,
+        out float min,
+        out float max)
     {
-        float a = stats.GetValue(GetOffenceStat(type));
-        float b = stats.GetValue(GetOffenceMaxStat(type));
+        GetDamageRange(
+            stats,
+            type,
+            null,
+            out min,
+            out max
+        );
+    }
+
+    /// <summary>
+    /// Khoảng sát thương nhưng bỏ qua modifier của một nguồn.
+    /// </summary>
+    public static void GetDamageRange(
+        Character_Stats stats,
+        Damage_Type type,
+        object excludedSource,
+        out float min,
+        out float max)
+    {
+        float a = stats.GetValueExcludingSource(
+            GetOffenceStat(type),
+            excludedSource
+        );
+
+        float b = stats.GetValueExcludingSource(
+            GetOffenceMaxStat(type),
+            excludedSource
+        );
+
         min = Mathf.Min(a, b);
         max = Mathf.Max(a, b);
     }
 
-    public static float RollDamage(Character_Stats stats, Damage_Type type)
+    public static float RollDamage(
+        Character_Stats stats,
+        Damage_Type type)
     {
-        GetDamageRange(stats, type, out float min, out float max);
+        return RollDamage(
+            stats,
+            type,
+            null
+        );
+    }
+
+    public static float RollDamage(
+        Character_Stats stats,
+        Damage_Type type,
+        object excludedSource)
+    {
+        GetDamageRange(
+            stats,
+            type,
+            excludedSource,
+            out float min,
+            out float max
+        );
+
         return Random.Range(min, max);
     }
 
@@ -192,24 +247,69 @@ public static class Combat_Formulas
     /// </summary>
     public static Damage_Info BuildAttack(Character_Stats attacker, float multiplier, Damage_Scaling_Profile profile)
     {
-        var info = new Damage_Info { source = attacker };
-        if (attacker == null) return info;
+        return BuildAttack(
+            attacker,
+            multiplier,
+            profile,
+            null
+        );
+    }
+
+    public static Damage_Info BuildAttack(
+        Character_Stats attacker,
+        float multiplier,
+        Damage_Scaling_Profile profile,
+        object excludedSource)
+    {
+        var info = new Damage_Info
+        {
+            source = attacker
+        };
+
+        if (attacker == null)
+            return info;
 
         float safeMultiplier = Mathf.Max(0f, multiplier);
+
         foreach (Damage_Type type in Damage_Info.AllTypes)
         {
             float typeMultiplier = profile.GetMultiplier(type);
-            if (typeMultiplier <= 0f) continue;
-            info.Set(type, RollDamage(attacker, type) * safeMultiplier * typeMultiplier);
+
+            if (typeMultiplier <= 0f)
+                continue;
+
+            info.Set(
+                type,
+                RollDamage(
+                    attacker,
+                    type,
+                    excludedSource
+                ) *
+                safeMultiplier *
+                typeMultiplier
+            );
         }
 
-        info.accuracy = attacker.GetValue(Player_Stat_Type.Accuracy);
+        info.accuracy = attacker.GetValue(
+            Player_Stat_Type.Accuracy
+        );
 
-        float critChance = CritProbability(attacker.GetValue(Player_Stat_Type.CriticalChance));
+        float critChance = CritProbability(
+            attacker.GetValue(
+                Player_Stat_Type.CriticalChance
+            )
+        );
+
         if (UnityEngine.Random.value < critChance)
         {
             info.isCritical = true;
-            info = info.Scaled(CritMultiplier(attacker.GetValue(Player_Stat_Type.CriticalDamage)));
+            info = info.Scaled(
+                CritMultiplier(
+                    attacker.GetValue(
+                        Player_Stat_Type.CriticalDamage
+                    )
+                )
+            );
         }
 
         return info;
@@ -221,44 +321,88 @@ public static class Combat_Formulas
     /// Global multiplier (effect/weapon) được áp dụng sau khi cộng scaling và flat của từng type.
     /// </summary>
     public static Damage_Info BuildSkillAttack(
-        Character_Stats attacker, float globalMultiplier, List<Skill_Damage_Entry> entries, Damage_Type[] availableSources = null)
+        Character_Stats attacker, float globalMultiplier, List<Skill_Damage_Entry> entries, Damage_Type[] availableSources = null, object excludedSource = null)
     {
-        var info = new Damage_Info { source = attacker };
-        if (attacker == null) return info;
+        var info = new Damage_Info
+        {
+            source = attacker
+        };
 
-        float safeGlobalMultiplier = IsFinite(globalMultiplier) ? Mathf.Max(0f, globalMultiplier) : 0f;
+        if (attacker == null)
+            return info;
+
+        float safeGlobalMultiplier =
+            IsFinite(globalMultiplier)
+                ? Mathf.Max(0f, globalMultiplier)
+                : 0f;
 
         if (entries != null)
         {
             for (int i = 0; i < entries.Count; i++)
             {
                 Skill_Damage_Entry entry = entries[i];
-                if (entry == null) continue;
 
-                float sourceMultiplier = IsFinite(entry.damageMultiplier)
-                    ? Mathf.Max(0f, entry.damageMultiplier)
-                    : 0f;
-                float flatDamage = IsFinite(entry.flatDamage)
-                    ? Mathf.Max(0f, entry.flatDamage)
-                    : 0f;
+                if (entry == null)
+                    continue;
 
-                bool sourceAvailable = availableSources == null || Array.IndexOf(availableSources, entry.damageType) >= 0;
-                float rolledSourceDamage = sourceMultiplier > 0f && sourceAvailable
-                    ? RollDamage(attacker, entry.damageType) * sourceMultiplier
-                    : 0f;
+                float sourceMultiplier =
+                    IsFinite(entry.damageMultiplier)
+                        ? Mathf.Max(0f, entry.damageMultiplier)
+                        : 0f;
 
-                float value = (rolledSourceDamage + flatDamage) * safeGlobalMultiplier;
-                info.Set(entry.damageType, info.Get(entry.damageType) + value);
+                float flatDamage =
+                    IsFinite(entry.flatDamage)
+                        ? Mathf.Max(0f, entry.flatDamage)
+                        : 0f;
+
+                bool sourceAvailable =
+                    availableSources == null ||
+                    Array.IndexOf(
+                        availableSources,
+                        entry.damageType
+                    ) >= 0;
+
+                float rolledSourceDamage =
+                    sourceMultiplier > 0f && sourceAvailable
+                        ? RollDamage(
+                            attacker,
+                            entry.damageType,
+                            excludedSource
+                        ) * sourceMultiplier
+                        : 0f;
+
+                float value =
+                    (rolledSourceDamage + flatDamage) *
+                    safeGlobalMultiplier;
+
+                info.Set(
+                    entry.damageType,
+                    info.Get(entry.damageType) + value
+                );
             }
         }
 
-        info.accuracy = attacker.GetValue(Player_Stat_Type.Accuracy);
+        info.accuracy = attacker.GetValue(
+            Player_Stat_Type.Accuracy
+        );
 
-        float critChance = CritProbability(attacker.GetValue(Player_Stat_Type.CriticalChance));
+        float critChance = CritProbability(
+            attacker.GetValue(
+                Player_Stat_Type.CriticalChance
+            )
+        );
+
         if (UnityEngine.Random.value < critChance)
         {
             info.isCritical = true;
-            info = info.Scaled(CritMultiplier(attacker.GetValue(Player_Stat_Type.CriticalDamage)));
+
+            info = info.Scaled(
+                CritMultiplier(
+                    attacker.GetValue(
+                        Player_Stat_Type.CriticalDamage
+                    )
+                )
+            );
         }
 
         return info;

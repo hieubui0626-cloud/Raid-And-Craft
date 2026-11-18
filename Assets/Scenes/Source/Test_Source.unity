@@ -637,6 +637,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 980887410157339624, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: cameraOffset.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 980887410157339624, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: cameraOffset.z
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 1679910007779890000, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -683,6 +691,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2065231536027365635, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: showAttackSourceDebug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
@@ -1019,7 +1031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[0].item
@@ -1036,11 +1048,11 @@ PrefabInstance:
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[3].item
       value: 
-      objectReference: {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
+      objectReference: {fileID: 11400000, guid: f7d8d3224bdb3de418438d6ac5ccebf4, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[4].item
       value: 
-      objectReference: {fileID: 11400000, guid: f871e3ef815033d47a0eb7ac14f77b27, type: 2}
+      objectReference: {fileID: 11400000, guid: 7ab6915893f54b841ba4fae1322cb16e, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[5].item
       value: 

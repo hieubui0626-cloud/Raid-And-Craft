@@ -157,8 +157,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Type.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Material_Family.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equippable_Item_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Status\Status_Effect_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
@@ -1359,9 +1359,9 @@
       <Project>{D85F757C-B189-6595-7624-782CFB4EBB29}</Project>
       <Name>Unity.Collections.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Animation.Rigging.csproj">
-      <Project>{8683AA42-B0BF-391F-034F-93A8E97026A4}</Project>
-      <Name>Unity.Animation.Rigging</Name>
+    <ProjectReference Include="Unity.Profiling.Core.csproj">
+      <Project>{6EAAFB43-4B33-593B-E7B1-ED60EA63EB84}</Project>
+      <Name>Unity.Profiling.Core</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
       <Project>{0A44E605-2745-7176-D45B-5A645158731F}</Project>
@@ -1383,9 +1383,9 @@
       <Project>{2AB43B6E-AE6F-D177-E981-5AFE504EEB00}</Project>
       <Name>Unity.InferenceEngine.Tokenization</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Profiling.Core.csproj">
-      <Project>{6EAAFB43-4B33-593B-E7B1-ED60EA63EB84}</Project>
-      <Name>Unity.Profiling.Core</Name>
+    <ProjectReference Include="Unity.Animation.Rigging.csproj">
+      <Project>{8683AA42-B0BF-391F-034F-93A8E97026A4}</Project>
+      <Name>Unity.Animation.Rigging</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AppUI.Editor.csproj">
       <Project>{36510EA0-FF2D-C315-CAD1-244C1D5F28C6}</Project>
@@ -1443,6 +1443,10 @@
       <Project>{EF33767D-3AAF-0775-AFC5-563D00B58494}</Project>
       <Name>Unity.InputSystem.ForUI</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Addressables.Editor.csproj">
+      <Project>{6B361D2C-999D-C090-DBDB-F2949B104CC1}</Project>
+      <Name>Unity.Addressables.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{87F0F149-FD8A-6179-356F-731A23B07F2E}</Project>
       <Name>UnityEditor.UI</Name>
@@ -1450,10 +1454,6 @@
     <ProjectReference Include="Unity.Searcher.Editor.csproj">
       <Project>{0EE1BCB7-BAE8-FD70-596E-9E31FD1924C4}</Project>
       <Name>Unity.Searcher.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Addressables.Editor.csproj">
-      <Project>{6B361D2C-999D-C090-DBDB-F2949B104CC1}</Project>
-      <Name>Unity.Addressables.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
       <Project>{6F274EBB-AD7F-DB88-C247-0E65FD73DD3D}</Project>

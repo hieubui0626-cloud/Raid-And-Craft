@@ -40,6 +40,14 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     private bool initialized;
     private bool nextAlternateIsOffHand;
 
+    [Header("Attack Source Debug")]
+    [SerializeField] private bool showAttackSourceDebug = false;
+
+    private int alternateAttackCount;
+    private string lastAttackSource = "None";
+    private string lastAttackWeapon = "None";
+    private string lastAttackDamage = "None";
+
     /// <summary>Mọi món đang mặc (ô -> món). Ô trống không có trong danh sách.</summary>
     public IReadOnlyDictionary<Equipment_Slot, Item_Instance> Equipped => equipped;
 
@@ -87,6 +95,13 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             return false;
         }
 
+        Equipment_Slot oppositeSlot =
+            sourceSlot == Skill_Weapon_Source_Slot.MainHand
+                ? Equipment_Slot.OffHand
+                : Equipment_Slot.MainHand;
+
+        Item_Instance oppositeWeapon = GetEquipped(oppositeSlot);
+
         attack = new Skill_Weapon_Attack(
             w.attackDelivery,
             w.damageTypes,
@@ -94,7 +109,8 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             w.attackAnimation,
             w.attackArchetype,
             w.weaponFamily,
-            w.attackSources
+            w.attackSources,
+            oppositeWeapon
         );
 
         return true;
@@ -138,27 +154,62 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         if (hasMain && !hasOff)
         {
             attack = mainAttack;
+            lastAttackSource = "MAIN HAND";
+            lastAttackWeapon = GetEquipped(Equipment_Slot.MainHand)
+                ?.DisplayName ?? "Unknown";
+
+            lastAttackDamage =
+                attack.DamageTypes != null
+                    ? string.Join(", ", attack.DamageTypes)
+                    : "None";
+
             nextAlternateIsOffHand = false;
+            alternateAttackCount++;
             return true;
         }
 
         if (!hasMain && hasOff)
         {
             attack = offAttack;
+            lastAttackSource = "OFF HAND";
+            lastAttackWeapon = GetEquipped(Equipment_Slot.OffHand)
+                ?.DisplayName ?? "Unknown";
+
+            lastAttackDamage =
+                attack.DamageTypes != null
+                    ? string.Join(", ", attack.DamageTypes)
+                    : "None";
+
             nextAlternateIsOffHand = false;
+            alternateAttackCount++;
             return true;
         }
 
         if (nextAlternateIsOffHand)
         {
             attack = offAttack;
+            lastAttackSource = "OFF HAND";
+            lastAttackWeapon = GetEquipped(Equipment_Slot.OffHand)
+                ?.DisplayName ?? "Unknown";
+
             nextAlternateIsOffHand = false;
         }
         else
         {
             attack = mainAttack;
+            lastAttackSource = "MAIN HAND";
+            lastAttackWeapon = GetEquipped(Equipment_Slot.MainHand)
+                ?.DisplayName ?? "Unknown";
+
             nextAlternateIsOffHand = true;
         }
+
+        alternateAttackCount++;
+
+        lastAttackDamage =
+            attack.DamageTypes != null
+                ? string.Join(", ", attack.DamageTypes)
+                : "None";
 
         return true;
     }
@@ -400,7 +451,17 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         else equipped.Remove(slot);
 
         OnEquipmentChanged?.Invoke(slot, oldItem, newItem);
-        if (slot == Equipment_Slot.MainHand) OnWeaponChanged?.Invoke(Weapon);
+
+        if (slot == Equipment_Slot.MainHand ||
+            slot == Equipment_Slot.OffHand)
+        {
+            nextAlternateIsOffHand = false;
+        }
+
+        if (slot == Equipment_Slot.MainHand)
+        {
+            OnWeaponChanged?.Invoke(Weapon);
+        }
     }
 
     private void ApplyItem(Item_Instance item)
@@ -474,5 +535,72 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         {
             if (!TryUnequip(slot)) Debug.LogWarning($"[{nameof(Character_Equipment)}] Không tháo được ô {slot} (kho hết chỗ?).", this);
         }
+    }
+
+    /// <summary>
+    /// Bật hoặc tắt bảng debug Dual Weapon Attack.
+    /// </summary>
+    public void SetAttackSourceDebugVisible(bool visible)
+    {
+        showAttackSourceDebug = visible;
+    }
+
+    /// <summary>
+    /// Trả về trạng thái hiện tại của bảng debug Dual Weapon Attack.
+    /// </summary>
+    public bool IsAttackSourceDebugVisible()
+    {
+        return showAttackSourceDebug;
+    }
+
+    /// <summary>
+    /// Đảo trạng thái hiển thị bảng debug Dual Weapon Attack.
+    /// </summary>
+    public void ToggleAttackSourceDebug()
+    {
+        showAttackSourceDebug = !showAttackSourceDebug;
+    }
+
+    /// <summary>
+    /// Hiện trong menu chuột phải của Component để bật/tắt debug.
+    /// </summary>
+    [ContextMenu("Debug: Toggle Attack Source UI")]
+    private void Debug_ToggleAttackSourceUI()
+    {
+        ToggleAttackSourceDebug();
+    }
+    private void OnGUI()
+    {
+        return;
+        /*
+         * if (!showAttackSourceDebug)
+            return;
+
+        GUI.Box(
+            new Rect(10, 10, 240, 115),
+            "ATTACK SOURCE DEBUG"
+        );
+
+        GUI.Label(
+            new Rect(20, 35, 220, 20),
+            $"Attack Count: {alternateAttackCount}"
+        );
+
+        GUI.Label(
+            new Rect(20, 55, 220, 20),
+            $"Source: {lastAttackSource}"
+        );
+
+        GUI.Label(
+            new Rect(20, 75, 220, 20),
+            $"Weapon: {lastAttackWeapon}"
+        );
+
+        GUI.Label(
+            new Rect(20, 95, 220, 20),
+            $"Damage Types: {lastAttackDamage}"
+        );
+         */
+
     }
 }

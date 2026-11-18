@@ -360,6 +360,18 @@ public class Character_Stats : MonoBehaviour, IDamageable
     {
         return TryGetStat(type, out Player_Stat stat) ? stat.Value : 0f;
     }
+    /// <summary>
+    /// Giá trị stat nhưng bỏ qua modifier của một nguồn cụ thể.
+    /// Dùng để tính damage riêng của từng vũ khí.
+    /// </summary>
+    public float GetValueExcludingSource(
+        Player_Stat_Type type,
+        object excludedSource)
+    {
+        return TryGetStat(type, out Player_Stat stat)
+            ? stat.GetValueExcludingSource(excludedSource)
+            : 0f;
+    }
 
     public int GetIntValue(Player_Stat_Type type)
     {
@@ -548,4 +560,11 @@ public class Character_Stats : MonoBehaviour, IDamageable
         SetVital(CurrentHealth, MaxHealth, true);
         SetVital(CurrentMana, MaxMana, false);
     }
+
+    // ------------------------------------------------------------------
+    // ĐỌC - không tính modifier
+    // ------------------------------------------------------------------
+
+    /// <summary>Giá trị gốc (chưa tính modifier), bao gồm cả nguồn bị loại trừ.</summary>
+    
 }

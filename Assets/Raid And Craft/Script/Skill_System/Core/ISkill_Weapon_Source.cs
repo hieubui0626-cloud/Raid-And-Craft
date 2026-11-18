@@ -41,14 +41,28 @@ public readonly struct Skill_Weapon_Attack
     public readonly Weapon_Attack_Archetype Archetype;
     public readonly Weapon_Family Family;
 
-    /// <summary>Loại animation đòn đánh của vũ khí (None = vũ khí chưa chọn, dùng loại của skill).</summary>
+    /// <summary>
+    /// Loại animation đòn đánh của vũ khí.
+    /// </summary>
     public readonly Skill_Animation_Type Animation;
 
-    public Skill_Weapon_Attack(Skill_Delivery delivery, Damage_Type[] damageTypes, float damageMultiplier,
-                               Skill_Animation_Type animation = Skill_Animation_Type.None,
-                               Weapon_Attack_Archetype archetype = Weapon_Attack_Archetype.Auto,
-                               Weapon_Family family = Weapon_Family.Unclassified,
-                               Damage_Type[] attackSources = null)
+    /// <summary>
+    /// Modifier source của vũ khí đối diện cần loại trừ.
+    /// </summary>
+    public readonly object ExcludedStatSource;
+
+    public Skill_Weapon_Attack(
+        Skill_Delivery delivery,
+        Damage_Type[] damageTypes,
+        float damageMultiplier,
+        Skill_Animation_Type animation =
+            Skill_Animation_Type.None,
+        Weapon_Attack_Archetype archetype =
+            Weapon_Attack_Archetype.Auto,
+        Weapon_Family family =
+            Weapon_Family.Unclassified,
+        Damage_Type[] attackSources = null,
+        object excludedStatSource = null)
     {
         Delivery = delivery;
         DamageTypes = damageTypes;
@@ -56,12 +70,16 @@ public readonly struct Skill_Weapon_Attack
         DamageMultiplier = damageMultiplier;
         Animation = animation;
         Family = family;
+        ExcludedStatSource = excludedStatSource;
 
         if (archetype == Weapon_Attack_Archetype.Auto)
         {
-            Archetype = damageTypes != null && damageTypes.Length > 0 && damageTypes[0] == Damage_Type.Magic
-                ? Weapon_Attack_Archetype.Magic
-                : Weapon_Attack_Archetype.Physical;
+            Archetype =
+                damageTypes != null &&
+                damageTypes.Length > 0 &&
+                damageTypes[0] == Damage_Type.Magic
+                    ? Weapon_Attack_Archetype.Magic
+                    : Weapon_Attack_Archetype.Physical;
         }
         else
         {

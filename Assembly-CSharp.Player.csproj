@@ -157,8 +157,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Combat System\Damage_Type.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Material_Family.cs" />
-    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equippable_Item_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Circuit_Item_Data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Status\Status_Effect_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Stat_Modifier_Type.cs" />
@@ -1103,9 +1103,9 @@
       <Project>{B9BD8590-9796-3A9B-CEF2-2BCDAC1AA095}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Animation.Rigging.Player.csproj">
-      <Project>{22D5E046-D46F-7CFE-FE2A-F1C23C3831E0}</Project>
-      <Name>Unity.Animation.Rigging.Player</Name>
+    <ProjectReference Include="Unity.Profiling.Core.Player.csproj">
+      <Project>{4C745FB8-FAD1-CF3E-978B-75901E19C923}</Project>
+      <Name>Unity.Profiling.Core.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
       <Project>{C8AC21C4-A827-7A41-CE31-4E4161EAB81B}</Project>
@@ -1115,9 +1115,9 @@
       <Project>{BA2B24FD-3FEE-ABB2-DFA9-9C9EB72426FE}</Project>
       <Name>Unity.InferenceEngine.Tokenization.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Profiling.Core.Player.csproj">
-      <Project>{4C745FB8-FAD1-CF3E-978B-75901E19C923}</Project>
-      <Name>Unity.Profiling.Core.Player</Name>
+    <ProjectReference Include="Unity.Animation.Rigging.Player.csproj">
+      <Project>{22D5E046-D46F-7CFE-FE2A-F1C23C3831E0}</Project>
+      <Name>Unity.Animation.Rigging.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{51EA57FE-698C-76E8-D681-264ACB67B17D}</Project>
