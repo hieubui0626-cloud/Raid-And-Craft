@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97dc401df84ed1f4da2124b4f990e159, type: 3}
-  m_Name: Staff_2
+  m_Name: Staff_1
   m_EditorClassIdentifier: 
   itemId: Staff
   displayName: Staff_2
@@ -25,15 +25,15 @@ MonoBehaviour:
   statModifiers:
   - stat: 6
     modifierType: 0
-    value: 80
+    value: 25
   - stat: 29
     modifierType: 0
-    value: 90
+    value: 30
   weaponFamily: 5
   weaponKind: 5
   handType: 1
   attackArchetype: 2
-  attackSources: 
+  attackSources: 0100000002000000030000000400000005000000
   damageTypes: 01000000
   damageMultiplier: 1
   attackDelivery:

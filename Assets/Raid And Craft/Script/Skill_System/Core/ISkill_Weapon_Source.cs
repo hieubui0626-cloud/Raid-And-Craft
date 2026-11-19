@@ -51,6 +51,11 @@ public readonly struct Skill_Weapon_Attack
     /// </summary>
     public readonly object ExcludedStatSource;
 
+    /// <summary>
+    /// Tay tạo ra Attack này.
+    /// </summary>
+    public readonly Skill_Weapon_Source_Slot SourceSlot;
+
     public Skill_Weapon_Attack(
         Skill_Delivery delivery,
         Damage_Type[] damageTypes,
@@ -62,7 +67,9 @@ public readonly struct Skill_Weapon_Attack
         Weapon_Family family =
             Weapon_Family.Unclassified,
         Damage_Type[] attackSources = null,
-        object excludedStatSource = null)
+        object excludedStatSource = null,
+        Skill_Weapon_Source_Slot sourceSlot =
+            Skill_Weapon_Source_Slot.MainHand)
     {
         Delivery = delivery;
         DamageTypes = damageTypes;
@@ -71,6 +78,7 @@ public readonly struct Skill_Weapon_Attack
         Animation = animation;
         Family = family;
         ExcludedStatSource = excludedStatSource;
+        SourceSlot = sourceSlot;
 
         if (archetype == Weapon_Attack_Archetype.Auto)
         {

@@ -95,7 +95,7 @@ public class Map_Node_Tooltip_UI : MonoBehaviour
             AppendMaterials(values);
         }
 
-        sb.Append("\nTrạng thái: ").Append(StateText(node.type, state));
+        sb.Append("\nStatus: ").Append(StateText(node.type, state));
 
         text.text = sb.ToString();
         canvas.gameObject.SetActive(true);
@@ -114,10 +114,10 @@ public class Map_Node_Tooltip_UI : MonoBehaviour
         AddFamilies(values.Base.MaterialFamilies, values, names);
         AddFamilies(values.extraFamilies, values, names);
 
-        sb.Append("Nguyên liệu: ");
+        sb.Append("Materials: ");
         if (names.Count == 0)
         {
-            sb.Append("<color=").Append(MutedColor).Append(">không có</color>\n");
+            sb.Append("<color=").Append(MutedColor).Append(">none</color>\n");
             return;
         }
 
@@ -143,9 +143,9 @@ public class Map_Node_Tooltip_UI : MonoBehaviour
     {
         switch (state)
         {
-            case Map_Node_State.Complete: return "<color=" + CompleteColor + ">Hoàn thành</color>";
-            case Map_Node_State.Unlocked: return "<color=" + UnlockedColor + ">Đã mở</color>";
-            default: return "<color=" + LockedColor + ">Chưa mở</color>";
+            case Map_Node_State.Complete: return "<color=" + CompleteColor + ">Complete</color>";
+            case Map_Node_State.Unlocked: return "<color=" + UnlockedColor + ">Unlocked</color>";
+            default: return "<color=" + LockedColor + ">Locked</color>";
         }
     }
 

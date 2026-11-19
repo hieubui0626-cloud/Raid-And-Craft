@@ -71,14 +71,14 @@ public static class Scene_Transition
         if (string.IsNullOrEmpty(sceneName))
         {
             Debug.LogError($"[{nameof(Scene_Transition)}] Chưa điền tên Scene đích.");
-            ReportMessage("Không đi được: chưa có Scene đích.");
+            ReportMessage("Cannot travel: no destination scene.");
             return false;
         }
 
         if (!Application.CanStreamedLevelBeLoaded(sceneName))
         {
             Debug.LogError($"[{nameof(Scene_Transition)}] Scene '{sceneName}' không có trong Build Settings (File -> Build Profiles/Settings -> Scene List).");
-            ReportMessage("Không đi được: khu vực này chưa sẵn sàng.");
+            ReportMessage("Cannot travel: this area is not ready.");
             return false;
         }
 
@@ -119,7 +119,7 @@ public static class Scene_Transition
         if (string.IsNullOrEmpty(menu) || !Application.CanStreamedLevelBeLoaded(menu))
         {
             Debug.LogError($"[{nameof(Scene_Transition)}] Scene Main Menu '{menu}' trống hoặc không có trong Build Settings (chỉnh ở Save_Manager).");
-            ReportMessage("Không về được Main Menu.");
+            ReportMessage("Cannot return to the Main Menu.");
             return false;
         }
 

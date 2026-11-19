@@ -80,12 +80,12 @@ public class Pause_Menu : MonoBehaviour
     private void SaveClicked()
     {
         bool ok = Save_Manager.Instance != null && Save_Manager.Instance.SaveNow();
-        messageText.text = ok ? "Đã lưu game." : "Chưa lưu được (xem Console).";
+        messageText.text = ok ? "Game saved." : "Could not save (see Console).";
     }
 
     private void MainMenuClicked()
     {
-        if (!Scene_Transition.GoToMainMenu()) messageText.text = "Không về được Main Menu (xem Console).";
+        if (!Scene_Transition.GoToMainMenu()) messageText.text = "Cannot return to the Main Menu (see Console).";
     }
 
     private void QuitClicked()
@@ -124,11 +124,11 @@ public class Pause_Menu : MonoBehaviour
         layout.childForceExpandHeight = false;
         panelObject.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
-        AddText(panel, "Tạm dừng", 32f, 48f, FontStyles.Bold);
-        CreateButton(panel, "Tiếp tục", Close);
-        CreateButton(panel, "Lưu game", SaveClicked);
-        CreateButton(panel, "Về Main Menu", MainMenuClicked);
-        CreateButton(panel, "Thoát game", QuitClicked);
+        AddText(panel, "Paused", 32f, 48f, FontStyles.Bold);
+        CreateButton(panel, "Resume", Close);
+        CreateButton(panel, "Save Game", SaveClicked);
+        CreateButton(panel, "Main Menu", MainMenuClicked);
+        CreateButton(panel, "Quit Game", QuitClicked);
         messageText = AddText(panel, string.Empty, 20f, 30f, FontStyles.Normal);
     }
 

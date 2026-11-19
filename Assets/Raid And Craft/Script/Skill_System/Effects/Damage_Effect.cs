@@ -26,7 +26,10 @@ public class Damage_Effect : Skill_Effect
     [SerializeField] private Damage_Balance_Config balanceConfig;
 
     [Header("Cách ra đòn")]
-    [Tooltip("Bật: lấy delivery và profile Physical/Magic từ vũ khí đang cầm. Elemental damage luôn được cộng theo profile. Tay không dùng Physical Weapon profile.")]
+    [Tooltip(
+        "Bật: lấy delivery và profile Physical/Magic từ vũ khí đang cầm. " +
+        "Attack Mode Alternate giữ fallback tương thích với hành vi cũ."
+    )]
     public bool useWeaponAttack;
 
     public Skill_Delivery delivery = new Skill_Delivery();
@@ -36,16 +39,68 @@ public class Damage_Effect : Skill_Effect
 
     public override void Execute(Skill_Context context)
     {
+        if (!useWeaponAttack ||
+            context.Skill.attackMode == Skill_Attack_Mode.WeaponIndependent)
+        {
+            ExecuteIndependentEvent(context);
+            return;
+        }
+
+        var sources = new List<Skill_Attack_Source>();
+
+        Skill_Attack_Source_Resolver.Resolve(
+            context.Caster.WeaponSource,
+            context.Skill.attackMode,
+            sources
+        );
+
+        if (sources.Count == 0)
+        {
+            if (context.Skill.attackMode == Skill_Attack_Mode.Alternate)
+            {
+                ExecuteLegacyWeaponFallback(context);
+            }
+
+            return;
+        }
+
+        for (int i = 0; i < sources.Count; i++)
+        {
+            Skill_Attack_Source source = sources[i];
+
+            float flatDamageScale =
+                GetFlatDamageScale(
+                    context.Skill.flatDamageDistribution,
+                    source.Slot,
+                    sources.Count
+                );
+
+            Damage_Info info = BuildWeaponDamageInfo(
+                context,
+                source.Attack,
+                flatDamageScale
+            );
+
+            ExecuteDamageEvent(
+                context,
+                source.Attack.Delivery,
+                info
+            );
+        }
+    }
+
+    private void ExecuteLegacyWeaponFallback(Skill_Context context)
+    {
         Resolve(
             context.Caster,
             true,
-            out Skill_Delivery d,
-            out Damage_Type[] types,
-            out float multiplier,
-            out bool useProfile,
-            out Damage_Scaling_Profile_Type profileType,
-            out Damage_Type[] attackSources,
-            out object excludedStatSource
+            out Skill_Delivery resolvedDelivery,
+            out Damage_Type[] resolvedTypes,
+            out float resolvedMultiplier,
+            out bool resolvedUseProfile,
+            out Damage_Scaling_Profile_Type resolvedProfileType,
+            out Damage_Type[] resolvedAttackSources,
+            out object resolvedExcludedStatSource
         );
 
         Damage_Info info;
@@ -54,36 +109,152 @@ public class Damage_Effect : Skill_Effect
         {
             info = Combat_Formulas.BuildSkillAttack(
                 context.Stats,
-                multiplier,
+                resolvedMultiplier,
                 context.Skill.damageEntries,
-                useWeaponAttack ? attackSources : null,
-                useWeaponAttack ? excludedStatSource : null
+                resolvedAttackSources,
+                resolvedExcludedStatSource
             );
         }
         else
         {
-            info = useProfile
+            info = resolvedUseProfile
                 ? Combat_Formulas.BuildAttack(
                     context.Stats,
-                    multiplier,
-                    GetProfile(profileType),
-                    excludedStatSource
+                    resolvedMultiplier,
+                    GetProfile(resolvedProfileType),
+                    resolvedExcludedStatSource
                 )
                 : Combat_Formulas.BuildAttack(
                     context.Stats,
-                    multiplier,
-                    types
+                    resolvedMultiplier,
+                    resolvedTypes
                 );
         }
 
-        switch (d.type)
+        ExecuteDamageEvent(
+            context,
+            resolvedDelivery,
+            info
+        );
+    }
+
+    private void ExecuteIndependentEvent(Skill_Context context)
+    {
+        Damage_Info info;
+
+        if (context.Skill.useSkillDamageConfiguration)
+        {
+            info = Combat_Formulas.BuildSkillAttack(
+                context.Stats,
+                damageMultiplier,
+                context.Skill.damageEntries
+            );
+        }
+        else
+        {
+            info = useBalanceProfile
+                ? Combat_Formulas.BuildAttack(
+                    context.Stats,
+                    damageMultiplier,
+                    GetProfile(scalingProfile)
+                )
+                : Combat_Formulas.BuildAttack(
+                    context.Stats,
+                    damageMultiplier,
+                    damageTypes
+                );
+        }
+
+        ExecuteDamageEvent(
+            context,
+            delivery,
+            info
+        );
+    }
+
+    private Damage_Info BuildWeaponDamageInfo(
+        Skill_Context context,
+        Skill_Weapon_Attack attack,
+        float flatDamageScale)
+    {
+        float multiplier =
+            damageMultiplier *
+            attack.DamageMultiplier;
+
+        if (context.Skill.useSkillDamageConfiguration)
+        {
+            return Combat_Formulas.BuildSkillAttack(
+                context.Stats,
+                multiplier,
+                context.Skill.damageEntries,
+                attack.AttackSources,
+                attack.ExcludedStatSource,
+                flatDamageScale
+            );
+        }
+
+        Damage_Scaling_Profile_Type profileType =
+            attack.Archetype == Weapon_Attack_Archetype.Magic
+                ? Damage_Scaling_Profile_Type.MagicWeapon
+                : Damage_Scaling_Profile_Type.PhysicalWeapon;
+
+        return Combat_Formulas.BuildAttack(
+            context.Stats,
+            multiplier,
+            GetProfile(profileType),
+            attack.ExcludedStatSource
+        );
+    }
+
+    private static float GetFlatDamageScale(
+        Skill_Flat_Damage_Distribution distribution,
+        Skill_Weapon_Source_Slot slot,
+        int eventCount)
+    {
+        switch (distribution)
+        {
+            case Skill_Flat_Damage_Distribution.Split:
+                return eventCount > 0
+                    ? 1f / eventCount
+                    : 0f;
+
+            case Skill_Flat_Damage_Distribution.MainHandOnly:
+                return slot == Skill_Weapon_Source_Slot.MainHand
+                    ? 1f
+                    : 0f;
+
+            case Skill_Flat_Damage_Distribution.OffHandOnly:
+                return slot == Skill_Weapon_Source_Slot.OffHand
+                    ? 1f
+                    : 0f;
+
+            case Skill_Flat_Damage_Distribution.Each:
+            default:
+                return 1f;
+        }
+    }
+
+    private static void ExecuteDamageEvent(
+        Skill_Context context,
+        Skill_Delivery damageDelivery,
+        Damage_Info info)
+    {
+        switch (damageDelivery.type)
         {
             case Skill_Delivery_Type.Melee_Arc:
-                PerformMeleeArc(context, d, info);
+                PerformMeleeArc(
+                    context,
+                    damageDelivery,
+                    info
+                );
                 break;
 
             case Skill_Delivery_Type.Projectile:
-                FireProjectile(context, d, info);
+                FireProjectile(
+                    context,
+                    damageDelivery,
+                    info
+                );
                 break;
         }
     }

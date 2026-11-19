@@ -541,6 +541,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 216713597106127348, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: availableSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 216713597106127348, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: 'availableSkills.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d0d1e3fd1c297c499ff18c81dead0af, type: 2}
     - target: {fileID: 532043368651651370, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -644,6 +652,14 @@ PrefabInstance:
     - target: {fileID: 980887410157339624, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: cameraOffset.z
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172134268808376540, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: defaultStats.Array.data[3].baseValue
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172134268808376540, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: defaultStats.Array.data[5].baseValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1679910007779890000, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1031,7 +1047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[0].item
@@ -1056,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[5].item
       value: 
-      objectReference: {fileID: 11400000, guid: f871e3ef815033d47a0eb7ac14f77b27, type: 2}
+      objectReference: {fileID: 11400000, guid: d47f477179680544b92588e1ac719746, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[6].item
       value: 
@@ -1349,6 +1365,10 @@ PrefabInstance:
     - target: {fileID: 183225339859694739, guid: ee4988a3d4b5f624e9f664a1ef305a09, type: 3}
       propertyPath: m_Name
       value: Enemy_Source_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1994264889576403738, guid: ee4988a3d4b5f624e9f664a1ef305a09, type: 3}
+      propertyPath: weapon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5840006190946009864, guid: ee4988a3d4b5f624e9f664a1ef305a09, type: 3}
       propertyPath: defaultStats.Array.data[29].type

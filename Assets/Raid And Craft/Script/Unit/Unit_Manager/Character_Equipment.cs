@@ -110,8 +110,9 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             w.attackArchetype,
             w.weaponFamily,
             w.attackSources,
-            oppositeWeapon
-        );
+            oppositeWeapon,
+            sourceSlot
+);
 
         return true;
     }
@@ -571,9 +572,9 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     }
     private void OnGUI()
     {
-        return;
-        /*
-         * if (!showAttackSourceDebug)
+        
+        
+         if (!showAttackSourceDebug)
             return;
 
         GUI.Box(
@@ -600,7 +601,7 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             new Rect(20, 95, 220, 20),
             $"Damage Types: {lastAttackDamage}"
         );
-         */
+        
 
     }
 }

@@ -19,6 +19,32 @@ public enum Weapon_Family
     Magic_Two_Hand = 6
 }
 
+/// <summary>
+/// Nguồn vũ khí được Skill sử dụng.
+/// Giá trị số được serialize trong Skill Data.
+/// Alternate = 0 để giữ hành vi cũ cho các asset được tạo trước Phase 4.
+/// </summary>
+public enum Skill_Attack_Mode
+{
+    Alternate = 0,
+    MainHand = 1,
+    OffHand = 2,
+    DualSimultaneous = 3,
+    WeaponIndependent = 4
+}
+
+/// <summary>
+/// Cách phân bổ Flat Damage của Skill giữa các Damage Event.
+/// Giá trị số được serialize trong Skill Data.
+/// </summary>
+public enum Skill_Flat_Damage_Distribution
+{
+    Each = 0,
+    Split = 1,
+    MainHandOnly = 2,
+    OffHandOnly = 3
+}
+
 public enum Skill_Weapon_Requirement_Mode
 {
     AllWeapons = 0,
@@ -59,6 +85,14 @@ public class Skill_Data : ScriptableObject
     [Tooltip("AllWeapons = mọi vũ khí; Restricted = chỉ các Weapon Family được chọn; Unarmed = chỉ tay không.")]
     public Skill_Weapon_Requirement weaponRequirement = new Skill_Weapon_Requirement();
 
+    [Header("Attack Configuration")]
+    [Tooltip("Nguồn tấn công của Skill. Alternate giữ hành vi cũ của các Skill Weapon Attack hiện tại.")]
+    public Skill_Attack_Mode attackMode = Skill_Attack_Mode.Alternate;
+
+    [Tooltip("Cách phân bổ Flat Damage khi Skill tạo nhiều Damage Event. Each giữ toàn bộ Flat Damage cho mỗi Event.")]
+    public Skill_Flat_Damage_Distribution flatDamageDistribution =
+        Skill_Flat_Damage_Distribution.Each;
+
     [Header("Skill Damage Configuration")]
     [Tooltip("Bật để dùng multiplier/flat riêng của Skill thay cho Damage Scaling Profile dùng chung cũ.")]
     public bool useSkillDamageConfiguration;
@@ -74,7 +108,7 @@ public class Skill_Data : ScriptableObject
     [Tooltip("Bật: nhân vật quay về phía điểm nhắm trước khi chạy hiệu ứng. Tắt cho skill tự buff.")]
     public bool faceAimDirection = true;
 
-    [Tooltip("Gồng (cast time), hậu cast, kéo dài (channeling) và những gì bị khoá ở từng giai đoạn. Mặc định = tức thời.")]
+    [Tooltip("Gồng (cast time), hậu cast, kéo dài (channeling) và những gì bị khoá ở từng giai đoạn. Mặc định = tức thì.")]
     public Skill_Timing timing = new Skill_Timing();
 
     [Header("Animation (tuỳ chọn)")]
@@ -91,10 +125,12 @@ public class Skill_Data : ScriptableObject
         get
         {
             if (effects == null) return false;
+
             for (int i = 0; i < effects.Length; i++)
             {
                 if (effects[i] != null) return true;
             }
+
             return false;
         }
     }

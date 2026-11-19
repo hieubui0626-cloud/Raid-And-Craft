@@ -229,6 +229,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Effect.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Category.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Attack_Source_Resolver.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Map_Boss_Objective.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Character_Slot_View.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Magic_Circuit\Magic_Circuit.cs" />

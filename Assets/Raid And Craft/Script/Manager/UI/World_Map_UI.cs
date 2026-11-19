@@ -55,6 +55,7 @@ public class World_Map_UI : MonoBehaviour
 
     private int closedFrame = -1;
     private bool diagnosed;
+    private Coroutine refocusRoutine;
     private bool selectMode;
     private Player_Map_Progress progress;
     private Map_Pan_Zoom panZoom;
@@ -133,7 +134,7 @@ public class World_Map_UI : MonoBehaviour
         progress = FindFirstObjectByType<Player_Map_Progress>();
         if (progress == null || progress.Layout == null)
         {
-            Scene_Transition.ReportMessage("Player chưa có Player_Map_Progress (hoặc chưa gán World_Map_Layout) nên chưa mở được Map.");
+            Scene_Transition.ReportMessage("The map cannot be opened right now.");
             return;
         }
 
@@ -145,6 +146,17 @@ public class World_Map_UI : MonoBehaviour
         panelRoot.gameObject.SetActive(true);
         Refresh();
         FocusOnPlayer();
+
+        // Layout của canvas (Content Size Fitter, v.v.) có thể chỉ xong sau frame này: căn lại một lần nữa ở frame kế.
+        if (refocusRoutine != null) StopCoroutine(refocusRoutine);
+        refocusRoutine = StartCoroutine(RefocusNextFrame());
+    }
+
+    private System.Collections.IEnumerator RefocusNextFrame()
+    {
+        yield return null;
+        refocusRoutine = null;
+        if (IsOpen && progress != null) FocusOnPlayer();
     }
 
     /// <summary>Nút Map_Button gọi: đang mở thì đóng, không thì mở chế độ xem.</summary>
@@ -305,7 +317,7 @@ public class World_Map_UI : MonoBehaviour
 
         if (!selectMode)
         {
-            SetMessage("Dùng Cổng Map ở Base để di chuyển.");
+            SetMessage("Use a Map Gate in a Base to travel.");
             return;
         }
 

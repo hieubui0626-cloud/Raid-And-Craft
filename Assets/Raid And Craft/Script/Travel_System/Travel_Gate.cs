@@ -26,7 +26,7 @@ public class Travel_Gate : Travel_Point_Base
     [SerializeField] private List<Travel_Condition> conditions = new List<Travel_Condition>();
 
     [Tooltip("Câu báo khi cổng đóng mà điều kiện không nêu lý do.")]
-    [SerializeField] private string lockedMessage = "Cổng này chưa mở.";
+    [SerializeField] private string lockedMessage = "This gate is not open yet.";
 
     public string TargetScene => targetScene;
     public string TargetSpawnId => targetSpawnId;

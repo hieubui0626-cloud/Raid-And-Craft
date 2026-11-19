@@ -22,7 +22,7 @@ public class Map_Exit_Gate : Travel_Point_Base
         var playerProgress = interactor.GetComponent<Player_Map_Progress>();
         if (playerProgress != null && !playerProgress.IsExitOpen)
         {
-            Scene_Transition.ReportMessage("Cổng thoát đang khoá: hạ boss cuối để mở.");
+            Scene_Transition.ReportMessage("The exit gate is locked: defeat the final boss to open it.");
             return;
         }
 
@@ -45,6 +45,6 @@ public class Map_Exit_Gate : Travel_Point_Base
         if (shownOpen == open) return;
 
         shownOpen = open;
-        SetLabel(open ? DisplayName : DisplayName + " (Khoá)", open ? LabelColor : LockedColor);
+        SetLabel(open ? DisplayName : DisplayName + " (Locked)", open ? LabelColor : LockedColor);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Raid And Craft/Travel/Locked (thử)", fileName = "Locked_Condition")]
 public class Locked_Travel_Condition : Travel_Condition
 {
-    [SerializeField] private string message = "Cổng này chưa mở.";
+    [SerializeField] private string message = "This gate is not open yet.";
 
     public override bool IsMet(GameObject traveler, out string reason)
     {

@@ -1,36 +1,88 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Buff/debuff chỉ số có thời hạn (làm chậm, tăng giáp, giảm kháng...).
-/// Làm chậm nên dùng PercentMult với Value âm (-0.3 = -30%): nhân độc lập nên nhiều debuff không bao giờ về 0.
-/// Source của modifier chính là asset này, nên cùng một asset áp lại sẽ được xử lý theo Stack Mode.
-/// </summary>
-[CreateAssetMenu(menuName = "Raid And Craft/Skill Effects/Stat Modifier", fileName = "Effect_Stat_Modifier")]
+public enum Stat_Modifier_Duration_Mode
+{
+    Temporary,
+    Permanent
+}
+
+[CreateAssetMenu(
+    menuName = "Raid And Craft/Skill Effects/Stat Modifier",
+    fileName = "Effect_Stat_Modifier")]
 public class Stat_Modifier_Effect : Skill_Effect
 {
+    [Header("Target")]
     public Skill_Target_Mode targetMode = Skill_Target_Mode.HitTargets;
-    [Min(0f)] public float radius = 3f;
 
-    [Header("Chỉ số bị tác động")]
-    public Player_Stat_Type stat = Player_Stat_Type.MovementSpeed;
-    public Player_Stat_Modifier_Type modifierType = Player_Stat_Modifier_Type.PercentMult;
-    [Tooltip("PercentAdd/PercentMult: -0.3 = -30%. Flat: cộng thẳng.")]
-    public float value = -0.3f;
-    [Min(0.01f)] public float duration = 3f;
+    [Min(0f)]
+    public float radius = 3f;
 
-    [Tooltip("Áp lại lên mục tiêu đang chịu hiệu ứng này: Refresh = làm mới thời gian, Stack = chồng thêm, Ignore = bỏ qua.")]
+    [Header("Chế độ hiệu ứng")]
+    public Stat_Modifier_Duration_Mode durationMode =
+        Stat_Modifier_Duration_Mode.Temporary;
+
+    [Header("Các chỉ số bị tác động")]
+    public List<Stat_Modifier_Entry> modifiers =
+        new List<Stat_Modifier_Entry>
+        {
+            new Stat_Modifier_Entry
+            {
+                stat = Player_Stat_Type.MovementSpeed,
+                modifierType = Player_Stat_Modifier_Type.PercentMult,
+                value = -0.3f
+            }
+        };
+
+    [Header("Temporary Settings")]
+    [Min(0.01f)]
+    public float duration = 3f;
+
+    [Tooltip("Refresh = làm mới thời gian, Stack = chồng thêm, Ignore = bỏ qua.")]
     public Status_Stack_Mode stackMode = Status_Stack_Mode.Refresh;
 
     public override void Execute(Skill_Context context)
     {
         List<Character_Stats> targets = Skill_Targeting.Rent();
+
         Skill_Targeting.Resolve(context, targetMode, radius, targets);
 
-        for (int i = 0; i < targets.Count; i++)
+        for (int targetIndex = 0; targetIndex < targets.Count; targetIndex++)
         {
-            Status_Effect_Controller controller = Status_Effect_Controller.GetOrAdd(targets[i]);
-            controller.Apply(this, stat, new Player_Stat_Modifier(value, modifierType, this), duration, stackMode);
+            Character_Stats target = targets[targetIndex];
+
+            if (target == null)
+                continue;
+
+            for (int modifierIndex = 0;
+                 modifierIndex < modifiers.Count;
+                 modifierIndex++)
+            {
+                Stat_Modifier_Entry entry = modifiers[modifierIndex];
+
+                Player_Stat_Modifier modifier =
+                    new Player_Stat_Modifier(
+                        entry.value,
+                        entry.modifierType,
+                        this);
+
+                if (durationMode == Stat_Modifier_Duration_Mode.Temporary)
+                {
+                    Status_Effect_Controller controller =
+                        Status_Effect_Controller.GetOrAdd(target);
+
+                    controller.Apply(
+                        this,
+                        entry.stat,
+                        modifier,
+                        duration,
+                        stackMode);
+                }
+                else
+                {
+                    target.AddModifier(entry.stat, modifier);
+                }
+            }
         }
 
         Skill_Targeting.Release(targets);
@@ -38,14 +90,31 @@ public class Stat_Modifier_Effect : Skill_Effect
 
     public override float GetReach(Skill_Caster caster, Skill_Data skill)
     {
-        return targetMode == Skill_Target_Mode.RadiusAroundCaster ? radius : 0f;
+        return targetMode == Skill_Target_Mode.RadiusAroundCaster
+            ? radius
+            : 0f;
     }
 
-    public override void Describe(Skill_Caster caster, Skill_Data skill, Skill_Preview preview)
+    public override void Describe(
+        Skill_Caster caster,
+        Skill_Data skill,
+        Skill_Preview preview)
     {
-        string amount = modifierType == Player_Stat_Modifier_Type.Flat
-            ? $"{value:+0.##;-0.##}"
-            : $"{value * 100f:+0.##;-0.##}%";
-        preview.Add(stat.ToString(), $"{amount} / {duration:0.#}s");
+        for (int i = 0; i < modifiers.Count; i++)
+        {
+            Stat_Modifier_Entry entry = modifiers[i];
+
+            string amount = entry.modifierType ==
+                Player_Stat_Modifier_Type.Flat
+                ? $"{entry.value:+0.##;-0.##}"
+                : $"{entry.value * 100f:+0.##;-0.##}%";
+
+            string description = durationMode ==
+                Stat_Modifier_Duration_Mode.Temporary
+                ? $"{amount} / {duration:0.#}s"
+                : amount;
+
+            preview.Add(entry.stat.ToString(), description);
+        }
     }
 }

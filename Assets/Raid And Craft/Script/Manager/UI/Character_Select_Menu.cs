@@ -165,7 +165,7 @@ public class Character_Select_Menu : MonoBehaviour
         string typed = nameInput != null ? nameInput.text.Trim() : string.Empty;
         if (string.IsNullOrEmpty(typed))
         {
-            SetStatus("Hãy nhập tên nhân vật.");
+            SetStatus("Please enter a character name.");
             return;
         }
 
@@ -196,7 +196,7 @@ public class Character_Select_Menu : MonoBehaviour
         {
             deleteArmedIndex = index;
             deleteArmedUntil = Time.unscaledTime + ConfirmSeconds;
-            SetStatus($"Bấm X lần nữa để XOÁ nhân vật '{summaries[index].name}'.");
+            SetStatus($"Press X again to DELETE character '{summaries[index].name}'.");
             return;
         }
 
@@ -233,7 +233,7 @@ public class Character_Select_Menu : MonoBehaviour
         if (string.IsNullOrEmpty(sceneName) || !Application.CanStreamedLevelBeLoaded(sceneName))
         {
             Debug.LogError($"[{nameof(Character_Select_Menu)}] Scene '{sceneName}' trống hoặc không có trong Build Settings.", this);
-            SetStatus("Không vào được: Scene chưa sẵn sàng (xem Console).");
+            SetStatus("Cannot enter: the scene is not ready (see Console).");
             return;
         }
 
@@ -461,13 +461,13 @@ public class Character_Select_Menu : MonoBehaviour
         box.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
         TextMeshProUGUI title = UI_Builder.CreateText("Title", boxRect, 30f, TextAlignmentOptions.Center);
-        title.text = "Tạo nhân vật";
+        title.text = "Create Character";
         title.fontStyle = FontStyles.Bold;
         title.gameObject.AddComponent<LayoutElement>().preferredHeight = 44f;
 
         nameInput = BuildInputField(boxRect);
-        createConfirmButton = AddButton(boxRect, "Tạo", 50f);
-        createCancelButton = AddButton(boxRect, "Huỷ", 44f);
+        createConfirmButton = AddButton(boxRect, "Create", 50f);
+        createCancelButton = AddButton(boxRect, "Cancel", 44f);
     }
 
     private static TMP_InputField BuildInputField(RectTransform parent)
@@ -486,7 +486,7 @@ public class Character_Select_Menu : MonoBehaviour
 
         TextMeshProUGUI placeholder = UI_Builder.CreateText("Placeholder", area.transform, 26f, TextAlignmentOptions.Left);
         UI_Builder.Stretch((RectTransform)placeholder.transform);
-        placeholder.text = "Tên nhân vật...";
+        placeholder.text = "Character name...";
         placeholder.color = new Color(1f, 1f, 1f, 0.35f);
 
         // Thêm TMP_InputField SAU khi đã có đủ phần con (component tự cấu hình khi bật).

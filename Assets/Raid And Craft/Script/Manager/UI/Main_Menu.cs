@@ -87,7 +87,7 @@ public class Main_Menu : MonoBehaviour
 
         if (string.IsNullOrEmpty(characterCreationScene))
         {
-            SetStatus("Chưa điền Scene chọn nhân vật (Character Creation Scene) trong Main_Menu.");
+            SetStatus("No character selection scene is set (Character Creation Scene in Main_Menu).");
             return;
         }
 
@@ -96,7 +96,7 @@ public class Main_Menu : MonoBehaviour
 
     public void OnSetting()
     {
-        SetStatus("Chưa có màn Setting.");
+        SetStatus("Settings are not available yet.");
     }
 
     public void OnContinue()
@@ -105,7 +105,7 @@ public class Main_Menu : MonoBehaviour
 
         if (Save_Manager.Instance == null || !Save_Manager.Instance.TryGetSavedBaseScene(out string sceneName))
         {
-            SetStatus("Chưa có dữ liệu lưu để tiếp tục.");
+            SetStatus("No save data to continue.");
             return;
         }
 
@@ -123,7 +123,7 @@ public class Main_Menu : MonoBehaviour
         if (hasSave && Time.unscaledTime > confirmUntil)
         {
             confirmUntil = Time.unscaledTime + ConfirmSeconds;
-            SetStatus("Đã có dữ liệu lưu. Bấm New Game lần nữa để XOÁ và chơi mới.");
+            SetStatus("Save data exists. Press New Game again to DELETE it and start over.");
             return;
         }
 

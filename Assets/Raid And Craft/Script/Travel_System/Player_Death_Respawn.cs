@@ -53,7 +53,7 @@ public class Player_Death_Respawn : MonoBehaviour
 
         // Hồi sinh TRƯỚC khi lưu/chuyển Scene để save không ghi lại trạng thái đang chết.
         stats.Revive(reviveHealthPercent);
-        Scene_Transition.ReportMessage("Bạn đã gục ngã và được đưa về nơi an toàn.");
+        Scene_Transition.ReportMessage("You fell and were taken to safety.");
 
         Scene_Info info = Scene_Info.Active;
         bool inBase = info == null || info.Kind == Scene_Kind.Base;

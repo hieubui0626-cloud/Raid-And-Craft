@@ -174,38 +174,38 @@ public class Player_Map_Progress : MonoBehaviour
 
         if (layout == null || !layout.TryGetNode(targetId, out Map_Node_Data target))
         {
-            reason = "Điểm này không tồn tại trên bản đồ.";
+            reason = "This location does not exist on the map.";
             return false;
         }
 
         Map_Node_Data current = CurrentNode;
         if (current == null)
         {
-            reason = "Scene hiện tại không thuộc bản đồ.";
+            reason = "You are not on the world map.";
             return false;
         }
 
         if (current.id == target.id)
         {
-            reason = "Bạn đang ở đây.";
+            reason = "You are already here.";
             return false;
         }
 
         if (GetState(target.id) == Map_Node_State.Locked)
         {
-            reason = "Điểm này chưa được mở khoá.";
+            reason = "This location is locked.";
             return false;
         }
 
         if (target.type == Map_Node_Type.Instance && !layout.AreConnected(current.id, target.id))
         {
-            reason = "Khu này không nối với điểm hiện tại.";
+            reason = "This area is not connected to your current location.";
             return false;
         }
 
         if (Scene_Transition.IsTransitioning)
         {
-            reason = "Đang chuyển khu vực.";
+            reason = "Already travelling.";
             return false;
         }
 
@@ -223,7 +223,7 @@ public class Player_Map_Progress : MonoBehaviour
         if (!Scene_Transition.Travel(target.sceneName, target.spawnId))
         {
             pendingArrivalSave = false;
-            reason = "Không đi được (xem Console).";
+            reason = "Cannot travel (see Console).";
             return false;
         }
 
@@ -260,12 +260,12 @@ public class Player_Map_Progress : MonoBehaviour
         if (newBase != null && Save_Manager.Instance != null) Save_Manager.Instance.LastBaseScene = newBase.sceneName;
         if (Save_Manager.Instance != null) Save_Manager.Instance.SaveNow();
 
-        string message = $"Hoàn thành {node.DisplayNameOrId}! Cổng thoát đã mở.";
+        string message = $"{node.DisplayNameOrId} complete! The exit gate is open.";
         if (newlyUnlocked.Count > 0)
         {
             var names = new List<string>();
             foreach (Map_Node_Data n in newlyUnlocked) names.Add(n.DisplayNameOrId);
-            message += " Đã mở: " + string.Join(", ", names) + ".";
+            message += " Unlocked: " + string.Join(", ", names) + ".";
         }
         Scene_Transition.ReportMessage(message);
 

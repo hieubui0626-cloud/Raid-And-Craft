@@ -21,6 +21,8 @@ MonoBehaviour:
     mode: 0
     allowedFamilies: 
     allowUnarmed: 1
+  attackMode: 3
+  flatDamageDistribution: 0
   useSkillDamageConfiguration: 1
   damageEntries:
   - damageType: 0
@@ -59,4 +61,5 @@ MonoBehaviour:
     useWeaponAnimation: 1
     scaleSpeedWithActionSpeed: 1
   effects:
+  - {fileID: 11400000, guid: 765fcad0b2d3ad94daa23ce14fafb0ae, type: 2}
   - {fileID: 11400000, guid: 9192959662a0d9549bd7aaf99e297992, type: 2}

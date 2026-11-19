@@ -215,8 +215,8 @@ public class Shop_UI : MonoBehaviour
     private void ShowTooltip(Slot slot)
     {
         string priceColor = CanAfford(slot) ? "#FFD27F" : "#FF6B6B";
-        string footer = "<color=" + priceColor + ">Giá: " + Player_Wallet.FormatCoins(slot.Entry.price) + " Coin</color>"
-                      + "\n<size=85%><color=#8FA8C8>Chuột trái để mua</color></size>";
+        string footer = "<color=" + priceColor + ">Price: " + Player_Wallet.FormatCoins(slot.Entry.price) + " Coin</color>"
+                      + "\n<size=85%><color=#8FA8C8>Left click to buy</color></size>";
 
         if (slot.PreviewInstance != null) Item_Tooltip_UI.Instance.Show(slot.PreviewInstance, footer);
         else Item_Tooltip_UI.Instance.Show(slot.Entry.item, EffectiveCount(slot.Entry), footer);
@@ -257,13 +257,13 @@ public class Shop_UI : MonoBehaviour
 
         if (!wallet.CanAfford(entry.price))
         {
-            ShowMessage("Không đủ Coin.", false);
+            ShowMessage("Not enough Coin.", false);
             return;
         }
 
         if (!inventory.CanAdd(entry.item, count))
         {
-            ShowMessage("Inventory hết chỗ.", false);
+            ShowMessage("Inventory is full.", false);
             return;
         }
 
@@ -272,12 +272,12 @@ public class Shop_UI : MonoBehaviour
         {
             // Không xảy ra vì đã kiểm CanAdd; hoàn lại phần đã thêm để không mất cân bằng.
             if (leftover < count) inventory.TryRemove(entry.item, count - leftover);
-            ShowMessage("Inventory hết chỗ.", false);
+            ShowMessage("Inventory is full.", false);
             return;
         }
 
         wallet.TrySpend(entry.price);
-        ShowMessage("Đã mua " + entry.item.DisplayName + (count > 1 ? " x" + count : string.Empty) + ".", true);
+        ShowMessage("Purchased " + entry.item.DisplayName + (count > 1 ? " x" + count : string.Empty) + ".", true);
     }
 
     private void ShowMessage(string message, bool good)
