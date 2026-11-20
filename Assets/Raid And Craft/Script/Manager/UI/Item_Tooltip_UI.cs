@@ -102,7 +102,7 @@ public class Item_Tooltip_UI : MonoBehaviour
         AppendWeaponInfo(instanceToShow.Base as Weapon_Data);
 
         foreach (Stat_Modifier_Entry m in instanceToShow.BaseModifiers) AppendModifier(m, BaseColor);
-        foreach (Stat_Modifier_Entry m in instanceToShow.AffixModifiers) AppendModifier(m, AffixColor);
+        foreach (Affix_Line line in instanceToShow.AffixLines) AppendAffixLine(line, AffixColor);
 
         if (instanceToShow.Influ != null)
         {
@@ -206,6 +206,28 @@ public class Item_Tooltip_UI : MonoBehaviour
     }
 
     // Flat: "+5 Stat" | PercentAdd: "+10% Stat" (giá trị x100) | PercentMult: "x1.1 Stat".
+    // Một dòng Affix: có Format thì hiện MỘT dòng theo mẫu ({0}, {1}... là giá trị từng chỉ số), không thì mỗi chỉ số một dòng.
+    private void AppendAffixLine(Affix_Line line, string color)
+    {
+        if (string.IsNullOrEmpty(line.format))
+        {
+            foreach (Stat_Modifier_Entry m in line.Modifiers) AppendModifier(m, color);
+            return;
+        }
+
+        string text = line.format;
+        for (int i = 0; i < line.Modifiers.Count; i++)
+        {
+            Stat_Modifier_Entry m = line.Modifiers[i];
+            string value = m.modifierType == Player_Stat_Modifier_Type.Flat
+                ? m.value.ToString("0.##")
+                : (m.value * 100f).ToString("0.##") + "%";
+            text = text.Replace("{" + i + "}", value);
+        }
+
+        sb.Append("<color=").Append(color).Append('>').Append(text).Append("</color>\n");
+    }
+
     private void AppendModifier(Stat_Modifier_Entry m, string color)
     {
         string stat = Humanize(m.stat.ToString());

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
+  m_Name: Add_Armor_Affix
+  m_EditorClassIdentifier: 
+  affixId: Add_Armor_Affix
+  displayName: Add Armor
+  components:
+  - stat: 8
+    modifierType: 0
+    wholeNumber: 1
+    ranges:
+    - tier: 1
+      min: 15
+      max: 67
+    - tier: 2
+      min: 73
+      max: 128
+    - tier: 3
+      min: 130
+      max: 193
+    - tier: 4
+      min: 200
+      max: 275
+    - tier: 5
+      min: 283
+      max: 367
+  sharedRoll: 0
+  format: Add {0} to Armor
+  weight: 100
+  exclusionGroup: Add Armor
+  allowedSlots: 03000000040000000500000006000000
+  stat: 0
+  modifierType: 1
+  ranges: []

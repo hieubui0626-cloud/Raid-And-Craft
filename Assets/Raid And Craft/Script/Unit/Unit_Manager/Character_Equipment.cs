@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Trang bị đang mang của MỘT nhân vật, theo từng ô (Equipment_Slot): mỗi ô một món (Item_Instance). Gắn cùng object với Character_Stats.
@@ -42,6 +43,10 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 
     [Header("Attack Source Debug")]
     [SerializeField] private bool showAttackSourceDebug = false;
+
+    [Header("Affix Debug")]
+    [SerializeField] private Affix_Data debugAffix;
+    [SerializeField] private Equipment_Slot debugAffixSlot = Equipment_Slot.MainHand;
 
     private int alternateAttackCount;
     private string lastAttackSource = "None";
@@ -445,8 +450,17 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         equipped.TryGetValue(slot, out Item_Instance oldItem);
         if (oldItem == newItem) return;
 
-        if (newItem != null) ApplyItem(newItem);
-        if (oldItem != null) RemoveItem(oldItem);
+        if (newItem != null)
+        {
+            ApplyItem(newItem);
+            newItem.OnChanged += HandleItemChanged;
+        }
+
+        if (oldItem != null)
+        {
+            oldItem.OnChanged -= HandleItemChanged;
+            RemoveItem(oldItem);
+        }
 
         if (newItem != null) equipped[slot] = newItem;
         else equipped.Remove(slot);
@@ -465,21 +479,67 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         }
     }
 
+    // Mỗi lần áp dụng một món có một "bản ghi" riêng: Source cho modifier và Influ + roll TẠI LÚC ÁP,
+    // để gỡ đúng thứ đã áp dù món đã đổi (craft sửa Affix/Influ khi đang mặc).
+    private sealed class Applied_Item
+    {
+        public readonly object Source = new object();
+        public Influ_Data Influ;
+        public float InfluRoll;
+    }
+
+    private readonly Dictionary<Item_Instance, Applied_Item> applied = new Dictionary<Item_Instance, Applied_Item>();
+
     private void ApplyItem(Item_Instance item)
     {
+        var record = new Applied_Item { Influ = item.Influ, InfluRoll = item.InfluRoll };
+
         foreach (Stat_Modifier_Entry m in item.AllModifiers)
         {
-            stats.AddModifier(m.stat, new Player_Stat_Modifier(m.value, m.modifierType, item));
+            stats.AddModifier(m.stat, new Player_Stat_Modifier(m.value, m.modifierType, record.Source));
         }
 
-        if (item.Influ != null) item.Influ.Apply(new Influ_Context(stats, this), item.InfluRoll, item);
+        if (record.Influ != null) record.Influ.Apply(new Influ_Context(stats, this), record.InfluRoll, record.Source);
+
+        applied[item] = record;
     }
 
     private void RemoveItem(Item_Instance item)
     {
-        stats.RemoveModifiersFromSource(item);
+        if (!applied.TryGetValue(item, out Applied_Item record)) return;
 
-        if (item.Influ != null) item.Influ.Remove(new Influ_Context(stats, this), item.InfluRoll, item);
+        applied.Remove(item);
+        RemoveRecord(record);
+    }
+
+    private void RemoveRecord(Applied_Item record)
+    {
+        stats.RemoveModifiersFromSource(record.Source);
+        if (record.Influ != null) record.Influ.Remove(new Influ_Context(stats, this), record.InfluRoll, record.Source);
+    }
+
+    // Món đang mặc đổi (Tier/Affix/Influ): áp bản mới TRƯỚC rồi gỡ bản cũ, để máu hiện tại không tụt khi max máu đổi.
+    private void HandleItemChanged(Item_Instance item)
+    {
+        if (!applied.TryGetValue(item, out Applied_Item oldRecord)) return;
+
+        ApplyItem(item); // ghi đè applied[item] bằng bản mới
+        RemoveRecord(oldRecord);
+
+        foreach (KeyValuePair<Equipment_Slot, Item_Instance> pair in equipped)
+        {
+            if (pair.Value == item) OnEquipmentChanged?.Invoke(pair.Key, item, item);
+        }
+    }
+
+    /// <summary>Áp lại chỉ số/Influ của món đang ở ô (dùng khi sửa Base Modifiers trực tiếp mà không qua OnChanged). False nếu ô trống.</summary>
+    public bool Refresh(Equipment_Slot slot)
+    {
+        EnsureInitialized();
+        if (!equipped.TryGetValue(slot, out Item_Instance item)) return false;
+
+        HandleItemChanged(item);
+        return true;
     }
 
     // ------------------------------------------------------------------
@@ -522,7 +582,11 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         {
             Item_Instance item = pair.Value;
             string influ = item.Influ != null ? $", Influ {item.Influ.DisplayName} x{item.InfluRoll}" : string.Empty;
-            Debug.Log($"[{nameof(Character_Equipment)}] {pair.Key}: {item.DisplayName} (Tier {item.Tier}, {item.BaseModifiers.Count} base, {item.AffixModifiers.Count} affix{influ})", this);
+            Debug.Log(
+    $"[{nameof(Character_Equipment)}] {pair.Key}: {item.DisplayName} " +
+    $"(Tier {item.Tier}, {item.BaseModifiers.Count} base, " +
+    $"{item.AffixLines.Count} affix{influ})",
+    this);
         }
     }
 
@@ -537,7 +601,41 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             if (!TryUnequip(slot)) Debug.LogWarning($"[{nameof(Character_Equipment)}] Không tháo được ô {slot} (kho hết chỗ?).", this);
         }
     }
+    [ContextMenu("Debug: Apply Affix")]
+    private void Debug_Apply_Affix()
+    {
+        EnsureInitialized();
 
+        if (debugAffix == null)
+        {
+            Debug.LogWarning(
+                $"[{nameof(Character_Equipment)}] Chưa chọn Affix_Data để áp dụng.",
+                this);
+            return;
+        }
+
+        if (!equipped.TryGetValue(
+                debugAffixSlot,
+                out Item_Instance instance))
+        {
+            Debug.LogWarning(
+                $"[{nameof(Character_Equipment)}] Không có item ở ô {debugAffixSlot}.",
+                this);
+            return;
+        }
+
+        Affix_Line affixLine =
+            debugAffix.Roll(1, new System.Random());
+
+        Item_Instance.Affix_Apply_Result result =
+            instance.ApplyAffix(affixLine);
+
+        Debug.Log(
+            $"[{nameof(Character_Equipment)}] Đã áp dụng affix " +
+            $"'{debugAffix.DisplayName}' cho '{instance.DisplayName}'. " +
+            $"Kết quả: {result}.",
+            this);
+    }
     /// <summary>
     /// Bật hoặc tắt bảng debug Dual Weapon Attack.
     /// </summary>

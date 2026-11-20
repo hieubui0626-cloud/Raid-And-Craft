@@ -141,6 +141,36 @@ public struct Modifier_Save_Entry
     public float value;
 }
 
+/// <summary>Một chỉ số trong một dòng Affix.</summary>
+[Serializable]
+public class Affix_Component_Save
+{
+    public int stat;
+    public int modifierType;
+    public float value;
+    public float minRoll;
+    public float maxRoll;
+}
+
+/// <summary>
+/// Một dòng Affix đã roll (có thể nhiều chỉ số). Các field stat/modifierType/value/minRoll/maxRoll là bản save P1 (một chỉ số):
+/// chỉ để ĐỌC khi components trống; lần lưu sau ghi vào components.
+/// </summary>
+[Serializable]
+public class Affix_Line_Save
+{
+    public string affixId;
+    public string format;
+    public int tier = 1;
+    public List<Affix_Component_Save> components = new List<Affix_Component_Save>();
+
+    public int stat;
+    public int modifierType;
+    public float value;
+    public float minRoll;
+    public float maxRoll;
+}
+
 /// <summary>Một món trang bị cụ thể (Item_Instance): id riêng, loại (itemId), bậc, các dòng chỉ số đã roll, Influ.</summary>
 [Serializable]
 public class Item_Instance_Save
@@ -149,7 +179,12 @@ public class Item_Instance_Save
     public string itemId;
     public int tier = 1;
     public List<Modifier_Save_Entry> baseModifiers = new List<Modifier_Save_Entry>();
+
+    /// <summary>Bản save CŨ (trước P1): chỉ có chỉ số affix. Chỉ để ĐỌC; nạp xong chuyển thành affixLines không id, lần lưu sau ghi vào affixLines.</summary>
     public List<Modifier_Save_Entry> affixModifiers = new List<Modifier_Save_Entry>();
+
+    /// <summary>Các dòng Affix (id, chỉ số, khoảng roll, tier).</summary>
+    public List<Affix_Line_Save> affixLines = new List<Affix_Line_Save>();
 
     /// <summary>InfluId, chuỗi rỗng = không có Influ.</summary>
     public string influId;

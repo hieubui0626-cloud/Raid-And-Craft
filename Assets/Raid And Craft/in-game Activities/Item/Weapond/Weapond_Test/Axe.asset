@@ -29,9 +29,6 @@ MonoBehaviour:
   - stat: 28
     modifierType: 0
     value: 70
-  - stat: 12
-    modifierType: 2
-    value: 2
   weaponFamily: 1
   weaponKind: 2
   handType: 1

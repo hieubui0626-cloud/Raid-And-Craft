@@ -127,6 +127,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Modifier_Entry.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Lock.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\World_Map_Node_View.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Affix_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Unit_Manager\Character_Equipment.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Inventory_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Input_Manager.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Skill_Slot_UI.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Travel_System\Scene_Spawn_Point.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Affix_Line.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Controller\Player_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Weapon_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Enemy\Enemy_AI.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\ISave_Provider.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Delivery.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Skill_System\Core\Skill_Preview.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Affix_Database.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Character_Select_Menu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />

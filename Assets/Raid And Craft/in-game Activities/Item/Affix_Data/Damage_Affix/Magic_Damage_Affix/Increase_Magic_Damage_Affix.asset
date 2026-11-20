@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
+  m_Name: Increase_Magic_Damage_Affix
+  m_EditorClassIdentifier: 
+  affixId: Increase_Magic_Damage_Affix
+  displayName: Increase Magic Damage
+  components:
+  - stat: 6
+    modifierType: 1
+    wholeNumber: 0
+    ranges:
+    - tier: 1
+      min: 0.1
+      max: 0.2
+    - tier: 2
+      min: 0.21
+      max: 0.31
+    - tier: 3
+      min: 0.32
+      max: 0.44
+    - tier: 4
+      min: 0.45
+      max: 0.59
+    - tier: 5
+      min: 0.6
+      max: 0.76
+  - stat: 29
+    modifierType: 1
+    wholeNumber: 0
+    ranges:
+    - tier: 1
+      min: 0.1
+      max: 0.2
+    - tier: 2
+      min: 0.21
+      max: 0.31
+    - tier: 3
+      min: 0.32
+      max: 0.44
+    - tier: 4
+      min: 0.45
+      max: 0.59
+    - tier: 5
+      min: 0.6
+      max: 0.76
+  sharedRoll: 0
+  format: '{0} Increase Magic Damage'
+  weight: 100
+  exclusionGroup: Magic Damage
+  allowedSlots: 0100000002000000
+  stat: 0
+  modifierType: 1
+  ranges: []
