@@ -826,13 +826,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: debugMaterial
+      value: 
+      objectReference: {fileID: 11400000, guid: 47294cdf8b137a2428000a14b16ead2e, type: 2}
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: debugAffixDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 64da9eec098cdb3458df5ff1596dd4d3, type: 2}
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: showAttackSourceDebug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: 'startingEquipment.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: f7d8d3224bdb3de418438d6ac5ccebf4, type: 2}
     - target: {fileID: 2576656398995915598, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1163,12 +1171,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.size
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[0].item
       value: 
-      objectReference: {fileID: 11400000, guid: edb4aa6cf9934f64a9d84f2fe8cee24d, type: 2}
+      objectReference: {fileID: 11400000, guid: 3ace20a0a4cf32c4d8a3f5021623c94f, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[1].item
       value: 
@@ -1195,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f871e3ef815033d47a0eb7ac14f77b27, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[0].count
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[1].count

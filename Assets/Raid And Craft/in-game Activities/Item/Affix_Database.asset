@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Affix_Database
   m_EditorClassIdentifier: 
   affixes:
-  - {fileID: 11400000, guid: d3bcf959e220d37459e2d353075e344d, type: 2}
   - {fileID: 11400000, guid: f49d02304b8110d479df6b136312e9f8, type: 2}
+  - {fileID: 11400000, guid: 8f471e7fc8e6bf84b83e759e22fdf871, type: 2}
+  - {fileID: 11400000, guid: 47e0f1de7b230f045852c568f3ed3e2f, type: 2}
+  - {fileID: 11400000, guid: d3bcf959e220d37459e2d353075e344d, type: 2}
   - {fileID: 11400000, guid: 9f27cb1639b3c264d95dbf5e69b6e44f, type: 2}
   - {fileID: 11400000, guid: 53b3d17ad90990f4a97bf04275f7f3e6, type: 2}
   - {fileID: 11400000, guid: d10c6d7d84e220942897ff96d239418b, type: 2}
@@ -29,6 +31,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1cced2f670457694a86118320f5dda43, type: 2}
   - {fileID: 11400000, guid: 9771e8a5cc4996346a9e41faa4ec8972, type: 2}
   - {fileID: 11400000, guid: a15aebe5071dcd94389bb4e7f6c9fb4b, type: 2}
+  - {fileID: 11400000, guid: 3d96fbe4d1d8496458e3de62a0e79783, type: 2}
+  - {fileID: 11400000, guid: ba13863a5bbb58040b6ac2d9fb6e4e36, type: 2}
+  - {fileID: 11400000, guid: 6d0a109f76cf34241a3632b9a0418cb3, type: 2}
+  - {fileID: 11400000, guid: 736d011f529cc0f4dab86b108ca9e750, type: 2}
+  - {fileID: 11400000, guid: cf594a880c5524a419f7c813fcc6f7cd, type: 2}
+  - {fileID: 11400000, guid: 25aba87eba0a8034885ae1099096daa7, type: 2}
+  - {fileID: 11400000, guid: 8f9c27e91c6961b48a66ccf4d4f1b7c5, type: 2}
   - {fileID: 11400000, guid: 5adbfe8007162f5488a4f4693d45dcf1, type: 2}
   - {fileID: 11400000, guid: dbb1eedf2a941914598e040352efa5d9, type: 2}
   - {fileID: 11400000, guid: bbceaa0a4d7c6d94380cc00afe321aea, type: 2}

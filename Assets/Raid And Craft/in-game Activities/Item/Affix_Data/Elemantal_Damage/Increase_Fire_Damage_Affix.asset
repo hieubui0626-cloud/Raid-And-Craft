@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
-  m_Name: Add_Action_Speed_Affix
+  m_Name: Increase_Fire_Damage_Affix
   m_EditorClassIdentifier: 
-  affixId: Add_Action_Speed_Affix
-  displayName: Add Action Speed
+  affixId: Increase_Fire_Damage_Affix
+  displayName: Increase Fire Damage
   components:
-  - stat: 7
+  - stat: 21
     modifierType: 1
-    wholeNumber: 1
+    wholeNumber: 0
     ranges:
     - tier: 1
-      min: 0.045
-      max: 0.1
+      min: 0.126
+      max: 0.27
     - tier: 2
-      min: 0.11
-      max: 0.19
+      min: 0.27
+      max: 0.414
     - tier: 3
-      min: 0.195
-      max: 0.29
+      min: 0.414
+      max: 0.558
     - tier: 4
-      min: 0.3
-      max: 0.41
+      min: 0.558
+      max: 0.702
     - tier: 5
-      min: 0.425
-      max: 0.55
+      min: 0.702
+      max: 0.846
   sharedRoll: 0
-  format: Add {0} to Action Speed
+  format: Increase {0} Fire Damage
   weight: 100
-  exclusionGroup: Add Action Speed
+  exclusionGroup: Increase Elemental Damage
   allowedSlots: 0100000002000000
   stat: 0
   modifierType: 1

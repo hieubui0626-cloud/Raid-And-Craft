@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
-  m_Name: Add_Physical Damage_Affix 1
+  m_Name: Add_Physical Damage_Affix
   m_EditorClassIdentifier: 
   affixId: Add_Physical Damage_Affix
   displayName: Add Physical Damage

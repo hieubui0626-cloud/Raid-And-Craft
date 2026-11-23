@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
+  m_Name: Add_Lighting_Damage_Affix
+  m_EditorClassIdentifier: 
+  affixId: Add_Lighting_Damage_Affix
+  displayName: Add Lighting Damage
+  components:
+  - stat: 23
+    modifierType: 0
+    wholeNumber: 1
+    ranges:
+    - tier: 1
+      min: 14.62
+      max: 29.24
+    - tier: 2
+      min: 32.164
+      max: 55.556
+    - tier: 3
+      min: 55.556
+      max: 84.796
+    - tier: 4
+      min: 87.72
+      max: 119.884
+    - tier: 5
+      min: 122.808
+      max: 160.82
+  sharedRoll: 0
+  format: Add {0} to Lighting Damage
+  weight: 100
+  exclusionGroup: Add Lighting Damage
+  allowedSlots: 0100000002000000
+  stat: 0
+  modifierType: 1
+  ranges: []

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d342cfcc07f7eb40aaf78098fd973c8, type: 3}
+  m_Name: Steel_Aluminum_Material_T1
+  m_EditorClassIdentifier: 
+  itemId: Alloy_Steel_Aluminum_T5
+  displayName: Highly Steel Aluminum Refined Alloy
+  description: 'Material for crafting '
+  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  worldModel: {fileID: 0}
+  stackType: 0
+  maxStack: 50
+  gridSize: {x: 1, y: 1}
+  allowedUsage: 0
+  rarityTier: 5
+  craftRole: 2
+  affixPool:
+  - {fileID: 11400000, guid: e84fc1509ba561c498a4f2dd302b1226, type: 2}
+  - {fileID: 11400000, guid: d3bcf959e220d37459e2d353075e344d, type: 2}
+  - {fileID: 11400000, guid: 8f471e7fc8e6bf84b83e759e22fdf871, type: 2}
+  - {fileID: 11400000, guid: 47e0f1de7b230f045852c568f3ed3e2f, type: 2}
+  influOptions: []

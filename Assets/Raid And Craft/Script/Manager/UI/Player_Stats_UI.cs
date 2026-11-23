@@ -287,6 +287,7 @@ public class Player_Stats_UI : MonoBehaviour
     Skill_Weapon_Attack attack,
     Damage_Type damageType)
     {
+        // AttackSources là cấu hình ưu tiên cao nhất.
         if (attack.AttackSources != null &&
             attack.AttackSources.Length > 0)
         {
@@ -294,6 +295,19 @@ public class Player_Stats_UI : MonoBehaviour
                 attack.AttackSources,
                 damageType
             ) >= 0;
+        }
+
+        // Archetype được ưu tiên trước DamageTypes.
+        // Điều này xử lý đúng trường hợp vũ khí được cấu hình là Magic
+        // nhưng asset cũ vẫn còn damageTypes = Physic.
+        if (attack.Archetype == Weapon_Attack_Archetype.Magic)
+        {
+            return damageType == Damage_Type.Magic;
+        }
+
+        if (attack.Archetype == Weapon_Attack_Archetype.Physical)
+        {
+            return damageType == Damage_Type.Physic;
         }
 
         if (attack.DamageTypes != null &&
@@ -305,10 +319,7 @@ public class Player_Stats_UI : MonoBehaviour
             ) >= 0;
         }
 
-        return attack.Archetype ==
-            Weapon_Attack_Archetype.Magic
-            ? damageType == Damage_Type.Magic
-            : damageType == Damage_Type.Physic;
+        return false;
     }
 
     private string BuildWeaponDamageLine(

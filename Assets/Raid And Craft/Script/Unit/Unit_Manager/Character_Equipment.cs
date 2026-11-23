@@ -44,9 +44,10 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     [Header("Attack Source Debug")]
     [SerializeField] private bool showAttackSourceDebug = false;
 
-    [Header("Affix Debug")]
-    [SerializeField] private Affix_Data debugAffix;
-    [SerializeField] private Equipment_Slot debugAffixSlot = Equipment_Slot.MainHand;
+    [Header("Material Affix Pool Debug")]
+    [SerializeField] private Material_Item_Data debugMaterial;
+    [SerializeField] private Affix_Database debugAffixDatabase;
+    [SerializeField] private Equipment_Slot debugMaterialSlot = Equipment_Slot.MainHand;
 
     private int alternateAttackCount;
     private string lastAttackSource = "None";
@@ -601,41 +602,95 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             if (!TryUnequip(slot)) Debug.LogWarning($"[{nameof(Character_Equipment)}] Không tháo được ô {slot} (kho hết chỗ?).", this);
         }
     }
-    [ContextMenu("Debug: Apply Affix")]
-    private void Debug_Apply_Affix()
+    [ContextMenu("Debug: Test Material Affix Pool")]
+    private void Debug_Test_Material_Affix_Pool()
     {
         EnsureInitialized();
 
-        if (debugAffix == null)
+        if (debugMaterial == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Chưa chọn Affix_Data để áp dụng.",
+                $"[{nameof(Character_Equipment)}] Chưa chọn Material_Item_Data.",
+                this);
+            return;
+        }
+
+        if (debugAffixDatabase == null)
+        {
+            Debug.LogWarning(
+                $"[{nameof(Character_Equipment)}] Chưa chọn Affix_Database.",
                 this);
             return;
         }
 
         if (!equipped.TryGetValue(
-                debugAffixSlot,
+                debugMaterialSlot,
                 out Item_Instance instance))
         {
             Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Không có item ở ô {debugAffixSlot}.",
+                $"[{nameof(Character_Equipment)}] Không có item ở ô " +
+                $"{debugMaterialSlot}.",
                 this);
             return;
         }
 
-        Affix_Line affixLine =
-            debugAffix.Roll(1, new System.Random());
+        List<Affix_Data> result = new List<Affix_Data>();
 
-        Item_Instance.Affix_Apply_Result result =
-            instance.ApplyAffix(affixLine);
+        debugMaterial.GetAffixPool(
+            debugMaterialSlot,
+            instance.AffixLines,
+            debugAffixDatabase,
+            result);
 
         Debug.Log(
-            $"[{nameof(Character_Equipment)}] Đã áp dụng affix " +
-            $"'{debugAffix.DisplayName}' cho '{instance.DisplayName}'. " +
-            $"Kết quả: {result}.",
+            $"[{nameof(Character_Equipment)}] Material: " +
+            $"{debugMaterial.DisplayName}, Role: {debugMaterial.Role}, " +
+            $"Slot: {debugMaterialSlot}, Existing Affixes: " +
+            $"{instance.AffixLines.Count}, Result Count: {result.Count}.",
             this);
+
+        if (result.Count == 0)
+        {
+            Debug.Log(
+                $"[{nameof(Character_Equipment)}] Affix pool rỗng.",
+                this);
+            return;
+        }
+
+        foreach (Affix_Data affix in result)
+{
+    Debug.Log(
+        $"[{nameof(Character_Equipment)}] Affix hợp lệ: " +
+        $"{affix.DisplayName} | Id: {affix.AffixId} | " +
+        $"Weight: {affix.Weight}.",
+        this);
+}
+
+System.Random rng = new System.Random();
+Affix_Data selectedAffix = PickWeightedAffix(result, rng);
+
+if (selectedAffix == null)
+{
+    Debug.LogWarning(
+        $"[{nameof(Character_Equipment)}] Không chọn được Affix để roll.",
+        this);
+    return;
+}
+
+Affix_Line rolledAffix =
+    selectedAffix.Roll(instance.Tier, rng);
+
+Item_Instance.Affix_Apply_Result applyResult =
+    instance.ApplyAffix(rolledAffix);
+
+Debug.Log(
+    $"[{nameof(Character_Equipment)}] Đã roll và áp dụng Affix " +
+    $"'{selectedAffix.DisplayName}' cho '{instance.DisplayName}'. " +
+    $"Tier: {instance.Tier}, Kết quả: {applyResult}, " +
+    $"Tổng số Affix hiện tại: {instance.AffixLines.Count}.",
+    this);
     }
+
     /// <summary>
     /// Bật hoặc tắt bảng debug Dual Weapon Attack.
     /// </summary>
@@ -702,4 +757,40 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         
 
     }
+    private static Affix_Data PickWeightedAffix(
+    List<Affix_Data> affixes,
+    System.Random rng)
+    {
+        if (affixes == null || affixes.Count == 0)
+            return null;
+
+        int totalWeight = 0;
+
+        foreach (Affix_Data affix in affixes)
+        {
+            if (affix == null || affix.Weight <= 0)
+                continue;
+
+            totalWeight += affix.Weight;
+        }
+
+        if (totalWeight <= 0)
+            return null;
+
+        int roll = rng.Next(totalWeight);
+
+        foreach (Affix_Data affix in affixes)
+        {
+            if (affix == null || affix.Weight <= 0)
+                continue;
+
+            if (roll < affix.Weight)
+                return affix;
+
+            roll -= affix.Weight;
+        }
+
+        return null;
+    }
+
 }

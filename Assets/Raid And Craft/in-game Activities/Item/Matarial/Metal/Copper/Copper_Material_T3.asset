@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d342cfcc07f7eb40aaf78098fd973c8, type: 3}
-  m_Name: Iron_Material_T4
+  m_Name: Copper_Material_T3
   m_EditorClassIdentifier: 
-  itemId: refined_iron_ore_material
-  displayName: refined Iron Ore
+  itemId: Copper_T3
+  displayName: Low Copper Refined
   description: 'Material for crafting '
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}
@@ -21,4 +21,8 @@ MonoBehaviour:
   maxStack: 50
   gridSize: {x: 1, y: 1}
   allowedUsage: 0
-  rarityTier: 4
+  rarityTier: 3
+  craftRole: 3
+  affixPool:
+  - {fileID: 11400000, guid: f49d02304b8110d479df6b136312e9f8, type: 2}
+  influOptions: []

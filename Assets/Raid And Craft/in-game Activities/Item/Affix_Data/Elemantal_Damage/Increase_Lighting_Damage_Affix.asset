@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
+  m_Name: Increase_Lighting_Damage_Affix
+  m_EditorClassIdentifier: 
+  affixId: Increase_Lighting_Damage_Affix
+  displayName: Increase Lighting Damage
+  components:
+  - stat: 23
+    modifierType: 1
+    wholeNumber: 0
+    ranges:
+    - tier: 1
+      min: 0.14616
+      max: 0.3132
+    - tier: 2
+      min: 0.3132
+      max: 0.48024
+    - tier: 3
+      min: 0.48024
+      max: 0.64728
+    - tier: 4
+      min: 0.64728
+      max: 0.81432
+    - tier: 5
+      min: 0.81432
+      max: 0.98136
+  sharedRoll: 0
+  format: Increase {0} Fire Damage
+  weight: 100
+  exclusionGroup: Increase Elemental Damage
+  allowedSlots: 0100000002000000
+  stat: 0
+  modifierType: 1
+  ranges: []

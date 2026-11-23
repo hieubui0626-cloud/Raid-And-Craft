@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d342cfcc07f7eb40aaf78098fd973c8, type: 3}
+  m_Name: Elemental_Dust_T2
+  m_EditorClassIdentifier: 
+  itemId: Elemental_Dust_T2
+  displayName: Low Elemental Dust Refined
+  description: 'Material for crafting '
+  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  worldModel: {fileID: 0}
+  stackType: 0
+  maxStack: 50
+  gridSize: {x: 1, y: 1}
+  allowedUsage: 0
+  rarityTier: 2
+  craftRole: 2
+  affixPool:
+  - {fileID: 11400000, guid: ba13863a5bbb58040b6ac2d9fb6e4e36, type: 2}
+  - {fileID: 11400000, guid: 3d96fbe4d1d8496458e3de62a0e79783, type: 2}
+  - {fileID: 11400000, guid: 6d0a109f76cf34241a3632b9a0418cb3, type: 2}
+  - {fileID: 11400000, guid: cf594a880c5524a419f7c813fcc6f7cd, type: 2}
+  - {fileID: 11400000, guid: 25aba87eba0a8034885ae1099096daa7, type: 2}
+  - {fileID: 11400000, guid: 8f9c27e91c6961b48a66ccf4d4f1b7c5, type: 2}
+  - {fileID: 11400000, guid: 736d011f529cc0f4dab86b108ca9e750, type: 2}
+  influOptions: []
