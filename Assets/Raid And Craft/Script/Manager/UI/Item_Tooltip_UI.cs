@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using TMPro;
@@ -13,7 +14,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Item_Tooltip_UI : MonoBehaviour
 {
-    private const float PanelWidth = 320f;
+    //private const float PanelWidth = 320f;
     private const float Padding = 12f;
     private const float CursorOffset = 18f;
 
@@ -101,7 +102,7 @@ public class Item_Tooltip_UI : MonoBehaviour
         AppendDescription(instanceToShow.Base);
         AppendWeaponInfo(instanceToShow.Base as Weapon_Data);
 
-        foreach (Stat_Modifier_Entry m in instanceToShow.BaseModifiers) AppendModifier(m, BaseColor);
+        AppendBaseModifiers(instanceToShow.BaseModifiers);
         foreach (Affix_Line line in instanceToShow.AffixLines) AppendAffixLine(line, AffixColor);
 
         if (instanceToShow.Influ != null)
@@ -302,6 +303,116 @@ public class Item_Tooltip_UI : MonoBehaviour
 
     private void Build()
     {
-        canvas = UI_Builder.CreateTooltip("Item_Tooltip_Canvas", transform, 115, PanelWidth, Padding, out panel, out text); // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
+        canvas = UI_Builder.CreateTooltip("Item_Tooltip_Canvas", transform, 115, 0f, Padding, out panel, out text); // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
+    }
+
+    private void AppendBaseModifiers(
+    IReadOnlyList<Stat_Modifier_Entry> modifiers)
+    {
+        if (modifiers == null)
+            return;
+
+        bool[] consumed = new bool[modifiers.Count];
+
+        for (int i = 0; i < modifiers.Count; i++)
+        {
+            if (consumed[i])
+                continue;
+
+            Stat_Modifier_Entry minModifier = modifiers[i];
+
+            if (TryFindDamageMaxModifier(
+                    minModifier,
+                    modifiers,
+                    out int maxIndex,
+                    out Stat_Modifier_Entry maxModifier))
+            {
+                string damageName = GetDamageName(minModifier.stat);
+
+                string minValue = Mathf.Abs(minModifier.value).ToString("0.##");
+                string maxValue = Mathf.Abs(maxModifier.value).ToString("0.##");
+
+                string line =
+                    "Add " +
+                    minValue +
+                    " to " +
+                    maxValue +
+                    " " +
+                    damageName;
+
+                sb.Append("<color=")
+                    .Append(BaseColor)
+                    .Append('>')
+                    .Append(line)
+                    .Append("</color>\n");
+
+                consumed[i] = true;
+                consumed[maxIndex] = true;
+                continue;
+            }
+
+            AppendModifier(minModifier, BaseColor);
+            consumed[i] = true;
+        }
+    }
+
+    private static bool TryFindDamageMaxModifier(
+        Stat_Modifier_Entry minModifier,
+        IReadOnlyList<Stat_Modifier_Entry> modifiers,
+        out int maxIndex,
+        out Stat_Modifier_Entry maxModifier)
+    {
+        maxIndex = -1;
+        maxModifier = default;
+
+        Player_Stat_Type maxStat;
+
+        switch (minModifier.stat)
+        {
+            case Player_Stat_Type.PhysicDamageMin:
+                maxStat = Player_Stat_Type.PhysicDamageMax;
+                break;
+
+            case Player_Stat_Type.MagicDamageMin:
+                maxStat = Player_Stat_Type.MagicDamageMax;
+                break;
+
+            default:
+                return false;
+        }
+
+        for (int i = 0; i < modifiers.Count; i++)
+        {
+            Stat_Modifier_Entry candidate = modifiers[i];
+
+            if (candidate.stat != maxStat)
+                continue;
+
+            if (candidate.modifierType != minModifier.modifierType)
+                continue;
+
+            maxIndex = i;
+            maxModifier = candidate;
+            return true;
+        }
+
+        return false;
+    }
+
+    private static string GetDamageName(Player_Stat_Type stat)
+    {
+        switch (stat)
+        {
+            case Player_Stat_Type.PhysicDamageMin:
+            case Player_Stat_Type.PhysicDamageMax:
+                return "Physical Damage";
+
+            case Player_Stat_Type.MagicDamageMin:
+            case Player_Stat_Type.MagicDamageMax:
+                return "Magic Damage";
+
+            default:
+                return stat.ToString();
+        }
     }
 }

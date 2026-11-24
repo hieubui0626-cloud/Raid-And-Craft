@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +13,32 @@ using UnityEngine;
 /// </summary>
 public abstract class Equippable_Item_Data : Item_Data
 {
+    /// <summary>
+    /// Khoảng roll của MỘT dòng Base theo Tier (dùng khi Forge roll lại Base). Khớp với dòng Stat Modifiers có cùng stat + modifierType;
+    /// dòng Stat Modifiers không có khai báo ở đây thì giữ giá trị asset, không roll.
+    /// </summary>
+    [Serializable]
+    public struct Base_Roll_Line
+    {
+        public Player_Stat_Type stat;
+        public Player_Stat_Modifier_Type modifierType;
+        [Tooltip("Làm tròn giá trị roll thành số nguyên.")]
+        public bool wholeNumber;
+        [Tooltip("Khoảng roll theo Tier của Material. Tier không có dòng riêng dùng dòng Tier cao nhất không vượt quá, không thì dòng thấp nhất.")]
+        public List<Affix_Data.Tier_Range> ranges;
+    }
+
     [Header("Trang bị")]
     [Tooltip("Ô trang bị vật phẩm này mặc vào.")]
     [SerializeField] private Equipment_Slot equipSlot = Equipment_Slot.MainHand;
 
     [Header("Chỉ số base mặc định (món tạo từ asset sao chép dòng này làm Base Modifier; món craft tự roll riêng)")]
     public List<Stat_Modifier_Entry> statModifiers = new List<Stat_Modifier_Entry>();
+
+    [Header("Khoảng roll Base theo Tier (Forge roll lại Base; để trống = Base cố định)")]
+    [SerializeField] private List<Base_Roll_Line> baseRolls = new List<Base_Roll_Line>();
+
+    public IReadOnlyList<Base_Roll_Line> BaseRolls => baseRolls;
 
     protected override bool ForceNonStackable => true;
 

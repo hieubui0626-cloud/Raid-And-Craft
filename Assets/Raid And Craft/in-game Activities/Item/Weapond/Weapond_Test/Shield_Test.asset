@@ -10,30 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97dc401df84ed1f4da2124b4f990e159, type: 3}
-  m_Name: Axe
+  m_Name: Shield_Test
   m_EditorClassIdentifier: 
-  itemId: Axe
-  displayName: Axe
+  itemId: Shield_Test
+  displayName: Shield
   description: 
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}
-  stackType: 1
+  stackType: 0
   maxStack: 1
-  gridSize: {x: 1, y: 3}
-  allowedUsage: 1
+  gridSize: {x: 2, y: 3}
+  allowedUsage: -1
   equipSlot: 1
   statModifiers:
-  - stat: 5
+  - stat: 10
     modifierType: 0
-    value: 50
-  - stat: 28
-    modifierType: 0
-    value: 70
+    value: 20
+  baseRolls: []
   weaponFamily: 1
-  weaponKind: 2
+  weaponKind: 6
   handType: 1
-  attackArchetype: 1
-  attackSources: 0000000002000000030000000400000005000000
+  attackArchetype: 0
+  attackSources: 
   damageTypes: 00000000
   damageMultiplier: 1
   attackDelivery:
@@ -45,4 +43,4 @@ MonoBehaviour:
     projectileSpeed: 15
     projectileLifetime: 1.5
     pierce: 0
-  attackAnimation: 1
+  attackAnimation: 0

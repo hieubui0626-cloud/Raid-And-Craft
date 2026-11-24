@@ -74,13 +74,29 @@ public static class UI_Builder
     /// Dựng Canvas + khung nền tự co theo chữ + một dòng chữ rich text (dùng cho tooltip).
     /// Khung và chữ không nhận raycast nên không cản chuột.
     /// </summary>
-    public static Canvas CreateTooltip(string canvasName, Transform parent, int sortingOrder, float panelWidth, float padding,
-                                       out RectTransform panel, out TextMeshProUGUI text)
+    public static Canvas CreateTooltip(
+        string canvasName,
+        Transform parent,
+        int sortingOrder,
+        float panelWidth,
+        float padding,
+        out RectTransform panel,
+        out TextMeshProUGUI text)
     {
-        Canvas canvas = CreateOverlayCanvas(canvasName, parent, sortingOrder);
+        Canvas canvas = CreateOverlayCanvas(
+            canvasName,
+            parent,
+            sortingOrder);
 
-        var panelObject = new GameObject("Panel", typeof(RectTransform), typeof(Image), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
+        var panelObject = new GameObject(
+            "Panel",
+            typeof(RectTransform),
+            typeof(Image),
+            typeof(VerticalLayoutGroup),
+            typeof(ContentSizeFitter));
+
         panelObject.transform.SetParent(canvas.transform, false);
+
         panel = (RectTransform)panelObject.transform;
         panel.sizeDelta = new Vector2(panelWidth, 0f);
 
@@ -89,17 +105,32 @@ public static class UI_Builder
         background.raycastTarget = false;
 
         var layout = panelObject.GetComponent<VerticalLayoutGroup>();
-        layout.padding = new RectOffset((int)padding, (int)padding, (int)padding, (int)padding);
+        layout.padding = new RectOffset(
+            (int)padding,
+            (int)padding,
+            (int)padding,
+            (int)padding);
+
         layout.childControlWidth = true;
         layout.childControlHeight = true;
-        layout.childForceExpandWidth = true;
+        layout.childForceExpandWidth = false;
         layout.childForceExpandHeight = false;
 
         var fitter = panelObject.GetComponent<ContentSizeFitter>();
-        fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+        fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
-        text = CreateText("Text", panel, 18f, TextAlignmentOptions.TopLeft, true);
+        text = CreateText(
+            "Text",
+            panel,
+            18f,
+            TextAlignmentOptions.Top,
+            true);
+
+        text.enableWordWrapping = false;
+        text.overflowMode = TextOverflowModes.Overflow;
+        text.alignment = TextAlignmentOptions.Top;
+
         return canvas;
     }
 }

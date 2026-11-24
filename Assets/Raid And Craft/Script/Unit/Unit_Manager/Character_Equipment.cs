@@ -602,6 +602,54 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
             if (!TryUnequip(slot)) Debug.LogWarning($"[{nameof(Character_Equipment)}] Không tháo được ô {slot} (kho hết chỗ?).", this);
         }
     }
+
+    [ContextMenu("Debug: Roll Base Tier 2")]
+    private void Debug_Roll_Base()
+    {
+        EnsureInitialized();
+
+        if (!equipped.TryGetValue(
+                debugMaterialSlot,
+                out Item_Instance instance))
+        {
+            Debug.LogWarning(
+                $"[{nameof(Character_Equipment)}] Không có item ở ô " +
+                $"{debugMaterialSlot}.",
+                this);
+            return;
+        }
+
+        bool success = Roll_Rules.RollBase(
+            instance,
+            2,
+            new System.Random());
+
+        if (!success)
+        {
+            Debug.LogWarning(
+                $"[{nameof(Character_Equipment)}] Không thể roll Base " +
+                $"cho '{instance.DisplayName}'. Item không phải " +
+                $"Equippable_Item_Data hoặc không hợp lệ.",
+                this);
+            return;
+        }
+
+        Debug.Log(
+            $"[{nameof(Character_Equipment)}] Đã roll lại Base cho " +
+            $"'{instance.DisplayName}' với Material Tier 2.",
+            this);
+
+        for (int i = 0; i < instance.BaseModifiers.Count; i++)
+        {
+            Stat_Modifier_Entry modifier = instance.BaseModifiers[i];
+
+            Debug.Log(
+                $"Base [{i}] {modifier.stat}: " +
+                $"{modifier.value} ({modifier.modifierType})",
+                this);
+        }
+    }
+
     [ContextMenu("Debug: Test Material Affix Pool")]
     private void Debug_Test_Material_Affix_Pool()
     {
@@ -689,6 +737,17 @@ Debug.Log(
     $"Tier: {instance.Tier}, Kết quả: {applyResult}, " +
     $"Tổng số Affix hiện tại: {instance.AffixLines.Count}.",
     this);
+
+
+if (Roll_Rules.ApplyAffixRoll(
+        debugMaterial,
+        instance,
+        debugAffixDatabase,
+        new System.Random(),
+        out var r))
+{
+    Debug.Log("Affix: " + r, this);
+}
     }
 
     /// <summary>
@@ -725,8 +784,8 @@ Debug.Log(
     }
     private void OnGUI()
     {
-        
-        
+
+        return;
          if (!showAttackSourceDebug)
             return;
 

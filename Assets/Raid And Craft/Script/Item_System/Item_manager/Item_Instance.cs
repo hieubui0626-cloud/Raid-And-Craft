@@ -94,6 +94,14 @@ public sealed class Item_Instance
         }
     }
 
+    /// <summary>Thay toàn bộ Base Modifiers (Forge roll lại Base) và báo OnChanged một lần.</summary>
+    public void SetBaseModifiers(IEnumerable<Stat_Modifier_Entry> modifiers)
+    {
+        BaseModifiers.Clear();
+        if (modifiers != null) BaseModifiers.AddRange(modifiers);
+        NotifyChanged();
+    }
+
     public void NotifyChanged()
     {
         OnChanged?.Invoke(this);

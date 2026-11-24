@@ -828,13 +828,17 @@ PrefabInstance:
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: debugMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 47294cdf8b137a2428000a14b16ead2e, type: 2}
+      objectReference: {fileID: 11400000, guid: 1e46499646f062042a6098edc27957fe, type: 2}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: debugAffixDatabase
       value: 
       objectReference: {fileID: 11400000, guid: 64da9eec098cdb3458df5ff1596dd4d3, type: 2}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: showAttackSourceDebug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: startingEquipment.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
@@ -1171,7 +1175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[0].item
@@ -1180,11 +1184,11 @@ PrefabInstance:
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[1].item
       value: 
-      objectReference: {fileID: 11400000, guid: 3ace20a0a4cf32c4d8a3f5021623c94f, type: 2}
+      objectReference: {fileID: 11400000, guid: e4e0ba8624497244491293d72fe870c1, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[2].item
       value: 
-      objectReference: {fileID: 11400000, guid: e4e0ba8624497244491293d72fe870c1, type: 2}
+      objectReference: {fileID: 11400000, guid: f7d8d3224bdb3de418438d6ac5ccebf4, type: 2}
     - target: {fileID: 8652263826878527243, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: startingItems.Array.data[3].item
       value: 
@@ -1280,7 +1284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1733307698}
   - component: {fileID: 1733307699}
-  - component: {fileID: 1733307700}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1318,26 +1321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d4c64e22b66df40a819c92236b85ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1733307700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733307697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c3884e2e67bfe4bac52c7ca1d06dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotId: slot_6
-  slotPrefix: slot_
-  maxCharacterSlots: 5
-  autoLoadOnStart: 1
-  autoSaveInterval: 60
-  loadSavedScene: 1
-  mainMenuScene: Main_Menu
-  fallbackBaseScene: 
 --- !u!1 &1885277523
 GameObject:
   m_ObjectHideFlags: 0
