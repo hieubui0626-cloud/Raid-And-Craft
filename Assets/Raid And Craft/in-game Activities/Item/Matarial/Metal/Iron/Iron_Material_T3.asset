@@ -22,7 +22,7 @@ MonoBehaviour:
   gridSize: {x: 1, y: 1}
   allowedUsage: 0
   rarityTier: 3
-  craftRole: 3
+  craftRole: 1
   affixPool:
   - {fileID: 11400000, guid: 0f2ab5d876fd3f24da10afc391a3fdb5, type: 2}
   influOptions: []

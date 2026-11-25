@@ -14,7 +14,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Item_Tooltip_UI : MonoBehaviour
 {
-    //private const float PanelWidth = 320f;
+    private const float PanelWidth = 320f;
     private const float Padding = 12f;
     private const float CursorOffset = 18f;
 
@@ -102,12 +102,16 @@ public class Item_Tooltip_UI : MonoBehaviour
         AppendDescription(instanceToShow.Base);
         AppendWeaponInfo(instanceToShow.Base as Weapon_Data);
 
-        AppendBaseModifiers(instanceToShow.BaseModifiers);
+        AppendModifiers(instanceToShow.BaseModifiers, BaseColor);
         foreach (Affix_Line line in instanceToShow.AffixLines) AppendAffixLine(line, AffixColor);
 
         if (instanceToShow.Influ != null)
         {
-            sb.Append("<color=").Append(InfluColor).Append('>').Append(instanceToShow.Influ.Describe(instanceToShow.InfluRoll)).Append("</color>\n");
+            sb.Append("<color=").Append(InfluColor).Append('>')
+              .Append(instanceToShow.Influ.Describe(
+                  instanceToShow.InfluRoll,
+                  instanceToShow.InfluVariantIndex))
+              .Append("</color>\n");
         }
 
         AppendFooter(footer);
@@ -125,7 +129,7 @@ public class Item_Tooltip_UI : MonoBehaviour
 
         if (item is Rune_Data rune)
         {
-            foreach (Stat_Modifier_Entry m in rune.StatModifiers) AppendModifier(m, AffixColor);
+            AppendModifiers(rune.StatModifiers, AffixColor);
         }
         else if (item is Spell_Stone_Data stone)
         {
@@ -212,7 +216,7 @@ public class Item_Tooltip_UI : MonoBehaviour
     {
         if (string.IsNullOrEmpty(line.format))
         {
-            foreach (Stat_Modifier_Entry m in line.Modifiers) AppendModifier(m, color);
+            AppendModifiers(line.Modifiers, color);
             return;
         }
 
@@ -227,6 +231,71 @@ public class Item_Tooltip_UI : MonoBehaviour
         }
 
         sb.Append("<color=").Append(color).Append('>').Append(text).Append("</color>\n");
+    }
+
+    // Nhiều dòng chỉ số: cặp Min/Max sát thương (cùng loại, cùng Flat) gộp thành MỘT dòng "Adds 8 to 12 Physic Damage".
+    private void AppendModifiers(IEnumerable<Stat_Modifier_Entry> modifiers, string color)
+    {
+        var list = new List<Stat_Modifier_Entry>(modifiers);
+        var used = new bool[list.Count];
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (used[i]) continue;
+
+            Stat_Modifier_Entry m = list[i];
+            if (m.modifierType == Player_Stat_Modifier_Type.Flat && TryGetDamagePair(m.stat, out Player_Stat_Type minStat, out Player_Stat_Type maxStat))
+            {
+                int minIndex = FindFlat(list, used, minStat);
+                int maxIndex = FindFlat(list, used, maxStat);
+
+                if (minIndex >= 0 && maxIndex >= 0)
+                {
+                    used[minIndex] = true;
+                    used[maxIndex] = true;
+
+                    string label = Humanize(minStat.ToString().Replace("Min", string.Empty));
+                    sb.Append("<color=").Append(color).Append(">Adds ")
+                      .Append(list[minIndex].value.ToString("0.##")).Append(" to ")
+                      .Append(list[maxIndex].value.ToString("0.##")).Append(' ').Append(label)
+                      .Append("</color>\n");
+                    continue;
+                }
+            }
+
+            used[i] = true;
+            AppendModifier(m, color);
+        }
+    }
+
+    private static int FindFlat(List<Stat_Modifier_Entry> list, bool[] used, Player_Stat_Type stat)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (!used[i] && list[i].stat == stat && list[i].modifierType == Player_Stat_Modifier_Type.Flat) return i;
+        }
+
+        return -1;
+    }
+
+    private static bool TryGetDamagePair(Player_Stat_Type stat, out Player_Stat_Type min, out Player_Stat_Type max)
+    {
+        switch (stat)
+        {
+            case Player_Stat_Type.PhysicDamageMin:
+            case Player_Stat_Type.PhysicDamageMax:
+                min = Player_Stat_Type.PhysicDamageMin;
+                max = Player_Stat_Type.PhysicDamageMax;
+                return true;
+            case Player_Stat_Type.MagicDamageMin:
+            case Player_Stat_Type.MagicDamageMax:
+                min = Player_Stat_Type.MagicDamageMin;
+                max = Player_Stat_Type.MagicDamageMax;
+                return true;
+            default:
+                min = max = stat;
+                return false;
+        }
     }
 
     private void AppendModifier(Stat_Modifier_Entry m, string color)
@@ -303,116 +372,6 @@ public class Item_Tooltip_UI : MonoBehaviour
 
     private void Build()
     {
-        canvas = UI_Builder.CreateTooltip("Item_Tooltip_Canvas", transform, 115, 0f, Padding, out panel, out text); // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
-    }
-
-    private void AppendBaseModifiers(
-    IReadOnlyList<Stat_Modifier_Entry> modifiers)
-    {
-        if (modifiers == null)
-            return;
-
-        bool[] consumed = new bool[modifiers.Count];
-
-        for (int i = 0; i < modifiers.Count; i++)
-        {
-            if (consumed[i])
-                continue;
-
-            Stat_Modifier_Entry minModifier = modifiers[i];
-
-            if (TryFindDamageMaxModifier(
-                    minModifier,
-                    modifiers,
-                    out int maxIndex,
-                    out Stat_Modifier_Entry maxModifier))
-            {
-                string damageName = GetDamageName(minModifier.stat);
-
-                string minValue = Mathf.Abs(minModifier.value).ToString("0.##");
-                string maxValue = Mathf.Abs(maxModifier.value).ToString("0.##");
-
-                string line =
-                    "Add " +
-                    minValue +
-                    " to " +
-                    maxValue +
-                    " " +
-                    damageName;
-
-                sb.Append("<color=")
-                    .Append(BaseColor)
-                    .Append('>')
-                    .Append(line)
-                    .Append("</color>\n");
-
-                consumed[i] = true;
-                consumed[maxIndex] = true;
-                continue;
-            }
-
-            AppendModifier(minModifier, BaseColor);
-            consumed[i] = true;
-        }
-    }
-
-    private static bool TryFindDamageMaxModifier(
-        Stat_Modifier_Entry minModifier,
-        IReadOnlyList<Stat_Modifier_Entry> modifiers,
-        out int maxIndex,
-        out Stat_Modifier_Entry maxModifier)
-    {
-        maxIndex = -1;
-        maxModifier = default;
-
-        Player_Stat_Type maxStat;
-
-        switch (minModifier.stat)
-        {
-            case Player_Stat_Type.PhysicDamageMin:
-                maxStat = Player_Stat_Type.PhysicDamageMax;
-                break;
-
-            case Player_Stat_Type.MagicDamageMin:
-                maxStat = Player_Stat_Type.MagicDamageMax;
-                break;
-
-            default:
-                return false;
-        }
-
-        for (int i = 0; i < modifiers.Count; i++)
-        {
-            Stat_Modifier_Entry candidate = modifiers[i];
-
-            if (candidate.stat != maxStat)
-                continue;
-
-            if (candidate.modifierType != minModifier.modifierType)
-                continue;
-
-            maxIndex = i;
-            maxModifier = candidate;
-            return true;
-        }
-
-        return false;
-    }
-
-    private static string GetDamageName(Player_Stat_Type stat)
-    {
-        switch (stat)
-        {
-            case Player_Stat_Type.PhysicDamageMin:
-            case Player_Stat_Type.PhysicDamageMax:
-                return "Physical Damage";
-
-            case Player_Stat_Type.MagicDamageMin:
-            case Player_Stat_Type.MagicDamageMax:
-                return "Magic Damage";
-
-            default:
-                return stat.ToString();
-        }
+        canvas = UI_Builder.CreateTooltip("Item_Tooltip_Canvas", transform, 115, PanelWidth, Padding, out panel, out text); // Trên Inventory/Skill tooltip (110), dưới vật phẩm đang cầm (120).
     }
 }

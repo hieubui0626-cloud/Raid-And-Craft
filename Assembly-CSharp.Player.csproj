@@ -119,6 +119,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Equipment_Slot.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Stat_Influ_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\Item_Drag_Controller.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Character_Level.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Player_Save.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Database.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Save System\Save_Data.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_Craft\Item_Roll.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Basic_Scene_Rule_Modifier.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\Control_System\Panel_Hotkey.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Assets\Raid And Craft\Script\Loot_System\Enemy_Reward.cs" />
     <Compile Include="Assets\Package\WaterWorks\Scripts\Water_Volume.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Manager\UI\UI_Builder.cs" />
+    <Compile Include="Assets\Raid And Craft\Script\Item_System\Item_manager\Influ_Data\Stat_Influ_Data.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Scene_System\Scene_Rule_Modifier.cs" />
     <Compile Include="Assets\Raid And Craft\Script\Unit\Player\Player_Stat_System\Player_Circuit_Points.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />

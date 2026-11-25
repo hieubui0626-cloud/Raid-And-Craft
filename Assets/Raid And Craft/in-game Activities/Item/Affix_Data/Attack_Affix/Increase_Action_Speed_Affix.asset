@@ -17,7 +17,7 @@ MonoBehaviour:
   components:
   - stat: 7
     modifierType: 1
-    wholeNumber: 1
+    wholeNumber: 0
     ranges:
     - tier: 1
       min: 0.045

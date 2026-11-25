@@ -34,10 +34,11 @@ MonoBehaviour:
     value: 63
   - stat: 7
     modifierType: 1
-    value: 0.07
+    value: 0.05
   baseRolls:
   - stat: 5
     modifierType: 0
+    rollGroup: PhysicalDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -57,6 +58,7 @@ MonoBehaviour:
       max: 71.5
   - stat: 28
     modifierType: 0
+    rollGroup: PhysicalDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -76,6 +78,7 @@ MonoBehaviour:
       max: 81.5
   - stat: 11
     modifierType: 0
+    rollGroup: 
     wholeNumber: 1
     ranges:
     - tier: 1
@@ -95,23 +98,24 @@ MonoBehaviour:
       max: 770
   - stat: 7
     modifierType: 1
+    rollGroup: 
     wholeNumber: 0
     ranges:
     - tier: 1
-      min: 0.07
-      max: 0.1
+      min: 0.05
+      max: 0.08
     - tier: 2
-      min: 0.11
-      max: 0.13
+      min: 0.09
+      max: 0.11
     - tier: 3
-      min: 0.14
-      max: 0.17
+      min: 0.12
+      max: 0.15
     - tier: 4
-      min: 0.18
-      max: 0.21
+      min: 0.16
+      max: 0.19
     - tier: 5
-      min: 0.22
-      max: 0.24
+      min: 0.2
+      max: 0.22
   weaponFamily: 1
   weaponKind: 2
   handType: 1

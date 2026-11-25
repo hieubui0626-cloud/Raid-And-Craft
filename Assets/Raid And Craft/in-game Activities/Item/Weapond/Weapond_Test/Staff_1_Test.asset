@@ -38,6 +38,7 @@ MonoBehaviour:
   baseRolls:
   - stat: 6
     modifierType: 0
+    rollGroup: MagicDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -57,6 +58,7 @@ MonoBehaviour:
       max: 55
   - stat: 29
     modifierType: 0
+    rollGroup: MagicDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -76,6 +78,7 @@ MonoBehaviour:
       max: 62
   - stat: 7
     modifierType: 1
+    rollGroup: 
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -95,6 +98,7 @@ MonoBehaviour:
       max: 0.24
   - stat: 6
     modifierType: 1
+    rollGroup: 
     wholeNumber: 0
     ranges:
     - tier: 1

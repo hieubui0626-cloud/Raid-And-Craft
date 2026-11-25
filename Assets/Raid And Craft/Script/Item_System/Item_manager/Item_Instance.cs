@@ -28,6 +28,7 @@ public sealed class Item_Instance
     private int tier = 1;
     private Influ_Data influ;
     private float influRoll = 1f;
+    private int influVariantIndex = -1;
 
     public string InstanceId { get; }
     public Item_Data Base { get; }
@@ -68,6 +69,18 @@ public sealed class Item_Instance
         {
             if (Mathf.Approximately(influRoll, value)) return;
             influRoll = value;
+            NotifyChanged();
+        }
+    }
+
+    public int InfluVariantIndex
+    {
+        get => influVariantIndex;
+        set
+        {
+            if (influVariantIndex == value) return;
+
+            influVariantIndex = value;
             NotifyChanged();
         }
     }
@@ -158,12 +171,22 @@ public sealed class Item_Instance
     }
 
     /// <summary>Đổi cả Influ và roll một lần (chỉ báo OnChanged một lần). Influ null = gỡ Influ.</summary>
-    public void SetInflu(Influ_Data newInflu, float newRoll)
+    public void SetInflu(
+        Influ_Data newInflu,
+        float newRoll,
+        int newVariantIndex)
     {
-        if (influ == newInflu && Mathf.Approximately(influRoll, newRoll)) return;
+        if (influ == newInflu &&
+            Mathf.Approximately(influRoll, newRoll) &&
+            influVariantIndex == newVariantIndex)
+        {
+            return;
+        }
 
         influ = newInflu;
         influRoll = newRoll;
+        influVariantIndex = newVariantIndex;
+
         NotifyChanged();
     }
 

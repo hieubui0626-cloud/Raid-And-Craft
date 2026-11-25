@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d342cfcc07f7eb40aaf78098fd973c8, type: 3}
   m_Name: Copper_Material_T1
   m_EditorClassIdentifier: 
-  itemId: Copper_T5
-  displayName: 'Highly Copper Refined '
+  itemId: Copper_T1
+  displayName: Raw Copper Ore
   description: 'Material for crafting '
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}
@@ -21,8 +21,8 @@ MonoBehaviour:
   maxStack: 50
   gridSize: {x: 1, y: 1}
   allowedUsage: 0
-  rarityTier: 5
-  craftRole: 3
+  rarityTier: 1
+  craftRole: 2
   affixPool:
   - {fileID: 11400000, guid: f49d02304b8110d479df6b136312e9f8, type: 2}
   influOptions: []

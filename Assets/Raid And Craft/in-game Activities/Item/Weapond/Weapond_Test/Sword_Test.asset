@@ -22,10 +22,23 @@ MonoBehaviour:
   gridSize: {x: 1, y: 3}
   allowedUsage: 1
   equipSlot: 1
-  statModifiers: []
+  statModifiers:
+  - stat: 5
+    modifierType: 0
+    value: 5
+  - stat: 28
+    modifierType: 0
+    value: 12
+  - stat: 11
+    modifierType: 0
+    value: 90
+  - stat: 7
+    modifierType: 1
+    value: 0.07
   baseRolls:
   - stat: 5
     modifierType: 0
+    rollGroup: PhysicalDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -45,6 +58,7 @@ MonoBehaviour:
       max: 55
   - stat: 28
     modifierType: 0
+    rollGroup: PhysicalDamage
     wholeNumber: 0
     ranges:
     - tier: 1
@@ -64,6 +78,7 @@ MonoBehaviour:
       max: 62
   - stat: 11
     modifierType: 0
+    rollGroup: 
     wholeNumber: 1
     ranges:
     - tier: 1
@@ -83,7 +98,8 @@ MonoBehaviour:
       max: 1100
   - stat: 7
     modifierType: 1
-    wholeNumber: 1
+    rollGroup: 
+    wholeNumber: 0
     ranges:
     - tier: 1
       min: 0.07

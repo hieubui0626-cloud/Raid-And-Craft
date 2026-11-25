@@ -77,27 +77,112 @@ public static class Roll_Rules
     // ------------------------------------------------------------------
 
     /// <summary>
-    /// Roll lại BaseModifiers của món: mỗi dòng trong Stat Modifiers của asset có khai báo khoảng roll (Base Rolls) thì roll
-    /// trong khoảng theo materialTier, dòng không khai báo giữ nguyên giá trị asset. Tier món giữ nguyên.
-    /// False nếu món không phải Equippable_Item_Data.
+    /// Roll một chỉ số Base ngẫu nhiên trên đúng một dòng.
+    /// Các dòng Base còn lại được giữ nguyên.
     /// </summary>
-    public static bool RollBase(Item_Instance item, int materialTier, System.Random rng)
+    /// <summary>
+    /// Roll một dòng Base hoặc một nhóm Base trong một lượt.
+    /// Các dòng có cùng rollGroup sẽ được roll cùng nhau.
+    /// Dòng không có rollGroup chỉ được roll riêng lẻ.
+    /// </summary>
+    public static bool RollBase(
+        Item_Instance item,
+        int materialTier,
+        System.Random rng)
     {
-        if (item == null || !(item.Base is Equippable_Item_Data asset)) return false;
-
-        var rolled = new List<Stat_Modifier_Entry>(asset.statModifiers.Count);
-
-        foreach (Stat_Modifier_Entry m in asset.statModifiers)
+        if (item == null || !(item.Base is Equippable_Item_Data asset))
         {
-            Stat_Modifier_Entry result = m;
+            return false;
+        }
 
-            Equippable_Item_Data.Base_Roll_Line? line = FindBaseRoll(asset, m);
-            if (line.HasValue && TryGetTierRange(line.Value.ranges, materialTier, out float min, out float max))
+        var rolled = new List<Stat_Modifier_Entry>(
+            item.BaseModifiers.Count == asset.statModifiers.Count
+                ? item.BaseModifiers
+                : asset.statModifiers);
+
+        var groups = new Dictionary<string, List<int>>();
+        var individualGroups = new List<List<int>>();
+
+        for (int i = 0; i < asset.statModifiers.Count; i++)
+        {
+            Stat_Modifier_Entry modifier = rolled[i];
+
+            Equippable_Item_Data.Base_Roll_Line? line =
+                FindBaseRoll(asset, modifier);
+
+            if (!line.HasValue ||
+                !TryGetTierRange(
+                    line.Value.ranges,
+                    materialTier,
+                    out _,
+                    out _))
             {
-                result.value = RollValue(min, max, line.Value.wholeNumber, rng);
+                continue;
             }
 
-            rolled.Add(result);
+            string groupId = line.Value.rollGroup;
+
+            if (string.IsNullOrWhiteSpace(groupId))
+            {
+                individualGroups.Add(new List<int> { i });
+                continue;
+            }
+
+            if (!groups.TryGetValue(groupId, out List<int> group))
+            {
+                group = new List<int>();
+                groups.Add(groupId, group);
+            }
+
+            group.Add(i);
+        }
+
+        var rollGroups = new List<List<int>>(individualGroups);
+
+        foreach (List<int> group in groups.Values)
+        {
+            rollGroups.Add(group);
+        }
+
+        if (rollGroups.Count == 0)
+        {
+            return false;
+        }
+
+        int selectedGroupIndex = rng != null
+            ? rng.Next(0, rollGroups.Count)
+            : UnityEngine.Random.Range(0, rollGroups.Count);
+
+        List<int> selectedGroup = rollGroups[selectedGroupIndex];
+
+        // Tạo một t dùng chung cho toàn bộ dòng trong cùng nhóm.
+        float sharedT = rng != null
+            ? (float)rng.NextDouble()
+            : UnityEngine.Random.value;
+
+        foreach (int index in selectedGroup)
+        {
+            Stat_Modifier_Entry modifier = rolled[index];
+
+            Equippable_Item_Data.Base_Roll_Line line =
+                FindBaseRoll(asset, modifier).Value;
+
+            if (!TryGetTierRange(
+                    line.ranges,
+                    materialTier,
+                    out float min,
+                    out float max))
+            {
+                continue;
+            }
+
+            float value = Mathf.Lerp(min, max, sharedT);
+
+            modifier.value = line.wholeNumber
+                ? Mathf.Round(value)
+                : (float)Math.Round(value, 3);
+
+            rolled[index] = modifier;
         }
 
         item.SetBaseModifiers(rolled);
@@ -157,15 +242,97 @@ public static class Roll_Rules
         return true;
     }
 
-    /// <summary>TryRollAffix rồi áp lên món bằng ApplyAffix (luật P0). False (món không đổi) nếu không bốc được.</summary>
-    public static bool ApplyAffixRoll(Material_Item_Data material, Item_Instance item, Affix_Database database, System.Random rng,
+    /// <summary>
+    /// Roll một Affix và chỉ áp dụng vào một dòng được chỉ định.
+    /// Nếu Affix cùng loại đã tồn tại, dòng cùng loại sẽ được ghi đè.
+    /// Nếu món đã đầy Affix và là loại mới, targetLineIndex sẽ được thay thế.
+    /// </summary>
+    public static bool ApplyAffixRoll(
+        Material_Item_Data material,
+        Item_Instance item,
+        Affix_Database database,
+        int targetLineIndex,
+        System.Random rng,
         out Item_Instance.Affix_Apply_Result result)
     {
         result = default;
-        if (!TryRollAffix(material, item, database, rng, out Affix_Roll roll)) return false;
 
-        result = item.ApplyAffix(roll.line, roll.replaceIndex);
+        if (material == null ||
+            item == null ||
+            targetLineIndex < 0 ||
+            targetLineIndex >= Item_Instance.MaxAffixLines)
+        {
+            return false;
+        }
+
+        var pool = new List<Affix_Data>();
+        material.GetAffixPool(
+            item.Base.EquipSlot,
+            item.AffixLines,
+            database,
+            pool);
+
+        Affix_Data chosen = PickWeighted(
+            pool,
+            affix => affix.Weight,
+            rng);
+
+        if (chosen == null)
+        {
+            return false;
+        }
+
+        Affix_Line line = chosen.Roll(
+            material.RarityTier,
+            rng);
+
+        result = item.ApplyAffix(
+            line,
+            targetLineIndex);
+
         return true;
+    }
+
+    /// <summary>
+    /// Overload tương thích với cách gọi cũ.
+    /// Mỗi lần vẫn chỉ thêm hoặc thay thế một dòng Affix.
+    /// </summary>
+    public static bool ApplyAffixRoll(
+        Material_Item_Data material,
+        Item_Instance item,
+        Affix_Database database,
+        System.Random rng,
+        out Item_Instance.Affix_Apply_Result result)
+    {
+        result = default;
+
+        if (item == null)
+        {
+            return false;
+        }
+
+        int targetLineIndex;
+
+        if (item.AffixLines.Count == 0)
+        {
+            // Item chưa có Affix: ApplyAffix sẽ thêm đúng một dòng.
+            targetLineIndex = 0;
+        }
+        else
+        {
+            // Item đã có Affix: chọn một dòng để thay nếu Affix mới.
+            targetLineIndex = rng != null
+                ? rng.Next(0, item.AffixLines.Count)
+                : UnityEngine.Random.Range(0, item.AffixLines.Count);
+        }
+
+        return ApplyAffixRoll(
+            material,
+            item,
+            database,
+            targetLineIndex,
+            rng,
+            out result);
     }
 
     // ------------------------------------------------------------------
@@ -175,36 +342,80 @@ public static class Roll_Rules
     /// <summary>Bốc một Influ trong Influ Options của Material và roll trong khoảng của Material (kẹp trong Min/Max của Influ). False nếu không có.</summary>
     public static bool TryRollInflu(Material_Item_Data material, System.Random rng, out Influ_Data influ, out float roll)
     {
+        return TryRollInflu(
+            material,
+            rng,
+            out influ,
+            out roll,
+            out _);
+    }
+
+    public static bool TryRollInflu(
+        Material_Item_Data material,
+        System.Random rng,
+        out Influ_Data influ,
+        out float roll,
+        out int variantIndex)
+    {
         influ = null;
         roll = 1f;
+        variantIndex = -1;
+
         if (material == null) return false;
 
         var options = new List<Material_Item_Data.Influ_Option>();
         material.GetInfluOptions(options);
+
         if (options.Count == 0) return false;
 
-        // PickWeighted cần kiểu tham chiếu: bốc theo chỉ số.
         long total = 0;
-        foreach (Material_Item_Data.Influ_Option o in options) total += Math.Max(0, o.weight);
+
+        foreach (Material_Item_Data.Influ_Option option in options)
+        {
+            total += Math.Max(0, option.weight);
+        }
+
         if (total <= 0) return false;
 
-        long pick = rng != null ? (long)(rng.NextDouble() * total) : (long)(UnityEngine.Random.value * total);
-        if (pick >= total) pick = total - 1;
+        long pick = rng != null
+            ? (long)(rng.NextDouble() * total)
+            : (long)(UnityEngine.Random.value * total);
+
+        if (pick >= total)
+        {
+            pick = total - 1;
+        }
 
         Material_Item_Data.Influ_Option chosen = options[options.Count - 1];
-        foreach (Material_Item_Data.Influ_Option o in options)
+
+        foreach (Material_Item_Data.Influ_Option option in options)
         {
-            int w = Math.Max(0, o.weight);
-            if (pick < w) { chosen = o; break; }
-            pick -= w;
+            int weight = Math.Max(0, option.weight);
+
+            if (pick < weight)
+            {
+                chosen = option;
+                break;
+            }
+
+            pick -= weight;
         }
 
         float min = Mathf.Max(chosen.minRoll, chosen.influ.MinRoll);
         float max = Mathf.Min(chosen.maxRoll, chosen.influ.MaxRoll);
-        if (min > max) { min = chosen.minRoll; max = chosen.maxRoll; }
+
+        if (min > max)
+        {
+            min = chosen.minRoll;
+            max = chosen.maxRoll;
+        }
+
+        Influ_Roll_Result result = chosen.influ.Roll(min, max, rng);
 
         influ = chosen.influ;
-        roll = RollValue(min, max, false, rng);
+        roll = result.value;
+        variantIndex = result.variantIndex;
+
         return true;
     }
 }

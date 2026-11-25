@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c3b6cf7c6d2644943975e2e755fec, type: 3}
   m_Name: Influ_Database
   m_EditorClassIdentifier: 
-  influs: []
+  influs:
+  - {fileID: 11400000, guid: 3b393cc620d60db45a7edb16e2e2ad20, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elemental_Dust_T3
   m_EditorClassIdentifier: 
   itemId: Elemental_Dust_T3
-  displayName: Low Elemental Dust Refined
+  displayName: Standard Elemental Dust Refined
   description: 'Material for crafting '
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}

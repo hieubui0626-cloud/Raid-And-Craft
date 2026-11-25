@@ -44,10 +44,9 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
     [Header("Attack Source Debug")]
     [SerializeField] private bool showAttackSourceDebug = false;
 
-    [Header("Material Affix Pool Debug")]
-    [SerializeField] private Material_Item_Data debugMaterial;
-    [SerializeField] private Affix_Database debugAffixDatabase;
-    [SerializeField] private Equipment_Slot debugMaterialSlot = Equipment_Slot.MainHand;
+    
+
+    
 
     private int alternateAttackCount;
     private string lastAttackSource = "None";
@@ -487,20 +486,38 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         public readonly object Source = new object();
         public Influ_Data Influ;
         public float InfluRoll;
+        public int InfluVariantIndex;
     }
 
     private readonly Dictionary<Item_Instance, Applied_Item> applied = new Dictionary<Item_Instance, Applied_Item>();
 
     private void ApplyItem(Item_Instance item)
     {
-        var record = new Applied_Item { Influ = item.Influ, InfluRoll = item.InfluRoll };
+        var record = new Applied_Item
+        {
+            Influ = item.Influ,
+            InfluRoll = item.InfluRoll,
+            InfluVariantIndex = item.InfluVariantIndex
+        };
 
         foreach (Stat_Modifier_Entry m in item.AllModifiers)
         {
-            stats.AddModifier(m.stat, new Player_Stat_Modifier(m.value, m.modifierType, record.Source));
+            stats.AddModifier(
+                m.stat,
+                new Player_Stat_Modifier(
+                    m.value,
+                    m.modifierType,
+                    record.Source));
         }
 
-        if (record.Influ != null) record.Influ.Apply(new Influ_Context(stats, this), record.InfluRoll, record.Source);
+        if (record.Influ != null)
+        {
+            record.Influ.Apply(
+                new Influ_Context(stats, this),
+                record.InfluRoll,
+                record.InfluVariantIndex,
+                record.Source);
+        }
 
         applied[item] = record;
     }
@@ -515,8 +532,16 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
 
     private void RemoveRecord(Applied_Item record)
     {
+        if (record.Influ != null)
+        {
+            record.Influ.Remove(
+                new Influ_Context(stats, this),
+                record.InfluRoll,
+                record.InfluVariantIndex,
+                record.Source);
+        }
+
         stats.RemoveModifiersFromSource(record.Source);
-        if (record.Influ != null) record.Influ.Remove(new Influ_Context(stats, this), record.InfluRoll, record.Source);
     }
 
     // Món đang mặc đổi (Tier/Affix/Influ): áp bản mới TRƯỚC rồi gỡ bản cũ, để máu hiện tại không tụt khi max máu đổi.
@@ -603,153 +628,11 @@ public class Character_Equipment : MonoBehaviour, ISkill_Weapon_Source
         }
     }
 
-    [ContextMenu("Debug: Roll Base Tier 2")]
-    private void Debug_Roll_Base()
-    {
-        EnsureInitialized();
+    
 
-        if (!equipped.TryGetValue(
-                debugMaterialSlot,
-                out Item_Instance instance))
-        {
-            Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Không có item ở ô " +
-                $"{debugMaterialSlot}.",
-                this);
-            return;
-        }
+    
 
-        bool success = Roll_Rules.RollBase(
-            instance,
-            2,
-            new System.Random());
-
-        if (!success)
-        {
-            Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Không thể roll Base " +
-                $"cho '{instance.DisplayName}'. Item không phải " +
-                $"Equippable_Item_Data hoặc không hợp lệ.",
-                this);
-            return;
-        }
-
-        Debug.Log(
-            $"[{nameof(Character_Equipment)}] Đã roll lại Base cho " +
-            $"'{instance.DisplayName}' với Material Tier 2.",
-            this);
-
-        for (int i = 0; i < instance.BaseModifiers.Count; i++)
-        {
-            Stat_Modifier_Entry modifier = instance.BaseModifiers[i];
-
-            Debug.Log(
-                $"Base [{i}] {modifier.stat}: " +
-                $"{modifier.value} ({modifier.modifierType})",
-                this);
-        }
-    }
-
-    [ContextMenu("Debug: Test Material Affix Pool")]
-    private void Debug_Test_Material_Affix_Pool()
-    {
-        EnsureInitialized();
-
-        if (debugMaterial == null)
-        {
-            Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Chưa chọn Material_Item_Data.",
-                this);
-            return;
-        }
-
-        if (debugAffixDatabase == null)
-        {
-            Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Chưa chọn Affix_Database.",
-                this);
-            return;
-        }
-
-        if (!equipped.TryGetValue(
-                debugMaterialSlot,
-                out Item_Instance instance))
-        {
-            Debug.LogWarning(
-                $"[{nameof(Character_Equipment)}] Không có item ở ô " +
-                $"{debugMaterialSlot}.",
-                this);
-            return;
-        }
-
-        List<Affix_Data> result = new List<Affix_Data>();
-
-        debugMaterial.GetAffixPool(
-            debugMaterialSlot,
-            instance.AffixLines,
-            debugAffixDatabase,
-            result);
-
-        Debug.Log(
-            $"[{nameof(Character_Equipment)}] Material: " +
-            $"{debugMaterial.DisplayName}, Role: {debugMaterial.Role}, " +
-            $"Slot: {debugMaterialSlot}, Existing Affixes: " +
-            $"{instance.AffixLines.Count}, Result Count: {result.Count}.",
-            this);
-
-        if (result.Count == 0)
-        {
-            Debug.Log(
-                $"[{nameof(Character_Equipment)}] Affix pool rỗng.",
-                this);
-            return;
-        }
-
-        foreach (Affix_Data affix in result)
-{
-    Debug.Log(
-        $"[{nameof(Character_Equipment)}] Affix hợp lệ: " +
-        $"{affix.DisplayName} | Id: {affix.AffixId} | " +
-        $"Weight: {affix.Weight}.",
-        this);
-}
-
-System.Random rng = new System.Random();
-Affix_Data selectedAffix = PickWeightedAffix(result, rng);
-
-if (selectedAffix == null)
-{
-    Debug.LogWarning(
-        $"[{nameof(Character_Equipment)}] Không chọn được Affix để roll.",
-        this);
-    return;
-}
-
-Affix_Line rolledAffix =
-    selectedAffix.Roll(instance.Tier, rng);
-
-Item_Instance.Affix_Apply_Result applyResult =
-    instance.ApplyAffix(rolledAffix);
-
-Debug.Log(
-    $"[{nameof(Character_Equipment)}] Đã roll và áp dụng Affix " +
-    $"'{selectedAffix.DisplayName}' cho '{instance.DisplayName}'. " +
-    $"Tier: {instance.Tier}, Kết quả: {applyResult}, " +
-    $"Tổng số Affix hiện tại: {instance.AffixLines.Count}.",
-    this);
-
-
-if (Roll_Rules.ApplyAffixRoll(
-        debugMaterial,
-        instance,
-        debugAffixDatabase,
-        new System.Random(),
-        out var r))
-{
-    Debug.Log("Affix: " + r, this);
-}
-    }
-
+    
     /// <summary>
     /// Bật hoặc tắt bảng debug Dual Weapon Attack.
     /// </summary>

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d342cfcc07f7eb40aaf78098fd973c8, type: 3}
   m_Name: Steel_Aluminum_Material_T2
   m_EditorClassIdentifier: 
-  itemId: Alloy_Steel_Aluminum_T4
-  displayName: Quality Steel Aluminum Refined Alloy
+  itemId: Alloy_Steel_Aluminum_T2
+  displayName: Low Steel Aluminum Refined Alloy
   description: 'Material for crafting '
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   worldModel: {fileID: 0}
@@ -21,7 +21,7 @@ MonoBehaviour:
   maxStack: 50
   gridSize: {x: 1, y: 1}
   allowedUsage: 0
-  rarityTier: 4
+  rarityTier: 2
   craftRole: 2
   affixPool:
   - {fileID: 11400000, guid: e84fc1509ba561c498a4f2dd302b1226, type: 2}

@@ -184,6 +184,40 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 7aebc1c81abd7c041b06bbaba577a95e, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &619068716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6986446369057350650, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  m_PrefabInstance: {fileID: 1417279038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &619068733 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+  m_PrefabInstance: {fileID: 1417279038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619068716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce7c73831d16994c999d104d6e9409e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &619068738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619068716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bbdf03bf996474caed706d8bcaac2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterEquipment: {fileID: 619068733}
+  BaseRarityTier: 3
+  BaseVAffix_material: {fileID: 11400000, guid: 1e46499646f062042a6098edc27957fe, type: 2}
+  affixDatabase: {fileID: 11400000, guid: 64da9eec098cdb3458df5ff1596dd4d3, type: 2}
+  Influ_material: {fileID: 11400000, guid: dbb1d90859d5afd43843ba7d65bc3009, type: 2}
+  targetSlot: 1
 --- !u!1 &1039186250
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,13 +856,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: debugAffix
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: debugMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 1e46499646f062042a6098edc27957fe, type: 2}
+      objectReference: {fileID: 11400000, guid: 8a47b9aed5d90fd43b5435550625e869, type: 2}
     - target: {fileID: 2504697917920924712, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: debugAffixDatabase
       value: 
@@ -1272,7 +1310,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6986446369057350650, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 619068738}
   m_SourcePrefab: {fileID: 100100000, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
 --- !u!1 &1733307697
 GameObject:

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebee1d249e6c2374380fe80283dead7d, type: 3}
-  m_Name: Incrased_Critical_Chance_Affix
+  m_Name: Incrase_Critical_Chance_Affix
   m_EditorClassIdentifier: 
   affixId: Increase_Cricital_Chance_Affix
   displayName: Increase Cricital Chance
   components:
   - stat: 12
     modifierType: 1
-    wholeNumber: 1
+    wholeNumber: 0
     ranges:
     - tier: 1
       min: 0.05

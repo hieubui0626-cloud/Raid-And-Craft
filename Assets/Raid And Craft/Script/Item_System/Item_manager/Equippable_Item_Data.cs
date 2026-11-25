@@ -22,8 +22,13 @@ public abstract class Equippable_Item_Data : Item_Data
     {
         public Player_Stat_Type stat;
         public Player_Stat_Modifier_Type modifierType;
+
+        [Tooltip("Các dòng có cùng Roll Group sẽ được roll trong cùng một lượt. Để trống = chỉ roll riêng dòng này.")]
+        public string rollGroup;
+
         [Tooltip("Làm tròn giá trị roll thành số nguyên.")]
         public bool wholeNumber;
+
         [Tooltip("Khoảng roll theo Tier của Material. Tier không có dòng riêng dùng dòng Tier cao nhất không vượt quá, không thì dòng thấp nhất.")]
         public List<Affix_Data.Tier_Range> ranges;
     }
