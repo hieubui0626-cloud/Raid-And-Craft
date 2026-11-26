@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Item_Roll : MonoBehaviour
+public sealed class Item_Craft_And_Forge : MonoBehaviour
 {
     [Header("Nguồn test")]
     [SerializeField] private Character_Equipment characterEquipment;
@@ -15,6 +15,9 @@ public sealed class Item_Roll : MonoBehaviour
     [SerializeField] private Material_Item_Data Influ_material;
 
     [SerializeField] private Equipment_Slot targetSlot = Equipment_Slot.MainHand;
+
+    [Header("Blueprint Craft")]
+    [SerializeField] private Item_Data blueprint;
 
     [ContextMenu("Debug: Roll Base")]
     private void DebugRollBase()
@@ -32,7 +35,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (!success)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Không thể roll Base.",
+                $"[{nameof(Item_Craft_And_Forge)}] Không thể roll Base.",
                 this);
 
             return;
@@ -60,7 +63,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (BaseVAffix_material == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Chưa chọn Material.",
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Material.",
                 this);
 
             return;
@@ -69,7 +72,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (affixDatabase == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Chưa chọn Affix Database.",
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Affix Database.",
                 this);
 
             return;
@@ -85,14 +88,14 @@ public sealed class Item_Roll : MonoBehaviour
         if (!success)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Không thể roll Affix.",
+                $"[{nameof(Item_Craft_And_Forge)}] Không thể roll Affix.",
                 this);
 
             return;
         }
 
         Debug.Log(
-            $"[{nameof(Item_Roll)}] Roll một dòng Affix. " +
+            $"[{nameof(Item_Craft_And_Forge)}] Roll một dòng Affix. " +
             $"Kết quả: {result}. " +
             $"Tổng số dòng: {item.AffixLines.Count}.",
             this);
@@ -109,7 +112,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (Influ_material == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Chưa chọn Material.",
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Material.",
                 this);
 
             return;
@@ -125,7 +128,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (!success || influ == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Không thể roll Influ.",
+                $"[{nameof(Item_Craft_And_Forge)}] Không thể roll Influ.",
                 this);
 
             return;
@@ -137,7 +140,7 @@ public sealed class Item_Roll : MonoBehaviour
             variantIndex);
 
         Debug.Log(
-            $"[{nameof(Item_Roll)}] Đã roll Influ " +
+            $"[{nameof(Item_Craft_And_Forge)}] Đã roll Influ " +
             $"'{influ.DisplayName}' với giá trị {roll:0.##}.",
             this);
     }
@@ -149,7 +152,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (characterEquipment == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Chưa chọn Character Equipment.",
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Character Equipment.",
                 this);
 
             return false;
@@ -160,7 +163,7 @@ public sealed class Item_Roll : MonoBehaviour
         if (item == null)
         {
             Debug.LogWarning(
-                $"[{nameof(Item_Roll)}] Không có item ở ô " +
+                $"[{nameof(Item_Craft_And_Forge)}] Không có item ở ô " +
                 $"{targetSlot}.",
                 this);
 
@@ -168,5 +171,53 @@ public sealed class Item_Roll : MonoBehaviour
         }
 
         return true;
+    }
+
+    [ContextMenu("Debug: Use Blueprint")]
+    private void DebugUseBlueprint()
+    {
+        if (blueprint == null)
+        {
+            Debug.LogWarning(
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Blueprint.",
+                this);
+
+            return;
+        }
+
+        if (BaseVAffix_material == null)
+        {
+            Debug.LogWarning(
+                $"[{nameof(Item_Craft_And_Forge)}] Chưa chọn Material.",
+                this);
+
+            return;
+        }
+
+        if (!blueprint.CanBeUsedFor(Item_Usage.Crafting))
+        {
+            Debug.LogWarning(
+                $"[{nameof(Item_Craft_And_Forge)}] Blueprint " +
+                $"'{blueprint.DisplayName}' không được phép dùng cho Crafting.",
+                this);
+
+            return;
+        }
+
+        if (!BaseVAffix_material.CanBeUsedFor(Item_Usage.Crafting))
+        {
+            Debug.LogWarning(
+                $"[{nameof(Item_Craft_And_Forge)}] Material " +
+                $"'{BaseVAffix_material.DisplayName}' không được phép dùng cho Crafting.",
+                this);
+
+            return;
+        }
+
+        Debug.Log(
+            $"[{nameof(Item_Craft_And_Forge)}] Blueprint và Material hợp lệ cho Crafting. " +
+            $"Blueprint: '{blueprint.DisplayName}', " +
+            $"Material: '{BaseVAffix_material.DisplayName}'.",
+            this);
     }
 }

@@ -136,8 +136,6 @@ MonoBehaviour:
   startingEquipment:
   - {fileID: 11400000, guid: 5e4124d3181df9245b52b018a14fc758, type: 2}
   showAttackSourceDebug: 1
-  debugAffix: {fileID: 0}
-  debugAffixSlot: 1
 --- !u!114 &603003315755472178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 100
-  coinText: {fileID: 0}
+  coinText: {fileID: 1712966486263245931}
   coinTextFormat: '{0}'
 --- !u!114 &3668295526862682145
 MonoBehaviour:
@@ -1286,6 +1284,17 @@ PrefabInstance:
 --- !u!114 &533549183060624334 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5365201859974070970, guid: 0ac4242e4de9bb1409e73412fce00f97, type: 3}
+  m_PrefabInstance: {fileID: 5553653632228016500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1712966486263245931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6545743998535658783, guid: 0ac4242e4de9bb1409e73412fce00f97, type: 3}
   m_PrefabInstance: {fileID: 5553653632228016500}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

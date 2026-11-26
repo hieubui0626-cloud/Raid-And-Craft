@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Nguyên liệu (Raw Material...): vật phẩm xếp chồng dùng cho hệ craft sau này (quặng, sắt thô...).
-/// Chưa có công dụng nào (Item_Usage.None); sau này thêm cờ Crafting rồi trả về trong SupportedUsage.
+/// Công dụng: Crafting (đặt vào bàn Craft/Forge).
 /// Rarity Tier là bậc hiếm (1 = thường). Tooltip và thẻ tên trên đất tô màu theo bậc này.
 /// Tạo asset: Create -> Raid And Craft -> Items -> Material. Nhớ đặt Stack Type = Stackable và Max Stack > 1.
 /// </summary>
@@ -46,6 +46,8 @@ public class Material_Item_Data : Item_Data
 
     [Tooltip("Vai trò Influ: các Influ nguyên liệu này cho roll, mỗi Influ có khoảng roll và trọng số riêng.")]
     [SerializeField] private List<Influ_Option> influOptions = new List<Influ_Option>();
+
+    public override Item_Usage SupportedUsage => Item_Usage.Crafting;
 
     public int RarityTier => Mathf.Max(1, rarityTier);
     public Craft_Role Role => craftRole;

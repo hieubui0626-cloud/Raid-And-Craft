@@ -149,6 +149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1297549876}
   - {fileID: 1173779603}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -218,6 +219,7 @@ MonoBehaviour:
   affixDatabase: {fileID: 11400000, guid: 64da9eec098cdb3458df5ff1596dd4d3, type: 2}
   Influ_material: {fileID: 11400000, guid: dbb1d90859d5afd43843ba7d65bc3009, type: 2}
   targetSlot: 1
+  blueprint: {fileID: 11400000, guid: 96475074688d997478fbe3cd17eabf0a, type: 2}
 --- !u!1 &1039186250
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +408,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 260500509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1297549875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 260500509}
+    m_Modifications:
+    - target: {fileID: 1019553699866128358, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_Name
+      value: NPC_Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313822409976868995, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: npcName
+      value: Bluepirnt Merchant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313822409976868995, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: entries.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 96475074688d997478fbe3cd17eabf0a, type: 2}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+--- !u!4 &1297549876 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2724159331282685348, guid: a03bd0070111e9546915b36237228ee7, type: 3}
+  m_PrefabInstance: {fileID: 1297549875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368173732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1234,10 @@ PrefabInstance:
     - target: {fileID: 7588714084423090421, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704352922237899480, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
+      propertyPath: coins
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8434671093672519525, guid: d5ccfaf4abf19f140a45177e908139bc, type: 3}
       propertyPath: m_AnchorMax.y

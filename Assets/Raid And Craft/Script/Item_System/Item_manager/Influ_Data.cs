@@ -100,6 +100,14 @@ public abstract class Influ_Data : ScriptableObject
         float roll,
         int variantIndex,
         object source);
+    /// <summary>
+    /// Tạo nội dung Description động dựa trên roll.
+    /// Dùng cho Influ không có biến thể hoặc mã cũ chưa lưu variant index.
+    /// </summary>
+    public string Describe(float roll)
+    {
+        return Describe(roll, -1);
+    }
 
     /// <summary>
     /// Tạo nội dung Description động dựa trên roll.

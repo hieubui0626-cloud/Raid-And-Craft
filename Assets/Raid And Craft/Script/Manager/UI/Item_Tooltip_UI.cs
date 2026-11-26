@@ -107,11 +107,7 @@ public class Item_Tooltip_UI : MonoBehaviour
 
         if (instanceToShow.Influ != null)
         {
-            sb.Append("<color=").Append(InfluColor).Append('>')
-              .Append(instanceToShow.Influ.Describe(
-                  instanceToShow.InfluRoll,
-                  instanceToShow.InfluVariantIndex))
-              .Append("</color>\n");
+            sb.Append("<color=").Append(InfluColor).Append('>').Append(instanceToShow.Influ.Describe(instanceToShow.InfluRoll)).Append("</color>\n");
         }
 
         AppendFooter(footer);
@@ -134,6 +130,14 @@ public class Item_Tooltip_UI : MonoBehaviour
         else if (item is Spell_Stone_Data stone)
         {
             if (stone.Skill != null) sb.Append("Skill: <color=").Append(AffixColor).Append('>').Append(stone.Skill.displayName).Append("</color>\n");
+        }
+        else if (item is Blueprint_Item_Data blueprint)
+        {
+            if (blueprint.CraftedBase != null) sb.Append("Blueprint: <color=").Append(AffixColor).Append('>').Append(blueprint.CraftedBase.DisplayName).Append("</color>\n");
+        }
+        else if (item is Material_Item_Data material)
+        {
+            sb.Append("<color=").Append(MutedColor).Append(">Material Tier ").Append(material.RarityTier).Append("  |  ").Append(Humanize(material.Role.ToString())).Append("</color>\n");
         }
         else if (item is Restore_Potion_Data potion)
         {

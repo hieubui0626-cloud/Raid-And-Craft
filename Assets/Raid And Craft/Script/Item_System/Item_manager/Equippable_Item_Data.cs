@@ -6,7 +6,7 @@ using UnityEngine;
 /// Lớp gốc của vật phẩm MẶC LÊN NGƯỜI (vũ khí hiện tại, sau này giáp, mũ, nhẫn...). Song song với Circuit_Item_Data
 /// (vật phẩm lắp vào Magic Circuit).
 /// - Equip Slot: ô trang bị vật phẩm này mặc vào (Character_Equipment mặc theo từng ô).
-/// - Công dụng: Equip (khi Equip Slot khác None).
+/// - Công dụng: Equip (khi Equip Slot khác None) và Crafting (đặt vào bàn Forge).
 /// - Trang bị luôn NonStackable (không xếp chồng), bất kể cấu hình trong Inspector.
 /// - Stat Modifiers: chỉ số cộng cho người mặc (Character_Equipment gỡ/cộng theo Source = vật phẩm này).
 /// Thêm loại trang bị mới: kế thừa lớp này, đặt [CreateAssetMenu(menuName = "Raid And Craft/Items/&lt;Tên&gt;")], thêm dữ liệu riêng.
@@ -23,7 +23,7 @@ public abstract class Equippable_Item_Data : Item_Data
         public Player_Stat_Type stat;
         public Player_Stat_Modifier_Type modifierType;
 
-        [Tooltip("Các dòng có cùng Roll Group sẽ được roll trong cùng một lượt. Để trống = chỉ roll riêng dòng này.")]
+        [Tooltip("Nhóm các dòng được roll cùng nhau. Để trống để roll riêng lẻ.")]
         public string rollGroup;
 
         [Tooltip("Làm tròn giá trị roll thành số nguyên.")]
@@ -50,7 +50,7 @@ public abstract class Equippable_Item_Data : Item_Data
     /// <summary>Mỗi món trang bị là một Item_Instance riêng (Base/Affix/Influ roll riêng).</summary>
     public override bool UsesInstance => true;
 
-    public override Item_Usage SupportedUsage => IsEquippable ? Item_Usage.Equip : Item_Usage.None;
+    public override Item_Usage SupportedUsage => (IsEquippable ? Item_Usage.Equip : Item_Usage.None) | Item_Usage.Crafting;
 
     public override bool IsEquippable => equipSlot != Equipment_Slot.None;
     public override Equipment_Slot EquipSlot => equipSlot;

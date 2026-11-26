@@ -20,4 +20,6 @@ public enum Item_Usage
     MagicCircuit = 2,
     /// <summary>Đặt lên thanh quick use để bấm phím dùng (làm sau).</summary>
     QuickUse = 4,
+    /// <summary>Đặt vào bàn Craft/Forge của NPC: nguyên liệu, Blueprint và món trang bị (Forge).</summary>
+    Crafting = 8,
 }
